@@ -30,7 +30,21 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              // "src/assets/js/example.js",
+              "src/assets/libs/jquery/jquery.min.js",
+              "src/assets/js/pages/apexcharts.min.js",
+              "src/assets/js/pages/jquery.vmap.min.js",
+              "src/assets/libs/node-waves/waves.min.js",
+              "src/assets/libs/simplebar/simplebar.min.js",
+              "src/assets/js/pages/dashboard.init.js",
+              "src/assets/libs/bootstrap/js/bootstrap.bundle.min.js",
+              "src/assets/libs/metismenu/metisMenu.min.js",
+              "src/assets/libs/slick-slider/slick/slick.min.js",
+              "src/assets/libs/jqvmap/maps/jquery.vmap.usa.js",
+              "src/assets/js/app.js"
+              
+            ]
           },
           "configurations": {
             "production": {
