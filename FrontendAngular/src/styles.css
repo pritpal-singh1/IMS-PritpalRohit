@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import 'assets/libs/slick-slider/slick/slick.css';
+@import 'assets/libs/slick-slider/slick/slick-theme.css';
+@import 'assets/libs/jqvmap/jqvmap.min.css';
+@import 'assets/css/bootstrap.min.css';
+@import 'assets/css/icons.min.css';
+@import 'assets/css/app.min.css';
