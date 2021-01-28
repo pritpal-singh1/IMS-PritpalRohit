@@ -7,6 +7,9 @@ import { HeaderComponent } from './pages/header/header.component';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { DashboardComponent } from './dynamic/dashboard/dashboard.component';
+import { RolesComponent } from './dynamic/roles/roles.component';
+import { BrandComponent } from './dynamic/brand/brand.component';
+import { CategoryComponent } from './dynamic/category/category.component';
 
 
 @NgModule({
@@ -15,7 +18,10 @@ import { DashboardComponent } from './dynamic/dashboard/dashboard.component';
     HeaderComponent,
     SidebarComponent,
     FooterComponent,
-    DashboardComponent
+    DashboardComponent,
+    RolesComponent
+    BrandComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
