@@ -20,6 +20,7 @@
         <list>
           <option value="App.App.urls.Project" />
           <option value="DjangoAPI.EmployeeApp.serializers.EmployeeApp" />
+          <option value="Backend.InventoryApp.urls.InventoryApp" />
         </list>
       </option>
     </inspection_tool>
