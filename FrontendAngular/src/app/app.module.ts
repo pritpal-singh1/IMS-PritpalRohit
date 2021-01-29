@@ -19,7 +19,7 @@ import { CategoryComponent } from './dynamic/category/category.component';
     SidebarComponent,
     FooterComponent,
     DashboardComponent,
-    RolesComponent
+    RolesComponent,
     BrandComponent,
     CategoryComponent
   ],
