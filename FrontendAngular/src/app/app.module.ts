@@ -10,6 +10,10 @@ import { DashboardComponent } from './dynamic/dashboard/dashboard.component';
 import { RolesComponent } from './dynamic/roles/roles.component';
 import { BrandComponent } from './dynamic/brand/brand.component';
 import { CategoryComponent } from './dynamic/category/category.component';
+import { SharedService } from './shared.service';
+
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,9 +29,12 @@ import { CategoryComponent } from './dynamic/category/category.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
