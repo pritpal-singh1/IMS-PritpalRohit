@@ -22,6 +22,8 @@ const routes: Routes = [
     { path: 'maps', loadChildren: () => import('./maps/maps.module').then(m => m.MapsModule) },
     { path: 'master', loadChildren: () => import('./master/master.module').then(m => m.MasterModule) },
     { path: 'master', loadChildren: () => import('./master/master.module').then(m => m.MasterModule) },
+    { path: 'sales', loadChildren: () => import('./sales/sales.module').then(m => m.SalesModule) },
+    { path: 'purchase', loadChildren: () => import('./purchase/purchase.module').then(m => m.PurchaseModule) },
 ];
 
 @NgModule({
