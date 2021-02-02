@@ -16,6 +16,12 @@ export const MENU: MenuItem[] = [
         },
         link: '/'
     },
+    // {
+    //     id: 3,
+    //     label: 'MENUITEMS.CALENDAR.TEXT',
+    //     icon: 'ri-calendar-2-line',
+    //     link: '/calendar'
+    // },
     {
         id: 3,
         label: 'Customers',
@@ -50,15 +56,73 @@ export const MENU: MenuItem[] = [
     {
         id: 3,
         label: 'MENUITEMS.CALENDAR.TEXT',
+        label: 'Sales',
         icon: 'ri-calendar-2-line',
-        link: '/calendar'
+        subItems: [
+            {
+                id: '',
+                label: 'New Invoice',
+                link: '/sales/new-invoice',
+                parentId: 3
+            },
+            {
+                id: '',
+                label: 'Manage Invoice',
+                link: '/sales/manage-invoice',
+                parentId: 3
+            },
+        ]
     },
     {
         id: 4,
-        label: 'MENUITEMS.CHAT.TEXT',
-        icon: 'ri-chat-1-line',
-        link: '/chat'
+        label: 'Purchase',
+        icon: 'ri-calendar-2-line',
+        subItems: [
+            {
+                id: '',
+                label: 'Add Purchase Bill',
+                link: '/purchase/add-purchase-bill',
+                parentId: 3
+            },
+            {
+                id: '',
+                label: 'Manage Purchase Bill',
+                link: '/purchase/manage-purchase-bill',
+                parentId: 3
+            },
+            {
+                id: '',
+                label: 'Purchase Return',
+                link: '/purchase/purchase-return',
+                parentId: 3
+            },
+            {
+                id: '',
+                label: 'Manage Purchase Return',
+                link: '/purchase/manage-purchase-return',
+                parentId: 3
+            },
+            {
+                id: '',
+                label: 'Purchase Order',
+                link: '/purchase/purchase-order',
+                parentId: 3
+            },
+            {
+                id: '',
+                label: 'Manage Purchase order',
+                link: '/purchase/manage-purchase-order',
+                parentId: 3
+            },
+            
+        ]
     },
+    // {
+    //     id: 4,
+    //     label: 'MENUITEMS.CHAT.TEXT',
+    //     icon: 'ri-chat-1-line',
+    //     link: '/chat'
+    // },
     {
         id: 5,
         label: 'Master',

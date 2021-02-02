@@ -28,6 +28,8 @@ const routes: Routes = [
     { path: 'master', loadChildren: () => import('./master/master.module').then(m => m.MasterModule) },
     { path: 'master', loadChildren: () => import('./master/master.module').then(m => m.MasterModule) },
     { path: 'expense', loadChildren: () => import('./expense/expense.module').then(m => m.ExpenseModule) },
+    { path: 'sales', loadChildren: () => import('./sales/sales.module').then(m => m.SalesModule) },
+    { path: 'purchase', loadChildren: () => import('./purchase/purchase.module').then(m => m.PurchaseModule) },
 ];
 
 @NgModule({
