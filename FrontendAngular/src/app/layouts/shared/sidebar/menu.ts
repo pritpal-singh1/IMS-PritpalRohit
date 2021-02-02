@@ -58,6 +58,31 @@ export const MENU: MenuItem[] = [
                 link: '/purchase/manage-purchase-bill',
                 parentId: 3
             },
+            {
+                id: '',
+                label: 'Purchase Return',
+                link: '/purchase/purchase-return',
+                parentId: 3
+            },
+            {
+                id: '',
+                label: 'Manage Purchase Return',
+                link: '/purchase/manage-purchase-return',
+                parentId: 3
+            },
+            {
+                id: '',
+                label: 'Purchase Order',
+                link: '/purchase/purchase-order',
+                parentId: 3
+            },
+            {
+                id: '',
+                label: 'Manage Purchase order',
+                link: '/purchase/manage-purchase-order',
+                parentId: 3
+            },
+            
         ]
     },
     // {
