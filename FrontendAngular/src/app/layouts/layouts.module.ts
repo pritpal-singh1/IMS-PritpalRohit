@@ -8,6 +8,7 @@ import { VerticalComponent } from './vertical/vertical.component';
 import { HorizontalComponent } from './horizontal/horizontal.component';
 import { LayoutComponent } from './layout/layout.component';
 
+
 @NgModule({
   declarations: [VerticalComponent, HorizontalComponent, LayoutComponent],
   imports: [

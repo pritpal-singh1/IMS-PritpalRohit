@@ -20,6 +20,8 @@ const routes: Routes = [
     { path: 'form', loadChildren: () => import('./form/form.module').then(m => m.FormModule) },
     { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) },
     { path: 'maps', loadChildren: () => import('./maps/maps.module').then(m => m.MapsModule) },
+    { path: 'master', loadChildren: () => import('./master/master.module').then(m => m.MasterModule) },
+    { path: 'master', loadChildren: () => import('./master/master.module').then(m => m.MasterModule) },
 ];
 
 @NgModule({

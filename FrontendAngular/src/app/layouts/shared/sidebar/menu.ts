@@ -30,19 +30,25 @@ export const MENU: MenuItem[] = [
     },
     {
         id: 5,
-        label: 'MENUITEMS.ECOMMERCE.TEXT',
+        label: 'Master',
         icon: 'ri-store-2-line',
         subItems: [
             {
                 id: 6,
-                label: 'MENUITEMS.ECOMMERCE.LIST.PRODUCTS',
-                link: '/ecommerce/products',
+                label: 'Category',
+                link: '/master/category',
                 parentId: 5
             },
             {
                 id: 8,
-                label: 'MENUITEMS.ECOMMERCE.LIST.ORDERS',
-                link: '/ecommerce/orders',
+                label: 'Brands',
+                link: '/master/brand',
+                parentId: 5
+            },
+            {
+                id: 9,
+                label: 'Staff',
+                link: '/master/staff',
                 parentId: 5
             },
             {
