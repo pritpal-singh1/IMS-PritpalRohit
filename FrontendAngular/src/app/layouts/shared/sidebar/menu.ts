@@ -55,7 +55,7 @@ export const MENU: MenuItem[] = [
     },
     {
         id: 3,
-        label: 'MENUITEMS.CALENDAR.TEXT',
+        
         label: 'Sales',
         icon: 'ri-calendar-2-line',
         subItems: [
