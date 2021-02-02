@@ -24,6 +24,38 @@ export const MENU: MenuItem[] = [
     // },
     {
         id: 3,
+        label: 'Customers',
+        icon: 'ri-calendar-2-line',
+        link: '/customer'
+    },
+    {
+        id: 5,
+        label: 'Expenses',
+        icon: 'ri-store-2-line',
+        subItems: [
+            {
+                id: 6,
+                label: 'Add Expenses',
+                link: '/expense/add-expense',
+                parentId: 5
+            },
+            {
+                id: 8,
+                label: 'Manage Expenses',
+                link: '/expense/manage-expense',
+                parentId: 5
+            },
+        ]
+    },
+    {
+        id: 3,
+        label: 'Online Orders',
+        icon: 'ri-calendar-2-line',
+        link: '/calendar'
+    },
+    {
+        id: 3,
+        label: 'MENUITEMS.CALENDAR.TEXT',
         label: 'Sales',
         icon: 'ri-calendar-2-line',
         subItems: [
@@ -142,6 +174,37 @@ export const MENU: MenuItem[] = [
                 id: 13,
                 label: 'MENUITEMS.ECOMMERCE.LIST.ADDPRODUCT',
                 link: '/ecommerce/add-product',
+                parentId: 5
+            },
+        ]
+    },
+    {
+        id: 5,
+        label: 'Reports',
+        icon: 'ri-store-2-line',
+        subItems: [
+            {
+                id: 6,
+                label: 'Category',
+                link: '/master/category',
+                parentId: 5
+            },
+            {
+                id: 8,
+                label: 'Brands',
+                link: '/master/brand',
+                parentId: 5
+            },
+            {
+                id: 9,
+                label: 'Staff',
+                link: '/master/staff',
+                parentId: 5
+            },
+            {
+                id: 9,
+                label: 'MENUITEMS.ECOMMERCE.LIST.CUSTOMERS',
+                link: '/ecommerce/customers',
                 parentId: 5
             },
         ]
