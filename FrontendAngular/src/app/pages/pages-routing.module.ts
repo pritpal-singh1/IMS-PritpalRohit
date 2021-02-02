@@ -6,11 +6,16 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { ChatComponent } from './chat/chat.component';
 import { KanbanComponent } from './kanban/kanban.component';
 
+import { CustomerComponent } from './customer/customer.component';
+
+
 const routes: Routes = [
     { path: '', component: DashboardComponent },
     { path: 'calendar', component: CalendarComponent },
     { path: 'chat', component: ChatComponent },
     { path: 'kanban-board', component: KanbanComponent },
+    { path: 'customer', component: CustomerComponent },
+ 
     { path: 'ecommerce', loadChildren: () => import('./ecommerce/ecommerce.module').then(m => m.EcommerceModule) },
     { path: 'email', loadChildren: () => import('./email/email.module').then(m => m.EmailModule) },
     { path: 'pages', loadChildren: () => import('./utility/utility.module').then(m => m.UtilityModule) },
@@ -22,6 +27,7 @@ const routes: Routes = [
     { path: 'maps', loadChildren: () => import('./maps/maps.module').then(m => m.MapsModule) },
     { path: 'master', loadChildren: () => import('./master/master.module').then(m => m.MasterModule) },
     { path: 'master', loadChildren: () => import('./master/master.module').then(m => m.MasterModule) },
+    { path: 'expense', loadChildren: () => import('./expense/expense.module').then(m => m.ExpenseModule) },
 ];
 
 @NgModule({

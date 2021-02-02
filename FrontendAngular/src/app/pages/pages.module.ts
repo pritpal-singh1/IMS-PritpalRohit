@@ -30,6 +30,9 @@ import { FormModule } from './form/form.module';
 import { TablesModule } from './tables/tables.module';
 import { MapsModule } from './maps/maps.module';
 import { MasterModule } from './master/master.module';
+import { CustomerComponent } from './customer/customer.component';
+
+
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -38,7 +41,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 };
 
 @NgModule({
-  declarations: [DashboardComponent, CalendarComponent, ChatComponent, KanbanComponent,],
+  declarations: [DashboardComponent, CalendarComponent, ChatComponent, KanbanComponent, CustomerComponent],
   imports: [
     CommonModule,
     FormsModule,

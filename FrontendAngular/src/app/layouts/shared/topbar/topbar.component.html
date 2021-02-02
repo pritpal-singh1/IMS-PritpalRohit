@@ -35,7 +35,7 @@
         </div>
       </form>
 
-      <div class="dropdown dropdown-mega d-none d-lg-block ml-2" ngbDropdown>
+      <!-- <div class="dropdown dropdown-mega d-none d-lg-block ml-2" ngbDropdown>
         <button ngbDropdownToggle type="button" class="btn header-item waves-effect" data-toggle="dropdown"
           aria-haspopup="false" aria-expanded="false">
           {{ 'HEADER.MEGA_MENU' | translate}}
@@ -164,7 +164,7 @@
           </div>
 
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="d-flex">
@@ -190,7 +190,7 @@
         </div>
       </div>
 
-      <div class="dropdown d-inline-block" ngbDropdown>
+       <!-- <div class="dropdown d-inline-block" ngbDropdown>
         <button type="button" class="btn header-item" id="page-header-user-dropdown" ngbDropdownToggle>
           <img *ngIf="flagvalue !== undefined" src="{{flagvalue}}" alt="Header Language" height="16"> <span
             class="ml-1">{{countryName}}</span>
@@ -198,17 +198,17 @@
           <span *ngIf="flagvalue === undefined" class="ml-1">English</span>
         </button>
         <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
-          <!-- item-->
+         
           <a href="javascript:void(0);" class="dropdown-item notify-item" *ngFor="let item of listLang"
             (click)="setLanguage(item.text, item.lang, item.flag)" [ngClass]="{'active': cookieValue === item.lang}">
             <img src="{{item.flag}}" alt="user-image" class="mr-1" height="12"> <span
               class="align-middle">{{item.text}}</span>
           </a>
-          <!-- item-->
-        </div>
-      </div>
+          
+        </div> -->
+      
 
-      <div class="dropdown d-none d-lg-inline-block ml-1" ngbDropdown>
+      <!-- <div class="dropdown d-none d-lg-inline-block ml-1" ngbDropdown>
         <button type="button" ngbDropdownToggle class="btn header-item noti-icon waves-effect" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           <i class="ri-apps-2-line"></i>
@@ -258,7 +258,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="dropdown d-none d-lg-inline-block ml-1">
         <button type="button" class="btn header-item noti-icon waves-effect" (click)="fullscreen()">
@@ -380,12 +380,12 @@
         </div>
       </div>
 
-      <div class="dropdown d-inline-block">
+      <!-- <div class="dropdown d-inline-block">
         <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect"
           (click)="toggleRightSidebar()">
           <i class="ri-settings-2-line"></i>
         </button>
-      </div>
+      </div> -->
 
     </div>
   </div>
