@@ -31,6 +31,7 @@ import { TablesModule } from './tables/tables.module';
 import { MapsModule } from './maps/maps.module';
 import { MasterModule } from './master/master.module';
 import { CustomerComponent } from './customer/customer.component';
+import { RoleConfigurationComponent } from './role-configuration/role-configuration.component';
 
 
 
@@ -41,7 +42,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 };
 
 @NgModule({
-  declarations: [DashboardComponent, CalendarComponent, ChatComponent, KanbanComponent, CustomerComponent],
+  declarations: [DashboardComponent, CalendarComponent, ChatComponent, KanbanComponent, CustomerComponent, RoleConfigurationComponent],
   imports: [
     CommonModule,
     FormsModule,

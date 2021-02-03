@@ -7,10 +7,11 @@ import { ChatComponent } from './chat/chat.component';
 import { KanbanComponent } from './kanban/kanban.component';
 
 import { CustomerComponent } from './customer/customer.component';
-
+import {RoleConfigurationComponent} from './role-configuration/role-configuration.component';
 
 const routes: Routes = [
     { path: '', component: DashboardComponent },
+    { path: 'role-configuration', component: RoleConfigurationComponent},
     { path: 'calendar', component: CalendarComponent },
     { path: 'chat', component: ChatComponent },
     { path: 'kanban-board', component: KanbanComponent },
