@@ -49,11 +49,11 @@ function sort(tables: Table[], column: string, direction: string): Table[] {
  */
 function matches(tables: Table, term: string, pipe: PipeTransform) {
     return tables.name.toLowerCase().includes(term)
-        || tables.position.toLowerCase().includes(term)
+        // || tables.position.toLowerCase().includes(term)
         || tables.office.toLowerCase().includes(term)
-        || pipe.transform(tables.age).includes(term)
-        || tables.date.toLowerCase().includes(term)
-        || tables.salary.toLowerCase().includes(term);
+        || pipe.transform(tables.id).includes(term)
+        // || tables.date.toLowerCase().includes(term)
+        // || tables.salary.toLowerCase().includes(term);
 }
 
 @Injectable({

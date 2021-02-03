@@ -10,6 +10,7 @@ import { TablesRoutingModule } from '../tables/tables-routing.module';
 import { UiModule } from 'src/app/shared/ui/ui.module';
 import { NgbDropdownModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [MasterComponent, CategoryComponent, BrandsComponent, StaffComponent],
@@ -21,7 +22,11 @@ import { FormsModule } from '@angular/forms';
     NgbDropdownModule,
     NgbPaginationModule,
     NgbTypeaheadModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
+  ],
+  providers: [
+    
   ]
 })
 export class MasterModule { }

@@ -41,9 +41,9 @@
                     <th sortable="name" (sort)="onSort($event)">Name</th>
                     <th sortable="position" (sort)="onSort($event)">Position</th>
                     <th sortable="office" (sort)="onSort($event)">Office</th>
-                    <th sortable="age" (sort)="onSort($event)">Age</th>
+                    <!-- <th sortable="age" (sort)="onSort($event)">Age</th>
                     <th sortable="date" (sort)="onSort($event)">Start date</th>
-                    <th sortable="salary" (sort)="onSort($event)">Salary</th>
+                    <th sortable="salary" (sort)="onSort($event)">Salary</th> -->
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -55,15 +55,15 @@
                       </a>
                     </td>
                     <td>
-                      <ngb-highlight [result]="table.name" [term]="service.searchTerm"></ngb-highlight>
+                      <ngb-highlight [result]="table.id" [term]="service.searchTerm"></ngb-highlight>
                     </td>
                     <td>
-                      <ngb-highlight [result]="table.position" [term]="service.searchTerm"></ngb-highlight>
+                      <ngb-highlight [result]="table.name" [term]="service.searchTerm"></ngb-highlight>
                     </td>
                     <td>
                       <ngb-highlight [result]="table.office" [term]="service.searchTerm"></ngb-highlight>
                     </td>
-                    <td>
+                    <!-- <td>
                       <ngb-highlight [result]="table.age" [term]="service.searchTerm"></ngb-highlight>
                     </td>
                     <td>
@@ -71,7 +71,7 @@
                     </td>
                     <td>
                       <ngb-highlight [result]="table.salary" [term]="service.searchTerm"></ngb-highlight>
-                    </td>
+                    </td> -->
                     <td>
                       <div ngbDropdown placement="bottom-left">
                         <i class="mdi mdi-dots-vertical dropdown-toggle" ngbDropdownToggle data-toggle="dropdown"
@@ -84,7 +84,7 @@
                       </div>
                     </td>
                   </tr>
-                  <tr *ngIf="!hideme[i]" class="sub-table no-bg">
+                  <!-- <tr *ngIf="!hideme[i]" class="sub-table no-bg">
                     <td align="center"> </td>
                     <td colspan="15" class="p-0">
                       <table class="table mb-0 table-striped">
@@ -106,7 +106,7 @@
                         </tbody>
                       </table>
                     </td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
             </div>
