@@ -1,13 +1,13 @@
 // Table data
 export interface Table {
+    id: string;
     name: string;
-    position: string;
     office: string;
-    age: number;
-    date: string;
-    salary: string;
-    unit: number;
-    enddate: string;
+    // age: number;
+    // date: string;
+    // salary: string;
+    // unit: number;
+    // enddate: string;
 }
 
 // Search Data

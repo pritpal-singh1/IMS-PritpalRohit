@@ -34,7 +34,7 @@ export class CategoryComponent implements OnInit {
  }
  ngOnInit() {
 
-   this.breadCrumbItems = [{ label: 'Tables' }, { label: 'Advanced Table', active: true }];
+   this.breadCrumbItems = [{ label: 'Master' }, { label: 'Category', active: true }];
 
    /**
     * fetch data
