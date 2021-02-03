@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import * as $ from 'jquery'; 
+import 'datatables.net';
 
+
+$(document).ready( function () {
+  ($('#manage-invoice') as any).DataTable();
+} );
+// ($('#manage-invoice') as any).DataTable();
 @Component({
   selector: 'app-manage-invoice',
   templateUrl: './manage-invoice.component.html',
@@ -13,3 +20,4 @@ export class ManageInvoiceComponent implements OnInit {
   }
 
 }
+

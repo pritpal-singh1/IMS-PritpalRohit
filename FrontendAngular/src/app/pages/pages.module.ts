@@ -35,7 +35,6 @@ import { RoleConfigurationComponent } from './role-configuration/role-configurat
 
 
 
-
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelSpeed: 0.3
