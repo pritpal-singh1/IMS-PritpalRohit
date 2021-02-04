@@ -9,6 +9,7 @@ import { Table, SearchResult } from './category.model';
 import { tableData } from './category';
 
 import { SortDirection } from './category-sortable.directive';
+import { HttpClient } from '@angular/common/http';
 
 interface State {
     page: number;
@@ -62,7 +63,7 @@ function matches(tables: Table, term: string, pipe: PipeTransform) {
 
 export class AdvancedService {
 
-   
+    readonly APIUrl = "http://127.0.0.1:8000";
     // tslint:disable-next-line: variable-name
     private _loading$ = new BehaviorSubject<boolean>(true);
     // tslint:disable-next-line: variable-name
@@ -84,7 +85,7 @@ export class AdvancedService {
         totalRecords: 0
     };
 
-    constructor(private pipe: DecimalPipe) {
+    constructor(private pipe: DecimalPipe, private http: HttpClient) {
         this._search$.pipe(
             tap(() => this._loading$.next(true)),
             debounceTime(200),
@@ -102,7 +103,7 @@ export class AdvancedService {
     /**
      * Returns the value
      */
-    get tables$() { return this._tables$.asObservable(); }
+    get tables$() {  return this.http.get<any[]>(this.APIUrl + '/category/'); }
     get total$() { return this._total$.asObservable(); }
     get loading$() { return this._loading$.asObservable(); }
     get page() { return this._state.page; }

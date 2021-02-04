@@ -18,13 +18,14 @@ import { SharedService } from '../shared.service';
 })
 export class CategoryComponent implements OnInit {
  // bread crum data
+ readonly APIUrl = "http://127.0.0.1:8000";
  breadCrumbItems: Array<{}>;
  hideme: boolean[] = [];
 
  // Table data
 //  tableData: Table[];
-  CategoryList: Table [];
- tables$: Observable<Table[]>;
+  CategoryList: any [];
+ tables$: Observable<any[]>;
  total$: Observable<number>;
 
  @ViewChildren(AdvancedSortableDirective) headers: QueryList<AdvancedSortableDirective>;

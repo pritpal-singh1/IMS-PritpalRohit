@@ -4,19 +4,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">manage-invoice</h4>
-                <table id="manage-invoice" border="1" class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
-                    <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of CategoryList">
-                            <td>{{item.id}}</td>
-                            <td>{{item.name}}</td>
-                        </tr>
-                    </tbody>
+                <table #dataTable class="display" style="width:100%">
                 </table>
             </div>
         </div>

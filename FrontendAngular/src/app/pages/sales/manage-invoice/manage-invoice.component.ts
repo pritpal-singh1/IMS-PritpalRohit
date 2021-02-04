@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import * as $ from 'jquery'; 
 import 'datatables.net';
 import { SharedService } from '../shared.service';
+import { ResDataModal } from './datamodel';
 
 
 $(document).ready( function () {
   ($('#manage-invoice') as any).DataTable();
-} );
+});
+
 // ($('#manage-invoice') as any).DataTable();
 @Component({
   selector: 'app-manage-invoice',
@@ -14,7 +16,10 @@ $(document).ready( function () {
   styleUrls: ['./manage-invoice.component.scss']
 })
 export class ManageInvoiceComponent implements OnInit {
-  CategoryList: any = [];
+  dataTable: any;
+  dtOptions: any;
+  tableData: any=[];
+  @ViewChild('dataTable', { static: true }) table;
   constructor(public catservice: SharedService) { }
 
   ngOnInit(): void {
@@ -22,8 +27,21 @@ export class ManageInvoiceComponent implements OnInit {
   }
   refreshdepList() {
     this.catservice.getCatList().subscribe(data => {
-      this.CategoryList = data;
-      console.log(this.CategoryList);
+      this.tableData = data;
+      console.log(this.tableData);
+      this.dtOptions = {
+        data: this.tableData,
+        columns: [
+          { title: 'Category Id', data: 'CategoryId' },
+          { title: 'Category Name', data: 'CategoryName' },
+          // { title: 'First Name', data: 'first_name' },
+          // { title: 'Last Name', data: 'last_name' },
+          // { title: 'Avatar', data: 'avatar' },
+        ]
+      };
+    }, err => { }, () => {
+      this.dataTable = $(this.table.nativeElement);
+      this.dataTable.DataTable(this.dtOptions);
     });
   }
 }
