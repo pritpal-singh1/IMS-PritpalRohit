@@ -7,14 +7,14 @@
                 <table id="manage-invoice" border="1" class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Email</th>
+                            <th>id</th>
+                            <th>name</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Rohit</td>
-                            <td>r@gmail.com</td>
+                        <tr *ngFor="let item of CategoryList">
+                            <td>{{item.id}}</td>
+                            <td>{{item.name}}</td>
                         </tr>
                     </tbody>
                 </table>

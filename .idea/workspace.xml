@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c90f87a-6886-4782-8ade-95650f9bb1cb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/category.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/category.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/category.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/category.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/category.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/category.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/category.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/category.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/category.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/category.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/master.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/master.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/sales/manage-invoice/manage-invoice.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/sales/manage-invoice/manage-invoice.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/sales/manage-invoice/manage-invoice.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/sales/manage-invoice/manage-invoice.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

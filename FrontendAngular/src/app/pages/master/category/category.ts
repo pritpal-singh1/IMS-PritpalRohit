@@ -2,7 +2,7 @@ const tableData = [
   {
     id: '1',
     name: 'Category 1 ',
-    office: 'Vidago',
+   
     // age: 29,
     // date: '2018/12/04',
     // salary: '$11700',
@@ -11,7 +11,7 @@ const tableData = [
   }, {
     id: '2',
     name: 'Category 2',
-    office: 'La Concordia',
+   
     // age: 62,
     // date: '2018/10/04',
     // salary: '$14700',
