@@ -9,8 +9,9 @@ import { StaffComponent } from './staff/staff.component';
 import { TablesRoutingModule } from '../tables/tables-routing.module';
 import { UiModule } from 'src/app/shared/ui/ui.module';
 import { NgbDropdownModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SharedService } from './shared.service';
 
 @NgModule({
   declarations: [MasterComponent, CategoryComponent, BrandsComponent, StaffComponent],
@@ -23,10 +24,11 @@ import { HttpClientModule } from '@angular/common/http';
     NgbPaginationModule,
     NgbTypeaheadModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
-    
+    SharedService
   ]
 })
 export class MasterModule { }

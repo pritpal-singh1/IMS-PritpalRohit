@@ -50,7 +50,7 @@ function sort(tables: Table[], column: string, direction: string): Table[] {
 function matches(tables: Table, term: string, pipe: PipeTransform) {
     return tables.name.toLowerCase().includes(term)
         // || tables.position.toLowerCase().includes(term)
-        || tables.office.toLowerCase().includes(term)
+        // || tables.office.toLowerCase().includes(term)
         || pipe.transform(tables.id).includes(term)
         // || tables.date.toLowerCase().includes(term)
         // || tables.salary.toLowerCase().includes(term);
@@ -61,6 +61,8 @@ function matches(tables: Table, term: string, pipe: PipeTransform) {
 })
 
 export class AdvancedService {
+
+   
     // tslint:disable-next-line: variable-name
     private _loading$ = new BehaviorSubject<boolean>(true);
     // tslint:disable-next-line: variable-name
@@ -69,7 +71,7 @@ export class AdvancedService {
     private _tables$ = new BehaviorSubject<Table[]>([]);
     // tslint:disable-next-line: variable-name
     private _total$ = new BehaviorSubject<number>(0);
-
+ 
     // tslint:disable-next-line: variable-name
     private _state: State = {
         page: 1,
