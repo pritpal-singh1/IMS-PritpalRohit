@@ -18,6 +18,8 @@ import { ErrorInterceptor } from './core/helpers/error.interceptor';
 import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 import { AdvancedService } from './pages/master/category/category.service';
+import { DataTablesModule } from 'angular-datatables';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
@@ -36,9 +38,12 @@ export function createTranslateLoader(http: HttpClient): any {
   ],
   imports: [
     BrowserModule,
+    DataTablesModule,
     HttpClientModule,
     AppRoutingModule,
     PagesModule,
+    FormsModule,
+    ReactiveFormsModule,
     LayoutsModule,
     TranslateModule.forRoot({
       loader: {
