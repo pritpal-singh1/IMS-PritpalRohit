@@ -12,7 +12,7 @@ export class PurchaseOrderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'Purchase' }, { label: 'Add Purchase Return', active: true }];
+    this.breadCrumbItems = [{ label: 'Purchase' }, { label: 'Purchase Order', active: true }];
     this.selectValue = [
       {id:1,name:'Cash'},
       {id:2,name:'Cheque'},
