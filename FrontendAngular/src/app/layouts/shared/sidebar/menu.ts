@@ -123,6 +123,26 @@ export const MENU: MenuItem[] = [
             
         ]
     },
+    {
+        id: 3,
+        
+        label: 'Users',
+        icon: 'ri-calendar-2-line',
+        subItems: [
+            {
+                id: '',
+                label: 'All Users',
+                link: '/users/all-users',
+                parentId: 3
+            },
+            {
+                id: '',
+                label: 'Add User',
+                link: '/users/add-users',
+                parentId: 3
+            },
+        ]
+    },
     // {
     //     id: 4,
     //     label: 'MENUITEMS.CHAT.TEXT',
