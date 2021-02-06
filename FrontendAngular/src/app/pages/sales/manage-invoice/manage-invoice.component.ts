@@ -3,6 +3,7 @@ import * as $ from 'jquery';
 import 'datatables.net';
 import { SharedService } from '../shared.service';
 import { ResDataModal } from './datamodel';
+import { Router } from '@angular/router';
 
 
 $(document).ready( function () {
@@ -16,13 +17,15 @@ $(document).ready( function () {
   styleUrls: ['./manage-invoice.component.scss']
 })
 export class ManageInvoiceComponent implements OnInit {
+  breadCrumbItems: Array<{}>;
   dataTable: any;
   dtOptions: any;
   tableData: any=[];
   @ViewChild('dataTable', { static: true }) table;
-  constructor(public catservice: SharedService) { }
+  constructor(public catservice: SharedService,private router: Router) { }
 
   ngOnInit(): void {
+    this.breadCrumbItems = [{ label: 'Sales' }, { label: 'Manage Invoice', active: true }];
     this.refreshdepList();
   }
   refreshdepList() {
@@ -43,6 +46,9 @@ export class ManageInvoiceComponent implements OnInit {
       this.dataTable = $(this.table.nativeElement);
       this.dataTable.DataTable(this.dtOptions);
     });
+  }
+  navigate(){
+    this.router.navigate(['/sales/new-invoice']);
   }
 }
 

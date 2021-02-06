@@ -17,7 +17,7 @@ export class PurchaseReturnComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'Purchase' }, { label: 'Add Purchase Return', active: true }];
+    this.breadCrumbItems = [{ label: 'Purchase' }, { label: 'Purchase Return', active: true }];
   }
 
 }

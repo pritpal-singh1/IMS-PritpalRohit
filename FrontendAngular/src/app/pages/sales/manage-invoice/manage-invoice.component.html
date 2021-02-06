@@ -1,11 +1,29 @@
 
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">manage-invoice</h4>
-                <table #dataTable class="display" style="width:100%">
-                </table>
+<div class="container-fluid">
+    <!-- start page title -->
+  <app-pagetitle title="Manage Invoice" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+  <!-- end page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <!-- <h4 class="card-title">manage-invoice</h4> -->
+                    <div class="card border-0">
+                        <div class="card-body">
+                            <div class="row align-items-center mb-2">
+                                <div class="col align-content-start">
+                                    <h4 class="one">Manage Invoices</h4>
+                                </div>
+                                <div class="col-auto">
+                                    <button (click)="navigate()" class="btn btn-outline-success waves-effect pull-right waves-light">Add New Invoice
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table #dataTable class="display" style="width:100%">
+                    </table>
+                </div>
             </div>
         </div>
     </div>

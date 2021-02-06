@@ -31,13 +31,13 @@ export const MENU: MenuItem[] = [
     {
         id: 4,
         label: 'Role Configuration',
-        icon: 'ri-calendar-2-line',
+        icon: ' ri-user-2-line',
         link: '/role-configuration'
     },
     {
         id: 5,
         label: 'Expenses',
-        icon: 'ri-store-2-line',
+        icon: 'ri-money-dollar-circle-line',
         subItems: [
             {
                 id: 6,
@@ -56,7 +56,7 @@ export const MENU: MenuItem[] = [
     {
         id: 3,
         label: 'Online Orders',
-        icon: 'ri-calendar-2-line',
+        icon: ' ri-stack-line',
         link: '/calendar'
     },
     {
@@ -139,6 +139,18 @@ export const MENU: MenuItem[] = [
                 id: '',
                 label: 'Add User',
                 link: '/users/add-users',
+                parentId: 3
+            },
+            {
+                id: '',
+                label: 'Employees',
+                link: '/users/employee',
+                parentId: 3
+            },
+            {
+                id: '',
+                label: 'Add Employees',
+                link: '/users/add-employee',
                 parentId: 3
             },
         ]
