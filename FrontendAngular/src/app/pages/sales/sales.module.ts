@@ -5,6 +5,7 @@ import { NewInvoiceComponent } from './new-invoice/new-invoice.component';
 import { ManageInvoiceComponent } from './manage-invoice/manage-invoice.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UiModule } from '../../shared/ui/ui.module';
 
 
 
@@ -15,7 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SalesRoutingModule,
     NgSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UiModule
   ]
 })
 export class SalesModule { }

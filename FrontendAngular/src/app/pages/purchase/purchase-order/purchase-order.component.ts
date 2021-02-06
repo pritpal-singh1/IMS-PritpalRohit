@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PurchaseOrderComponent implements OnInit {
 
+  breadCrumbItems: Array<{}>;
+  selectValue: Array<{}>;
   constructor() { }
 
   ngOnInit(): void {
+    this.breadCrumbItems = [{ label: 'Purchase' }, { label: 'Add Purchase Return', active: true }];
+    this.selectValue = [
+      {id:1,name:'Cash'},
+      {id:2,name:'Cheque'},
+      {id:3,name:'Card Payment'},
+      {id:4,name:'Wallet'}
+     ];
   }
 
 }
