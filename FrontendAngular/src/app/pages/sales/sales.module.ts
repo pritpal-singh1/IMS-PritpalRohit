@@ -6,6 +6,7 @@ import { ManageInvoiceComponent } from './manage-invoice/manage-invoice.componen
 import { DataTablesModule } from 'angular-datatables';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UiModule } from '../../shared/ui/ui.module';
 
 
 
@@ -20,7 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     NgSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UiModule
   ]
 })
 export class SalesModule { }

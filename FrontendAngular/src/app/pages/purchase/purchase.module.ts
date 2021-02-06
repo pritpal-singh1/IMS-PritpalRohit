@@ -7,14 +7,20 @@ import { PurchaseReturnComponent } from './purchase-return/purchase-return.compo
 import { ManagePurchaseReturnComponent } from './manage-purchase-return/manage-purchase-return.component';
 import { PurchaseOrderComponent } from './purchase-order/purchase-order.component';
 import { ManagePurchaseOrderComponent } from './manage-purchase-order/manage-purchase-order.component';
-
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UiModule } from '../../shared/ui/ui.module';
 
 
 @NgModule({
   declarations: [AddPurchaseBillComponent, ManagePurchaseBillComponent, PurchaseReturnComponent, ManagePurchaseReturnComponent, PurchaseOrderComponent, ManagePurchaseOrderComponent],
   imports: [
     CommonModule,
-    PurchaseRoutingModule
+    PurchaseRoutingModule,
+    NgSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    UiModule
   ]
 })
 export class PurchaseModule { }
