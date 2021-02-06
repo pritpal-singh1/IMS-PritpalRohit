@@ -12,9 +12,10 @@ import { NgbDropdownModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedService } from './shared.service';
+import { AddEditCategoryComponent } from './category/add-edit-category/add-edit-category.component';
 
 @NgModule({
-  declarations: [MasterComponent, CategoryComponent, BrandsComponent, StaffComponent],
+  declarations: [MasterComponent, CategoryComponent, BrandsComponent, StaffComponent, AddEditCategoryComponent],
   imports: [
     CommonModule,
     MasterRoutingModule,

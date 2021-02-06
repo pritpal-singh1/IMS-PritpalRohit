@@ -24,7 +24,7 @@ def categoryApi(request, id=0):
     elif request.method=='PUT':
         category_data= JSONParser().parse(request)
         category=Category.objects.get(CategoryId=category_data['CategoryId'])
-        category_serializer=CategorySerializer(data=category_data)
+        category_serializer=CategorySerializer(category,data=category_data)
         if category_serializer.is_valid():
             category_serializer.save()
             return JsonResponse("Updated",safe=False)
