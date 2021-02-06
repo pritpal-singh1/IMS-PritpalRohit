@@ -4,7 +4,9 @@ import {SalesRoutingModule} from './sales-routing.module';
 import { NewInvoiceComponent } from './new-invoice/new-invoice.component';
 import { ManageInvoiceComponent } from './manage-invoice/manage-invoice.component';
 import { DataTablesModule } from 'angular-datatables';
-import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -15,6 +17,9 @@ import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
     DataTablesModule,
     FormsModule,
     ReactiveFormsModule,
+    NgSelectModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class SalesModule { }
