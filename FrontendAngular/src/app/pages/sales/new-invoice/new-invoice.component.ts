@@ -8,6 +8,7 @@ import { NgbDate, NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap'
 })
 export class NewInvoiceComponent{
    
+  breadCrumbItems: Array<{}>;
   selectValue = [
     {id:1,name:'Cash'},
     {id:2,name:'Cheque'},
@@ -19,7 +20,7 @@ export class NewInvoiceComponent{
   }
 
   ngOnInit() {
-   
+    this.breadCrumbItems = [{ label: 'Sales' }, { label: 'Add Invoice', active: true }];
   }
 
 }
