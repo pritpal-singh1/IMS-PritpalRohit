@@ -2,6 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { getJSON } from 'jquery';
+import Swal from 'sweetalert2';
 import { Category } from '../category.model';
 import { CategoryService } from '../category.service';
 
@@ -21,16 +22,42 @@ export class AddEditCategoryComponent implements OnInit {
     if (form != null)
       form.resetForm();
     this.catservice.formData = {
-      CategoryId: '',
+      CategoryId: 0,
       CategoryName: ''
     }
   }
   onSubmit(form: NgForm) {
-    if (form.value.CategoryId == '')
-    this.insertRecord(form );
-  else
+    if (form.value.CategoryId == 0) {
+      this.insertRecord(form);
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Category Added',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      this.catservice.getCategoryList();
+      this.catservice.formData = {
+        CategoryId: 0,
+        CategoryName: ''
+      }
+    }
+    else {
       this.updateRecord(form);
-    console.log("called",form.value);
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Category Updated.',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      this.catservice.getCategoryList();
+      this.catservice.formData = {
+        CategoryId: 0,
+        CategoryName: ''
+      }
+    }
+  
     
   }
   insertRecord(form: NgForm) {

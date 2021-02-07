@@ -12,9 +12,11 @@ export class CategoryService {
   readonly APIUrl = "http://127.0.0.1:8000";
   constructor(private http: HttpClient) { }
 
-  getCategoryList(): Observable<Category[]>{
-    return this.http.get < Category[]>(this.APIUrl + '/category/');
+  getCategoryList(){
+    this.http.get(this.APIUrl+'/category/')
+    .toPromise().then(res => this.list = res as Category[]);
   }
+
   addCategory(formData:Category){
     return this.http.post(this.APIUrl + '/category/', formData);
     

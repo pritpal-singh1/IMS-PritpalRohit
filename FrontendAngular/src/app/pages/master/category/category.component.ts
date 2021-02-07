@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 
 
 import { Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 
 import { SharedService } from '../shared.service';
 import { Category } from './category.model';
@@ -27,17 +28,30 @@ export class CategoryComponent implements OnInit {
  
 
   refreshCatList() {
-    this.catservice.getCategoryList().subscribe(data => {
-      this.CategoryList = data
-    });
+    this.catservice.getCategoryList();
   }
   editCategory(cat: Category) {
     this.catservice.formData = Object.assign({}, cat);
   }
   deleteCategory(cat: Category) {
-    this.catservice.deleteCategory(cat).subscribe(res => {
-      this.refreshCatList();
-     
+  
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#34c38f',
+      cancelButtonColor: '#ff3d60',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(result => {
+      if (result.value) {
+        this.catservice.deleteCategory(cat).subscribe(res => {
+      
+          this.refreshCatList();
+         
+        });
+        Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+      }
     });
   }
 }
