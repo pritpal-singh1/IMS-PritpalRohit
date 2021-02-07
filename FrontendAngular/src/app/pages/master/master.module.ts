@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MasterRoutingModule } from './master-routing.module';
@@ -30,6 +30,7 @@ import { AddEditCategoryComponent } from './category/add-edit-category/add-edit-
   ],
   providers: [
     SharedService
-  ]
+  ],
+    schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class MasterModule { }
