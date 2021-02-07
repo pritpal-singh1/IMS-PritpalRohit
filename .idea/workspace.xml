@@ -3,12 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8107d7b8-2b89-4408-a1fb-cbbf9f8518fc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/add-edit-category/add-edit-category.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/add-edit-category/add-edit-category.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/add-edit-category/add-edit-category.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/add-edit-category/add-edit-category.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/category.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/category.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/category.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/category.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/category.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/category.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/category.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/category/category.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

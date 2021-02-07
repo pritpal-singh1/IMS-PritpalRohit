@@ -20,9 +20,11 @@ export class CategoryComponent implements OnInit {
  BtnName: string;
  dep: any;
  catmodel :any;
+  len: number;
  constructor(public catservice: CategoryService) { }
 
- ngOnInit(): void {
+  ngOnInit(): void {
+  
    this.refreshCatList();
   }
  
