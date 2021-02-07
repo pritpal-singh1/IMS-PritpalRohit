@@ -20,7 +20,7 @@ export class NewInvoiceComponent{
   }
 
   ngOnInit() {
-    this.breadCrumbItems = [{ label: 'Sales' }, { label: 'Add Invoice', active: true }];
+    this.breadCrumbItems = [{ label: 'Users' }, { label: 'Add Employee', active: true }];
   }
 
 }
