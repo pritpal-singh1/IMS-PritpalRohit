@@ -2,15 +2,15 @@
   <app-pagetitle title="Dashboard" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
 
   <div class="row">
-    <div class="col-xl-8">
+    <div class="col-xl-6">
       <div class="row">
-        <div *ngFor="let stat of statData" class="col-md-4">
+        <div *ngFor="let stat of statData" class="col-md-6">
           <app-stat [title]="stat.title" [value]="stat.value" [icon]="stat.icon"></app-stat>
         </div>
       </div>
       <!-- end row -->
 
-      <div class="card">
+      <!-- <div class="card">
         <div class="card-body">
           <div class="float-right d-none d-md-inline-block">
             <div class="btn-group mb-2">
@@ -63,11 +63,11 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
 
-    <div class="col-xl-4">
-      <div class="card">
+    <div class="col-xl-6">
+      <!-- <div class="card">
         <div class="card-body">
           <div class="float-right">
             <select class="custom-select custom-select-sm">
@@ -107,57 +107,71 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="card">
         <div class="card-body">
           <div class="dropdown float-right" ngbDropdown>
-            <a href="javascript: void(0);" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown"
+            <!-- <a href="javascript: void(0);" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown"
               aria-expanded="false" ngbDropdownToggle>
               <i class="mdi mdi-dots-vertical"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
-              <!-- item-->
+         
               <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
-              <!-- item-->
+             
               <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
-              <!-- item-->
+         
               <a href="javascript:void(0);" class="dropdown-item">Profit</a>
-              <!-- item-->
+           
               <a href="javascript:void(0);" class="dropdown-item">Action</a>
-            </div>
+            </div> -->
           </div>
 
-          <h4 class="card-title mb-4">Earning Reports</h4>
+          <h4 class="card-title mb-4">Quick Info</h4>
           <div class="text-center">
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-sm-4">
                 <div>
                   <div class="mb-3">
-                    <apx-chart dir="ltr" class="apex-charts" [series]="sparklineEarning.series"
+                    <!-- <apx-chart dir="ltr" class="apex-charts" [series]="sparklineEarning.series"
                       [chart]="sparklineEarning.chart" [colors]="sparklineEarning.colors"
                       [labels]="sparklineEarning.labels" [dataLabels]="sparklineEarning.dataLabels"
                       [plotOptions]="sparklineEarning.plotOptions">
-                    </apx-chart>
+                    </apx-chart> -->
                   </div>
 
-                  <p class="text-muted text-truncate mb-2">Weekly Earnings</p>
+                  <p class="text-muted text-truncate mb-2">Gross Sale</p>
                   <h5 class="mb-0">$2,523</h5>
                 </div>
               </div>
 
-              <div class="col-sm-6">
+              <div class="col-sm-4">
                 <div class="mt-5 mt-sm-0">
                   <div class="mb-3">
-                    <apx-chart dir="ltr" class="apex-charts" [series]="sparklineMonthly.series"
+                    <!-- <apx-chart dir="ltr" class="apex-charts" [series]="sparklineMonthly.series"
                       [chart]="sparklineMonthly.chart" [colors]="sparklineMonthly.colors"
                       [labels]="sparklineMonthly.labels" [dataLabels]="sparklineMonthly.dataLabels"
                       [plotOptions]="sparklineMonthly.plotOptions">
-                    </apx-chart>
+                    </apx-chart> -->
                   </div>
 
-                  <p class="text-muted text-truncate mb-2">Monthly Earnings</p>
+                  <p class="text-muted text-truncate mb-2">Amount Recieved</p>
                   <h5 class="mb-0">$11,235</h5>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div>
+                  <div class="mb-3">
+                    <!-- <apx-chart dir="ltr" class="apex-charts" [series]="sparklineEarning.series"
+                      [chart]="sparklineEarning.chart" [colors]="sparklineEarning.colors"
+                      [labels]="sparklineEarning.labels" [dataLabels]="sparklineEarning.dataLabels"
+                      [plotOptions]="sparklineEarning.plotOptions">
+                    </apx-chart> -->
+                  </div>
+
+                  <p class="text-muted text-truncate mb-2">Amount Due</p>
+                  <h5 class="mb-0">$2,523</h5>
                 </div>
               </div>
             </div>
@@ -168,7 +182,7 @@
   </div>
   <!-- end row -->
 
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-lg-4">
       <div class="card">
         <div class="card-body">
@@ -178,13 +192,13 @@
               <i class="mdi mdi-dots-vertical"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
-              <!-- item-->
+            
               <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
-              <!-- item-->
+            
               <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
-              <!-- item-->
+              
               <a href="javascript:void(0);" class="dropdown-item">Profit</a>
-              <!-- item-->
+             
               <a href="javascript:void(0);" class="dropdown-item">Action</a>
             </div>
           </div>
@@ -279,13 +293,13 @@
               <i class="mdi mdi-dots-vertical"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
-              <!-- item-->
+             
               <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
-              <!-- item-->
+              
               <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
-              <!-- item-->
+             
               <a href="javascript:void(0);" class="dropdown-item">Profit</a>
-              <!-- item-->
+            
               <a href="javascript:void(0);" class="dropdown-item">Action</a>
             </div>
           </div>
@@ -420,13 +434,13 @@
               <i class="mdi mdi-dots-vertical"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
-              <!-- item-->
+            
               <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
-              <!-- item-->
+            
               <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
-              <!-- item-->
+              
               <a href="javascript:void(0);" class="dropdown-item">Profit</a>
-              <!-- item-->
+              
               <a href="javascript:void(0);" class="dropdown-item">Action</a>
             </div>
           </div>
@@ -469,11 +483,153 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- end row -->
+ <div class="row">
+    <div class="col-xl-6">
+     
+      <div class="card">
+        <div class="card-body">
+        
+          <h4 class="card-title mb-4">Vital Stats</h4>
+          <div class="text-center">
+            <div class="row">
+              <div class="col-sm-6">
+                <div>
+                 
+                  <p class="text-muted text-truncate mb-2">Pending Online Orders</p>
+                  <h5 class="mb-0">1</h5>
+                </div>
+              </div>
 
+              <div class="col-sm-6">
+                <div class="mt-5 mt-sm-0">
+                    <p class="text-muted text-truncate mb-2">Unpaid Purchases</p>
+                  <h5 class="mb-0">1</h5>
+                </div>
+              </div>
+              
+            </div>
+            <div class="row mt-4">
+              <div class="col-sm-6">
+                <div>
+                 
+                  <p class="text-muted text-truncate mb-2">Unpaid Invoices</p>
+                  <h5 class="mb-0">4</h5>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="mt-5 mt-sm-0">
+                    <p class="text-muted text-truncate mb-2">Low Item Stock</p>
+                  <h5 class="mb-0">5</h5>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end row -->
+
+      <!-- <div class="card">
+        <div class="card-body">
+          <div class="float-right d-none d-md-inline-block">
+            <div class="btn-group mb-2">
+              <button type="button" class="btn btn-sm btn-light">Today</button>
+              <button type="button" class="btn btn-sm btn-light active">Weekly</button>
+              <button type="button" class="btn btn-sm btn-light">Monthly</button>
+            </div>
+          </div>
+          <h4 class="card-title mb-4">Revenue Analytics</h4>
+          <div>
+            <apx-chart dir="ltr" class="apex-charts" [series]="revenueChart.series" [chart]="revenueChart.chart"
+              [legend]="revenueChart.legend" [colors]="revenueChart.colors" [labels]="revenueChart.labels"
+              [stroke]="revenueChart.stroke" [plotOptions]="revenueChart.plotOptions">
+            </apx-chart>
+          </div>
+        </div>
+
+        <div class="card-body border-top text-center">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="d-inline-flex">
+                <h5 class="mr-2">$12,253</h5>
+                <div class="text-success">
+                  <i class="mdi mdi-menu-up font-size-14"> </i>2.2 %
+                </div>
+              </div>
+              <p class="text-muted text-truncate mb-0">This month</p>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="mt-4 mt-sm-0">
+                <p class="mb-2 text-muted text-truncate"><i class="mdi mdi-circle text-primary font-size-10 mr-1"></i>
+                  This Year :</p>
+                <div class="d-inline-flex">
+                  <h5 class="mb-0 mr-2">$ 34,254</h5>
+                  <div class="text-success">
+                    <i class="mdi mdi-menu-up font-size-14"> </i>2.1 %
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mt-4 mt-sm-0">
+                <p class="mb-2 text-muted text-truncate"><i class="mdi mdi-circle text-success font-size-10 mr-1"></i>
+                  Previous Year :</p>
+                <div class="d-inline-flex">
+                  <h5 class="mb-0">$ 32,695</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <div class="col-xl-6">
+  
+      <div class="card">
+        <div class="card-body">
+         
+          <h4 class="card-title mb-4">Quick Search</h4>
+        
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-6">
+                  <div class="custom-control custom-radio mb-3">
+                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio1">Stock</label>
+                  </div>
+                  <div class="custom-control custom-radio mb-3">
+                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio2">Invoice</label>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="custom-control custom-radio mb-3">
+                    <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio3">Supplier</label>
+                  </div>
+                  <div class="custom-control custom-radio mb-3">
+                    <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio4">Expense</label>
+                  </div>
+                </div>
+                
+              </div>
+
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row">
-    <div class="col-lg-4">
+    <!-- <div class="col-lg-4">
       <div class="card">
         <div class="card-body border-bottom">
 
@@ -587,8 +743,8 @@
           </form>
         </div>
       </div>
-    </div>
-    <div class="col-lg-8">
+    </div> -->
+    <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
           <div class="dropdown float-right" ngbDropdown>
@@ -607,7 +763,7 @@
               <a href="javascript:void(0);" class="dropdown-item">Action</a>
             </div>
           </div>
-          <h4 class="card-title mb-4">Latest Transactions</h4>
+          <h4 class="card-title mb-4">Online Orders</h4>
           <div class="row">
             <div class="col-sm-12 col-md-12">
               <div id="tickets-table_filter" class="dataTables_filter text-md-right"><label
