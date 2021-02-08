@@ -5,6 +5,8 @@ from django.http.response import JsonResponse
 
 from InventoryApp.models import Category
 from InventoryApp.serializers import CategorySerializer
+from InventoryApp.models import Brand
+from InventoryApp.serializers import BrandSerializer
 
 # Create your views here.
 
@@ -34,3 +36,29 @@ def categoryApi(request, id=0):
         category=Category.objects.get(CategoryId=id)
         category.delete()
         return JsonResponse("deleted",safe=False)
+
+@csrf_exempt
+def brandApi(request, id=0):
+    if request.method == 'GET':
+        brands = Brand.objects.all()
+        brand_serializer = BrandSerializer(brands, many=True)
+        return JsonResponse(brand_serializer.data, safe=False)
+    elif request.method == 'POST':
+        brand_data = JSONParser().parse(request)
+        brand_serializer = BrandSerializer(data=brand_data)
+        if brand_serializer.is_valid():
+            brand_serializer.save()
+            return JsonResponse("Added",safe=False)
+        return JsonResponse("Failed to add",safe=False)
+    elif request.method == 'PUT':
+        brand_data = JSONParser().parse(request)
+        brand = Brand.objects.get(BrandId=brand_data['BrandId'])
+        brand_serializer = BrandSerializer(brand,data=brand_data)
+        if brand_serializer.is_valid():
+            brand_serializer.save()
+            return JsonResponse("updated",safe=False)
+        return JsonResponse("failed to update",safe=False)
+    elif request.method == 'DELETE':
+        brand = Brand.objects.get(BrandId = id)
+        brand.delete()
+        return JsonResponse("Deleted",safe=False)
