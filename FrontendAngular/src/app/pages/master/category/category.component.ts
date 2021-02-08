@@ -25,12 +25,15 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit(): void {
   
-   this.refreshCatList();
+    this.refreshCatList();
+   
   }
  
 
   refreshCatList() {
     this.catservice.getCategoryList();
+   
+    
   }
   editCategory(cat: Category) {
     this.catservice.formData = Object.assign({}, cat);
