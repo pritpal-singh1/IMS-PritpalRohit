@@ -1,1 +1,75 @@
-<p>add-expense works!</p>
+<div class="container-fluid">
+    <!-- start page title -->
+  <app-pagetitle title="Add Expense" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+  <!-- end page title -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Expense Details</h3>
+                    <form class="needs-validation">
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label>Date</label>
+                                <div class="input-group clockpicker">
+                                  <input type="date" class="form-control" placeholder="yyyy-mm-dd">
+                                  
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Expense Type</label>
+                                    <!-- <ng-select [items]="selectValue"
+                                    bindLabel='name'></ng-select> -->
+                                    <!-- <ng-select>
+                                        <ng-option *ngFor="let item of selectValue">{{item.name}}</ng-option>
+                                    </ng-select> -->
+                                    <input type="text" class="form-control"
+                                    placeholder="Enter expense type">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Amount</label>
+                                    <input type="Number" class="form-control"
+                                    placeholder="₹">
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label>Paid to</label>
+                                <input type="text" class="form-control"
+                                placeholder="enter name">
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Pay mode</label>
+                                    <!-- <ng-select [items]="selectValue"
+                                    bindLabel='name'></ng-select> -->
+                                    <ng-select>
+                                        <ng-option *ngFor="let item of selectValue">{{item.name}}</ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Paid by</label>
+                                <input type="text" class="form-control"
+                                placeholder="enter name">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="text-right">
+                                    <button class="btn btn-primary d-inline">Save & Print</button>
+                                    &nbsp;<button class="btn btn-primary d-inline">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
