@@ -223,11 +223,7 @@ const statData = [
         icon: 'ri-store-2-line',
         title: 'Sales Revenue',
         value: '$ 38452'
-    }, {
-        icon: 'ri-briefcase-4-line',
-        title: 'Average Price',
-        value: '$ 15.4'
-    }
+    }, 
 ];
 
 export { revenueChart, salesAnalytics, sparklineEarning, sparklineMonthly, chatData, transactions, statData };
