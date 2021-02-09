@@ -222,7 +222,7 @@ const statData = [
     }, {
         icon: 'ri-store-2-line',
         title: 'Sales Revenue',
-        value: '$ 38452'
+        value: 'INR 38452'
     }, 
 ];
 
