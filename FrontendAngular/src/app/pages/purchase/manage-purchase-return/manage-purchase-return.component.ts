@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Routes, RouterModule, Router} from '@angular/router';
 
 @Component({
   selector: 'app-manage-purchase-return',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManagePurchaseReturnComponent implements OnInit {
 
-  constructor() { }
+  breadCrumbItems: Array<{}>;
+
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
-  }
+    this.breadCrumbItems = [{ label: 'Purchase' }, { label: 'Manage Purchase Return', active: true }];
 
+  }
+  addPurchaseReturn(){
+    this.router.navigate(['/purchase/purchase-return']);
+  }
 }

@@ -14,7 +14,7 @@ export class AddEmployeeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'Sales' }, { label: 'Add Invoice', active: true }];
+    this.breadCrumbItems = [{ label: 'Users' }, { label: 'Add Employee', active: true }];
   }
 
 }

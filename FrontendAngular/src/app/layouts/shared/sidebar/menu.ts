@@ -29,6 +29,12 @@ export const MENU: MenuItem[] = [
         link: '/customer'
     },
     {
+        id: 3,
+        label: 'Company Details',
+        icon: 'ri-calendar-2-line',
+        link: '/company-details'
+    },
+    {
         id: 4,
         label: 'Role Configuration',
         icon: ' ri-user-2-line',
