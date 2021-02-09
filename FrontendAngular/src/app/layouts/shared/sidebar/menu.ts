@@ -63,8 +63,40 @@ export const MENU: MenuItem[] = [
         id: 3,
         label: 'Online Orders',
         icon: ' ri-stack-line',
-        link: '/calendar'
+        link: '/online-orders'
     },
+    {
+        id: 3,
+        label: 'Inventory',
+        icon: ' ri-stack-line',
+        subItems: [
+            {
+                id: 6,
+                label: 'Fast Moving Items',
+                link: '/inventory/fast-moving-items',
+                parentId: 5
+            },
+            {
+                id: 8,
+                label: 'Stock Availability',
+                link: '/inventory/stock-availability',
+                parentId: 5
+            },
+            {
+                id: 8,
+                label: 'Stock Adjustments',
+                link: '/inventory/stock-adjustments',
+                parentId: 5
+            },
+            {
+                id: 8,
+                label: 'Low Level Stock',
+                link: '/inventory/low-level-stock',
+                parentId: 5
+            },
+        ]
+    },
+    
     {
         id: 3,
         
