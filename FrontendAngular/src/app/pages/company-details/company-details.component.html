@@ -1,0 +1,80 @@
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <app-pagetitle title="Company Details" ></app-pagetitle>
+    <!-- end page title -->
+    <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+    
+              <h4 class="card-title">Company Details</h4>
+              <!-- <p class="card-title-desc">Here are examples of <code>.form-control</code> applied to each
+                textual HTML5 <code>&lt;input&gt;</code> <code>type</code>.</p> -->
+    
+              <div class="form-group row">
+                <label for="example-text-input" class="col-md-2 col-form-label">Name:</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="text" [(ngModel)]="companyName" id="example-text-input" [disabled]="isDisabled">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="example-text-input" class="col-md-2 col-form-label">Company Owner:</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="text" [(ngModel)]="ownerName" id="example-text-input" [disabled]="isDisabled">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="example-text-input" class="col-md-2 col-form-label">GSTIN:</label>
+                <div class="col-md-4">
+                  <input class="form-control" type="text" [(ngModel)]="companyGST" id="example-text-input" [disabled]="isDisabled">
+                </div>
+              <!-- </div>
+              <div class="form-group row"> -->
+                <label for="example-text-input" class="col-md-2 col-form-label">Pan Number:</label>
+                <div class="col-md-4">
+                  <input class="form-control" type="text" [(ngModel)]="companyPAN" id="example-text-input" [disabled]="isDisabled">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="example-text-input" class="col-md-2 col-form-label">Address:</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="text" [(ngModel)]="companyAddress" id="example-text-input" [disabled]="isDisabled">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="example-text-input" class="col-md-2 col-form-label">Zip Code:</label>
+                <div class="col-md-4">
+                  <input class="form-control" type="text" [(ngModel)]="CompanyZIP" id="example-text-input" [disabled]="isDisabled">
+                </div>
+              <!-- </div>
+              <div class="form-group row"> -->
+                <label for="example-text-input" class="col-md-2 col-form-label">Country:</label>
+                <div class="col-md-4">
+                  <input class="form-control" type="text" [(ngModel)]="country" id="example-text-input" [disabled]="isDisabled">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="example-text-input" class="col-md-2 col-form-label">Contact Number:</label>
+                <div class="col-md-4">
+                  <input class="form-control" type="text" [(ngModel)]="contactNumber" id="example-text-input" [disabled]="isDisabled">
+                </div>
+              <!-- </div>
+              <div class="form-group row"> -->
+                <label for="example-text-input" class="col-md-2 col-form-label">Contact Number:</label>
+                <div class="col-md-4">
+                  <input class="form-control" type="text" [(ngModel)]="emailId" id="example-text-input" [disabled]="isDisabled">
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="text-right">
+                    <button type="button" class="btn btn-danger"><i class="fas fa-edit editcolor"></i>&nbsp;Edit Company Details</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div> <!-- end col -->
+      </div>
+      <!-- end row -->
+</div>

@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as $ from 'jquery'; 
 import { SharedService } from '../shared.service';
+import {Routes, RouterModule, Router} from '@angular/router';
+
 
 
 
@@ -16,11 +18,17 @@ import { SharedService } from '../shared.service';
   styleUrls: ['./manage-invoice.component.scss']
 })
 export class ManageInvoiceComponent implements OnInit {
+  breadCrumbItems: Array<{}>;
 
-  constructor(public catservice: SharedService) { }
+
+  constructor(public catservice: SharedService,
+    private router:Router) { }
 
   ngOnInit(): void {
- 
+    this.breadCrumbItems = [{ label: 'Sales' }, { label: 'Manage Invoice', active: true }];
+
   }
-  
+  addInvoice(){
+    this.router.navigate(['/sales/new-invoice']);
+  }
 }
