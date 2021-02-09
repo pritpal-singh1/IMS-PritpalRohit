@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Routes, RouterModule, Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-manage-purchase-order',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManagePurchaseOrderComponent implements OnInit {
 
-  constructor() { }
+  breadCrumbItems: Array<{}>;
+
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
+    this.breadCrumbItems = [{ label: 'Purchase' }, { label: 'Manage Purchase Order', active: true }];
+
   }
+  addPurchaseOrder(){
+    this.router.navigate(['/purchase/purchase-order']);
+  }
+
 
 }

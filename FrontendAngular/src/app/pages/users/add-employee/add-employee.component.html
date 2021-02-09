@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <!-- start page title -->
-  <app-pagetitle title="Add Invoice" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+  <app-pagetitle title="Add Employee" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
   <!-- end page title -->
   <div class="row">
     <div class="col-lg-12">
@@ -102,31 +102,18 @@
                             </ng-select>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label>Document No:</label>
                             <input type="text" class="form-control"
                             placeholder="Enter Document Number">
                         </div>
                     </div>
-                </div>
-            </form>
-          </div>
-       </div>
-    </div>
-  </div>   
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">Identity Details</h4>
-            <form class="needs-validation">
-                <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label>Invoice Number</label>
-                            <input type="text" class="form-control"
-                            placeholder="First name">
+                            <label>Expiry/Issue Date</label>
+                            <input type="Date" class="form-control"
+                            placeholder="dd-mm-yyyy">
                         </div>
                     </div>
                 </div>
@@ -139,14 +126,28 @@
     <div class="col-lg-12">
       <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Invoice Information</h4>
+            <h4 class="card-title">Login Credentials</h4>
             <form class="needs-validation">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label>Invoice Number</label>
+                            <label>User Name</label>
                             <input type="text" class="form-control"
-                            placeholder="First name">
+                            placeholder="User name">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control"
+                            placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" class="form-control"
+                            placeholder="">
                         </div>
                     </div>
                 </div>
@@ -154,5 +155,39 @@
           </div>
        </div>
     </div>
+  </div>   
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Emergency Contact</h4>
+            <form class="needs-validation">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Person Name</label>
+                            <input type="text" class="form-control"
+                            placeholder="Name">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Contact Number</label>
+                            <input type="Number" class="form-control"
+                            placeholder="ex:1234567890">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="col-md-12">
+                <div class="text-right">
+                    <button class="btn btn-primary d-inline">Save & Print</button>
+                    &nbsp;<button class="btn btn-primary d-inline">Save</button>
+                </div>
+            </div>
+          </div>
+       </div>
+    </div>
+    
   </div>    
 </div>
