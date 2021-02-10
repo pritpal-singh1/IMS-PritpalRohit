@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-view-expense',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewExpenseComponent implements OnInit {
 
-  constructor() { }
+  breadCrumbItems: Array<{}>;
+
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
+    this.breadCrumbItems = [{ label: 'Expense' }, { label: 'Manage Expense', active: true }];
+
+  }
+  addExpense(){
+    this.router.navigate(['/expense/add-expense']);
   }
 
 }
