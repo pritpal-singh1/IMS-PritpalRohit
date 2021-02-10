@@ -21,6 +21,8 @@ import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 import { DataTablesModule } from 'angular-datatables';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
+
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
 } else {
@@ -51,7 +53,7 @@ export function createTranslateLoader(http: HttpClient): any {
         useFactory: createTranslateLoader,
         deps: [HttpClient]
       }
-    }),
+    })
   ],
   providers: [
   
