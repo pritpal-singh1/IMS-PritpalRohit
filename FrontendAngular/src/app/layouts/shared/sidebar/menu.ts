@@ -38,7 +38,39 @@ export const MENU: MenuItem[] = [
         id: 4,
         label: 'Role Configuration',
         icon: ' ri-user-2-line',
-        link: '/role-configuration'
+        subItems: [
+            {
+                id: 6,
+                label: 'Add User',
+                link: '/role-configuration/add-user',
+                parentId: 5
+            },
+            {
+                id: 8,
+                label: 'Manage User',
+                link: '/role-configuration/manage-user',
+                parentId: 5
+            },
+        ]
+    },
+    {
+        id: 4,
+        label: 'Employees',
+        icon: ' ri-user-2-line',
+        subItems: [
+            {
+                id: 6,
+                label: 'Add Employee',
+                link: '/employees/add-employee',
+                parentId: 5
+            },
+            {
+                id: 8,
+                label: 'Manage employee',
+                link: '/employees/manage-employee',
+                parentId: 5
+            },
+        ]
     },
     {
         id: 5,

@@ -14,7 +14,7 @@ import {CompanyDetailsComponent} from './company-details/company-details.compone
 
 const routes: Routes = [
     { path: '', component: DashboardComponent },
-    { path: 'role-configuration', component: RoleConfigurationComponent},
+    // { path: 'role-configuration', component: RoleConfigurationComponent},
     { path: 'calendar', component: CalendarComponent },
     { path: 'chat', component: ChatComponent },
     { path: 'kanban-board', component: KanbanComponent },
@@ -38,6 +38,9 @@ const routes: Routes = [
     { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule) },
     { path: 'inventory', loadChildren: () => import('./inventory/inventory.module').then(m => m.InventoryModule) },
     { path: 'onlineorders', loadChildren: () => import('./onlineorders/onlineorders.module').then(m => m.OnlineordersModule) },
+    { path: 'role-configuration', loadChildren: () => import('./role-configuration/role-configuration.module').then(m => m.RoleConfigurationModule) },
+    { path: 'employees', loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesModule) },
+
   
 ];
 
