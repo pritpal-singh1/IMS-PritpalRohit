@@ -63,8 +63,23 @@ export const MENU: MenuItem[] = [
         id: 3,
         label: 'Online Orders',
         icon: ' ri-stack-line',
-        link: '/online-orders'
+        subItems: [
+            {
+                id: 6,
+                label: 'All Orders',
+                link: '/onlineorders/all-orders',
+                parentId: 5
+            },
+            {
+                id: 8,
+                label: 'Pending Orders',
+                link: '/onlineorders/pending-orders',
+                parentId: 5
+            },
+           
+        ]
     },
+    
     {
         id: 3,
         label: 'Inventory',
