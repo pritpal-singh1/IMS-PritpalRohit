@@ -22,12 +22,12 @@ export const MENU: MenuItem[] = [
     //     icon: 'ri-calendar-2-line',
     //     link: '/calendar'
     // },
-    {
-        id: 3,
-        label: 'Customers',
-        icon: 'ri-calendar-2-line',
-        link: '/customer'
-    },
+    // {
+    //     id: 3,
+    //     label: 'Customers',
+    //     icon: 'ri-calendar-2-line',
+    //     link: '/customer'
+    // },
     {
         id: 3,
         label: 'Company Details',
@@ -117,12 +117,7 @@ export const MENU: MenuItem[] = [
         label: 'Inventory',
         icon: ' ri-stack-line',
         subItems: [
-            {
-                id: 6,
-                label: 'Fast Moving Items',
-                link: '/inventory/fast-moving-items',
-                parentId: 5
-            },
+            
             {
                 id: 8,
                 label: 'Stock Availability',
@@ -208,38 +203,38 @@ export const MENU: MenuItem[] = [
             
         ]
     },
-    {
-        id: 3,
+    // {
+    //     id: 3,
         
-        label: 'Users',
-        icon: 'ri-calendar-2-line',
-        subItems: [
-            {
-                id: '',
-                label: 'All Users',
-                link: '/users/all-users',
-                parentId: 3
-            },
-            {
-                id: '',
-                label: 'Add User',
-                link: '/users/add-users',
-                parentId: 3
-            },
-            {
-                id: '',
-                label: 'Employees',
-                link: '/users/employee',
-                parentId: 3
-            },
-            {
-                id: '',
-                label: 'Add Employees',
-                link: '/users/add-employee',
-                parentId: 3
-            },
-        ]
-    },
+    //     label: 'Users',
+    //     icon: 'ri-calendar-2-line',
+    //     subItems: [
+    //         {
+    //             id: '',
+    //             label: 'All Users',
+    //             link: '/users/all-users',
+    //             parentId: 3
+    //         },
+    //         {
+    //             id: '',
+    //             label: 'Add User',
+    //             link: '/users/add-users',
+    //             parentId: 3
+    //         },
+    //         {
+    //             id: '',
+    //             label: 'Employees',
+    //             link: '/users/employee',
+    //             parentId: 3
+    //         },
+    //         {
+    //             id: '',
+    //             label: 'Add Employees',
+    //             link: '/users/add-employee',
+    //             parentId: 3
+    //         },
+    //     ]
+    // },
     // {
     //     id: 4,
     //     label: 'MENUITEMS.CHAT.TEXT',
@@ -263,12 +258,12 @@ export const MENU: MenuItem[] = [
                 link: '/master/brand',
                 parentId: 5
             },
-            {
-                id: 9,
-                label: 'Staff',
-                link: '/master/staff',
-                parentId: 5
-            },
+            // {
+            //     id: 9,
+            //     label: 'Staff',
+            //     link: '/master/staff',
+            //     parentId: 5
+            // },
             {
                 id: 10,
                 label: 'Products',
@@ -294,36 +289,36 @@ export const MENU: MenuItem[] = [
                 link: '/ecommerce/customers',
                 parentId: 5
             },
-            {
-                id: 10,
-                label: 'MENUITEMS.ECOMMERCE.LIST.CART',
-                link: '/ecommerce/cart',
-                parentId: 5
-            },
-            {
-                id: 11,
-                label: 'MENUITEMS.ECOMMERCE.LIST.CHECKOUT',
-                link: '/ecommerce/checkout',
-                parentId: 5
-            },
-            {
-                id: 11,
-                label: 'MENUITEMS.ECOMMERCE.LIST.CHECKOUT',
-                link: '/ecommerce/product-detail',
-                parentId: 5
-            },
-            {
-                id: 12,
-                label: 'MENUITEMS.ECOMMERCE.LIST.SHOPS',
-                link: '/ecommerce/shops',
-                parentId: 5
-            },
-            {
-                id: 13,
-                label: 'MENUITEMS.ECOMMERCE.LIST.ADDPRODUCT',
-                link: '/ecommerce/add-product',
-                parentId: 5
-            },
+            // {
+            //     id: 10,
+            //     label: 'MENUITEMS.ECOMMERCE.LIST.CART',
+            //     link: '/ecommerce/cart',
+            //     parentId: 5
+            // },
+            // {
+            //     id: 11,
+            //     label: 'MENUITEMS.ECOMMERCE.LIST.CHECKOUT',
+            //     link: '/ecommerce/checkout',
+            //     parentId: 5
+            // },
+            // {
+            //     id: 11,
+            //     label: 'MENUITEMS.ECOMMERCE.LIST.CHECKOUT',
+            //     link: '/ecommerce/product-detail',
+            //     parentId: 5
+            // },
+            // {
+            //     id: 12,
+            //     label: 'MENUITEMS.ECOMMERCE.LIST.SHOPS',
+            //     link: '/ecommerce/shops',
+            //     parentId: 5
+            // },
+            // {
+            //     id: 13,
+            //     label: 'MENUITEMS.ECOMMERCE.LIST.ADDPRODUCT',
+            //     link: '/ecommerce/add-product',
+            //     parentId: 5
+            // },
         ]
     },
     {

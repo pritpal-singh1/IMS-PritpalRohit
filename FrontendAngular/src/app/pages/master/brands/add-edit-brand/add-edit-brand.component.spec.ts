@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FastMovingItemsComponent } from './fast-moving-items.component';
+import { AddEditBrandComponent } from './add-edit-brand.component';
 
-describe('FastMovingItemsComponent', () => {
-  let component: FastMovingItemsComponent;
-  let fixture: ComponentFixture<FastMovingItemsComponent>;
+describe('AddEditBrandComponent', () => {
+  let component: AddEditBrandComponent;
+  let fixture: ComponentFixture<AddEditBrandComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FastMovingItemsComponent ]
+      declarations: [ AddEditBrandComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FastMovingItemsComponent);
+    fixture = TestBed.createComponent(AddEditBrandComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
