@@ -238,6 +238,25 @@ export const MENU: MenuItem[] = [
                 parentId: 5
             },
             {
+                id: 10,
+                label: 'Products',
+                parentId: 5,
+                subItems: [
+                    {
+                        id: 72,
+                        label: 'Add Products',
+                        link: 'master/add-products',
+                        parentId: 10,
+                    },
+                    {
+                        id: 73,
+                        label: 'Manage Products',
+                        link: 'master/manage-products',
+                        parentId: 10,
+                    }
+                ]
+            },
+            {
                 id: 9,
                 label: 'MENUITEMS.ECOMMERCE.LIST.CUSTOMERS',
                 link: '/ecommerce/customers',
