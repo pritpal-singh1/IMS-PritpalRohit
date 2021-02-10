@@ -20,10 +20,12 @@ import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { ArchwizardModule } from 'angular-archwizard';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { Ng5SliderModule } from 'ng5-slider';
+import { AddEditBrandComponent } from './brands/add-edit-brand/add-edit-brand.component';
+
 
 
 @NgModule({
-  declarations: [MasterComponent, CategoryComponent, BrandsComponent, StaffComponent, AddEditCategoryComponent, AddproductsComponent, ManageproductsComponent],
+  declarations: [MasterComponent, CategoryComponent, BrandsComponent, StaffComponent, AddEditCategoryComponent, AddproductsComponent, ManageproductsComponent, AddEditBrandComponent],
   imports: [
     CommonModule,
     MasterRoutingModule,
@@ -49,7 +51,7 @@ import { Ng5SliderModule } from 'ng5-slider';
     NgbCollapseModule,
     Ng5SliderModule,
     NgbModalModule,
-  
+
   ],
   providers: [
     SharedService

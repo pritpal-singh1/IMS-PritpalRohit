@@ -1,4 +1,4 @@
-export interface Customers {
+export interface Stocks {
     name: string;
     email: string;
     phone: string;
