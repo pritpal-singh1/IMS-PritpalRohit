@@ -9,13 +9,19 @@ import { Category } from './category.model';
 export class CategoryService {
   formData  : Category;
   list: Category[];
+  CategoryFilter: string = "";
+  listwithoutfilter: Category[];
   readonly APIUrl = "http://127.0.0.1:8000";
   constructor(private http: HttpClient) { }
 
   getCategoryList(){
-    this.http.get(this.APIUrl+'/category/')
-    .toPromise().then(res => this.list = res as Category[]);
+    this.http.get(this.APIUrl + '/category/').subscribe(data => {
+      this.list = data as Category[];
+      this.listwithoutfilter = data as Category[];
+    });
+   
   }
+ 
 
   addCategory(formData:Category){
     return this.http.post(this.APIUrl + '/category/', formData);
