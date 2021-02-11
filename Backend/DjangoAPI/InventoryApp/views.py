@@ -8,6 +8,8 @@ from InventoryApp.serializers import CategorySerializer
 from InventoryApp.models import Brand
 from InventoryApp.serializers import BrandSerializer
 
+from django.core.files.storage import default_storage
+
 # Create your views here.
 
 @csrf_exempt
@@ -62,3 +64,10 @@ def brandApi(request, id=0):
         brand = Brand.objects.get(BrandId = id)
         brand.delete()
         return JsonResponse("Deleted",safe=False)
+
+@csrf_exempt
+def SaveProductImage(request):
+    file=request.FILES['uploadedFile']
+    file_name=default_storage.save(file.name,file)
+
+    return JsonResponse(file_name,safe=False)

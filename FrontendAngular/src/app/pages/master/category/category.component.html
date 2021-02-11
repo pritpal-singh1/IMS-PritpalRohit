@@ -31,25 +31,11 @@
 										<td>{{ item.CategoryId }}</td>
 										<td>{{ item.CategoryName }}</td>
 										<td>
-											<div class="row">
-												<div class="col-md-4  " 
-													(click)="editCategory(item)"
-													class="row icon-demo-content"
-													id="solid" 
-												>
-													<i class="fas fa-edit editcolor"></i>
-												</div>
-                        <div class="col-md-4">
-
-                        </div>
-												<div class="col-md-4 "
-													(click)="deleteCategory(item)"
-													class="row icon-demo-content"
-													id="solid"
-												>
-													<i class="fas fa-trash trashcolor"></i>
-												</div>
-											</div>
+											<a (click)="editCategory(item)" class="mr-3 text-primary" placement="top" ngbTooltip="Edit"><i
+												class="mdi mdi-pencil font-size-18"></i></a>
+											<a (click)="deleteCategory(item)" class="text-danger" placement="top" ngbTooltip="Delete"><i
+												class="mdi mdi-trash-can font-size-18"></i></a>
+											
 										</td>
 									</tr>
 								</tbody>

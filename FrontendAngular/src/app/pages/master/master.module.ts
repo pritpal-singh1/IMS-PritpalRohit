@@ -1,6 +1,6 @@
 import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import {DataTablesModule} from 'angular-datatables';
 import { MasterRoutingModule } from './master-routing.module';
 import { MasterComponent } from './master.component';
 import { CategoryComponent } from './category/category.component';
@@ -24,10 +24,13 @@ import { AddEditBrandComponent } from './brands/add-edit-brand/add-edit-brand.co
 
 
 
+
 @NgModule({
   declarations: [MasterComponent, CategoryComponent, BrandsComponent, StaffComponent, AddEditCategoryComponent, AddproductsComponent, ManageproductsComponent, AddEditBrandComponent],
   imports: [
     CommonModule,
+    
+    DataTablesModule,
     MasterRoutingModule,
     TablesRoutingModule,
     DropzoneModule,
@@ -56,6 +59,7 @@ import { AddEditBrandComponent } from './brands/add-edit-brand/add-edit-brand.co
   providers: [
     SharedService
   ],
-    schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  bootstrap: [CategoryComponent],
 })
 export class MasterModule { }
