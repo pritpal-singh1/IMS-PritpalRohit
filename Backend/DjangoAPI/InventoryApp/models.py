@@ -1,41 +1,44 @@
 from django.db import models
 
-
 # Create your models here.
 
 class Role(models.Model):
+    RoleId = models.AutoField(primary_key=True)
     RoleName = models.CharField(max_length=100)
     def __str__(self):
         return self.RoleName
 
 class Employee(models.Model):
+    EmployeeId = models.AutoField(primary_key=True)
     EmployeeName=models.CharField(max_length=100)
     Gender=models.CharField(max_length=10)
     Address= models.CharField(max_length=100)
     EmailId=models.CharField(max_length=100)
-    MobiileNo=models.CharField(max_length=20)
+    MobileNo=models.CharField(max_length=20)
     DOB=models.DateField()
     CreatedAt=models.DateTimeField(auto_now_add=True)
     ContactPerson=models.CharField(max_length=100)
     ContactPersonNo=models.CharField(max_length=100)
-    AdharNo=models.CharField(max_length=100)
+    AdhaarNo=models.CharField(max_length=100)
     JoiningDate=models.DateField()
 
     def __str__(self):
         return self.EmployeeName
 
 class AdminUser(models.Model):
+    AdminUserid = models.AutoField(primary_key=True)
     EmployeeId=models.ForeignKey(Employee,on_delete=models.CASCADE)
     Password = models.CharField(max_length=100)
     UserId = models.CharField(max_length=100)
     CreatedAt=models.DateTimeField(auto_now_add=True)
     Status=models.CharField(max_length=100)
-    Role=models.ForeignKey(Role,on_delete=models.CASCADE)
+    Role=models.ForeignKey(Role,db_column="RoleId",on_delete=models.CASCADE)
     def __str__(self):
-        return self.EmployeeId
+        return self.UserId
 
 
 class Category(models.Model):
+    CategoryId=models.AutoField(primary_key=True)
     CategoryName = models.CharField(max_length=100)
     CreatedAt=models.DateTimeField(auto_now_add=True)
     def __str__(self):
@@ -43,14 +46,16 @@ class Category(models.Model):
 
 
 class Brand(models.Model):
+    BrandId=models.AutoField(primary_key=True)
     BrandName = models.CharField(max_length=100)
-    CreatedAt = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.BrandName
 
+
 class Product(models.Model):
-    BrandId = models.ForeignKey(Brand,on_delete=models.CASCADE)
-    CategoryId = models.ForeignKey(Category, on_delete=models.CASCADE)
+    ProductId = models.AutoField(primary_key=True)
+    Brand = models.ForeignKey(Brand,db_column='BrandId',on_delete=models.CASCADE)
+    Category = models.ForeignKey(Category, db_column='CategoryId', on_delete=models.CASCADE)
     ProductName=models.CharField(max_length=100)
     ItemCode=models.CharField(max_length=100)
     PrintName = models.CharField(max_length=100)
@@ -67,6 +72,7 @@ class Product(models.Model):
         return self.ProductName
 
 class Supplier(models.Model):
+    SupplierId=models.AutoField(primary_key=True)
     SupplierName=models.CharField(max_length=100)
     CompanyName=models.CharField(max_length=100)
     Address = models.CharField(max_length=100)
@@ -85,6 +91,7 @@ class Supplier(models.Model):
         return self.ProductName
 
 class CustomersOnline(models.Model):
+    CustomersOnlineId=models.AutoField(primary_key=True)
     CustomerName=models.CharField(max_length=100)
     EmailId=models.CharField(max_length=100)
     Password=models.CharField(max_length=100)
@@ -95,10 +102,11 @@ class CustomersOnline(models.Model):
 
 
 class SalesOrderOnline(models.Model):
+    SalesOrderOnlineId=models.AutoField(primary_key=True)
     InvoiceNo=models.CharField(max_length=100)
     Date=models.DateTimeField(auto_now_add=True)
     Contact=models.CharField(max_length=20)
-    CustomerId=models.ForeignKey(CustomersOnline,on_delete=models.CASCADE)
+    CustomerId=models.ForeignKey(CustomersOnline,db_column="CustomersOnlineId",on_delete=models.CASCADE)
     BillingName=models.CharField(max_length=100)
     Address=models.CharField(max_length=100)
     PaymentStatus=models.CharField(max_length=100)
@@ -109,8 +117,9 @@ class SalesOrderOnline(models.Model):
         return self.InvoiceNo
 
 class SalesOrderOnlineDetail(models.Model):
-    SalesOrderOnlineId=models.ForeignKey(SalesOrderOnline,on_delete=models.CASCADE)
-    ProductId=models.ForeignKey(Product,on_delete=models.CASCADE)
+    SalesOrderOnlineDetailId=models.AutoField(primary_key=True)
+    SalesOrderOnlineId=models.ForeignKey(SalesOrderOnline, db_column="SalesOrderOnlineId",on_delete=models.CASCADE)
+    ProductId=models.ForeignKey(Product,db_column="ProductId",on_delete=models.CASCADE)
     Quantity=models.CharField(max_length=10)
     SalePrice=models.CharField(max_length=10)
     Amount=models.CharField(max_length=10)
@@ -120,11 +129,11 @@ class SalesOrderOnlineDetail(models.Model):
         return self.Amount
 
 class SalesOrdersOffline(models.Model):
+    SalesOrderOfflineId = models.AutoField(primary_key=True)
     InvoiceNo=models.CharField(max_length=100)
     Date=models.DateTimeField()
     CustomerName=models.CharField(max_length=100)
     Contact=models.CharField(max_length=100)
-    CreatedBy=models.ForeignKey(AdminUser,on_delete=models.CASCADE)
     PaymentMode=models.CharField(max_length=100)
     TotalAmount=models.CharField(max_length=10)
     AmountPaid=models.CharField(max_length=10)
@@ -135,8 +144,9 @@ class SalesOrdersOffline(models.Model):
         return self.InvoiceNo
 
 class SalesOrderOfflineDetail(models.Model):
-    SalesOrdersOfflineId=models.ForeignKey(SalesOrdersOffline,on_delete=models.CASCADE)
-    ProductId=models.ForeignKey(Product,on_delete=models.CASCADE)
+    SalesOrderOfflineDetailId = models.AutoField(primary_key=True)
+    SalesOrdersOfflineId=models.ForeignKey(SalesOrdersOffline,db_column="SalesOrderOfflineId",on_delete=models.CASCADE)
+    ProductId=models.ForeignKey(Product,db_column="ProductId",on_delete=models.CASCADE)
     Quantity=models.CharField(max_length=10)
     SalePrice=models.CharField(max_length=10)
     Amount=models.CharField(max_length=10)
@@ -146,12 +156,11 @@ class SalesOrderOfflineDetail(models.Model):
         return self.Amount
 
 class PurchaseBill(models.Model):
-    BillNo=models.CharField(max_length=100)
+    BillNo=models.CharField(max_length=100,primary_key=True)
     Date=models.DateTimeField()
-    SupplierId=models.ForeignKey(Supplier,on_delete=models.CASCADE)
+    Supplier=models.ForeignKey(Supplier,db_column="SupplierId",on_delete=models.CASCADE)
     PurchaseType=models.CharField(max_length=100)
     Contact=models.CharField(max_length=100)
-    CreatedBy=models.ForeignKey(AdminUser,on_delete=models.CASCADE)
     TotalAmount=models.CharField(max_length=10)
     AmountPaid=models.CharField(max_length=10)
     PaymentMode=models.CharField(max_length=10)
@@ -162,8 +171,8 @@ class PurchaseBill(models.Model):
         return self.BillNo
 
 class PurchaseBillDetail(models.Model):
-    PurchaseBillDetailId=models.ForeignKey(PurchaseBill,on_delete=models.CASCADE)
-    ProductId=models.ForeignKey(Product,on_delete=models.CASCADE)
+    PurchaseBillDetailId=models.ForeignKey(PurchaseBill,db_column="BillNo",on_delete=models.CASCADE)
+    ProductId=models.ForeignKey(Product,db_column="ProductId",on_delete=models.CASCADE)
     Quantity=models.CharField(max_length=10)
     SalePrice=models.CharField(max_length=10)
     Amount=models.CharField(max_length=10)
