@@ -112,12 +112,62 @@ class SalesOrderOnlineDetail(models.Model):
     SalesOrderOnlineId=models.ForeignKey(SalesOrderOnline,on_delete=models.CASCADE)
     ProductId=models.ForeignKey(Product,on_delete=models.CASCADE)
     Quantity=models.CharField(max_length=10)
-
     SalePrice=models.CharField(max_length=10)
     Amount=models.CharField(max_length=10)
     Discount=models.CharField(max_length=10)
 
     def __str__(self):
-        return self.pk
+        return self.Amount
 
+class SalesOrdersOffline(models.Model):
+    InvoiceNo=models.CharField(max_length=100)
+    Date=models.DateTimeField()
+    CustomerName=models.CharField(max_length=100)
+    Contact=models.CharField(max_length=100)
+    CreatedBy=models.ForeignKey(AdminUser,on_delete=models.CASCADE)
+    PaymentMode=models.CharField(max_length=100)
+    TotalAmount=models.CharField(max_length=10)
+    AmountPaid=models.CharField(max_length=10)
+    Status=models.CharField(max_length=10)
+    CreatedAt=models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.InvoiceNo
+
+class SalesOrderOfflineDetail(models.Model):
+    SalesOrdersOfflineId=models.ForeignKey(SalesOrdersOffline,on_delete=models.CASCADE)
+    ProductId=models.ForeignKey(Product,on_delete=models.CASCADE)
+    Quantity=models.CharField(max_length=10)
+    SalePrice=models.CharField(max_length=10)
+    Amount=models.CharField(max_length=10)
+    Discount=models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.Amount
+
+class PurchaseBill(models.Model):
+    BillNo=models.CharField(max_length=100)
+    Date=models.DateTimeField()
+    SupplierId=models.ForeignKey(Supplier,on_delete=models.CASCADE)
+    PurchaseType=models.CharField(max_length=100)
+    Contact=models.CharField(max_length=100)
+    CreatedBy=models.ForeignKey(AdminUser,on_delete=models.CASCADE)
+    TotalAmount=models.CharField(max_length=10)
+    AmountPaid=models.CharField(max_length=10)
+    PaymentMode=models.CharField(max_length=10)
+    Status=models.CharField(max_length=10)
+    CreatedAt=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.BillNo
+
+class PurchaseBillDetail(models.Model):
+    PurchaseBillDetailId=models.ForeignKey(PurchaseBill,on_delete=models.CASCADE)
+    ProductId=models.ForeignKey(Product,on_delete=models.CASCADE)
+    Quantity=models.CharField(max_length=10)
+    SalePrice=models.CharField(max_length=10)
+    Amount=models.CharField(max_length=10)
+    Discount=models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.Amount
