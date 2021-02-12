@@ -40,14 +40,16 @@ def categoryApi(request, id=0):
         return JsonResponse("deleted",safe=False)
 
 @csrf_exempt
-def brandApi(request, id=0):
+def brandApi(request, bid=0):
     if request.method == 'GET':
         brands = Brand.objects.all()
+        print(brands)
         brand_serializer = BrandSerializer(brands, many=True)
         return JsonResponse(brand_serializer.data, safe=False)
     elif request.method == 'POST':
         brand_data = JSONParser().parse(request)
         brand_serializer = BrandSerializer(data=brand_data)
+        print(brand_serializer)
         if brand_serializer.is_valid():
             brand_serializer.save()
             return JsonResponse("Added",safe=False)
@@ -61,7 +63,7 @@ def brandApi(request, id=0):
             return JsonResponse("updated",safe=False)
         return JsonResponse("failed to update",safe=False)
     elif request.method == 'DELETE':
-        brand = Brand.objects.get(BrandId = id)
+        brand = Brand.objects.get(BrandId = bid)
         brand.delete()
         return JsonResponse("Deleted",safe=False)
 

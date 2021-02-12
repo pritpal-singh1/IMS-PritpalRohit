@@ -8,6 +8,8 @@ class CategorySerializer(serializers.ModelSerializer):
         fields=('CategoryId',
                 'CategoryName')
 
+
+
 class BrandSerializer(serializers.ModelSerializer):
     class Meta:
         model=Brand
