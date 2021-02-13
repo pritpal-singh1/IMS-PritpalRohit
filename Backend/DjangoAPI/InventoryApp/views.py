@@ -3,8 +3,9 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 
-from InventoryApp.models import Category
-from InventoryApp.serializers import CategorySerializer
+from InventoryApp.models import Category,Supplier,Employee
+from InventoryApp.serializers import CategorySerializer, SalesOrdersOfflineSerializer,SupplierSerializer,\
+    EmployeeSerializer
 from InventoryApp.models import Brand
 from InventoryApp.serializers import BrandSerializer
 
@@ -48,6 +49,7 @@ def brandApi(request, bid=0):
         return JsonResponse(brand_serializer.data, safe=False)
     elif request.method == 'POST':
         brand_data = JSONParser().parse(request)
+        print(type(brand_data))
         brand_serializer = BrandSerializer(data=brand_data)
         print(brand_serializer)
         if brand_serializer.is_valid():
@@ -73,3 +75,75 @@ def SaveProductImage(request):
     file_name=default_storage.save(file.name,file)
 
     return JsonResponse(file_name,safe=False)
+
+@csrf_exempt
+def newSalesOrder(request):
+    sales_order=JSONParser().parse(request)
+    sales_order_serializer = SalesOrdersOfflineSerializer(data=sales_order)
+    print(sales_order_serializer)
+    sales_order_serializer.is_valid(raise_exception=True)
+    if sales_order_serializer.is_valid():
+        sales_order_serializer.save()
+        print(sales_order_serializer.data)
+        print("This is Id: ",sales_order_serializer.data['SalesOrderOfflineId'])
+        return JsonResponse("Added", safe=False)
+    return JsonResponse("Failed to add", safe=False)
+
+@csrf_exempt
+def supplierApi(request, sid=0):
+    if request.method == 'GET':
+        suppliers = Supplier.objects.all()
+        suppliers_serializer = SupplierSerializer(suppliers, many=True)
+        return JsonResponse(suppliers_serializer.data, safe=False)
+    elif request.method == 'POST':
+        supplier_data = JSONParser().parse(request)
+        print(supplier_data)
+        supplier_serializer = SupplierSerializer(data=supplier_data)
+        print(supplier_serializer)
+        supplier_serializer.is_valid(raise_exception=True)
+        if supplier_serializer.is_valid():
+            supplier_serializer.save()
+            return JsonResponse("Added",safe=False)
+        return JsonResponse("Failed to add",safe=False)
+    elif request.method == 'PUT':
+        supplier_data = JSONParser().parse(request)
+        supplier = Supplier.objects.get(SupplierId=supplier_data['SupplierId'])
+        supplier_serializer = SupplierSerializer(supplier,data=supplier_data)
+        if supplier_serializer.is_valid():
+            supplier_serializer.save()
+            return JsonResponse("updated",safe=False)
+        return JsonResponse("failed to update",safe=False)
+    elif request.method == 'DELETE':
+        supplier = Supplier.objects.get(SupplierId = sid)
+        supplier.delete()
+        return JsonResponse("Deleted",safe=False)
+
+@csrf_exempt
+def employeeApi(request,eid=0):
+    if request.method == 'GET':
+        employee = Employee.objects.all()
+        employee_serializer = EmployeeSerializer(employee, many=True)
+        print(employee_serializer.data)
+        return JsonResponse(employee_serializer.data, safe=False)
+    elif request.method == 'POST':
+        employee_data = JSONParser().parse(request)
+        print(employee_data)
+        employee_serializer = EmployeeSerializer(data=employee_data)
+        print(employee_serializer)
+        employee_serializer.is_valid(raise_exception=True)
+        if employee_serializer.is_valid():
+            employee_serializer.save()
+            return JsonResponse("Added", safe=False)
+        return JsonResponse("Failed to add", safe=False)
+    elif request.method == 'PUT':
+        employee_data = JSONParser().parse(request)
+        employee = Employee.objects.get(EmployeeId=employee_data['EmployeeId'])
+        employee_serializer = EmployeeSerializer(employee, data=employee_data)
+        if employee_serializer.is_valid():
+            employee_serializer.save()
+            return JsonResponse("updated", safe=False)
+        return JsonResponse("failed to update", safe=False)
+    elif request.method == 'DELETE':
+        employee = Employee.objects.get(EmployeeId=eid)
+        employee.delete()
+        return JsonResponse("Deleted", safe=False)
