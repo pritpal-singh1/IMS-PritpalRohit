@@ -10,6 +10,14 @@ urlpatterns=[
 
     url(r'^brand/$',views.brandApi),
     url(r'brand/([0-9]+)$',views.brandApi),
+    url(r'^adminUser/$',views.adminApi),
+    url(r'adminUser/([0-9]+)$',views.adminApi),
+    url(r'^product/$',views.adminApi),
+    url(r'product/([0-9]+)$',views.adminApi),
+    url(r'^customersOnline/$',views.adminApi),
+    url(r'customersOnline/([0-9]+)$',views.adminApi),
+    url(r'^salesOrderOnline/$',views.adminApi),
+    url(r'salesOrderOnline/([0-9]+)$',views.adminApi),
 
     url(r'^newsale/$',views.newSalesOrder),
 

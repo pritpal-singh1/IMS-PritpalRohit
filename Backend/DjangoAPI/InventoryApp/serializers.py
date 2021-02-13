@@ -1,7 +1,6 @@
 from rest_framework import serializers
-from InventoryApp.models import Category
-from InventoryApp.models import Brand,Employee,SalesOrderOfflineDetail
-from InventoryApp.models import SalesOrdersOffline,Supplier
+from InventoryApp.models import Category, Brand,Employee,SalesOrderOfflineDetail, SalesOrdersOffline,Supplier, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline
+
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -77,3 +76,63 @@ class SalesOrderOfflineDetailSerializer(serializers.ModelSerializer):
                 'Discount',
                )
 
+class RoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Role
+        fields = ('RoleId',
+                'RoleName')
+
+class AdminSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AdminUser
+        fields = ('AdminUserid',
+        'EmployeeId',
+        'Password',
+        'UserId',
+        'CreatedAt',
+        'Status',
+        'Role')
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ('ProductId',
+        'Brand',
+        'Category',
+        'ProductName',
+        'ItemCode',
+        'PrintName',
+        'PurchasePrice',
+        'SalePrice',
+        'MRP',
+        'LowLevelLimit',
+        'Discount',
+        'GST',
+        'StockQTY',
+        'CreatedAt',
+        'ProductImage')
+
+class CustomersOnlineSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomersOnline
+        fields = ('CustomersOnlineId',
+        'CustomerName',
+        'EmailId',
+        'Password',
+        'CreatedAt',
+        'Status')
+
+
+class SalesOrderOnlineSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SalesOrderOnline
+        fields = ('SalesOrderOnlineId',
+        'InvoiceNo',
+        'Date',
+        'Contact',
+        'CustomerId',
+        'BillingName',
+        'Address',
+        'PaymentStatus',
+        'OrderStatus',
+        'TotalAmount')
