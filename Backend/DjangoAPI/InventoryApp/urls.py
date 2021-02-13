@@ -7,8 +7,19 @@ from django.conf import settings
 urlpatterns=[
     url(r'^category/$',views.categoryApi),
     url(r'^category/([0-9]+)$',views.categoryApi),
+
     url(r'^brand/$',views.brandApi),
     url(r'brand/([0-9]+)$',views.brandApi),
+
+    url(r'^newsale/$',views.newSalesOrder),
+
+    url(r'supplier/([0-9]+)$',views.supplierApi),
+    url(r'^supplier/$',views.supplierApi),
+
+    url(r'employee/([0-9]+)$',views.employeeApi),
+    url(r'^employee/$',views.employeeApi),
+
+
 
     url(r'^SaveFile$',views.SaveProductImage)
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

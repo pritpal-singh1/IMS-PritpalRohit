@@ -83,8 +83,6 @@ class Supplier(models.Model):
     Contact=models.CharField(max_length=100)
     PANNo=models.CharField(max_length=100)
     GSTIN=models.CharField(max_length=100)
-    ContactPerson=models.CharField(max_length=100)
-    ContactPersonNo=models.CharField(max_length=100)
     Status=models.CharField(max_length=100)
     CreatedAt = models.DateTimeField(auto_now_add=True)
     def __str__(self):
@@ -131,7 +129,7 @@ class SalesOrderOnlineDetail(models.Model):
 class SalesOrdersOffline(models.Model):
     SalesOrderOfflineId = models.AutoField(primary_key=True)
     InvoiceNo=models.CharField(max_length=100)
-    Date=models.DateTimeField()
+    Date=models.DateField()
     CustomerName=models.CharField(max_length=100)
     Contact=models.CharField(max_length=100)
     PaymentMode=models.CharField(max_length=100)
