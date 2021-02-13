@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {DataTablesModule} from 'angular-datatables';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
 import {EmployeesRoutingModule} from './employee-routing.module';
@@ -12,6 +13,7 @@ import { UiModule } from '../../shared/ui/ui.module';
   declarations: [AddEmployeeComponent, ManageEmployeeComponent],
   imports: [
     CommonModule,
+    DataTablesModule,
     EmployeesRoutingModule,
     NgSelectModule,
     UiModule,
