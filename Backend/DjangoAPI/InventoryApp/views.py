@@ -196,7 +196,7 @@ def productApi(request, pid=0):
     elif request.method == 'POST':
         product_data = JSONParser().parse(request)
         product_serializer = ProductSerializer(data=product_data)
-        print(product_serializer)
+        print(product_serializer.is_valid(Exception))
         if product_serializer.is_valid():
             product_serializer.save()
             return JsonResponse("Added",safe=False)

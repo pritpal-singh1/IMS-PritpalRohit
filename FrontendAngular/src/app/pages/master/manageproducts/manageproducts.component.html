@@ -27,63 +27,21 @@
                 </p> -->
       
                 <div class="table-responsive">
-                  <table class="table mb-0">
-      
-                    <thead class="thead-light">
+                  <table datatable [dtOptions]="dtOptions"  [dtTrigger]="dtTrigger" class="row-border hover">
+                    <thead>
                       <tr>
-                        <th>Sr. No.</th>
-                        <th>Category</th>
-                        <th>Brand</th>
+                        <th>ID</th>
                         <th>Product Name</th>
-                        <th>MRP</th>
-                        <th>Purchase Price</th>
-                        <th>Actions</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Cat 1</td>
-                        <td>Brand 1</td>
-                        <td>Product Name 1</td>
-                        <td>1000</td>
-                        <td>1000</td>
-                        <td>
-                            <a href="javascript:void(0);" class="mr-3 text-primary" placement="top" ngbTooltip="Edit"><i
-                                class="mdi mdi-pencil font-size-18"></i></a>
-                            <a href="javascript:void(0);" class="text-danger" placement="top" ngbTooltip="Delete"><i
-                                class="mdi mdi-trash-can font-size-18"></i></a>
-                        </td>
+                    <tbody  >
+                      <tr *ngFor="let item of products">
+                        <td>{{ item.ProductId }}</td>
+                        <td>{{ item.ProductName }}</td>
+                       
                       </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Cat 1</td>
-                        <td>Brand 1</td>
-                        <td>Product Name 1</td>
-                        <td>1000</td>
-                        <td>1000</td>
-                        <td>
-                            <a href="javascript:void(0);" class="mr-3 text-primary" placement="top" ngbTooltip="Edit"><i
-                                class="mdi mdi-pencil font-size-18"></i></a>
-                            <a href="javascript:void(0);" class="text-danger" placement="top" ngbTooltip="Delete"><i
-                                class="mdi mdi-trash-can font-size-18"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Cat 1</td>
-                        <td>Brand 1</td>
-                        <td>Product Name 1</td>
-                        <td>1000</td>
-                        <td>1000</td>
-                        <td>
-                            <a href="javascript:void(0);" class="mr-3 text-primary" placement="top" ngbTooltip="Edit"><i
-                                class="mdi mdi-pencil font-size-18"></i></a>
-                            <a href="javascript:void(0);" class="text-danger" placement="top" ngbTooltip="Delete"><i
-                                class="mdi mdi-trash-can font-size-18"></i></a>
-                        </td>
-                      </tr>
-                    </tbody>
+                    </tbody  >
+                   
                   </table>
                 </div>
       
