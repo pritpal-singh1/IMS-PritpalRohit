@@ -284,6 +284,25 @@ export const MENU: MenuItem[] = [
                 ]
             },
             {
+                id: 10,
+                label: 'Supplier',
+                parentId: 5,
+                subItems: [
+                    {
+                        id: 72,
+                        label: 'Add Supplier',
+                        link: 'master/supplier/add-supplier',
+                        parentId: 10,
+                    },
+                    {
+                        id: 73,
+                        label: 'Manage supplier',
+                        link: 'master/supplier/manage-supplier',
+                        parentId: 10,
+                    }
+                ]
+            },
+            {
                 id: 9,
                 label: 'MENUITEMS.ECOMMERCE.LIST.CUSTOMERS',
                 link: '/ecommerce/customers',
