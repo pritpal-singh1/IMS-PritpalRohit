@@ -4,6 +4,7 @@ import { Product } from '../product.model';
 import { ProductService } from '../product.service';
 import { Subject } from 'rxjs';
 import { HttpClient, HttpResponse } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 class DataTablesResponse {
   data: any[];
@@ -30,21 +31,20 @@ export class ManageproductsComponent implements OnInit {
     this.breadCrumbItems = [{ label: 'Master' }, { label: 'Manage Products', active: true }];
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 2
+      pageLength: 10
     };
+    this.getProducts();
+    
+  }
+  
+  
+  getProducts() {
     this.productservice.getProductList().subscribe(data => {
       this.products = data;
       console.log(this.products);
       this.dtTrigger.next();
     })
-    // this.http.get<Product[]>('http://127.0.0.1:8000/product/')
-    //   .subscribe(data => {
-    //     this.products = ;
-    //     console.log(this.products);
-    //     // Calling the DT trigger to manually render the table
-    //     this.dtTrigger.next();
-    //   });
-    }
+  }
   addExpense(){
     this.router.navigate(['/master/add-products']);
   }
@@ -52,8 +52,37 @@ export class ManageproductsComponent implements OnInit {
   //   this.productservice.getProductList()
   //   .subscribe(resp => this.products = resp);
   // }
-  // ngOnDestroy(): void {
-  //   // Do not forget to unsubscribe the event
-  //   this.dtTrigger.unsubscribe();
-  // }
+ 
+
+  editProduct(product: Product) {
+    this.productservice.formData = Object.assign({}, product);
+    this.router.navigate(['/master/add-products']);
+  }
+  deleteProduct(product: Product) {
+  
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#34c38f',
+      cancelButtonColor: '#ff3d60',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(result => {
+      if (result.value) {
+        this.productservice.deleteProduct(product).subscribe(res => {
+
+          this.getProducts();
+          console.log(product);
+        });
+        Swal.fire('Deleted!', product.ProductName +' has been deleted.', 'success');
+      }
+    });
+    
+  } 
+  
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
+  }
 }
