@@ -203,14 +203,14 @@ def productApi(request, pid=0):
         return JsonResponse("Failed to add",safe=False)
     elif request.method == 'PUT':
         product_data = JSONParser().parse(request)
-        product = Product.objects.get(productId=product_data['ProductId'])
+        product = Product.objects.get(ProductId=product_data['ProductId'])
         product_serializer = ProductSerializer(product,data=product_data)
         if product_serializer.is_valid():
             product_serializer.save()
             return JsonResponse("updated",safe=False)
         return JsonResponse("failed to update",safe=False)
     elif request.method == 'DELETE':
-        product = Product.objects.get(productId = pid)
+        product = Product.objects.get(ProductId = pid)
         product.delete()
         return JsonResponse("Deleted",safe=False)
 
