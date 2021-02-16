@@ -1,6 +1,9 @@
 <div class="container-fluid">
 	<form #form="ngForm" (submit)="onSubmit(form)" class="needs-validation">
-		<app-pagetitle title="Add Product" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+		<app-pagetitle
+			title="Add Product"
+			[breadcrumbItems]="breadCrumbItems"
+		></app-pagetitle>
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="card">
@@ -10,25 +13,85 @@
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
-									<input [(ngModel)]="productservice.formData.ProductId"  name ="ProductId"
-									#ProductId="ngModel" type="text" class="form-control" placeholder="Full name" />
+									<input
+										[(ngModel)]="productservice.formData.ProductId"
+										name="ProductId"
+										#ProductId="ngModel"
+										type="hidden"
+										class="form-control"
+										placeholder="Product Id"
+									/>
 									<label>Product Name</label>
-									<input [(ngModel)]="productservice.formData.ProductName"  name ="ProductName"
-									#ProductName="ngModel" type="text" class="form-control" placeholder="Full name" />
+									<input
+										[(ngModel)]="productservice.formData.ProductName"
+										name="ProductName"
+										#ProductName="ngModel"
+										[class.is-invalid]="ProductName.invalid && ProductName.touched"
+										
+										type="text"
+										class="form-control"
+										placeholder="Product Name"
+										required
+										minlength="4"
+									/>
+									
+									<div
+										*ngIf="ProductName.invalid && (ProductName.dirty || ProductName.touched)"
+										
+									>
+										<small class="text-danger" *ngIf="ProductName.errors.required">Product Name is required.</small>
+										<small class="text-danger"  *ngIf="ProductName.errors.minlength">
+											Product	Name must be at least 4 characters long.
+										</small>
+										
+									</div>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>Item Code</label>
-									<input [(ngModel)]="productservice.formData.ItemCode"  name ="ItemCode"
-									#ItemCode="ngModel" type="text" class="form-control" placeholder="Enter Email Id" />
+									<input
+										[(ngModel)]="productservice.formData.ItemCode"
+										name="ItemCode"
+										#ItemCode="ngModel"
+										type="text"
+										[class.is-invalid]="ItemCode.invalid && ItemCode.touched"
+										class="form-control"
+										placeholder="Item Code"
+										required
+									/>
+									<div
+										*ngIf="ItemCode.invalid && (ItemCode.dirty || ItemCode.touched)"
+										
+									>
+										<small class="text-danger" *ngIf="ItemCode.errors.required">Item Code is required.</small>
+										
+										
+									</div>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>Print Name</label>
-									<input [(ngModel)]="productservice.formData.PrintName"  name ="PrintName"
-									#PrintName="ngModel" type="text" class="form-control" placeholder="Enter Email Id" />
+									<input
+										[(ngModel)]="productservice.formData.PrintName"
+										name="PrintName"
+										#PrintName="ngModel"
+										[class.is-invalid]="PrintName.invalid && PrintName.touched"
+										type="text"
+										class="form-control"
+										placeholder="Print Name"
+										required
+									/>
+									<div
+									*ngIf="PrintName.invalid && (PrintName.dirty || PrintName.touched)"
+									
+								>
+									<small class="text-danger" *ngIf="PrintName.errors.required">Print Name is required.</small>
+									
+									
+								</div>
+									
 								</div>
 							</div>
 						</div>
@@ -37,36 +100,72 @@
 								<!-- <h5 class="font-size-14 mb-3">Brand</h5> -->
 								<div class="form-group">
 									<label>Brand</label>
-									<ng-select [(ngModel)]="productservice.formData.Brand"  name ="Brand"
-									#Brand="ngModel" >
-										<ng-option  [value]="item.BrandId" *ngFor="let item of AllBrands">{{
-											item.BrandName
-										}}</ng-option>
+									<ng-select
+										[(ngModel)]="productservice.formData.Brand"
+										name="Brand"
+										#Brand="ngModel"
+									>
+										<ng-option
+											[value]="item.BrandId"
+											*ngFor="let item of AllBrands"
+											>{{ item.BrandName }}</ng-option
+										>
 									</ng-select>
+									
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>Category</label>
-									<ng-select [(ngModel)]="productservice.formData.Category"  name ="Category"
-									#Category="ngModel" >
-										<ng-option  [value]="item.CategoryId" *ngFor="let item of AllCategory">{{
-											item.CategoryName
-										}}</ng-option>
+									<ng-select required
+										[(ngModel)]="productservice.formData.Category"
+										name="Category"
+										#Category="ngModel"
+									>
+										<ng-option
+											[value]="item.CategoryId"
+											*ngFor="let item of AllCategory"
+											>{{ item.CategoryName }}</ng-option
+										>
 									</ng-select>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label >Opening Stock</label>
-									<input [(ngModel)]="productservice.formData.StockQTY"  name ="StockQTY"
-									#StockQTY="ngModel" type="text" class="form-control" placeholder="Enter Email Id" />
-									<input [(ngModel)]="productservice.formData.ProductImage"  name ="ProductImage"
-									#ProductImage="ngModel" type="hidden" class="form-control" placeholder="Enter Email Id" />
+									<label>Opening Stock</label>
+									<input
+										[(ngModel)]="productservice.formData.StockQTY"
+										name="StockQTY"
+										#StockQTY="ngModel"
+										[class.is-invalid]="StockQTY.invalid && StockQTY.touched"
+										type="text"
+										class="form-control"
+										placeholder="Opening Stock"
+										required
+										pattern="^[0-9]+$"
+									/>
+									<div
+									*ngIf="StockQTY.invalid && (StockQTY.dirty || StockQTY.touched)"
+									
+								>
+									<small class="text-danger" *ngIf="StockQTY.errors.required">Opening Stock is required.</small>
+									<small class="text-danger" *ngIf="StockQTY.errors.pattern">Opening Stock must be in digit.</small>
+									
+								</div>
+									<input
+										[(ngModel)]="productservice.formData.ProductImage"
+										name="ProductImage"
+										#ProductImage="ngModel"
+										type="hidden"
+										class="form-control"
+										placeholder="Enter Email Id"
+									
+									/>
+									
+									
 								</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -80,12 +179,20 @@
 							<div class="row">
 								<div class="col-md-4">
 									<div class="form-group">
-										<input type="file"  (change)="onFileChanged($event)">
-									</div>
+										<input type="file" required (change)="onFileChanged($event)" 
+										[class.is-invalid]="ProductImage.invalid && ProductImage.touched"
+										required
+										/>
+										<div
+									*ngIf="ProductImage.invalid && (ProductImage.dirty || ProductImage.touched)"
+									
+								>
+									<small class="text-danger" *ngIf="ProductImage.errors.required">Opening Stock is required.</small>
+									
 									
 								</div>
-
-
+									</div>
+								</div>
 							</div>
 						</form>
 					</div>
@@ -97,63 +204,168 @@
 			<div class="col-lg-12">
 				<div class="card">
 					<div class="card-body">
-						<h4 class="card-title">Price Details</h4>
-
+						<h4 class="card-title">Price Details </h4>
+			
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>Purchase Price</label>
-									<input [(ngModel)]="productservice.formData.PurchasePrice"  name ="PurchasePrice"
-									#PurchasePrice="ngModel" type="text" class="form-control" placeholder="Full name" />
+									<input
+										[(ngModel)]="productservice.formData.PurchasePrice"
+										name="PurchasePrice"
+										#PurchasePrice="ngModel"
+										type="text"
+										[class.is-invalid]="PurchasePrice.invalid && PurchasePrice.touched"
+										class="form-control"
+										placeholder="Purchase Price"
+										required
+										pattern="^[0-9]+$"
+									/>
+									<div
+									*ngIf="PurchasePrice.invalid && (PurchasePrice.dirty || PurchasePrice.touched)"
+									
+								>
+									<small class="text-danger" *ngIf="PurchasePrice.errors.required">Purchase Price is required.</small>
+									<small class="text-danger" *ngIf="PurchasePrice.errors.pattern">Purchase Price must be in digit.</small>
+									
+								</div>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>Sale Price</label>
-									<input [(ngModel)]="productservice.formData.SalePrice"  name ="SalePrice"
-									#SalePrice="ngModel" type="text" class="form-control" placeholder="Enter Email Id" />
+									<input
+										[(ngModel)]="productservice.formData.SalePrice"
+										name="SalePrice"
+										#SalePrice="ngModel"
+										type="text"
+										[class.is-invalid]="SalePrice.invalid && SalePrice.touched"
+										class="form-control"
+										placeholder="Sale Price"
+										required
+										pattern="^[0-9]+$"
+									/>
+									<div
+									*ngIf="SalePrice.invalid && (SalePrice.dirty || SalePrice.touched)"
+									
+								>
+									<small class="text-danger" *ngIf="SalePrice.errors.required">Sale Price is required.</small>
+									<small class="text-danger" *ngIf="SalePrice.errors.pattern">Sale Price must be in digit.</small>
+									
+								</div>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>MRP</label>
-									<input [(ngModel)]="productservice.formData.MRP"  name ="MRP"
-									#MRP="ngModel" type="text" class="form-control" placeholder="Enter Email Id" />
+									<input
+										[(ngModel)]="productservice.formData.MRP"
+										name="MRP"
+										#MRP="ngModel"
+										type="text"
+										class="form-control"
+										placeholder="MRP"
+										[class.is-invalid]="MRP.invalid && MRP.touched"
+										required
+										pattern="^[0-9]+$"
+									/>
+									<div
+									*ngIf="MRP.invalid && (MRP.dirty || MRP.touched)"
+									
+								>
+									<small class="text-danger" *ngIf="MRP.errors.required">MRP is required.</small>
+									<small class="text-danger" *ngIf="MRP.errors.pattern">MRP must be in digit.</small>
+									
+								</div>
 								</div>
 							</div>
-
-
 						</div>
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>Discount</label>
-									<input [(ngModel)]="productservice.formData.Discount"  name ="Discount"
-									#Discount="ngModel" type="text" class="form-control" placeholder="Full name" />
+									<input
+										[(ngModel)]="productservice.formData.Discount"
+										name="Discount"
+										#Discount="ngModel"
+										type="text"
+										class="form-control"
+										placeholder="Discount"
+										[class.is-invalid]="Discount.invalid && Discount.touched"
+										required
+										pattern="^[0-9]+$"
+									/>
+									<div
+									*ngIf="Discount.invalid && (Discount.dirty || Discount.touched)"
+									
+								>
+									<small class="text-danger" *ngIf="Discount.errors.required">Discount is required.</small>
+									<small class="text-danger" *ngIf="Discount.errors.pattern">Discount must be in digit.</small>
+									
+								</div>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>GST</label>
-									<input [(ngModel)]="productservice.formData.GST"  name ="GST"
-									#GST="ngModel" type="text" class="form-control" placeholder="Enter Email Id" />
+									<input
+										[(ngModel)]="productservice.formData.GST"
+										name="GST"
+										#GST="ngModel"
+										type="text"
+										class="form-control"
+										placeholder="GST"
+										[class.is-invalid]="GST.invalid && GST.touched"
+										required
+										pattern="^[0-9]+$"
+									/>
+									<div
+									*ngIf="GST.invalid && (GST.dirty || GST.touched)"
+									
+								>
+									<small class="text-danger" *ngIf="GST.errors.required">GST is required.</small>
+									<small class="text-danger" *ngIf="GST.errors.pattern">GST must be in digit.</small>
+									
+								</div>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>LowLevelLimit</label>
-									<input [(ngModel)]="productservice.formData.LowLevelLimit"  name ="LowLevelLimit"
-									#LowLevelLimit="ngModel" type="text" class="form-control" placeholder="Enter Email Id" />
+									<input
+										[(ngModel)]="productservice.formData.LowLevelLimit"
+										name="LowLevelLimit"
+										#LowLevelLimit="ngModel"
+										type="text"
+										class="form-control"
+										placeholder="Low Level Limit"
+										[class.is-invalid]="LowLevelLimit.invalid && LowLevelLimit.touched"
+										required
+										pattern="^[0-9]+$"
+									/>
+									<div
+									*ngIf="LowLevelLimit.invalid && (LowLevelLimit.dirty || LowLevelLimit.touched)"
+									
+								>
+									<small class="text-danger" *ngIf="LowLevelLimit.errors.required">Low Leve lLimit is required.</small>
+									<small class="text-danger" *ngIf="LowLevelLimit.errors.pattern">Low Leve lLimit  must be in digit.</small>
+									
+								</div>
 								</div>
 							</div>
-
-
 						</div>
+						<div class="row">
+                            <div class="col-md-12">
+                                <div class="text-right">
+                                    <button [disabled]="form.form.invalid" class="btn btn-primary d-inline">Save</button>
 
+                                </div>
+                            </div>
+                        </div>
 					</div>
 				</div>
 			</div>
-			<button class="btn btn-primary" type="submit">Submit</button>
+		
 		</div>
 	</form>
 </div>
