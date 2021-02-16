@@ -2,8 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../category/category.service';
 import { ProductService } from '../product.service';
-import { NgForm } from '@angular/forms';
+import { FormsModule,
+  NgForm, FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl
+} from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addproducts',
@@ -14,52 +20,52 @@ export class AddproductsComponent implements OnInit {
 
   AllCategory: any[];
   AllBrands: any[];
- // breadcrumb items
+  // breadcrumb items
   breadCrumbItems: Array<{}>;
-  selectedLevel;
 
-  constructor(public productservice: ProductService , public httpClient : HttpClient
+  form: FormGroup;
+  constructor(public productservice: ProductService, public router: Router, public httpClient: HttpClient, private formBuilder: FormBuilder
   ) { }
 
- ngOnInit(): void {
-   this.breadCrumbItems = [{ label: 'Ecommerce' }, { label: 'Add Product', active: true }];
-   this.resetForm();
-   console.log(this.productservice.formData);
-   this.getCategories();
-   this.getBrands();
-   
+  ngOnInit(): void {
+    this.breadCrumbItems = [{ label: 'Ecommerce' }, { label: 'Add Product', active: true }];
+    this.resetForm();
+    console.log(this.productservice.formData);
+    this.getCategories();
+    this.getBrands();
+
+    
+
   }
-  selected(){
-    console.log(this.selectedLevel);
-  }
+
   resetForm(form?: NgForm) {
     if (form != null)
       form.resetForm();
-    
+
   }
   getCategories() {
     this.httpClient.get("http://127.0.0.1:8000/category/").subscribe(
       data => {
         this.AllCategory = data as any;
-     
+
       });
   }
   getBrands() {
     this.httpClient.get("http://127.0.0.1:8000/brand/").subscribe(
       data => {
         this.AllBrands = data as any;
-       
+
       });
   }
   onSubmit(form: NgForm) {
     if (form.value.ProductId == 0) {
       this.insertRecord(form);
 
-      console.log("proimahe "+ this.productservice.formData.ProductImage);
+      console.log("proimahe " + this.productservice.formData.ProductImage);
       Swal.fire({
         position: 'center',
         icon: 'success',
-        title: form.value.ProductName+' Added',
+        title: form.value.ProductName + ' Added',
         showConfirmButton: false,
         timer: 1500
       });
@@ -69,18 +75,19 @@ export class AddproductsComponent implements OnInit {
         Brand: '',
         Category: '',
         ItemCode: '',
-        ProductImage :'',
-        PrintName :'',
+        ProductImage: '',
+        PrintName: '',
         PurchasePrice: '',
-        SalePrice :'',
-        MRP :'',
-        LowLevelLimit :'',
+        SalePrice: '',
+        MRP: '',
+        LowLevelLimit: '',
         Discount: '',
-        GST :'',
+        GST: '',
         StockQTY: '',
-        
+
       }
-     
+      this.router.navigate(["/master/manage-products"]);
+
     }
     else {
       this.updateRecord(form);
@@ -97,31 +104,32 @@ export class AddproductsComponent implements OnInit {
         Brand: '',
         Category: '',
         ItemCode: '',
-        ProductImage :'',
-        PrintName :'',
+        ProductImage: '',
+        PrintName: '',
         PurchasePrice: '',
-        SalePrice :'',
-        MRP :'',
-        LowLevelLimit :'',
+        SalePrice: '',
+        MRP: '',
+        LowLevelLimit: '',
         Discount: '',
-        GST :'',
+        GST: '',
         StockQTY: '',
-        
+
       }
+      this.router.navigate(["/master/manage-products"]);
     }
-  
-    
+
+
   }
   insertRecord(form: NgForm) {
-    
+
     this.productservice.addProduct(form.value).subscribe(res => {
       console.log(res.toString);
     });
   }
   updateRecord(form: NgForm) {
     this.productservice.updateProduct(form.value).subscribe(res => {
-     
-     
+
+
     });
   }
   onFileChanged(event) {
@@ -130,13 +138,13 @@ export class AddproductsComponent implements OnInit {
     formdata.append('uploadedFile', file, file.name);
 
     this.productservice.uploadPhoto(formdata).subscribe(data => {
-    
+
       this.productservice.formData.ProductImage = this.productservice.PhotoUrl + data.toString();
       console.log("pro image " + this.productservice.formData.ProductImage);
     });
     console.log(file);
   }
- 
-  
+
+
 }
 
