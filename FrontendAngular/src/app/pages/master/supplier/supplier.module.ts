@@ -8,6 +8,7 @@ import { from } from 'rxjs';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UiModule } from '../../../shared/ui/ui.module';
+import {DataTablesModule} from 'angular-datatables';
 
 
 
@@ -19,7 +20,8 @@ import { UiModule } from '../../../shared/ui/ui.module';
     NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    UiModule
+    UiModule,
+    DataTablesModule
   ]
 })
 export class SupplierModule { }
