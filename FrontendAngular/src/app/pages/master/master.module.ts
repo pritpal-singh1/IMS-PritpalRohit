@@ -24,12 +24,11 @@ import { AddEditBrandComponent } from './brands/add-edit-brand/add-edit-brand.co
 
 
 
-
 @NgModule({
   declarations: [MasterComponent, CategoryComponent, BrandsComponent, StaffComponent, AddEditCategoryComponent, AddproductsComponent, ManageproductsComponent, AddEditBrandComponent],
   imports: [
     CommonModule,
-    
+    NgSelectModule,
     DataTablesModule,
     MasterRoutingModule,
     TablesRoutingModule,

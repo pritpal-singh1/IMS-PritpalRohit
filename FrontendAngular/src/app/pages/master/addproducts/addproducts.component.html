@@ -1,157 +1,159 @@
 <div class="container-fluid">
-    <app-pagetitle title="Add Product" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card">
-          <div class="card-body">
-            <aw-wizard>
-              <aw-wizard-step stepTitle="Product Details">
-                <div class="tab-pane" id="basic-info">
-                  <h4 class="card-title">Basic Information</h4>
-                  <p class="card-title-desc">Fill all information below</p>
-  
-                  <form>
-                    <div class="form-group">
-                      <label for="productname">Product Name</label>
-                      <input id="productname" name="productname" type="text" class="form-control">
-                    </div>
-                    <div class="row">
-                      <div class="col-lg-4">
-                        <div class="form-group">
-                          <label for="manufacturername">Product Code</label>
-                          <input id="manufacturername" name="manufacturername" type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-lg-4">
-                        <div class="form-group">
-                          <label for="manufacturerbrand">Print Name</label>
-                          <input id="manufacturerbrand" name="manufacturerbrand" type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-lg-4">
-                        <div class="form-group">
-                          <label for="price">Opening Stock</label>
-                          <input id="price" name="price" type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="control-label">Category</label>
-                          <select class="form-control select2">
-                            <option>Select</option>
-                            <option value="EL">Electronic</option>
-                            <option value="FA">Fashion</option>
-                            <option value="FI">Fitness</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="control-label">Brand</label>
-                          <select class="form-control select2">
-                            <option>Select</option>
-                            <option value="EL">Brand 1</option>
-                            <option value="FA">Brand 2 </option>
-                            <option value="FI">Brand 3</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="productdesc">Product Description</label>
-                      <textarea class="form-control" id="productdesc" rows="5"></textarea>
-                    </div>
-                  </form>
-                </div>
-                <button type="button" awNextStep class="btn btn-primary">Next Step</button>
-              </aw-wizard-step>
-              <aw-wizard-step stepTitle="Product Img" awOptionalStep>
-                <div class="tab-pane" id="product-img">
-                  <h4 class="card-title">Product Images</h4>
-                  <p class="card-title-desc">Upload product image</p>
-                  <dropzone class="dropzone"></dropzone>
-  
-                  <!-- <form action="/" method="post" class="dropzone">
-                    <div class="fallback">
-                      <input name="file" type="file" multiple />
-                    </div>
-  
-                    <div class="dz-message needsclick">
-                      <div class="mb-3">
-                        <i class="display-4 text-muted ri-upload-cloud-2-line"></i>
-                      </div>
-  
-                      <h4>Drop files here or click to upload.</h4>
-                    </div>
-                  </form> -->
-                </div>
-                <button type="button" awPreviousStep class="btn btn-primary">Go to previous step</button>
-                <button type="button" awNextStep class="btn btn-primary">Go to next step</button>
-              </aw-wizard-step>
-              <aw-wizard-step stepTitle="Price Data">
-                <div class="tab-pane" id="metadata">
-                  <h4 class="card-title">Price Detail Data</h4>
-                  <p class="card-title-desc">Fill all information below</p>
-  
-                  <form>
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label for="metatitle">Purchase Price</label>
-                          <input id="metatitle" name="metatitle" type="number" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label for="metakeywords">Sale Price</label>
-                          <input id="metakeywords" name="metakeywords" type="number" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label for="metakeywords">MRP</label>
-                          <input id="metakeywords" name="metakeywords" type="number" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4">
-                          <div class="form-group">
-                            <label for="metatitle">GST</label>
-                            <input id="metatitle" name="metatitle" type="number" class="form-control">
-                          </div>
-                        </div>
-                        <div class="col-sm-4">
-                          <div class="form-group">
-                            <label for="metakeywords">Discount</label>
-                            <input id="metakeywords" name="metakeywords" type="number" class="form-control">
-                          </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                              <label for="metakeywords">Low Level Limit</label>
-                              <input id="metakeywords" name="metakeywords" type="number" class="form-control">
-                            </div>
-                          </div>
-                      </div>
-                  
-                  </form>
-                  <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-primary mr-2 waves-effect waves-light">Save Changes</button>
-                    <button type="submit" class="btn btn-light waves-effect">Cancel</button>
-                  </div>
-                </div>
-                <!-- <div class="pager wizard twitter-bs-wizard-pager-link">
-                  <button class="btn btn-primary" awPreviousStep>Previous Step</button>
-                  <button type="button" class="btn btn-primary">Finish</button>
-                </div> -->
-              </aw-wizard-step>
-            </aw-wizard>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
+	<form #form="ngForm" (submit)="onSubmit(form)" class="needs-validation">
+		<app-pagetitle title="Add Product" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">Product Details</h4>
+
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<input [(ngModel)]="productservice.formData.ProductId"  name ="ProductId"
+									#ProductId="ngModel" type="text" class="form-control" placeholder="Full name" />
+									<label>Product Name</label>
+									<input [(ngModel)]="productservice.formData.ProductName"  name ="ProductName"
+									#ProductName="ngModel" type="text" class="form-control" placeholder="Full name" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Item Code</label>
+									<input [(ngModel)]="productservice.formData.ItemCode"  name ="ItemCode"
+									#ItemCode="ngModel" type="text" class="form-control" placeholder="Enter Email Id" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Print Name</label>
+									<input [(ngModel)]="productservice.formData.PrintName"  name ="PrintName"
+									#PrintName="ngModel" type="text" class="form-control" placeholder="Enter Email Id" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<!-- <h5 class="font-size-14 mb-3">Brand</h5> -->
+								<div class="form-group">
+									<label>Brand</label>
+									<ng-select [(ngModel)]="productservice.formData.Brand"  name ="Brand"
+									#Brand="ngModel" >
+										<ng-option  [value]="item.BrandId" *ngFor="let item of AllBrands">{{
+											item.BrandName
+										}}</ng-option>
+									</ng-select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Category</label>
+									<ng-select [(ngModel)]="productservice.formData.Category"  name ="Category"
+									#Category="ngModel" >
+										<ng-option  [value]="item.CategoryId" *ngFor="let item of AllCategory">{{
+											item.CategoryName
+										}}</ng-option>
+									</ng-select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label >Opening Stock</label>
+									<input [(ngModel)]="productservice.formData.StockQTY"  name ="StockQTY"
+									#StockQTY="ngModel" type="text" class="form-control" placeholder="Enter Email Id" />
+									<input [(ngModel)]="productservice.formData.ProductImage"  name ="ProductImage"
+									#ProductImage="ngModel" type="hidden" class="form-control" placeholder="Enter Email Id" />
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">Image Upload</h4>
+						<form class="needs-validation">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<input type="file"  (change)="onFileChanged($event)">
+									</div>
+									
+								</div>
+
+
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">Price Details</h4>
+
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Purchase Price</label>
+									<input [(ngModel)]="productservice.formData.PurchasePrice"  name ="PurchasePrice"
+									#PurchasePrice="ngModel" type="text" class="form-control" placeholder="Full name" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Sale Price</label>
+									<input [(ngModel)]="productservice.formData.SalePrice"  name ="SalePrice"
+									#SalePrice="ngModel" type="text" class="form-control" placeholder="Enter Email Id" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>MRP</label>
+									<input [(ngModel)]="productservice.formData.MRP"  name ="MRP"
+									#MRP="ngModel" type="text" class="form-control" placeholder="Enter Email Id" />
+								</div>
+							</div>
+
+
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Discount</label>
+									<input [(ngModel)]="productservice.formData.Discount"  name ="Discount"
+									#Discount="ngModel" type="text" class="form-control" placeholder="Full name" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>GST</label>
+									<input [(ngModel)]="productservice.formData.GST"  name ="GST"
+									#GST="ngModel" type="text" class="form-control" placeholder="Enter Email Id" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>LowLevelLimit</label>
+									<input [(ngModel)]="productservice.formData.LowLevelLimit"  name ="LowLevelLimit"
+									#LowLevelLimit="ngModel" type="text" class="form-control" placeholder="Enter Email Id" />
+								</div>
+							</div>
+
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<button class="btn btn-primary" type="submit">Submit</button>
+		</div>
+	</form>
+</div>

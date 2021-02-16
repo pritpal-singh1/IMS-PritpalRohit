@@ -1,7 +1,8 @@
 export class Product {
     ProductId :number;
-    Brand:number;
-    Category :string;
+    Brand:string;
+    Category: string;
+    ProductName: string;
     ItemCode :string;
     PrintName :string;
     PurchasePrice: string;
@@ -11,6 +12,5 @@ export class Product {
     Discount: string;
     GST :string;
     StockQTY :string;
-    CreatedAt :string;
-    ProductImage :string;
+    ProductImage: String;
 }

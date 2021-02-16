@@ -7,19 +7,33 @@ import { Product } from './product.model';
   providedIn: 'root'
 })
 export class ProductService {
-  formData  : Product;
+  formData  : Product= {
+    ProductId: 0,
+    ProductName: '',
+    Brand: '',
+    Category: '',
+    ItemCode: '',
+    ProductImage :'',
+    PrintName :'',
+    PurchasePrice: '',
+    SalePrice :'',
+    MRP :'',
+    LowLevelLimit :'',
+    Discount: '',
+    GST :'',
+    StockQTY: '',
+    
+  };
   list: Product[];
   readonly APIUrl = "http://127.0.0.1:8000";
+  readonly PhotoUrl = "http://127.0.0.1:8000/media/";
   constructor(private http: HttpClient) { }
-
+  
   getProductList(){
     return this.http.get<Product[]>(this.APIUrl + '/product/');
-      
-    //   .subscribe(data => {
-    //   this.list = data as Product[];
-    // });
    
   }
+  
  
 
   addProduct(formData:Product){
@@ -33,5 +47,9 @@ export class ProductService {
   }
   deleteProduct(formData){
     return this.http.delete(this.APIUrl + '/product/'+formData.ProductId);
+  }
+
+  uploadPhoto(val: any) {
+    return this.http.post(this.APIUrl + '/SaveFile', val);
   }
 }
