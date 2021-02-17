@@ -3,8 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 
-from InventoryApp.models import Category, Brand, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, Supplier, Employee
-from InventoryApp.serializers import CategorySerializer, BrandSerializer, RoleSerializer, AdminSerializer, ProductSerializer, CustomersOnlineSerializer, SalesOrderOnlineSerializer, SupplierSerializer, EmployeeSerializer
+from InventoryApp.models import Category, Brand, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, Supplier, Employee, CompanyDetails
+from InventoryApp.serializers import CategorySerializer, BrandSerializer, RoleSerializer, AdminSerializer, ProductSerializer, CustomersOnlineSerializer, SalesOrderOnlineSerializer, SupplierSerializer, EmployeeSerializer, CompanyDetailsSerializer
 
 
 
@@ -271,3 +271,33 @@ def salesOrderOnlineApi(request, soid=0):
         order = SalesOrderOnline.objects.get(orderId = soid)
         order.delete()
         return JsonResponse("Deleted",safe=False)
+
+@csrf_exempt
+def CompanyDetailsApi(request):
+    if request.method == 'GET':
+        company = CompanyDetails.objects.all()
+        print(company)
+        company_detail_serializer = CompanyDetailsSerializer(company, many=True)
+        print(company_detail_serializer.data)
+        return JsonResponse(company_detail_serializer.data, safe=False)
+    # elif request.method == 'POST':
+    #     order_data = JSONParser().parse(request)
+    #     sales_order_serializer = SalesOrderOnlineSerializer(data=order_data)
+    #     print(sales_order_serializer)
+    #     if sales_order_serializer.is_valid():
+    #         sales_order_serializer.save()
+    #         return JsonResponse("Added",safe=False)
+    #     return JsonResponse("Failed to add",safe=False)
+    elif request.method == 'PUT':
+        company_data = JSONParser().parse(request)
+        print(company_data)
+        company = CompanyDetails.objects.get(CompanyName=company_data['CompanyName'])
+        company_detail_serializer = CompanyDetailsSerializer(company,data=company_data)
+        if CompanyDetailsSerializer.is_valid():
+            CompanyDetailsSerializer.save()
+            return JsonResponse("updated",safe=False)
+        return JsonResponse("failed to update",safe=False)
+    # elif request.method == 'DELETE':
+    #     order = SalesOrderOnline.objects.get(orderId = soid)
+    #     order.delete()
+    #     return JsonResponse("Deleted",safe=False)

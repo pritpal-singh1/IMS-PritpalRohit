@@ -86,7 +86,7 @@ class Supplier(models.Model):
     Status=models.CharField(max_length=100)
     CreatedAt = models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return self.ProductName
+        return self.SupplierName
 
 class CustomersOnline(models.Model):
     CustomersOnlineId=models.AutoField(primary_key=True)
@@ -178,3 +178,17 @@ class PurchaseBillDetail(models.Model):
 
     def __str__(self):
         return self.Amount
+
+class CompanyDetails(models.Model):
+    CompanyId = models.AutoField(primary_key=True)
+    CompanyName = models.CharField(max_length=100)
+    OwnerName = models.CharField(max_length=100)
+    GSTIN = models.CharField(max_length=20)
+    panNo = models.CharField(max_length=20)
+    Address = models.CharField(max_length=100)
+    ZipCode = models.CharField(max_length=10)
+    Country = models.CharField(max_length=20)
+    ContactNumber = models.CharField(max_length=15)
+    EmailId = models.CharField(max_length=50)
+
+
