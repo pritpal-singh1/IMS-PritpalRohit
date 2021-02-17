@@ -7,7 +7,7 @@ import {EmployeesRoutingModule} from './employee-routing.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UiModule } from '../../shared/ui/ui.module';
-
+import {HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AddEmployeeComponent, ManageEmployeeComponent],
@@ -18,7 +18,8 @@ import { UiModule } from '../../shared/ui/ui.module';
     NgSelectModule,
     UiModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class EmployeesModule { }
