@@ -83,4 +83,9 @@ export class ManageSupplierComponent implements OnInit {
     })
   }
 
+  // goToAddComponent(supplier){
+  //   this.supplierservice.formdata = supplier;
+  //   this.router.navigate(['/master/supplier/add-supplier']);
+  // }
+
 }
