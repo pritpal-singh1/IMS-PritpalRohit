@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import status
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 
@@ -213,6 +214,19 @@ def productApi(request, pid=0):
         product = Product.objects.get(ProductId = pid)
         product.delete()
         return JsonResponse("Deleted",safe=False)
+
+@csrf_exempt
+def productDetailApi(request, pid=0):
+    if request.method == 'GET':
+        try:
+            product = Product.objects.get(ProductId=pid)
+        except Product.DoesNotExist:
+            return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+        if request.method == 'GET':
+            product_serializer = ProductSerializer(product)
+            return JsonResponse(product_serializer.data,safe=False)
+
 
 
 @csrf_exempt
