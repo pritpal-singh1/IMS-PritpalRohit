@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import {Router} from '@angular/router';
 import { from } from 'rxjs';
 import {SupplierService} from '../../master.service';
@@ -8,6 +8,8 @@ import { Subject } from 'rxjs';
 import {Supplier} from '../../master.model';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import { DataTableDirective } from "angular-datatables";
+
 
 
 
@@ -29,6 +31,9 @@ export class ManageSupplierComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
   readonly APIUrl = "http://127.0.0.1:8000";
+  @ViewChild(DataTableDirective, { static: false })
+	dtElement: DataTableDirective;
+  isDtInitialized: boolean = false;
 
 
   breadCrumbItems: Array<{}>;
@@ -54,7 +59,15 @@ export class ManageSupplierComponent implements OnInit {
     this.supplierservice.getSupplierList().subscribe( data => {
       console.log(data);
       this.suppliers = data;
-     this.dtTrigger.next();
+      if (this.isDtInitialized) {
+				this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+					dtInstance.destroy();
+					this.dtTrigger.next();
+				});
+			} else {
+				this.isDtInitialized = true;
+				this.dtTrigger.next();
+			}
    });
   }
 
@@ -75,17 +88,21 @@ export class ManageSupplierComponent implements OnInit {
     }).then(result => {
       if(result.value){
         this.supplierservice.deleteSupplier(supplier).subscribe(data =>{
-          this.dtTrigger.next();
 
           this.getSuppliers();
-        })
+        });
+		Swal.fire(
+			"Deleted!",
+			supplier.SupplierName + " has been deleted.",
+			"success"
+		);
       }
-    })
+    });
   }
 
-  // goToAddComponent(supplier){
-  //   this.supplierservice.formdata = supplier;
-  //   this.router.navigate(['/master/supplier/add-supplier']);
-  // }
+  editSupplier(supplier: Supplier){
+    this.supplierservice.formdata = Object.assign({},supplier);
+    this.router.navigate(['/master/supplier/add-supplier']);
+  }
 
 }
