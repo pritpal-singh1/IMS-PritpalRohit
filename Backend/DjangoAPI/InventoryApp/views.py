@@ -4,9 +4,10 @@ from rest_framework import status
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 
-from InventoryApp.models import Category, Brand, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, Supplier, Employee
-from InventoryApp.serializers import CategorySerializer, BrandSerializer, RoleSerializer, AdminSerializer, ProductSerializer, CustomersOnlineSerializer, SalesOrderOnlineSerializer, SupplierSerializer, EmployeeSerializer
-
+from InventoryApp.models import Category, Brand, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, \
+    Supplier, Employee
+from InventoryApp.serializers import CategorySerializer, BrandSerializer, RoleSerializer, AdminSerializer, \
+    ProductSerializer, CustomersOnlineSerializer, SalesOrderOnlineSerializer, SupplierSerializer, EmployeeSerializer,SalesOrdersOfflineSerializer
 
 
 from django.core.files.storage import default_storage
@@ -78,8 +79,14 @@ def SaveProductImage(request):
 
 @csrf_exempt
 def newSalesOrder(request):
+    print(request)
+    print("request")
     sales_order=JSONParser().parse(request)
-    sales_order_serializer = SalesOrdersOfflineSerializer(data=sales_order)
+    print(sales_order)
+    salesItems=sales_order['SalesItems']
+    sales_order_offline=dict(list(sales_order.items())[:len(sales_order)-1])
+    print(sales_order_offline)
+    sales_order_serializer = SalesOrdersOfflineSerializer(data=sales_order_offline)
     print(sales_order_serializer)
     sales_order_serializer.is_valid(raise_exception=True)
     if sales_order_serializer.is_valid():
@@ -226,7 +233,10 @@ def productDetailApi(request, pid=0):
         if request.method == 'GET':
             product_serializer = ProductSerializer(product)
             return JsonResponse(product_serializer.data,safe=False)
-
+    elif request.method == 'DELETE':
+        product = Product.objects.get(ProductId = pid)
+        product.delete()
+        return JsonResponse("Deleted",safe=False)
 
 
 @csrf_exempt
