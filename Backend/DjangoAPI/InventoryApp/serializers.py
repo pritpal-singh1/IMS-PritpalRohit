@@ -59,9 +59,12 @@ class SalesOrdersOfflineSerializer(serializers.ModelSerializer):
                 'Date',
                 'CustomerName',
                 'Contact',
+                'SubTotal',
+                'GST',
                 'PaymentMode',
                 'TotalAmount',
                 'AmountPaid',
+                'Balance',
                 'Status',
                 'CreatedAt')
 class SalesOrderOfflineDetailSerializer(serializers.ModelSerializer):
@@ -73,7 +76,6 @@ class SalesOrderOfflineDetailSerializer(serializers.ModelSerializer):
                 'Quantity',
                 'SalePrice',
                 'Amount',
-                'Discount',
                )
 
 class RoleSerializer(serializers.ModelSerializer):

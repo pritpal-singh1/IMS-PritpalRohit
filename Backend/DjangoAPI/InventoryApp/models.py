@@ -68,8 +68,7 @@ class Product(models.Model):
     StockQTY=models.CharField(max_length=10)
     CreatedAt = models.DateTimeField(auto_now_add=True)
     ProductImage=models.CharField(max_length=100)
-    def __str__(self):
-        return self.ProductName
+
 
 class Supplier(models.Model):
     SupplierId=models.AutoField(primary_key=True)
@@ -86,7 +85,7 @@ class Supplier(models.Model):
     Status=models.CharField(max_length=100)
     CreatedAt = models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return self.ProductName
+        return self.SupplierName
 
 class CustomersOnline(models.Model):
     CustomersOnlineId=models.AutoField(primary_key=True)
@@ -132,10 +131,13 @@ class SalesOrdersOffline(models.Model):
     Date=models.DateField()
     CustomerName=models.CharField(max_length=100)
     Contact=models.CharField(max_length=100)
-    PaymentMode=models.CharField(max_length=100)
+    PaymentMode=models.CharField(max_length=100,)
+    SubTotal=models.CharField(max_length=100,default=0)
+    GST = models.CharField(max_length=100,default=0)
     TotalAmount=models.CharField(max_length=10)
     AmountPaid=models.CharField(max_length=10)
     Status=models.CharField(max_length=10)
+    Balance=models.CharField(max_length=10,default=0)
     CreatedAt=models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -148,7 +150,6 @@ class SalesOrderOfflineDetail(models.Model):
     Quantity=models.CharField(max_length=10)
     SalePrice=models.CharField(max_length=10)
     Amount=models.CharField(max_length=10)
-    Discount=models.CharField(max_length=10)
 
     def __str__(self):
         return self.Amount

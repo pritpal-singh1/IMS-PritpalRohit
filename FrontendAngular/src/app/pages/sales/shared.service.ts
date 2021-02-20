@@ -15,6 +15,9 @@ export class SharedService {
   addNewSale(invoice: Invoice) {
     return this.http.post(this.APIUrl + '/newsale/', invoice);
   }
-  
+  getInvoiceNo(){
+    return this.http.get(this.APIUrl + '/getInvoiceNo/');
+  }
+
     
   }

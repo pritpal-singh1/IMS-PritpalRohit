@@ -5,13 +5,15 @@ export class Invoice {
     CustomerName: string;
     PaymentMode: string;
     TotalAmount: number;
-    AmountPaid: string;
+    AmountPaid: number;
     Status: string;
     SalesItems: SalesItem[];
     GST: number;
+    Balance: number;
+    SubTotal: number;
+    
+
 }
-
-
 export class SalesItem
 {
     ProductId: number;

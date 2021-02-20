@@ -23,10 +23,12 @@ import { SharedService } from "../../sales/shared.service";
   styleUrls: ["./new-invoice.component.scss"],
 })
 export class NewInvoiceComponent {
-  isShow :boolean=false ;
+  isShow: boolean = false;
+  showbalance: boolean = false;
   stockQuantity;
   purchaseprice;
   MRP;
+  invNo;
 
   breadCrumbItems: Array<{}>;
   selectValue = [
@@ -49,7 +51,9 @@ export class NewInvoiceComponent {
     CustomerName: "",
     PaymentMode: "",
     TotalAmount: 0,
-    AmountPaid: "",
+    SubTotal: 0,
+    Balance:0,
+    AmountPaid: 0,
     Status: "Paid",
     GST: 0,
     SalesItems: [],
@@ -64,7 +68,13 @@ export class NewInvoiceComponent {
    }
 
   ngOnInit() {
+    this.salesservice.getInvoiceNo().subscribe((data) => {
+      this.invNo = data;
+      console.log(this.invNo + "");
+      this.invoice.InvoiceNo =  "INV-00"+(this.invNo+1);
+    });
     
+
     this.salesitem = new SalesItem();
     this.breadCrumbItems = [
       { label: "Users" },
@@ -97,12 +107,12 @@ export class NewInvoiceComponent {
         //here we iterate a loop which will calculate the sub total as soon as user selects a product from 
         //the list
         var i;
-        this.invoice.TotalAmount = 0;
+        this.invoice.SubTotal = 0;
         for (i = 0; i < this.dataarray.length; i++) {
           console.log("This Dataraay " + this.dataarray);
           console.log("This Amount " + this.dataarray[i].Amount);
-          this.invoice.TotalAmount =
-            this.invoice.TotalAmount + this.dataarray[i].Amount;
+          this.invoice.SubTotal =
+            this.invoice.SubTotal + this.dataarray[i].Amount;
         }
         
         //similarly here we iterate a loop which will calculate the GST as soon as user selects a product from 
@@ -115,6 +125,7 @@ export class NewInvoiceComponent {
           this.invoice.GST =
             this.invoice.GST + parseInt(this.dataarray[i].GST);
         }
+        this.invoice.TotalAmount = this.invoice.GST + this.invoice.SubTotal; 
         
         // console.log(this.ProductData);
       });
@@ -167,12 +178,12 @@ export class NewInvoiceComponent {
   calculate(obj) {
     obj.Amount = obj.SalePrice * obj.Quantity;
     var i;
-    this.invoice.TotalAmount = 0;
+    this.invoice.SubTotal = 0;
     for (i = 0; i < this.dataarray.length; i++) {
       // console.log("This Dataraay " + this.dataarray);
       // console.log("This Amount " + this.dataarray[i].Amount);
-      this.invoice.TotalAmount =
-        this.invoice.TotalAmount + this.dataarray[i].Amount;
+      this.invoice.SubTotal =
+        this.invoice.SubTotal + this.dataarray[i].Amount;
     }
 
     this.invoice.GST = 0;
@@ -182,6 +193,7 @@ export class NewInvoiceComponent {
       this.invoice.GST =
         this.invoice.GST + parseInt(this.dataarray[i].GST)  ;
     }
+    this.invoice.TotalAmount = this.invoice.GST + this.invoice.SubTotal; 
   }
 
   saveInvoice() {
@@ -190,5 +202,13 @@ export class NewInvoiceComponent {
     this.salesservice.addNewSale(this.invoice).subscribe(data => {
       console.log(data);
     });
+  }
+  getbal() {
+    this.invoice.Balance = this.invoice.TotalAmount - this.invoice.AmountPaid;
+    if (this.invoice.Balance != 0)
+    {
+      this.showbalance = true;
+      this.invoice.Status = "Unpaid";
+    }
   }
 }
