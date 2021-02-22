@@ -161,9 +161,13 @@
 												[(ngModel)]="obj.Quantity"
 												(change)="calculate(obj)"
 												min="1"
+												#Quantity="ngModel"
+										[class.is-invalid]="Quantity.invalid && Quantity.touched"
+										required
+										pattern="^[0-9]+$"
 												name="Quantity"
 												class="form-control form-control-md"
-												type="number"
+												type="text"
 												placeholder="Quantity"
 											/>
 										</td>
@@ -192,6 +196,10 @@
 													<div class="input-group-text">&#8377;</div>
 												</div>
 												<input
+												#Amount="ngModel"
+										[class.is-invalid]="Amount.invalid && Amount.touched"
+										required
+										pattern="^[0-9]+$"
 													type="text"
 													class="form-control"
 													id="inlineFormInputGroup"
@@ -239,9 +247,11 @@
 					<div class="row">
 						<div class="col-md-3">
 							<label class="">Payment Mode</label>
-							<ng-select class="border border-primary" 	[(ngModel)]="invoice.PaymentMode"
+							<ng-select 
+							required
+							 	[(ngModel)]="invoice.PaymentMode"
 							name="PaymentMode">
-								<ng-option [value]="item.name"  *ngFor="let item of paymentMode">{{
+								<ng-option [value]="item.name" *ngFor="let item of paymentMode">{{
 									item.name
 								}}</ng-option>
 							</ng-select>
@@ -253,10 +263,24 @@
 								[(ngModel)]="invoice.AmountPaid"
 								name="AmountPaid"
 								(change)="getbal()"
-								class="border border-primary form-control"
+								class="form-control"
 								type="text"
 								placeholder="Amount Paid"
+								#AmountPaid="ngModel"
+										[class.is-invalid]="AmountPaid.invalid && AmountPaid.touched"
+										required
+										pattern="^[0-9]+$"
 							/>
+							<div
+										*ngIf="CustomerName.invalid && (AmountPaid.dirty || AmountPaid.touched)"
+										
+									>
+										<small class="text-danger" *ngIf="AmountPaid.errors.required">Amount paid is required.</small>
+										<small class="text-danger"  *ngIf="AmountPaid.errors.pattern">
+											Paid amount must be in digits
+										</small>
+										
+									</div>
 							<label *ngIf="showbalance" class="text-danger mt-2">Balance</label>
 							<input 
 								[(ngModel)]="invoice.Balance"

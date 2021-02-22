@@ -16,6 +16,7 @@ import { SalesItem, Invoice } from "../SalesItem.model";
 import { HttpClient } from "@angular/common/http";
 import { toInteger } from "@ng-bootstrap/ng-bootstrap/util/util";
 import { SharedService } from "../../sales/shared.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: "app-new-invoice",
@@ -66,15 +67,17 @@ export class NewInvoiceComponent {
   constructor(public httpClient: HttpClient, public salesservice: SharedService) {
    
    }
-
-  ngOnInit() {
+  getInvoice() {
     this.salesservice.getInvoiceNo().subscribe((data) => {
       this.invNo = data;
       console.log(this.invNo + "");
       this.invoice.InvoiceNo =  "INV-00"+(this.invNo+1);
     });
     
-
+  }
+  ngOnInit() {
+    
+    this.getInvoice();
     this.salesitem = new SalesItem();
     this.breadCrumbItems = [
       { label: "Users" },
@@ -202,6 +205,28 @@ export class NewInvoiceComponent {
     this.salesservice.addNewSale(this.invoice).subscribe(data => {
       console.log(data);
     });
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: "New Product "+ this.invoice.InvoiceNo +" Created",
+      showConfirmButton: false,
+      timer: 1500
+    });
+    this.invoice = {
+      InvoiceNo: "",
+      Date: "",
+      Contact: "",
+      CustomerName: "",
+      PaymentMode: "",
+      TotalAmount: 0,
+      SubTotal: 0,
+      Balance:0,
+      AmountPaid: 0,
+      Status: "Paid",
+      GST: 0,
+      SalesItems: [],
+    };
+    this.getInvoice();
   }
   getbal() {
     this.invoice.Balance = this.invoice.TotalAmount - this.invoice.AmountPaid;

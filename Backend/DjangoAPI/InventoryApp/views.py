@@ -81,30 +81,30 @@ def SaveProductImage(request):
 
 @csrf_exempt
 def newSalesOrder(request):
-    sales_order=JSONParser().parse(request)
+    if request.method=="POST":
+        sales_order=JSONParser().parse(request)
+        salesItems=sales_order['SalesItems']
+        sales_order_offline=dict(list(sales_order.items())[:len(sales_order)-1])
+        sales_order_serializer = SalesOrdersOfflineSerializer(data=sales_order_offline)
+        sales_order_serializer.is_valid(raise_exception=True)
+        if sales_order_serializer.is_valid():
+            sales_order_serializer.save()
+            sales_order_offline_id=sales_order_serializer.data['SalesOrderOfflineId']
 
-    salesItems=sales_order['SalesItems']
+        for i in salesItems:
+            sales_order_offline_detail=i
+            sales_order_offline_detail['SalesOrdersOfflineId']=sales_order_offline_id
+            sales_order_detail_serializer = SalesOrderOfflineDetailSerializer(data=sales_order_offline_detail)
+            sales_order_detail_serializer.is_valid(raise_exception=True)
+            if sales_order_detail_serializer.is_valid():
+                sales_order_detail_serializer.save()
+                print(sales_order_detail_serializer.data)
+                res=updateProductQuantity(sales_order_detail_serializer.data['ProductId'],i['Quantity'])
+                print(res)
+                salesOrderSuccess = "Invoice Successfully Added"
+        return JsonResponse(salesOrderSuccess, safe=False)
 
-    sales_order_offline=dict(list(sales_order.items())[:len(sales_order)-1])
-    sales_order_serializer = SalesOrdersOfflineSerializer(data=sales_order_offline)
-    sales_order_serializer.is_valid(raise_exception=True)
-    if sales_order_serializer.is_valid():
-        sales_order_serializer.save()
-        sales_order_offline_id=sales_order_serializer.data['SalesOrderOfflineId']
 
-    for i in salesItems:
-        sales_order_offline_detail=i
-        sales_order_offline_detail['SalesOrdersOfflineId']=sales_order_offline_id
-        sales_order_detail_serializer = SalesOrderOfflineDetailSerializer(data=sales_order_offline_detail)
-        sales_order_detail_serializer.is_valid(raise_exception=True)
-        if sales_order_detail_serializer.is_valid():
-            sales_order_detail_serializer.save()
-            print(sales_order_detail_serializer.data)
-            res=updateProductQuantity(sales_order_detail_serializer.data['ProductId'],i['Quantity'])
-            print(res)
-        salesOrderSuccess = "Invoice Successfully Added"
-
-    return JsonResponse(salesOrderSuccess, safe=False)
 
 @csrf_exempt
 def getInvoiceNo(request):
@@ -113,8 +113,9 @@ def getInvoiceNo(request):
         if o.count()==0:
             return JsonResponse(0, safe=False)
         else:
-            obj = SalesOrdersOffline.objects.order_by('SalesOrderOfflineId')[0]
-            return JsonResponse(obj.SalesOrderOfflineId, safe=False)
+            obj = SalesOrdersOffline.objects.order_by('SalesOrderOfflineId')[len(o)-1:]
+
+            return JsonResponse(obj.values()[0]['SalesOrderOfflineId'], safe=False)
 
 
 def updateProductQuantity(pid,quantity):
