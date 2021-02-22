@@ -20,7 +20,9 @@ urlpatterns=[
     url(r'^salesOrderOnline/$',views.adminApi),
     url(r'salesOrderOnline/([0-9]+)$',views.adminApi),
     url(r'getInvoiceNo/$',views.getInvoiceNo),
+
     url(r'^newsale/$',views.newSalesOrder),
+    url(r'^newsale/([0-9]+)$',views.newSalesOrder),
 
     url(r'supplier/([0-9]+)$',views.supplierApi),
     url(r'^supplier/$',views.supplierApi),

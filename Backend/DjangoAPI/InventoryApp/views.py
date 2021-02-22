@@ -6,7 +6,7 @@ from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 
 from InventoryApp.models import Category, Brand, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, \
-    Supplier, Employee,SalesOrdersOffline
+    Supplier, Employee,SalesOrdersOffline,SalesOrderOfflineDetail
 from InventoryApp.serializers import CategorySerializer, BrandSerializer, RoleSerializer, AdminSerializer, \
     ProductSerializer, CustomersOnlineSerializer, SalesOrderOnlineSerializer, SupplierSerializer, EmployeeSerializer,\
     SalesOrdersOfflineSerializer,SalesOrderOfflineDetailSerializer
@@ -80,7 +80,7 @@ def SaveProductImage(request):
     return JsonResponse(file_name,safe=False)
 
 @csrf_exempt
-def newSalesOrder(request):
+def newSalesOrder(request,sid=0):
     if request.method=="POST":
         sales_order=JSONParser().parse(request)
         salesItems=sales_order['SalesItems']
@@ -103,6 +103,18 @@ def newSalesOrder(request):
                 print(res)
                 salesOrderSuccess = "Invoice Successfully Added"
         return JsonResponse(salesOrderSuccess, safe=False)
+    elif request.method == 'GET':
+        orders = SalesOrdersOffline.objects.all()
+        print(orders)
+        order_serializer = SalesOrdersOfflineSerializer(orders, many=True)
+        return JsonResponse(order_serializer.data, safe=False)
+    elif request.method == 'DELETE':
+        orderdetail=SalesOrderOfflineDetail.objects.filter(SalesOrdersOfflineId=sid)
+        for i in orderdetail:
+            i.delete()
+        orders = SalesOrdersOffline.objects.get(SalesOrderOfflineId = sid)
+        orders.delete()
+        return JsonResponse("Deleted",safe=False)
 
 
 

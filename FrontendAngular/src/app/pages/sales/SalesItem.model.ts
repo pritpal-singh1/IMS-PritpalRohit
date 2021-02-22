@@ -1,4 +1,5 @@
 export class Invoice {
+    SalesOrderOfflineId: number;
     InvoiceNo: string;
     Date: string;
     Contact: string;

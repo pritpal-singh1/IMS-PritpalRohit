@@ -17,6 +17,7 @@ import { HttpClient } from "@angular/common/http";
 import { toInteger } from "@ng-bootstrap/ng-bootstrap/util/util";
 import { SharedService } from "../../sales/shared.service";
 import Swal from 'sweetalert2';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: "app-new-invoice",
@@ -46,6 +47,7 @@ export class NewInvoiceComponent {
   ];
 
   invoice: Invoice = {
+    SalesOrderOfflineId: 0,
     InvoiceNo: "",
     Date: "",
     Contact: "",
@@ -64,7 +66,7 @@ export class NewInvoiceComponent {
 
   salesitem = new SalesItem();
   dataarray = [];
-  constructor(public httpClient: HttpClient, public salesservice: SharedService) {
+  constructor(public httpClient: HttpClient, private router: Router,public salesservice: SharedService) {
    
    }
   getInvoice() {
@@ -199,7 +201,7 @@ export class NewInvoiceComponent {
     this.invoice.TotalAmount = this.invoice.GST + this.invoice.SubTotal; 
   }
 
-  saveInvoice() {
+  saveInvoice(event) {
     this.invoice.SalesItems = this.dataarray;
     console.log(this.invoice);
     this.salesservice.addNewSale(this.invoice).subscribe(data => {
@@ -212,21 +214,26 @@ export class NewInvoiceComponent {
       showConfirmButton: false,
       timer: 1500
     });
-    this.invoice = {
-      InvoiceNo: "",
-      Date: "",
-      Contact: "",
-      CustomerName: "",
-      PaymentMode: "",
-      TotalAmount: 0,
-      SubTotal: 0,
-      Balance:0,
-      AmountPaid: 0,
-      Status: "Paid",
-      GST: 0,
-      SalesItems: [],
-    };
-    this.getInvoice();
+    event.preventDefault();
+
+    this.router.navigateByUrl('/', {skipLocationChange: true})
+      .then(() => this.router.navigate(['/sales/new-invoice']));
+    
+    // this.invoice = {
+    //   InvoiceNo: "",
+    //   Date: "",
+    //   Contact: "",
+    //   CustomerName: "",
+    //   PaymentMode: "",
+    //   TotalAmount: 0,
+    //   SubTotal: 0,
+    //   Balance:0,
+    //   AmountPaid: 0,
+    //   Status: "Paid",
+    //   GST: 0,
+    //   SalesItems: [],
+    // };
+    // this.getInvoice();
   }
   getbal() {
     this.invoice.Balance = this.invoice.TotalAmount - this.invoice.AmountPaid;
