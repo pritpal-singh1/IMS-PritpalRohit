@@ -94,7 +94,7 @@ export class AddEmployeeComponent implements OnInit {
         AdhaarNo:0,
         JoiningDate:''
       }
-      this.router.navigate(["/employees/add-employee"]);
+      this.router.navigate(["/employees/manage-employee"]);
     }
   }
   insertRecord(form: NgForm){

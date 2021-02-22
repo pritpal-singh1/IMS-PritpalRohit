@@ -22,6 +22,6 @@ export class EmployeeService{
         return this.http.delete(this.APIUrl + '/employee/' + formdata.EmployeeId);
     }
     updateEmployee(formdata: Employee){
-        return this.http.put(this.APIUrl + '/Employee/',formdata);
+        return this.http.put(this.APIUrl + '/employee/',formdata);
     }
 }

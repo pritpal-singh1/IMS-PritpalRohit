@@ -76,6 +76,7 @@ export class AddSupplierComponent implements OnInit {
         Status:'',
         CreatedAt:''
       }
+      this.router.navigate(["/master/supplier/manage-supplier"]);
     }
     else{
       this.updateRecord(form);
