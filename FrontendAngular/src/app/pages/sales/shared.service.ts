@@ -18,6 +18,13 @@ export class SharedService {
   getInvoiceNo(){
     return this.http.get(this.APIUrl + '/getInvoiceNo/');
   }
+  getAllInv(){
+  return this.http.get(this.APIUrl + '/newsale/' );
+  }
+
+  deleteInv(sid) {
+    return this.http.delete(this.APIUrl + '/newsale/' + sid);
+  }
 
     
   }
