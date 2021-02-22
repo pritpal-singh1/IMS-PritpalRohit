@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from InventoryApp.models import Category, Brand,Employee,SalesOrderOfflineDetail, SalesOrdersOffline,Supplier, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline
+from InventoryApp.models import Category, Brand,Employee,SalesOrderOfflineDetail, SalesOrdersOffline,Supplier, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, CompanyDetails
+
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -138,3 +139,16 @@ class SalesOrderOnlineSerializer(serializers.ModelSerializer):
         'PaymentStatus',
         'OrderStatus',
         'TotalAmount')
+
+class CompanyDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CompanyDetails
+        fields = ('CompanyName',
+        'OwnerName',
+        'GSTIN',
+        'panNo',
+        'Address',
+        'ZipCode',
+        'Country',
+        'ContactNumber',
+        'EmailId')

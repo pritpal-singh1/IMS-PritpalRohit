@@ -29,6 +29,10 @@ export class SupplierService{
     deleteSupplier(formdata){
         return this.http.delete(this.APIUrl + '/supplier/'+formdata.SupplierId);
     }
-    
+    updateSupplier(formdata: Supplier){
+        return this.http.put(this.APIUrl + '/supplier/', formdata );
+    }
 }
+
+
 
