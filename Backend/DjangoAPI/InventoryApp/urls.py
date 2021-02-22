@@ -13,12 +13,13 @@ urlpatterns=[
     url(r'^adminUser/$',views.adminApi),
     url(r'adminUser/([0-9]+)$',views.adminApi),
     url(r'^product/$',views.productApi),
-    url(r'product/([0-9]+)$',views.productApi),
+    url(r'product/([0-9]+)$',views.productDetailApi),
+    url(r'^product/$',views.productApi),
     url(r'^customersOnline/$',views.adminApi),
     url(r'customersOnline/([0-9]+)$',views.adminApi),
     url(r'^salesOrderOnline/$',views.adminApi),
     url(r'salesOrderOnline/([0-9]+)$',views.adminApi),
-
+    url(r'getInvoiceNo/$',views.getInvoiceNo),
     url(r'^newsale/$',views.newSalesOrder),
 
     url(r'supplier/([0-9]+)$',views.supplierApi),

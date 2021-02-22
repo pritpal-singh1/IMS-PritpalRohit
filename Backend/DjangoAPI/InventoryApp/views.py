@@ -1,11 +1,15 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import status
+from django.forms.models import model_to_dict
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 
-from InventoryApp.models import Category, Brand, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, Supplier, Employee, CompanyDetails
-from InventoryApp.serializers import CategorySerializer, BrandSerializer, RoleSerializer, AdminSerializer, ProductSerializer, CustomersOnlineSerializer, SalesOrderOnlineSerializer, SupplierSerializer, EmployeeSerializer, CompanyDetailsSerializer
-
+from InventoryApp.models import Category, Brand, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, \
+    Supplier, Employee,SalesOrdersOffline
+from InventoryApp.serializers import CategorySerializer, BrandSerializer, RoleSerializer, AdminSerializer, \
+    ProductSerializer, CustomersOnlineSerializer, SalesOrderOnlineSerializer, SupplierSerializer, EmployeeSerializer,\
+    SalesOrdersOfflineSerializer,SalesOrderOfflineDetailSerializer
 
 
 from django.core.files.storage import default_storage
@@ -77,16 +81,59 @@ def SaveProductImage(request):
 
 @csrf_exempt
 def newSalesOrder(request):
-    sales_order=JSONParser().parse(request)
-    sales_order_serializer = SalesOrdersOfflineSerializer(data=sales_order)
-    print(sales_order_serializer)
-    sales_order_serializer.is_valid(raise_exception=True)
-    if sales_order_serializer.is_valid():
-        sales_order_serializer.save()
-        print(sales_order_serializer.data)
-        print("This is Id: ",sales_order_serializer.data['SalesOrderOfflineId'])
-        return JsonResponse("Added", safe=False)
-    return JsonResponse("Failed to add", safe=False)
+    if request.method=="POST":
+        sales_order=JSONParser().parse(request)
+        salesItems=sales_order['SalesItems']
+        sales_order_offline=dict(list(sales_order.items())[:len(sales_order)-1])
+        sales_order_serializer = SalesOrdersOfflineSerializer(data=sales_order_offline)
+        sales_order_serializer.is_valid(raise_exception=True)
+        if sales_order_serializer.is_valid():
+            sales_order_serializer.save()
+            sales_order_offline_id=sales_order_serializer.data['SalesOrderOfflineId']
+
+        for i in salesItems:
+            sales_order_offline_detail=i
+            sales_order_offline_detail['SalesOrdersOfflineId']=sales_order_offline_id
+            sales_order_detail_serializer = SalesOrderOfflineDetailSerializer(data=sales_order_offline_detail)
+            sales_order_detail_serializer.is_valid(raise_exception=True)
+            if sales_order_detail_serializer.is_valid():
+                sales_order_detail_serializer.save()
+                print(sales_order_detail_serializer.data)
+                res=updateProductQuantity(sales_order_detail_serializer.data['ProductId'],i['Quantity'])
+                print(res)
+                salesOrderSuccess = "Invoice Successfully Added"
+        return JsonResponse(salesOrderSuccess, safe=False)
+
+
+
+@csrf_exempt
+def getInvoiceNo(request):
+    if request.method == 'GET':
+        o = SalesOrdersOffline.objects.order_by('SalesOrderOfflineId')
+        if o.count()==0:
+            return JsonResponse(0, safe=False)
+        else:
+            obj = SalesOrdersOffline.objects.order_by('SalesOrderOfflineId')[len(o)-1:]
+
+            return JsonResponse(obj.values()[0]['SalesOrderOfflineId'], safe=False)
+
+
+def updateProductQuantity(pid,quantity):
+        try:
+            product = Product.objects.get(ProductId=pid)
+            print(product)
+            print(model_to_dict(product))
+        except Product.DoesNotExist:
+            return 'The Product does not exist'
+        product_serializer = ProductSerializer(product,  data=model_to_dict(product))
+
+        product_serializer.is_valid(raise_exception=True)
+        if product_serializer.is_valid():
+            print(product_serializer.validated_data['StockQTY'])
+            product_serializer.validated_data['StockQTY']=int(product_serializer.validated_data['StockQTY'])-int(quantity)
+            product_serializer.save()
+            return "Success"
+
 
 @csrf_exempt
 def supplierApi(request, sid=0):
@@ -214,11 +261,28 @@ def productApi(request, pid=0):
         product.delete()
         return JsonResponse("Deleted",safe=False)
 
+@csrf_exempt
+def productDetailApi(request, pid=0):
+    if request.method == 'GET':
+        try:
+            product = Product.objects.get(ProductId=pid)
+            print(product)
+        except Product.DoesNotExist:
+            return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+        if request.method == 'GET':
+            product_serializer = ProductSerializer(product)
+            return JsonResponse(product_serializer.data,safe=False)
+    elif request.method == 'DELETE':
+        product = Product.objects.get(ProductId = pid)
+        product.delete()
+        return JsonResponse("Deleted",safe=False)
+
 
 @csrf_exempt
 def customerOnlineApi(request, cid=0):
     if request.method == 'GET':
-        orders = CustomersOnline.objects.all()
+        customers = CustomersOnline.objects.all()
         print(customers)
         customers_serializer = CustomersOnlineSerializer(customers, many=True)
         return JsonResponse(customers_serializer.data, safe=False)
@@ -271,33 +335,3 @@ def salesOrderOnlineApi(request, soid=0):
         order = SalesOrderOnline.objects.get(orderId = soid)
         order.delete()
         return JsonResponse("Deleted",safe=False)
-
-@csrf_exempt
-def CompanyDetailsApi(request):
-    if request.method == 'GET':
-        company = CompanyDetails.objects.all()
-        print(company)
-        company_detail_serializer = CompanyDetailsSerializer(company, many=True)
-        print(company_detail_serializer.data)
-        return JsonResponse(company_detail_serializer.data, safe=False)
-    # elif request.method == 'POST':
-    #     order_data = JSONParser().parse(request)
-    #     sales_order_serializer = SalesOrderOnlineSerializer(data=order_data)
-    #     print(sales_order_serializer)
-    #     if sales_order_serializer.is_valid():
-    #         sales_order_serializer.save()
-    #         return JsonResponse("Added",safe=False)
-    #     return JsonResponse("Failed to add",safe=False)
-    elif request.method == 'PUT':
-        company_data = JSONParser().parse(request)
-        print(company_data)
-        company = CompanyDetails.objects.get(CompanyName=company_data['CompanyName'])
-        company_detail_serializer = CompanyDetailsSerializer(company,data=company_data)
-        if CompanyDetailsSerializer.is_valid():
-            CompanyDetailsSerializer.save()
-            return JsonResponse("updated",safe=False)
-        return JsonResponse("failed to update",safe=False)
-    # elif request.method == 'DELETE':
-    #     order = SalesOrderOnline.objects.get(orderId = soid)
-    #     order.delete()
-    #     return JsonResponse("Deleted",safe=False)

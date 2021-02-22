@@ -19,11 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8107d7b8-2b89-4408-a1fb-cbbf9f8518fc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/manageproducts/manageproducts.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/manageproducts/manageproducts.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/manageproducts/manageproducts.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/manageproducts/manageproducts.component.ts" afterDir="false" />
-    </list>
+    <list default="true" id="8107d7b8-2b89-4408-a1fb-cbbf9f8518fc" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,17 +79,17 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="187" y="17" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1613056635986" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1613067920525">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1613892170890">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1613067920525" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1613892170890" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/models.py</url>
-          <line>73</line>
+          <line>72</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
