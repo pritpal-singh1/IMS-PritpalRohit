@@ -1,6 +1,6 @@
 export class Supplier{
     SupplierId: number;
-    SupplierName: string;
+    // SupplierName: string;
     CompanyName: string;
     Address: string;
     City: string;
@@ -11,5 +11,7 @@ export class Supplier{
     PANNo: string;
     GSTIN: string;
     Status: string;
+    ContactPerson: string;
+    ContactPersonNo: string;
     CreatedAt:string;
 }
