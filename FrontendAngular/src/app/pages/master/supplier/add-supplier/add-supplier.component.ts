@@ -36,17 +36,19 @@ export class AddSupplierComponent implements OnInit {
       form.resetForm();
     this.supplierService.formdata = {
       SupplierId: 0,
-      SupplierName: '',
+      // SupplierName: '',
       CompanyName:'',
       Address:'',
       City:'',
       State:'',
-      Pincode:0,
+      Pincode:null,
       Email:'',
-      Contact:0,
+      Contact:null,
       PANNo:'',
       GSTIN:'',
       Status:'',
+      ContactPerson:'',
+      ContactPersonNo:'',
       CreatedAt:''
     }
   }
@@ -63,7 +65,7 @@ export class AddSupplierComponent implements OnInit {
       });
       this.supplierService.formdata ={
         SupplierId: 0,
-        SupplierName: '',
+        // SupplierName: '',
         CompanyName:'',
         Address:'',
         City:'',
@@ -74,6 +76,8 @@ export class AddSupplierComponent implements OnInit {
         PANNo:'',
         GSTIN:'',
         Status:'',
+        ContactPerson:'',
+        ContactPersonNo:'',
         CreatedAt:''
       }
       this.router.navigate(["/master/supplier/manage-supplier"]);
@@ -89,7 +93,7 @@ export class AddSupplierComponent implements OnInit {
       });
       this.supplierService.formdata = {
         SupplierId: 0,
-        SupplierName: '',
+        // SupplierName: '',
         CompanyName:'',
         Address:'',
         City:'',
@@ -100,6 +104,8 @@ export class AddSupplierComponent implements OnInit {
         PANNo:'',
         GSTIN:'',
         Status:'',
+        ContactPerson:'',
+        ContactPersonNo:'',
         CreatedAt:''
 
       }
