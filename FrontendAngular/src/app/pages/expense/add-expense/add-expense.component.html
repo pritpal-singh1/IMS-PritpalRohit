@@ -7,12 +7,16 @@
             <div class="card">
                 <div class="card-body">
                     <h3 class="card-title">Expense Details</h3>
-                    <form class="needs-validation">
+                    <form class="needs-validation"  #form="ngForm" (submit)="onSubmit(form)">
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label>Date</label>
                                 <div class="input-group clockpicker">
-                                  <input type="date" class="form-control" placeholder="YYYY-MM-DD">
+                                  <input type="date" class="form-control" placeholder="YYYY-MM-DD" #Date="ngModel" [(ngModel)] = "expenseservice.formdata.Date" name="Date"
+                                  [class.is-invalid]="Date.invalid && Date.touched" required>
+                                  <div *ngIf="Date.invalid && (Date.dirty || Date.touched)">
+                                    <small class="text-danger" *ngIf="Date.errors.required">Date is required.</small>
+                                  </div>
                                   
                                 </div>
                             </div>
@@ -24,15 +28,21 @@
                                     <!-- <ng-select>
                                         <ng-option *ngFor="let item of selectValue">{{item.name}}</ng-option>
                                     </ng-select> -->
-                                    <input type="text" class="form-control"
-                                    placeholder="Enter expense type">
+                                    <input type="text" class="form-control" #ExpenseType="ngModel" [(ngModel)]="expenseservice.formdata.ExpenseType" name="ExpenseType"
+                                    placeholder="Enter expense type" [class.is-invalid]="ExpenseType.invalid && ExpenseType.touched" required>
+                                    <div *ngIf="ExpenseType.invalid && (ExpenseType.dirty || ExpenseType.touched)">
+                                        <small class="text-danger" *ngIf="ExpenseType.errors.required">Expense Type is required.</small>
+                                      </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Amount</label>
-                                    <input type="Number" class="form-control"
-                                    placeholder="₹">
+                                    <input type="Number" class="form-control" #Amount="ngModel" [(ngModel)]="expenseservice.formdata.Amount" name="Amount"
+                                    placeholder="₹" [class.is-invalid]="Amount.invalid && Amount.touched" required>
+                                    <div *ngIf="Amount.invalid && (Amount.dirty || Amount.touched)">
+                                        <small class="text-danger" *ngIf="Amount.errors.required">Amount is required.</small>
+                                      </div>
                                 </div>
                                 
                             </div>
@@ -40,30 +50,32 @@
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label>Paid to</label>
-                                <input type="text" class="form-control"
-                                placeholder="Enter name">
+                                <input type="text" class="form-control" #PaidTo="ngModel" [(ngModel)]="expenseservice.formdata.PaidTo" name="PaidTo"
+                                placeholder="Enter name" [class.is-invalid]="PaidTo.invalid && PaidTo.touched" required>
+                                <div *ngIf="PaidTo.invalid && (PaidTo.dirty || PaidTo.touched)">
+                                    <small class="text-danger" *ngIf="PaidTo.errors.required">Paid To is required.</small>
+                                  </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Pay mode</label>
-                                    <!-- <ng-select [items]="selectValue"
-                                    bindLabel='name'></ng-select> -->
-                                    <ng-select>
-                                        <ng-option *ngFor="let item of selectValue">{{item.name}}</ng-option>
-                                    </ng-select>
-                                </div>
-                            </div>
+                            
                             <div class="form-group col-md-4">
                                 <label>Paid by</label>
-                                <input type="text" class="form-control"
-                                placeholder="Enter name">
+                                <input type="text" class="form-control" #PaidBy="ngModel" [(ngModel)]="expenseservice.formdata.PaidBy" name="PaidBy"
+                                placeholder="Enter name" [class.is-invalid]="PaidBy.invalid && PaidBy.touched" required>
+                                <div *ngIf="PaidBy.invalid && (PaidBy.dirty || PaidBy.touched)">
+                                    <small class="text-danger" *ngIf="PaidBy.errors.required">Paid by is required.</small>
+                                  </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Remarks</label>
+                                <input type="text" class="form-control" #Remarks="ngModel" [(ngModel)]="expenseservice.formdata.Remarks" name="Remarks"
+                                placeholder="Remarks" >
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="text-right">
                                    
-                                    &nbsp;<button class="btn btn-primary d-inline">Save</button>
+                                    &nbsp;<button [disabled]="form.form.invalid" class="btn btn-primary d-inline" type="submit">Save</button>
                                 </div>
                             </div>
                         </div>

@@ -6,10 +6,10 @@ from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 
 from InventoryApp.models import Category, Brand, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, \
-    Supplier, Employee,SalesOrdersOffline,SalesOrderOfflineDetail
+    Supplier, Employee,SalesOrdersOffline,SalesOrderOfflineDetail, Expense
 from InventoryApp.serializers import CategorySerializer, BrandSerializer, RoleSerializer, AdminSerializer, \
     ProductSerializer, CustomersOnlineSerializer, SalesOrderOnlineSerializer, SupplierSerializer, EmployeeSerializer,\
-    SalesOrdersOfflineSerializer,SalesOrderOfflineDetailSerializer
+    SalesOrdersOfflineSerializer,SalesOrderOfflineDetailSerializer,ExpenseSerializer
 
 
 from django.core.files.storage import default_storage
@@ -98,14 +98,12 @@ def newSalesOrder(request,sid=0):
             sales_order_detail_serializer.is_valid(raise_exception=True)
             if sales_order_detail_serializer.is_valid():
                 sales_order_detail_serializer.save()
-                print(sales_order_detail_serializer.data)
-                res=updateProductQuantity(sales_order_detail_serializer.data['ProductId'],i['Quantity'])
-                print(res)
+                res=updateProductQuantityForAdd(sales_order_detail_serializer.data['ProductId'],i['Quantity'])
                 salesOrderSuccess = "Invoice Successfully Added"
         return JsonResponse(salesOrderSuccess, safe=False)
     elif request.method == 'GET':
         orders = SalesOrdersOffline.objects.all()
-        print(orders)
+
         order_serializer = SalesOrdersOfflineSerializer(orders, many=True)
         return JsonResponse(order_serializer.data, safe=False)
     elif request.method == 'DELETE':
@@ -115,6 +113,35 @@ def newSalesOrder(request,sid=0):
         orders = SalesOrdersOffline.objects.get(SalesOrderOfflineId = sid)
         orders.delete()
         return JsonResponse("Deleted",safe=False)
+
+    elif request.method == 'PUT':
+        sales_order=JSONParser().parse(request)
+        salesItems = sales_order['SalesItems']
+
+        sales_order_offline_recieved = dict(list(sales_order.items())[:len(sales_order) - 1])
+        sales_order_offline = SalesOrdersOffline.objects.get(SalesOrderOfflineId=sales_order_offline_recieved[
+            'SalesOrderOfflineId'])
+        sales_order_offline_serializer = SalesOrdersOfflineSerializer(sales_order_offline, data=sales_order_offline_recieved)
+        if sales_order_offline_serializer.is_valid():
+            sales_order_offline_serializer.save()
+        salesorderdetail = SalesOrderOfflineDetail.objects.filter(SalesOrdersOfflineId=sales_order_offline_recieved[
+            'SalesOrderOfflineId'])
+
+        for i in salesorderdetail:
+            res = updateProductQuantityForUpdate(model_to_dict(i.ProductId)['ProductId'], i.Quantity)
+            i.delete()
+        for i in salesItems:
+            sales_order_offline_detail=i
+            sales_order_offline_detail['SalesOrdersOfflineId']=sales_order_offline_recieved[
+            'SalesOrderOfflineId']
+            sales_order_detail_serializer = SalesOrderOfflineDetailSerializer(data=sales_order_offline_detail)
+            sales_order_detail_serializer.is_valid(raise_exception=True)
+            if sales_order_detail_serializer.is_valid():
+                sales_order_detail_serializer.save()
+                res=updateProductQuantityForAdd(sales_order_detail_serializer.data['ProductId'],i['Quantity'])
+
+        return JsonResponse("updated", safe=False)
+
 
 def getSalesOrderById(request,sid=0):
     try:
@@ -134,7 +161,7 @@ def getSalesOrderById(request,sid=0):
 
         FinalData=orders_serializer.data
         FinalData['SalesItems']=ResData
-        print(FinalData)
+
         return JsonResponse(FinalData,safe=False)
     except SalesOrdersOffline.DoesNotExist:
         return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
@@ -153,11 +180,10 @@ def getInvoiceNo(request):
             return JsonResponse(obj.values()[0]['SalesOrderOfflineId'], safe=False)
 
 
-def updateProductQuantity(pid,quantity):
+def updateProductQuantityForAdd(pid,quantity):
         try:
             product = Product.objects.get(ProductId=pid)
-            print(product)
-            print(model_to_dict(product))
+
         except Product.DoesNotExist:
             return 'The Product does not exist'
         product_serializer = ProductSerializer(product,  data=model_to_dict(product))
@@ -169,6 +195,22 @@ def updateProductQuantity(pid,quantity):
             product_serializer.save()
             return "Success"
 
+
+def updateProductQuantityForUpdate(pid, quantity):
+    try:
+        product = Product.objects.get(ProductId=pid)
+
+    except Product.DoesNotExist:
+        return 'The Product does not exist'
+    product_serializer = ProductSerializer(product, data=model_to_dict(product))
+
+    product_serializer.is_valid(raise_exception=True)
+    if product_serializer.is_valid():
+        print(product_serializer.validated_data['StockQTY'])
+        product_serializer.validated_data['StockQTY'] = int(product_serializer.validated_data['StockQTY']) + int(
+            quantity)
+        product_serializer.save()
+        return "Success"
 
 @csrf_exempt
 def supplierApi(request, sid=0):
@@ -369,4 +411,33 @@ def salesOrderOnlineApi(request, soid=0):
     elif request.method == 'DELETE':
         order = SalesOrderOnline.objects.get(orderId = soid)
         order.delete()
+        return JsonResponse("Deleted",safe=False)
+
+@csrf_exempt
+def expenseApi(request, eid=0):
+    if request.method == 'GET':
+        expenses = Expense.objects.all()
+        expense_serializer = ExpenseSerializer(expenses, many=True)
+        return JsonResponse(expense_serializer.data, safe=False)
+    elif request.method == 'POST':
+        expense_data = JSONParser().parse(request)
+        print(expense_data)
+        expense_serializer = ExpenseSerializer(data=expense_data)
+        print(expense_serializer)
+        expense_serializer.is_valid(raise_exception=True)
+        if expense_serializer.is_valid():
+            expense_serializer.save()
+            return JsonResponse("Added",safe=False)
+        return JsonResponse("Failed to add",safe=False)
+    elif request.method == 'PUT':
+        expense_data = JSONParser().parse(request)
+        expense = Expense.objects.get(ExpenseId=expense_data['ExpenseId'])
+        expense_serializer = ExpenseSerializer(expense,data=expense_data)
+        if expense_serializer.is_valid():
+            expense_serializer.save()
+            return JsonResponse("updated",safe=False)
+        return JsonResponse("failed to update",safe=False)
+    elif request.method == 'DELETE':
+        expense = Expense.objects.get(ExpenseId = eid)
+        expense.delete()
         return JsonResponse("Deleted",safe=False)

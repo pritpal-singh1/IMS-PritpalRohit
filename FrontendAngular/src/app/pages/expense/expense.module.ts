@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {DataTablesModule} from 'angular-datatables';
 
 import { ExpenseRoutingModule } from './expense-routing.module';
 import { ExpenseComponent } from './expense.component';
@@ -18,7 +19,8 @@ import { UiModule } from '../../shared/ui/ui.module';
     NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    UiModule
+    UiModule,
+    DataTablesModule
   ]
 })
 export class ExpenseModule { }

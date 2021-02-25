@@ -29,6 +29,11 @@ export class SharedService {
   getInvoiceById(id) {
     return this.http.get(this.APIUrl + '/getSalesById/' + id);
   }
+  updateInvoice(invoice: Invoice) {
+    
+    return this.http.put(this.APIUrl + '/newsale/', invoice);
+    
+  }
 
     
   }

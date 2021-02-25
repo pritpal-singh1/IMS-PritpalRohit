@@ -23,5 +23,6 @@ export class SalesItem
     Quantity: number;
     SalePrice: number;
     Amount: number;
+    GST: number;
   
 }

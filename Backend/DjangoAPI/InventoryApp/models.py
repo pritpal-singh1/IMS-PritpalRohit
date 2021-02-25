@@ -151,11 +151,12 @@ class SalesOrderOfflineDetail(models.Model):
     SalesOrdersOfflineId=models.ForeignKey(SalesOrdersOffline,db_column="SalesOrderOfflineId",on_delete=models.CASCADE)
     ProductId=models.ForeignKey(Product,related_name="products",db_column="ProductId",on_delete=models.CASCADE)
     Quantity=models.CharField(max_length=10)
+    GST = models.CharField(max_length=10,default=0)
     SalePrice=models.CharField(max_length=10)
     Amount=models.CharField(max_length=10)
 
     def __str__(self):
-        return self.Amount
+        return self.SalesOrderOfflineDetailId
 
 class PurchaseBill(models.Model):
     BillNo=models.CharField(max_length=100,primary_key=True)
@@ -194,5 +195,15 @@ class CompanyDetails(models.Model):
     Country = models.CharField(max_length=20)
     ContactNumber = models.CharField(max_length=15)
     EmailId = models.CharField(max_length=50)
+
+class Expense(models.Model):
+    ExpenseId = models.AutoField(primary_key=True)
+    Date = models.DateTimeField()
+    ExpenseType = models.CharField(max_length=100)
+    Amount = models.CharField(max_length=100)
+    PaidTo = models.CharField(max_length=100)
+    PaidBy = models.CharField(max_length=100)
+    Remarks = models.CharField(max_length=100)
+
 
 
