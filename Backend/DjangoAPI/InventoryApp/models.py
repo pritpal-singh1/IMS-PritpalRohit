@@ -70,6 +70,7 @@ class Product(models.Model):
     ProductImage=models.CharField(max_length=100)
 
 
+
 class Supplier(models.Model):
     SupplierId=models.AutoField(primary_key=True)
     # SupplierName=models.CharField(max_length=100)
@@ -148,7 +149,7 @@ class SalesOrdersOffline(models.Model):
 class SalesOrderOfflineDetail(models.Model):
     SalesOrderOfflineDetailId = models.AutoField(primary_key=True)
     SalesOrdersOfflineId=models.ForeignKey(SalesOrdersOffline,db_column="SalesOrderOfflineId",on_delete=models.CASCADE)
-    ProductId=models.ForeignKey(Product,db_column="ProductId",on_delete=models.CASCADE)
+    ProductId=models.ForeignKey(Product,related_name="products",db_column="ProductId",on_delete=models.CASCADE)
     Quantity=models.CharField(max_length=10)
     SalePrice=models.CharField(max_length=10)
     Amount=models.CharField(max_length=10)

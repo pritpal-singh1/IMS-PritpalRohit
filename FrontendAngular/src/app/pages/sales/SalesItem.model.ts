@@ -16,7 +16,9 @@ export class Invoice {
 
 }
 export class SalesItem
-{
+{   
+    SalesOrderOfflineDetailId: number;
+    SalesOrdersOfflineId: number;
     ProductId: number;
     Quantity: number;
     SalePrice: number;

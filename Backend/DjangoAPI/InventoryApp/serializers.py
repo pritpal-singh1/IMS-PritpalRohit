@@ -70,7 +70,29 @@ class SalesOrdersOfflineSerializer(serializers.ModelSerializer):
                 'Balance',
                 'Status',
                 'CreatedAt')
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ('ProductId',
+        'Brand',
+        'Category',
+        'ProductName',
+        'ItemCode',
+        'PrintName',
+        'PurchasePrice',
+        'SalePrice',
+        'MRP',
+        'LowLevelLimit',
+        'Discount',
+        'GST',
+        'StockQTY',
+        'CreatedAt',
+        'ProductImage')
+
 class SalesOrderOfflineDetailSerializer(serializers.ModelSerializer):
+    # SalesOrdersOfflineId=SalesOrdersOfflineSerializer()
+    # ProductId=ProductSerializer()
     class Meta:
         model=SalesOrderOfflineDetail
         fields=('SalesOrderOfflineDetailId',

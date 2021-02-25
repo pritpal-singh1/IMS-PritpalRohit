@@ -10,7 +10,7 @@
 			<div class="card">
 				<div class="card-body">
 					<h4 class="card-title">Invoice Information</h4>
-					<form  (ngSubmit)="onSubmit()" #form="ngForm" class="needs-validation">
+					<form   #form="ngForm" class="needs-validation">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -145,12 +145,12 @@
 										<td>
 											<ng-select
 												required
-												[(ngModel)]="obj.ProductName"
-												name="ProductName"
-												(change)="getProductById(obj)"
+												[(ngModel)]="obj.ProductId"
+												name="ProductId"
+												
 											>
 												<ng-option
-													[value]="item.ProductName"
+													[value]="item.ProductId"
 													*ngFor="let item of AllProductList"
 													>{{ item.ProductName }}</ng-option
 												>
@@ -308,10 +308,10 @@
 							</div>
 							<div class="text-right">
 								&nbsp;<button
-									(click)="saveInvoice($event)"
+									
 									class="btn btn-primary d-inline"
 								>
-									Save
+									Update
 								</button>
 							</div>
 						</div>
