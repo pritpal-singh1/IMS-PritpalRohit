@@ -195,4 +195,14 @@ class CompanyDetails(models.Model):
     ContactNumber = models.CharField(max_length=15)
     EmailId = models.CharField(max_length=50)
 
+class Expense(models.Model):
+    ExpenseId = models.AutoField(primary_key=True)
+    Date = models.DateTimeField()
+    ExpenseType = models.CharField(max_length=100)
+    Amount = models.CharField(max_length=100)
+    PaidTo = models.CharField(max_length=100)
+    PaidBy = models.CharField(max_length=100)
+    Remarks = models.CharField(max_length=100)
+
+
 

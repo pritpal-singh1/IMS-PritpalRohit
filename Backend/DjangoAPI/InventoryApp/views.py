@@ -6,10 +6,10 @@ from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 
 from InventoryApp.models import Category, Brand, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, \
-    Supplier, Employee,SalesOrdersOffline,SalesOrderOfflineDetail
+    Supplier, Employee,SalesOrdersOffline,SalesOrderOfflineDetail, Expense
 from InventoryApp.serializers import CategorySerializer, BrandSerializer, RoleSerializer, AdminSerializer, \
     ProductSerializer, CustomersOnlineSerializer, SalesOrderOnlineSerializer, SupplierSerializer, EmployeeSerializer,\
-    SalesOrdersOfflineSerializer,SalesOrderOfflineDetailSerializer
+    SalesOrdersOfflineSerializer,SalesOrderOfflineDetailSerializer,ExpenseSerializer
 
 
 from django.core.files.storage import default_storage
@@ -369,4 +369,33 @@ def salesOrderOnlineApi(request, soid=0):
     elif request.method == 'DELETE':
         order = SalesOrderOnline.objects.get(orderId = soid)
         order.delete()
+        return JsonResponse("Deleted",safe=False)
+
+@csrf_exempt
+def expenseApi(request, eid=0):
+    if request.method == 'GET':
+        expenses = Expense.objects.all()
+        expense_serializer = ExpenseSerializer(expenses, many=True)
+        return JsonResponse(expense_serializer.data, safe=False)
+    elif request.method == 'POST':
+        expense_data = JSONParser().parse(request)
+        print(expense_data)
+        expense_serializer = ExpenseSerializer(data=expense_data)
+        print(expense_serializer)
+        expense_serializer.is_valid(raise_exception=True)
+        if expense_serializer.is_valid():
+            expense_serializer.save()
+            return JsonResponse("Added",safe=False)
+        return JsonResponse("Failed to add",safe=False)
+    elif request.method == 'PUT':
+        expense_data = JSONParser().parse(request)
+        expense = Expense.objects.get(ExpenseId=expense_data['ExpenseId'])
+        expense_serializer = ExpenseSerializer(expense,data=expense_data)
+        if expense_serializer.is_valid():
+            expense_serializer.save()
+            return JsonResponse("updated",safe=False)
+        return JsonResponse("failed to update",safe=False)
+    elif request.method == 'DELETE':
+        expense = Expense.objects.get(ExpenseId = eid)
+        expense.delete()
         return JsonResponse("Deleted",safe=False)
