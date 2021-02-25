@@ -101,6 +101,7 @@ class SalesOrderOfflineDetailSerializer(serializers.ModelSerializer):
                 'Quantity',
                 'SalePrice',
                 'Amount',
+                'GST',
                )
 
 class RoleSerializer(serializers.ModelSerializer):

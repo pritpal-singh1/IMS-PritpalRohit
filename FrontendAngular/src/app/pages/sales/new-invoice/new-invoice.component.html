@@ -145,12 +145,12 @@
 										<td>
 											<ng-select
 												required
-												[(ngModel)]="obj.ProductName"
-												name="ProductName"
+												[(ngModel)]="obj.ProductId"
+												name="ProductId"
 												(change)="getProductById(obj)"
 											>
 												<ng-option
-													[value]="item.ProductName"
+													[value]="item.ProductId"
 													*ngFor="let item of AllProductList"
 													>{{ item.ProductName }}</ng-option
 												>
