@@ -73,7 +73,7 @@ class Product(models.Model):
 
 class Supplier(models.Model):
     SupplierId=models.AutoField(primary_key=True)
-    SupplierName=models.CharField(max_length=100)
+    # SupplierName=models.CharField(max_length=100)
     CompanyName=models.CharField(max_length=100)
     Address = models.CharField(max_length=100)
     City=models.CharField(max_length=100)
@@ -84,9 +84,11 @@ class Supplier(models.Model):
     PANNo=models.CharField(max_length=100)
     GSTIN=models.CharField(max_length=100)
     Status=models.CharField(max_length=100)
+    ContactPerson = models.CharField(max_length=100, default="ABC")
+    ContactPersonNo = models.CharField(max_length=100,default="1234567890")
     CreatedAt = models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return self.SupplierName
+        return self.CompanyName
 
 class CustomersOnline(models.Model):
     CustomersOnlineId=models.AutoField(primary_key=True)

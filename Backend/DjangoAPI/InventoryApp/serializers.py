@@ -24,7 +24,7 @@ class SupplierSerializer(serializers.ModelSerializer):
     class Meta:
         model=Supplier
         fields=('SupplierId',
-                'SupplierName',
+                # 'SupplierName',
                 'CompanyName',
                 'Address',
                 'City',
@@ -34,6 +34,8 @@ class SupplierSerializer(serializers.ModelSerializer):
                 'Contact',
                 'PANNo',
                 'GSTIN',
+                'ContactPerson',
+                'ContactPersonNo',
                 'CreatedAt')
 
 class EmployeeSerializer(serializers.ModelSerializer):

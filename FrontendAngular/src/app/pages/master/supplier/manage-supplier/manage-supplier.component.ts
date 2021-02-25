@@ -93,7 +93,7 @@ export class ManageSupplierComponent implements OnInit {
         });
 		Swal.fire(
 			"Deleted!",
-			supplier.SupplierName + " has been deleted.",
+			supplier.CompanyName + " has been deleted.",
 			"success"
 		);
       }
