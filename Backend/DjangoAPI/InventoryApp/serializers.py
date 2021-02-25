@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from InventoryApp.models import Category, Brand,Employee,SalesOrderOfflineDetail, SalesOrdersOffline,Supplier, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, CompanyDetails
+from InventoryApp.models import Category, Brand,Employee,SalesOrderOfflineDetail, SalesOrdersOffline,Supplier, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, CompanyDetails, Expense
 
 
 
@@ -176,3 +176,14 @@ class CompanyDetailsSerializer(serializers.ModelSerializer):
         'Country',
         'ContactNumber',
         'EmailId')
+
+class ExpenseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Expense
+        fields = ('ExpenseId',
+        'Date',
+        'ExpenseType',
+        'Amount',
+        'PaidTo',
+        'PaidBy',
+        'Remarks')

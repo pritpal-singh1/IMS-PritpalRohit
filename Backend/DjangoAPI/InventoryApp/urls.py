@@ -31,7 +31,8 @@ urlpatterns=[
     url(r'employee/([0-9]+)$',views.employeeApi),
     url(r'^employee/$',views.employeeApi),
     # url(r'^companyDetails/$',views.CompanyDetailsApi),
-
+    url(r'expense/([0-9]+)$',views.expenseApi),
+    url(r'^expense/$',views.expenseApi),
 
 
 
