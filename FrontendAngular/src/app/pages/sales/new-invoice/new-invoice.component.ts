@@ -91,7 +91,7 @@ export class NewInvoiceComponent {
 
   getProductById(obj) {
     
-    this.httpClient
+    this.httpClient 
       .get("http://127.0.0.1:8000/product/" + obj["ProductId"])
       .subscribe((data) => {
 

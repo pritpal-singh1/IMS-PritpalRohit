@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../../sales/shared.service';
 import { Invoice, SalesItem } from '../SalesItem.model';
+import Swal from 'sweetalert2';
+
+
 @Component({
   selector: 'app-update-invoice',
   templateUrl: './update-invoice.component.html',
@@ -51,11 +54,11 @@ export class UpdateInvoiceComponent implements OnInit {
 
   salesitem = new SalesItem();
   dataarray = [];
-  constructor(public httpClient: HttpClient,private route: ActivatedRoute,public salesservice: SharedService) { }
+  constructor(public httpClient: HttpClient, private router: Router, private route: ActivatedRoute,public salesservice: SharedService) { }
 
   ngOnInit(): void {
     this.getInvoiceDetails(this.route.snapshot.paramMap.get('id'));
-    
+    this.getProductList();
     this.salesitem = new SalesItem();
     this.breadCrumbItems = [
       { label: "Sales" },
@@ -82,6 +85,7 @@ export class UpdateInvoiceComponent implements OnInit {
         this.salesitem.Quantity = this.orders[i].Quantity;
         this.salesitem.ProductId = this.orders[i].ProductId;
         this.salesitem.SalePrice = this.orders[i].SalePrice;
+        this.salesitem.GST = this.orders[i].GST;
         this.salesitem.Amount = this.orders[i].Amount;
         this.dataarray.push(this.salesitem);
         
@@ -103,7 +107,7 @@ export class UpdateInvoiceComponent implements OnInit {
       // console.log("This Dataraay " + this.dataarray);
       // console.log("This Amount " + this.dataarray[i].Amount);
       this.invoice.TotalAmount =
-        this.invoice.TotalAmount + this.dataarray[i].Amount;
+        this.invoice.TotalAmount +parseInt(this.dataarray[i].Amount);
     }
 
     this.invoice.GST = 0;
@@ -130,7 +134,7 @@ export class UpdateInvoiceComponent implements OnInit {
       // console.log("This Dataraay " + this.dataarray);
       // console.log("This Amount " + this.dataarray[i].Amount);
       this.invoice.SubTotal =
-        this.invoice.SubTotal + this.dataarray[i].Amount;
+        this.invoice.SubTotal + parseInt(this.dataarray[i].Amount)  ;
     }
 
     this.invoice.GST = 0;
@@ -141,6 +145,76 @@ export class UpdateInvoiceComponent implements OnInit {
         this.invoice.GST + parseInt(this.dataarray[i].GST)  ;
     }
     this.invoice.TotalAmount = this.invoice.GST + this.invoice.SubTotal; 
+  }
+  getProductById(obj) {
+    
+    this.httpClient
+      .get("http://127.0.0.1:8000/product/" + obj["ProductId"])
+      .subscribe((data) => {
+
+        this.ProductData = data as any;
+        this.stockQuantity=this.ProductData["StockQTY"]
+        this.purchaseprice=this.ProductData["PurchasePrice"]
+        this.MRP=this.ProductData["MRP"]
+        console.log(this.ProductData["StockQTY"]);
+
+        //sets the sale price for each products
+        obj.SalePrice = this.ProductData["SalePrice"];
+        obj.Quantity = 1;
+
+        //calcultae the amount when used select one product on the basis of the unit price
+        obj.Amount = obj.SalePrice * obj.Quantity;
+        //calcultae the GST when used select one product on the basis of the unit price
+        obj.GST = this.ProductData["GST"];
+        //here we iterate a loop which will calculate the sub total as soon as user selects a product from 
+        //the list
+        // var i;
+        // this.invoice.SubTotal = 0;
+        // for (i = 0; i < this.dataarray.length; i++) {
+        //   console.log("This Dataraay " + this.dataarray);
+        //   console.log("This Amount " + this.dataarray[i].Amount);
+        //   this.invoice.SubTotal =
+        //     this.invoice.SubTotal +  parseInt(this.dataarray[i].GST) ;
+        // }
+        
+        //similarly here we iterate a loop which will calculate the GST as soon as user selects a product from 
+        //the list
+      
+        // this.invoice.GST = 0;
+        // for (i = 0; i < this.dataarray.length; i++) {
+        //   console.log("This Dataraay " + this.dataarray);
+        //   console.log("This Amount " +  typeof this.dataarray[i].GST);
+        //   this.invoice.GST =
+        //     this.invoice.GST + parseInt(this.dataarray[i].GST);
+        // }
+        // this.invoice.TotalAmount = this.invoice.GST + this.invoice.SubTotal; 
+        
+        // console.log(this.ProductData);
+        this.calculate(obj);
+      });
+    
+        this.isShow = true;
+      
+  }
+  saveInvoice(event) {
+    this.invoice.SalesItems = this.dataarray;
+    console.log(this.invoice);
+    this.salesservice.updateInvoice(this.invoice).subscribe(data => {
+      console.log(data);
+    });
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: this.invoice.InvoiceNo +" Successfully Updated",
+      showConfirmButton: false,
+      timer: 1500
+    });
+    event.preventDefault();
+
+    this.router.navigateByUrl('/', {skipLocationChange: true})
+      .then(() => this.router.navigate(['/sales/manage-invoice']));
+    
+    
   }
 
 }

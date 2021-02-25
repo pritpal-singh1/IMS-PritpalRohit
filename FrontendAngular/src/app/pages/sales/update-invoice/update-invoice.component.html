@@ -147,7 +147,7 @@
 												required
 												[(ngModel)]="obj.ProductId"
 												name="ProductId"
-												
+												(change)="getProductById(obj)"
 											>
 												<ng-option
 													[value]="item.ProductId"
@@ -308,7 +308,7 @@
 							</div>
 							<div class="text-right">
 								&nbsp;<button
-									
+								(click)="saveInvoice($event)"
 									class="btn btn-primary d-inline"
 								>
 									Update
