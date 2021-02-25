@@ -26,5 +26,9 @@ export class SharedService {
     return this.http.delete(this.APIUrl + '/newsale/' + sid);
   }
 
+  getInvoiceById(id) {
+    return this.http.get(this.APIUrl + '/getSalesById/' + id);
+  }
+
     
   }

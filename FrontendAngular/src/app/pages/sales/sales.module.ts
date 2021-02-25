@@ -7,12 +7,13 @@ import { DataTablesModule } from 'angular-datatables';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UiModule } from '../../shared/ui/ui.module';
+import { UpdateInvoiceComponent } from './update-invoice/update-invoice.component';
 
 
 
 
 @NgModule({
-  declarations: [NewInvoiceComponent, ManageInvoiceComponent],
+  declarations: [NewInvoiceComponent, ManageInvoiceComponent, UpdateInvoiceComponent],
   imports: [
     CommonModule,
     SalesRoutingModule,

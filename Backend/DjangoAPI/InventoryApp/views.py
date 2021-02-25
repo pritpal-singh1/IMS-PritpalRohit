@@ -116,6 +116,29 @@ def newSalesOrder(request,sid=0):
         orders.delete()
         return JsonResponse("Deleted",safe=False)
 
+def getSalesOrderById(request,sid=0):
+    try:
+        ResData={}
+        orders = SalesOrdersOffline.objects.get(SalesOrderOfflineId=sid)
+
+        orderdetails=SalesOrderOfflineDetail.objects.filter(SalesOrdersOfflineId=sid).select_related("ProductId")
+        index = 0
+        for i in orderdetails:
+
+            orderdetails_serializer = SalesOrderOfflineDetailSerializer(i)
+            ResData[index] =orderdetails_serializer.data
+
+            index+=1
+            # print(orderdetails_serializer.data['ProductId']['ProductId'])
+        orders_serializer=SalesOrdersOfflineSerializer(orders)
+
+        FinalData=orders_serializer.data
+        FinalData['SalesItems']=ResData
+        print(FinalData)
+        return JsonResponse(FinalData,safe=False)
+    except SalesOrdersOffline.DoesNotExist:
+        return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
 
 
 @csrf_exempt
