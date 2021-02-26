@@ -8,12 +8,13 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UiModule } from '../../shared/ui/ui.module';
 import { UpdateInvoiceComponent } from './update-invoice/update-invoice.component';
+import { PrintInvoiceComponent } from './print-invoice/print-invoice.component';
 
 
 
 
 @NgModule({
-  declarations: [NewInvoiceComponent, ManageInvoiceComponent, UpdateInvoiceComponent],
+  declarations: [NewInvoiceComponent, ManageInvoiceComponent, UpdateInvoiceComponent, PrintInvoiceComponent],
   imports: [
     CommonModule,
     SalesRoutingModule,

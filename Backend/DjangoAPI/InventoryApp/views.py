@@ -100,7 +100,7 @@ def newSalesOrder(request,sid=0):
                 sales_order_detail_serializer.save()
                 res=updateProductQuantityForAdd(sales_order_detail_serializer.data['ProductId'],i['Quantity'])
                 salesOrderSuccess = "Invoice Successfully Added"
-        return JsonResponse(salesOrderSuccess, safe=False)
+        return JsonResponse({"SalesId" : sales_order_offline_id}, safe=False)
     elif request.method == 'GET':
         orders = SalesOrdersOffline.objects.all()
 
@@ -153,6 +153,7 @@ def getSalesOrderById(request,sid=0):
         for i in orderdetails:
 
             orderdetails_serializer = SalesOrderOfflineDetailSerializer(i)
+
             ResData[index] =orderdetails_serializer.data
 
             index+=1
