@@ -20,6 +20,7 @@ export class SalesItem
     SalesOrderOfflineDetailId: number;
     SalesOrdersOfflineId: number;
     ProductId: number;
+    ProductName: string;
     Quantity: number;
     SalePrice: number;
     Amount: number;

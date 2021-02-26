@@ -205,7 +205,9 @@ export class NewInvoiceComponent {
     this.invoice.SalesItems = this.dataarray;
     console.log(this.invoice);
     this.salesservice.addNewSale(this.invoice).subscribe(data => {
-      console.log(data);
+      console.log(data as any);
+      console.log(data['SalesId']);
+      this.router.navigate(['/sales/print-invoice/'+data['SalesId']]);
     });
     Swal.fire({
       position: 'center',
