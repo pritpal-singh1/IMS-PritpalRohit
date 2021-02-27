@@ -168,10 +168,11 @@ class SalesOrderOnlineSerializer(serializers.ModelSerializer):
 class CompanyDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompanyDetails
-        fields = ('CompanyName',
+        fields = ('CompanyId',
+            'CompanyName',
         'OwnerName',
         'GSTIN',
-        'panNo',
+        'PanNo',
         'Address',
         'ZipCode',
         'Country',

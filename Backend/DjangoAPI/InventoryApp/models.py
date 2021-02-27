@@ -189,7 +189,7 @@ class CompanyDetails(models.Model):
     CompanyName = models.CharField(max_length=100)
     OwnerName = models.CharField(max_length=100)
     GSTIN = models.CharField(max_length=20)
-    panNo = models.CharField(max_length=20)
+    PanNo = models.CharField(max_length=20)
     Address = models.CharField(max_length=100)
     ZipCode = models.CharField(max_length=10)
     Country = models.CharField(max_length=20)

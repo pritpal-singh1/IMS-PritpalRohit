@@ -13,4 +13,8 @@ export class companyDetailService{
   getCompanyDetails(){
       return this.http.get(this.APIUrl + '/companyDetails/');
   }
+  updateCompanyDetails(companydetails: CompanyDetails) {
+    console.log(companydetails);
+    return this.http.put(this.APIUrl + '/companyDetails/' + companydetails['CompanyId'], companydetails);
+  }
 }

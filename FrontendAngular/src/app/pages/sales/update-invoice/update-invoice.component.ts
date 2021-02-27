@@ -46,7 +46,7 @@ export class UpdateInvoiceComponent implements OnInit {
     AmountPaid: 0,
     Status: "Paid",
     GST: 0,
-    SalesItems: [],
+    SalesItems: [], 
   };
   orders: SalesItem[];
   ProductData: any[];
