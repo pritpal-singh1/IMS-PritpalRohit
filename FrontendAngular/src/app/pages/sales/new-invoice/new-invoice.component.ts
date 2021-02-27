@@ -237,6 +237,26 @@ export class NewInvoiceComponent {
     // };
     // this.getInvoice();
   }
+  saveInvoiceWithoutPrint(event) {
+    this.invoice.SalesItems = this.dataarray;
+    console.log(this.invoice);
+    this.salesservice.addNewSale(this.invoice).subscribe(data => {
+      
+    });
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: "New Product "+ this.invoice.InvoiceNo +" Created",
+      showConfirmButton: false,
+      timer: 1500
+    });
+    event.preventDefault();
+
+    this.router.navigateByUrl('/', {skipLocationChange: true})
+      .then(() => this.router.navigate(['/sales/new-invoice']));
+    
+    
+  }
   getbal() {
     this.invoice.Balance = this.invoice.TotalAmount - this.invoice.AmountPaid;
     if (this.invoice.Balance != 0)

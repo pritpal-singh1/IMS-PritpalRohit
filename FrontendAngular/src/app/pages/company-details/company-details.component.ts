@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {companyDetailService} from './company-detail.service';
 import {CompanyDetails} from './company-detail.model';
 import { from } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-company-details',
@@ -12,29 +13,54 @@ export class CompanyDetailsComponent implements OnInit {
 
   breadCrumbItems: Array<{}>;
   isDisabled = true;
-  company_details: CompanyDetails;
-  companyName = "Dream Plywood";
-  ownerName = "Sudhir Singhani";
-  companyGST = "2345789";
-  companyPAN = "234567";
-  companyAddress = "Main Bazar, Madhav nagar, Katni(M.P.).";
-  CompanyZIP = "123456";
-  country = "India";
-  contactNumber = "9827061790";
-  emailId = "abc@gmail.com";
+  companyData: CompanyDetails = {
+    CompanyId: 0,
+    CompanyName: "",
+    OwnerName: "",
+    GSTIN: "",
+    PanNo: "",
+    Address: "",
+    ZipCode: "",
+    Country: "",
+    ContactNumber:"",
+    EmailId:"",
+    
+  };
   constructor(private companydetails: companyDetailService) { }
 
-  ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'Company Details' }, { label: '', active: true }];
-     this.companydetails.getCompanyDetails().subscribe(data=>{
-      this.company_details = data[0];
-      // console.log(data[0]);
-    });
+  ngOnInit() {
+    this.breadCrumbItems = [
+      { label: "Users" },
+      { label: "Add Employee", active: true },
+    ]; 
+    this.getCompanyData();
     
   }
-  updateDetails(){
-    console.log('hello');
-    this.isDisabled = false;
+
+  getCompanyData() {
+    this.companydetails.getCompanyDetails().subscribe(data => {
+      this.companyData = data as CompanyDetails;
+      console.log(this.companyData);
+    });
   }
+  updateDetails() {
+    this.companydetails.updateCompanyDetails(this.companyData).subscribe(data => {
+    
+      console.log(data);
+      this.changeButtons(); 
+    });
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: "Company details has been successfully updated.",
+      showConfirmButton: false,
+      timer: 1500
+    });
+  }
+
+  changeButtons() {
+    this.isDisabled = !this.isDisabled;
+  }
+ 
 
 }
