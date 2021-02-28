@@ -309,9 +309,15 @@
 							<div class="text-right">
 								&nbsp;<button
 									(click)="saveInvoice($event)"
-									class="btn btn-primary d-inline"
+									class="btn btn-primary mr-3 d-inline"
 								>
 									Save
+								</button>
+								<button
+									(click)="saveInvoiceWithoutPrint($event)"
+									class="btn btn-primary d-inline "
+								>
+									Save and Print
 								</button>
 							</div>
 						</div>

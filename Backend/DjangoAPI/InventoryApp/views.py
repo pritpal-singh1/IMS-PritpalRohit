@@ -6,10 +6,10 @@ from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 
 from InventoryApp.models import Category, Brand, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, \
-    Supplier, Employee,SalesOrdersOffline,SalesOrderOfflineDetail, Expense
+    Supplier, Employee,SalesOrdersOffline,SalesOrderOfflineDetail, Expense,CompanyDetails
 from InventoryApp.serializers import CategorySerializer, BrandSerializer, RoleSerializer, AdminSerializer, \
     ProductSerializer, CustomersOnlineSerializer, SalesOrderOnlineSerializer, SupplierSerializer, EmployeeSerializer,\
-    SalesOrdersOfflineSerializer,SalesOrderOfflineDetailSerializer,ExpenseSerializer
+    SalesOrdersOfflineSerializer,SalesOrderOfflineDetailSerializer,ExpenseSerializer,CompanyDetailsSerializer
 
 
 from django.core.files.storage import default_storage
@@ -442,3 +442,20 @@ def expenseApi(request, eid=0):
         expense = Expense.objects.get(ExpenseId = eid)
         expense.delete()
         return JsonResponse("Deleted",safe=False)
+
+@csrf_exempt
+def CompanyDetailsApi(request, eid=0):
+    if request.method == 'GET':
+        companydetails = CompanyDetails.objects.get(CompanyId=1)
+        companydetails_serializer = CompanyDetailsSerializer(companydetails)
+        print(companydetails_serializer.data)
+        return JsonResponse(companydetails_serializer.data, safe=False)
+
+    elif request.method == 'PUT':
+        companydetails_data = JSONParser().parse(request)
+        companydetails = CompanyDetails.objects.get(CompanyId=companydetails_data['CompanyId'])
+        companydetails_serializer = CompanyDetailsSerializer(companydetails,data=companydetails_data)
+        if companydetails_serializer.is_valid():
+            companydetails_serializer.save()
+            return JsonResponse("updated",safe=False)
+        return JsonResponse("failed to update",safe=False)
