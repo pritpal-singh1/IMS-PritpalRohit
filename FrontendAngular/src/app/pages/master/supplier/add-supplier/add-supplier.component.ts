@@ -4,6 +4,8 @@ import {SupplierService} from '../../master.service';
 import { SupplierModule } from '../supplier.module';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-add-supplier',
@@ -21,7 +23,7 @@ export class AddSupplierComponent implements OnInit {
     // {id:4,name:'Wallet'}
    ];
 
-  constructor(public supplierService: SupplierService, private router:Router) { }
+  constructor(public supplierService: SupplierService, private router:Router,private http: HttpClient) { }
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'supplier' }, { label: 'Add Supplier', active: true }];
@@ -120,6 +122,16 @@ export class AddSupplierComponent implements OnInit {
   }
   updateRecord(form: NgForm){
     this.supplierService.updateSupplier(form.value).subscribe(res =>{ });
+  }
+  getDetail(){
+      var abc = "Access-Control-Allow-Origin:"
+      var Api_url = "http://postalpincode.in/api/pincode/";
+      var pincode = this.supplierService.formdata.Pincode;
+      console.log(Api_url+pincode);
+      this.http.get(abc+Api_url+pincode).subscribe(data=>{
+        console.log(data);
+      });
+   
   }
 
 }

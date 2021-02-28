@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import {ExpenseService} from '../expense.service';
 import { Router} from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-expense',
@@ -18,7 +19,7 @@ export class AddExpenseComponent implements OnInit {
     {id:3,name:'Card Payment'},
     {id:4,name:'Wallet'}
    ];
-  constructor(public expenseservice: ExpenseService, private router: Router) { }
+  constructor(public expenseservice: ExpenseService, private router: Router,public datepipe: DatePipe) { }
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'Expenses' }, { label: 'Add Expense', active: true }];
@@ -31,7 +32,7 @@ export class AddExpenseComponent implements OnInit {
       form.resetForm();
       this.expenseservice.formdata = {
         ExpenseId:0,
-        Date:new Date,
+        Date:'',
         ExpenseType:'',
         Amount:null,
         PaidTo:'',
@@ -41,6 +42,7 @@ export class AddExpenseComponent implements OnInit {
       }
   }
   onSubmit(form: NgForm){
+    form.value.Date = new Date(form.value.Date);
     if(form.value.ExpenseId == 0){
       this.insertRecord(form);
       Swal.fire({
@@ -52,7 +54,7 @@ export class AddExpenseComponent implements OnInit {
       });
       this.expenseservice.formdata = {
         ExpenseId:0,
-        Date:new Date,
+        Date:'',
         ExpenseType:'',
         Amount:null,
         PaidTo:'',
@@ -74,7 +76,7 @@ export class AddExpenseComponent implements OnInit {
       });
       this.expenseservice.formdata = {
         ExpenseId:0,
-        Date:new Date,
+        Date:'',
         ExpenseType:'',
         Amount:null,
         PaidTo:'',

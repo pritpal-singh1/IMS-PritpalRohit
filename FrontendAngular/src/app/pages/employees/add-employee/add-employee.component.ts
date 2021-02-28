@@ -35,12 +35,12 @@ export class AddEmployeeComponent implements OnInit {
         Gender:'',
         Address:'',
         EmailId:'',
-        MobileNo:0,
+        MobileNo:null,
         DOB:'',
         CreatedAt:'',
         ContactPerson:'',
         ContactPersonNo:'',
-        AdhaarNo:0,
+        AdhaarNo:null,
         JoiningDate:''
       }
   }

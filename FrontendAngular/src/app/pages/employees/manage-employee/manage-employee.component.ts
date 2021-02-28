@@ -60,6 +60,20 @@ export class ManageEmployeeComponent implements OnInit {
     // };
   }
   addEmployee(){
+    this.employeeservice.formdata = {
+      EmployeeId:0,
+      EmployeeName:'',
+      Gender:'',
+      Address:'',
+      EmailId:'',
+      MobileNo:null,
+      DOB:'',
+      CreatedAt:'',
+      ContactPerson:'',
+      ContactPersonNo:'',
+      AdhaarNo:null,
+      JoiningDate:''
+    }
     this.router.navigate(['/employees/add-employee']);
   }
   getEmployees(){
