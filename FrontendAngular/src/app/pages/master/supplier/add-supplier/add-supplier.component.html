@@ -30,7 +30,7 @@
                                 <div class="form-group">
                                     <label >Company Name</label>
                                     <input #CompanyName="ngModel" [(ngModel)]="supplierService.formdata.CompanyName" name="CompanyName" type="text" class="form-control"
-                                    [class.is-invalid]="CompanyName.invalid && CompanyName.touched" required minlength="4" placeholder="supplier's company name">
+                                    [class.is-invalid]="CompanyName.invalid && CompanyName.touched" required minlength="4" placeholder="Supplier's Company Name" autocomplete="off">
                                     <div *ngIf="CompanyName.invalid && (CompanyName.dirty || CompanyName.touched)">
 										<small class="text-danger" *ngIf="CompanyName.errors.required">Company Name is required.</small>
 										<small class="text-danger"  *ngIf="CompanyName.errors.minlength">
@@ -44,7 +44,7 @@
                                 <div class="form-group">
                                     <label>Address</label>
                                     <input #Address="ngModel" [(ngModel)]="supplierService.formdata.Address" name="Address" type="text" class="form-control"
-                                    [class.is-invalid]="Address.invalid && Address.touched" required minlength="4" placeholder="supplier's address">
+                                    [class.is-invalid]="Address.invalid && Address.touched" required minlength="4" placeholder="Supplier's Address" autocomplete="off">
                                     <div *ngIf="Address.invalid && (Address.dirty || Address.touched)">
 										<small class="text-danger" *ngIf="Address.errors.required">Address is required.</small>
 										<small class="text-danger"  *ngIf="Address.errors.minlength">
@@ -56,42 +56,44 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>City</label>
-                                    <input #City="ngModel" [(ngModel)]="supplierService.formdata.City" name="City" type="text" class="form-control"
-                                    [class.is-invalid]="City.invalid && City.touched" required placeholder="supplier's city">
-                                    <div *ngIf="City.invalid && (City.dirty || City.touched)">
-										<small class="text-danger" *ngIf="City.errors.required">City is required.</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>State</label>
-                                    <input #State="ngModel" [(ngModel)]="supplierService.formdata.State" name="State" type="text" class="form-control"
-                                    [class.is-invalid]="State.invalid && State.touched" required placeholder="supplier's state">
-                                    <div *ngIf="State.invalid && (State.dirty || State.touched)">
-										<small class="text-danger" *ngIf="State.errors.required">State is required.</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
                                     <label>Pincode</label>
                                     <input #Pincode="ngModel" [(ngModel)]="supplierService.formdata.Pincode" name="Pincode" type="text" class="form-control"
-                                    [class.is-invalid]="Pincode.invalid && Pincode.touched" required placeholder="Suppliers pincode">
+                                    [class.is-invalid]="Pincode.invalid && Pincode.touched" required placeholder="Suppliers Pincode" autocomplete="off" minlength="6"
+                                    (change)="getDetail()">
                                     <div *ngIf="Pincode.invalid && (Pincode.dirty || Pincode.touched)">
 										<small class="text-danger" *ngIf="Pincode.errors.required">Pincode is required.</small>
                                     </div>
                                 </div>
                             </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input #City="ngModel" [(ngModel)]="supplierService.formdata.City" name="City" type="text" class="form-control"
+                                    [class.is-invalid]="City.invalid && City.touched" required placeholder="Supplier's City" autocomplete="off">
+                                    <div *ngIf="City.invalid && (City.dirty || City.touched)">
+										<small class="text-danger" *ngIf="City.errors.required">City is required.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>State</label>
+                                    <input #State="ngModel" [(ngModel)]="supplierService.formdata.State" name="State" type="text" class="form-control"
+                                    [class.is-invalid]="State.invalid && State.touched" required placeholder="Supplier's State" autocomplete="off">
+                                    <div *ngIf="State.invalid && (State.dirty || State.touched)">
+										<small class="text-danger" *ngIf="State.errors.required">State is required.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Email</label>
                                     <input #Email="ngModel" [(ngModel)]="supplierService.formdata.Email" name="Email" type="text" class="form-control"
-                                    [class.is-invalid]="Email.invalid && Email.touched" required placeholder="suppliers mail id">
+                                    [class.is-invalid]="Email.invalid && Email.touched" required placeholder="Suppliers Mail ID" autocomplete="off">
                                     <div *ngIf="Email.invalid && (Email.dirty || Email.touched)">
 										<small class="text-danger" *ngIf="Email.errors.required">Email is required.</small>
                                     </div>
@@ -104,7 +106,7 @@
                                 <div class="form-group">
                                     <label>Contact Number</label>
                                     <input #Contact="ngModel" [(ngModel)]="supplierService.formdata.Contact" name="Contact" type="text" class="form-control"
-                                    [class.is-invalid]="Contact.invalid && Contact.touched" required placeholder="supplier's Contact number">
+                                    [class.is-invalid]="Contact.invalid && Contact.touched" required placeholder="Supplier's Contact Number" autocomplete="off">
                                     <div *ngIf="Contact.invalid && (Contact.dirty || Contact.touched)">
 										<small class="text-danger" *ngIf="Contact.errors.required">Contact is required.</small>
                                     </div>
@@ -114,7 +116,7 @@
                                 <div class="form-group">
                                     <label>Pan No.</label>
                                     <input #PANNo="ngModel" [(ngModel)]="supplierService.formdata.PANNo" name="PANNo" type="text" class="form-control"
-                                    [class.is-invalid]="PANNo.invalid && PANNo.touched" required placeholder="suppliers pan no.">
+                                    [class.is-invalid]="PANNo.invalid && PANNo.touched" required placeholder="Suppliers Pan No." autocomplete="off">
                                     <div *ngIf="PANNo.invalid && (PANNo.dirty || PANNo.touched)">
 										<small class="text-danger" *ngIf="PANNo.errors.required">PANNo is required.</small>
                                     </div>
@@ -124,7 +126,7 @@
                                 <div class="form-group">
                                     <label>GSTIN</label>
                                     <input #GSTIN="ngModel" [(ngModel)]="supplierService.formdata.GSTIN" name="GSTIN" type="text" class="form-control"
-                                    [class.is-invalid]="GSTIN.invalid && GSTIN.touched" required placeholder="supplier's GSTIN">
+                                    [class.is-invalid]="GSTIN.invalid && GSTIN.touched" required placeholder="Supplier's GSTIN" autocomplete="off">
                                     <div *ngIf="GSTIN.invalid && (GSTIN.dirty || GSTIN.touched)">
 										<small class="text-danger" *ngIf="GSTIN.errors.required">GSTIN is required.</small>
                                     </div>
@@ -133,7 +135,7 @@
                         </div>
                         <div class="row">
                             
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Status</label>
                                     
@@ -144,7 +146,7 @@
 										<small class="text-danger" *ngIf="Status.errors.required">Status is required.</small>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Pan No.</label>
@@ -167,7 +169,7 @@
                             <div class="form-group">
                                 <label>Contact Person Name</label>
                                 <input #ContactPerson="ngModel" [(ngModel)]="supplierService.formdata.ContactPerson"  name="ContactPerson" type="text" class="form-control"
-                                [class.is-invalid]="ContactPerson.invalid && ContactPerson.touched" required minlength="4" placeholder="Contact Person name">
+                                [class.is-invalid]="ContactPerson.invalid && ContactPerson.touched" required minlength="4" placeholder="Contact Person Name" autocomplete="off">
                                 <div *ngIf="ContactPerson.invalid && (ContactPerson.dirty || ContactPerson.touched)">
                                     <small class="text-danger" *ngIf="ContactPerson.errors.required">Contact Person Name is required.</small>
                                     <small class="text-danger"  *ngIf="ContactPerson.errors.minlength">
@@ -181,7 +183,7 @@
                             <div class="form-group">
                                 <label>Contact Person Number</label>
                                 <input #ContactPersonNo="ngModel" [(ngModel)]="supplierService.formdata.ContactPersonNo"  name="ContactPersonNo" type="text" class="form-control"
-                                [class.is-invalid]="ContactPersonNo.invalid && ContactPersonNo.touched" required minlength="10" placeholder="Contact person number">
+                                [class.is-invalid]="ContactPersonNo.invalid && ContactPersonNo.touched" required minlength="10" placeholder="Contact Person No." autocomplete="off">
                                 <div *ngIf="ContactPersonNo.invalid && (ContactPersonNo.dirty || ContactPersonNo.touched)">
                                     <small class="text-danger" *ngIf="ContactPersonNo.errors.required">contact number is required.</small>
                                     <small class="text-danger"  *ngIf="ContactPersonNo.errors.minlength">
@@ -195,7 +197,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="text-right">
-                                <button class="btn btn-primary d-inline">Save & Print</button>
+                                <!-- <button class="btn btn-primary d-inline">Save & Print</button> -->
                                 &nbsp;<button [disabled]="form.form.invalid" class="btn btn-primary d-inline" type="submit">Save</button>
                             </div>
                         </div>

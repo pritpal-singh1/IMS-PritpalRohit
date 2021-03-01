@@ -1,80 +1,322 @@
 <div class="container-fluid">
-
-    <!-- start page title -->
-    <app-pagetitle title="Company Details" ></app-pagetitle>
-    <!-- end page title -->
-    <div class="row">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-body">
-    
-              <h4 class="card-title">Company Details</h4>
-              <!-- <p class="card-title-desc">Here are examples of <code>.form-control</code> applied to each
+	<!-- start page title -->
+	<app-pagetitle title="Company Details"></app-pagetitle>
+	<!-- end page title -->
+  <form #form="ngForm">
+  <div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">Company Details</h4>
+					<!-- <p class="card-title-desc">Here are examples of <code>.form-control</code> applied to each
                 textual HTML5 <code>&lt;input&gt;</code> <code>type</code>.</p> -->
-    
-              <div class="form-group row">
-                <label for="example-text-input" class="col-md-2 col-form-label">Name:</label>
-                <div class="col-md-10">
-                  <input class="form-control" type="text" [(ngModel)]="company_details.CompanyName" id="example-text-input" [disabled]="isDisabled">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="example-text-input" class="col-md-2 col-form-label">Company Owner:</label>
-                <div class="col-md-10">
-                  <input class="form-control" type="text" [(ngModel)]="company_details.OwnerName" id="example-text-input" [disabled]="isDisabled">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="example-text-input" class="col-md-2 col-form-label">GSTIN:</label>
-                <div class="col-md-4">
-                  <input class="form-control" type="text" [(ngModel)]="company_details.GSTIN" id="example-text-input" [disabled]="isDisabled">
-                </div>
-              <!-- </div>
+					<div hidden class="form-group row">
+						<label for="example-text-input" class="col-md-2 col-form-label"
+							>Name:</label
+						>
+						<div class="col-md-10">
+							<input
+								class="form-control"
+								type="text"
+								[(ngModel)]="companyData.CompanyId"
+								id="example-text-input"
+							/>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="example-text-input" class="col-md-2 col-form-label"
+							>Name:</label
+						>
+						<div class="col-md-10">
+							<input
+								class="form-control border"
+								[class.border-danger]="!isDisabled"
+                [class.is-invalid]="CompanyName.invalid"
+								[disabled]="isDisabled"
+								type="text"
+                name="CompanyName"
+								#CompanyName="ngModel"
+								[(ngModel)]="companyData.CompanyName"
+								id="example-text-input"
+                required
+                pattern="^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$"
+							/>
+              <div
+										*ngIf="CompanyName.invalid && (CompanyName.dirty || CompanyName.touched)"
+										
+									>
+										<small class="text-danger" *ngIf="CompanyName.errors.required">Company Name is required.</small>
+										<small class="text-danger"  *ngIf="CompanyName.errors.pattern">
+											Company	Name should not contain any special characters.
+										</small>
+										
+									</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="example-text-input" class="col-md-2 col-form-label"
+							>Company Owner:</label
+						>
+						<div class="col-md-10">
+							<input
+								class="form-control border"
+								[class.border-danger]="!isDisabled"
+                [class.is-invalid]="OwnerName.invalid"
+								[disabled]="isDisabled"
+								type="text"
+                name="OwnerName"
+								#OwnerName="ngModel"
+								[(ngModel)]="companyData.OwnerName"
+								id="example-text-input"
+                required
+                pattern="^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$"
+							/>
+              <div
+										*ngIf="OwnerName.invalid && (OwnerName.dirty || OwnerName.touched)"
+										
+									>
+										<small class="text-danger" *ngIf="OwnerName.errors.required">Product Name is required.</small>
+										<small class="text-danger"  *ngIf="OwnerName.errors.pattern">
+											Product	Name must be at least 4 characters long.
+										</small>
+										
+									</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="example-text-input" class="col-md-2 col-form-label"
+							>GSTIN:</label
+						>
+						<div class="col-md-4">
+							<input
+								class="form-control border"
+								[class.border-danger]="!isDisabled"
+								[disabled]="isDisabled"
+								type="text"
+                [class.is-invalid]="GSTIN.invalid"
+                name="GSTIN"
+								#GSTIN="ngModel"
+								[(ngModel)]="companyData.GSTIN"
+								id="example-text-input"
+                required
+                pattern="^[A-Z0-9]{15}$"
+							/>
+              <div
+										*ngIf="GSTIN.invalid && (GSTIN.dirty || GSTIN.touched)"
+										
+									>
+										<small class="text-danger" *ngIf="GSTIN.errors.required">GSTIN is required.</small>
+										<small class="text-danger"  *ngIf="GSTIN.errors.pattern">
+											Please enter a valid GSTIN.
+										</small>
+										
+									</div>
+						</div>
+						<!-- </div>
               <div class="form-group row"> -->
-                <label for="example-text-input" class="col-md-2 col-form-label">Pan Number:</label>
-                <div class="col-md-4">
-                  <input class="form-control" type="text" [(ngModel)]="company_details.panNo" id="example-text-input" [disabled]="isDisabled">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="example-text-input" class="col-md-2 col-form-label">Address:</label>
-                <div class="col-md-10">
-                  <input class="form-control" type="text" [(ngModel)]="company_details.Address" id="example-text-input" [disabled]="isDisabled">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="example-text-input" class="col-md-2 col-form-label">Zip Code:</label>
-                <div class="col-md-4">
-                  <input class="form-control" type="text" [(ngModel)]="company_details.ZipCode" id="example-text-input" [disabled]="isDisabled">
-                </div>
-              <!-- </div>
+						<label for="example-text-input" class="col-md-2 col-form-label"
+							>Pan Number:</label
+						>
+						<div class="col-md-4">
+							<input
+								class="form-control border"
+								[class.border-danger]="!isDisabled"
+								[disabled]="isDisabled"
+                [class.is-invalid]="PanNo.invalid"
+								type="text"
+                name="PanNo"
+								#PanNo="ngModel"
+								[(ngModel)]="companyData.PanNo"
+								id="example-text-input"
+                required
+                pattern="^[A-Z0-9]{10}$"
+							/>
+              <div
+										*ngIf="PanNo.invalid && (PanNo.dirty || PanNo.touched)"
+										
+									>
+										<small class="text-danger" *ngIf="PanNo.errors.required">Pan Number is required.</small>
+										<small class="text-danger"  *ngIf="PanNo.errors.pattern">
+											Please enter a valid PAN Number.
+										</small>
+										
+									</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="example-text-input" class="col-md-2 col-form-label"
+							>Address:</label
+						>
+						<div class="col-md-10">
+							<input
+								class="form-control border"
+								[class.border-danger]="!isDisabled"
+								[disabled]="isDisabled"
+                [class.is-invalid]="Address.invalid"
+								type="text"
+                name="Address"
+								#Address="ngModel"
+								[(ngModel)]="companyData.Address"
+								id="example-text-input"
+                required
+							/>
+              <div
+										*ngIf="Address.invalid && (Address.dirty || Address.touched)"
+										
+									>
+										<small class="text-danger" *ngIf="Address.errors.required">Address is required.</small>
+										
+										
+									</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="example-text-input" class="col-md-2 col-form-label"
+							>Zip Code:</label
+						>
+						<div class="col-md-4">
+							<input
+								class="form-control border"
+								[class.border-danger]="!isDisabled"
+								[disabled]="isDisabled"
+                [class.is-invalid]="ZipCode.invalid"
+								type="text"
+								[(ngModel)]="companyData.ZipCode"
+                name="ZipCode"
+								#ZipCode="ngModel"
+								id="example-text-input"
+                required
+                pattern="^[0-9]{6}$"
+							/>
+              <div
+										*ngIf="ZipCode.invalid && (ZipCode.dirty || ZipCode.touched)"
+										
+									>
+										<small class="text-danger" *ngIf="ZipCode.errors.required">Zip Code is required.</small>
+										<small class="text-danger"  *ngIf="ZipCode.errors.pattern">
+											Enter a valid zip code
+										</small>
+										
+									</div>
+						</div>
+						<!-- </div>
               <div class="form-group row"> -->
-                <label for="example-text-input" class="col-md-2 col-form-label">Country:</label>
-                <div class="col-md-4">
-                  <input class="form-control" type="text" [(ngModel)]="company_details.Country" id="example-text-input" [disabled]="isDisabled">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="example-text-input" class="col-md-2 col-form-label">Contact Number:</label>
-                <div class="col-md-4">
-                  <input class="form-control" type="text" [(ngModel)]="company_details.ContactNumber" id="example-text-input" [disabled]="isDisabled">
-                </div>
-              <!-- </div>
+						<label for="example-text-input" class="col-md-2 col-form-label"
+							>Country:</label
+						>
+						<div class="col-md-4">
+							<input
+								class="form-control border"
+								[class.border-danger]="!isDisabled"
+								[disabled]="isDisabled"
+                [class.is-invalid]="Country.invalid"
+								type="text"
+                name="Country"
+								#Country="ngModel"
+								[(ngModel)]="companyData.Country"
+								id="example-text-input"
+                required
+                pattern="^[A-Za-z]+$"
+							/>
+              <div
+										*ngIf="Country.invalid && (Country.dirty || Country.touched)"
+										
+									>
+										<small class="text-danger" *ngIf="Country.errors.required">Country is required.</small>
+										<small class="text-danger"  *ngIf="Country.errors.pattern">
+											Enter a valid country name.
+										</small>
+										
+									</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="example-text-input" class="col-md-2 col-form-label"
+							>Contact Number:</label
+						>
+						<div class="col-md-4">
+							<input
+								class="form-control border"
+								[class.border-danger]="!isDisabled"
+								[disabled]="isDisabled"
+                [class.is-invalid]="ContactNumber.invalid"
+								type="text"
+                name="ContactNumber"
+								#ContactNumber="ngModel"
+								[(ngModel)]="companyData.ContactNumber"
+								id="example-text-input"
+                required
+                pattern="^[2-9]{1}[0-9]{9}$"
+                
+							/>
+              <div
+										*ngIf="ContactNumber.invalid && (ContactNumber.dirty || ContactNumber.touched)"
+										
+									>
+										<small class="text-danger" *ngIf="ContactNumber.errors.required">Contact Number is required.</small>
+										<small class="text-danger"  *ngIf="ContactNumber.errors.pattern">
+											Please enter valid contact number.
+										</small>
+										
+									</div>
+						</div>
+						<!-- </div>
               <div class="form-group row"> -->
-                <label for="example-text-input" class="col-md-2 col-form-label">Contact Number:</label>
-                <div class="col-md-4">
-                  <input class="form-control" type="text" [(ngModel)]="company_details.EmailId" id="example-text-input" [disabled]="isDisabled">
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="text-right">
-                    <button type="button" (click)=updateDetails() class="btn btn-danger"><i class="fas fa-edit editcolor"></i>&nbsp;Edit Company Details</button>
-                </div>
-              </div>
-              
-            </div>
-          </div>
-        </div> <!-- end col -->
-      </div>
-      <!-- end row -->
+						<label for="example-text-input" class="col-md-2 col-form-label"
+							>Contact Email:</label
+						>
+						<div class="col-md-4">
+							<input
+								class="form-control border"
+								[class.border-danger]="!isDisabled"
+								[disabled]="isDisabled"
+                [class.is-invalid]="EmailId.invalid"
+								type="type"
+                name="EmailId"
+								#EmailId="ngModel"
+								[(ngModel)]="companyData.EmailId"
+								id="example-text-input"
+                required
+                pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"
+							/>
+              <div
+										*ngIf="EmailId.invalid && (EmailId.dirty || EmailId.touched)"
+										
+									>
+										<small class="text-danger" *ngIf="EmailId.errors.required">Email is required.</small>
+										<small class="text-danger"  *ngIf="EmailId.errors.pattern">
+											Enter a valid email only.
+										</small>
+										
+									</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="text-right">
+							<button
+								type="button"
+                [disabled]="form.form.invalid" 
+								(click)="updateDetails()"
+								*ngIf="!isDisabled"
+								class="btn btn-primary mr-3"
+							>
+								<i class="fas fa-save editcolor"></i>&nbsp;Submit
+							</button>
+							<button
+								type="button"
+								*ngIf="isDisabled"
+								(click)="changeButtons()"
+								class="btn btn-danger"
+							>
+								<i class="fas fa-edit editcolor"></i>&nbsp;Edit Company Details
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end col -->
+	</div>
+</form>
+	<!-- end row -->
 </div>

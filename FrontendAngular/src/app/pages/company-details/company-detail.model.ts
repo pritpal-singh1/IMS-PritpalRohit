@@ -1,8 +1,9 @@
 export class CompanyDetails{
+    CompanyId: number;
     CompanyName: String;
     OwnerName:string;
     GSTIN:string;
-    panNo:string;
+    PanNo:string;
     Address:string;
     ZipCode:string;
     Country:string;
