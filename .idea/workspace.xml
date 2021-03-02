@@ -21,8 +21,11 @@
   <component name="ChangeListManager">
     <list default="true" id="8107d7b8-2b89-4408-a1fb-cbbf9f8518fc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/company-details/company-details.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/company-details/company-details.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/sales/manage-invoice/manage-invoice.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/sales/manage-invoice/manage-invoice.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/supplier/add-supplier/add-supplier.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/supplier/add-supplier/add-supplier.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/supplier/add-supplier/add-supplier.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/supplier/add-supplier/add-supplier.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/supplier/manage-supplier/manage-supplier.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/supplier/manage-supplier/manage-supplier.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/supplier/manage-supplier/manage-supplier.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/master/supplier/manage-supplier/manage-supplier.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -47,12 +47,7 @@ export class ManageSupplierComponent implements OnInit {
       pageLength: 5
     };
     this.getSuppliers();
-    // this.supplierservice.getSupplierList().subscribe( data => {
-    //    console.log(data);
-    //    this.suppliers = data;
-    //   this.dtTrigger.next();
-    // });
-    // this.suppliers[] = this.http.get<Supplier[]>(this.APIUrl + '/supplier/');
+
   }
   
   getSuppliers(){

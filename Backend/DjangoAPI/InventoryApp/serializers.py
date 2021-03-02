@@ -35,6 +35,7 @@ class SupplierSerializer(serializers.ModelSerializer):
                 'PANNo',
                 'GSTIN',
                 'ContactPerson',
+                'Status',
                 'ContactPersonNo',
                 'CreatedAt')
 
