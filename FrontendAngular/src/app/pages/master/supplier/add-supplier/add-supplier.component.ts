@@ -3,8 +3,8 @@ import { NgForm } from '@angular/forms';
 import {SupplierService} from '../../master.service';
 import { SupplierModule } from '../supplier.module';
 import Swal from 'sweetalert2';
-import {Router} from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { HttpClient } from "@angular/common/http";
 
 
 @Component({
@@ -18,15 +18,18 @@ export class AddSupplierComponent implements OnInit {
   breadCrumbItems: Array<{}>;
   selectValue = [
     {id:1,name:'Active'},
-    {id:2,name:'Disaabled'},
-    // {id:3,name:'Card Payment'},
-    // {id:4,name:'Wallet'}
-   ];
+    {id:2,name:'Disabled'}, 
 
-  constructor(public supplierService: SupplierService, private router:Router,private http: HttpClient) { }
+  ];
+
+  constructor(private httpClient: HttpClient, public supplierService: SupplierService, private router:Router) { }
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'supplier' }, { label: 'Add Supplier', active: true }];
+    
+  
+
+
     console.log(this.supplierService.formdata);
     if(!this.supplierService.formdata){
       this.restForm();
@@ -48,7 +51,7 @@ export class AddSupplierComponent implements OnInit {
       Contact:null,
       PANNo:'',
       GSTIN:'',
-      Status:'',
+      Status:'Active',
       ContactPerson:'',
       ContactPersonNo:'',
       CreatedAt:''
@@ -82,7 +85,9 @@ export class AddSupplierComponent implements OnInit {
         ContactPersonNo:'',
         CreatedAt:''
       }
-      this.router.navigate(["/master/supplier/manage-supplier"]);
+      // this.router.navigateByUrl('/', {skipLocationChange: true})
+      // .then(() => this.router.navigate(['/supplier/manage-supplier']));
+    
     }
     else{
       this.updateRecord(form);
@@ -111,7 +116,9 @@ export class AddSupplierComponent implements OnInit {
         CreatedAt:''
 
       }
-      this.router.navigate(["/master/supplier/manage-supplier"]);
+      // this.router.navigateByUrl('/', {skipLocationChange: true})
+      // .then(() => this.router.navigate(['/supplier/manage-supplier']));
+    
     }
     
   }
@@ -122,16 +129,6 @@ export class AddSupplierComponent implements OnInit {
   }
   updateRecord(form: NgForm){
     this.supplierService.updateSupplier(form.value).subscribe(res =>{ });
-  }
-  getDetail(){
-      var abc = "Access-Control-Allow-Origin:"
-      var Api_url = "http://postalpincode.in/api/pincode/";
-      var pincode = this.supplierService.formdata.Pincode;
-      console.log(Api_url+pincode);
-      this.http.get(abc+Api_url+pincode).subscribe(data=>{
-        console.log(data);
-      });
-   
   }
 
 }
