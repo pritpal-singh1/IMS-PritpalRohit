@@ -20,6 +20,8 @@ import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 
 import { DataTablesModule } from 'angular-datatables';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+
 
 
 
@@ -56,7 +58,7 @@ export function createTranslateLoader(http: HttpClient): any {
     })
   ],
   providers: [
-  
+    DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true },

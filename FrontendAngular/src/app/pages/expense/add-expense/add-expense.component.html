@@ -8,11 +8,13 @@
                 <div class="card-body">
                     <h3 class="card-title">Expense Details</h3>
                     <form class="needs-validation"  #form="ngForm" (submit)="onSubmit(form)">
+                        <input class="form-control" [(ngModel)]="expenseservice.formdata.ExpenseId"  name ="ExpenseId"
+                        #ExpenseId="ngModel" type="hidden">
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label>Date</label>
                                 <div class="input-group clockpicker">
-                                  <input type="date" class="form-control" placeholder="YYYY-MM-DD" #Date="ngModel" [(ngModel)] = "expenseservice.formdata.Date" name="Date"
+                                  <input type="date" class="form-control"  #Date="ngModel" [(ngModel)] = "expenseservice.formdata.Date" name="Date"
                                   [class.is-invalid]="Date.invalid && Date.touched" required>
                                   <div *ngIf="Date.invalid && (Date.dirty || Date.touched)">
                                     <small class="text-danger" *ngIf="Date.errors.required">Date is required.</small>

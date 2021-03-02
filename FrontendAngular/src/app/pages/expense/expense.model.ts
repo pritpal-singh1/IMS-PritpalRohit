@@ -1,6 +1,6 @@
 export class Expense{
     ExpenseId: number;
-    Date: Date;
+    Date: string;
     ExpenseType: string;
     Amount: number;
     PaidTo: string;

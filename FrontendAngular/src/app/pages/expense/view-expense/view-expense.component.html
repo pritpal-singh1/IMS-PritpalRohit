@@ -44,7 +44,7 @@
                           <td>{{ expense.ExpenseId }}</td>
                           <td>{{ expense.ExpenseType }}</td>
                           <!-- <td>{{ expense.CompanyName }}</td> -->
-                          <td>{{ expense.Date }}</td>
+                          <td>{{ expense.Date | date:'shortDate'}}</td>
                           <td>{{ expense.Amount }}</td>
                           <!-- <td>{{ expense.EmailId }}</td> -->
                           <!-- <td> 

@@ -6,6 +6,8 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { DataTableDirective } from "angular-datatables";
 import { Subject } from 'rxjs';
+import { DatePipe } from '@angular/common';
+
 
 
 class DataTablesResponse {
@@ -32,7 +34,7 @@ export class ViewExpenseComponent implements OnInit {
 	dtElement: DataTableDirective;
   isDtInitialized: boolean = false;
 
-  constructor(private router:Router, private expenseservice: ExpenseService,private http: HttpClient) { }
+  constructor(private router:Router, private expenseservice: ExpenseService,private http: HttpClient,public datepipe: DatePipe) { }
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'Expense' }, { label: 'Manage Expense', active: true }];
@@ -40,10 +42,21 @@ export class ViewExpenseComponent implements OnInit {
 
   }
   addExpense(){
+    this.expenseservice.formdata = {
+      ExpenseId:0,
+      Date:'',
+      ExpenseType:'',
+      Amount:null,
+      PaidTo:'',
+      PaidBy:'',
+      Remarks:''
+
+    }
     this.router.navigate(['/expense/add-expense']);
   }
   getExpense(){
     this.expenseservice.getExpenseList().subscribe( data => {
+      
       console.log(data);
       this.expenses = data;
       if (this.isDtInitialized) {
@@ -58,6 +71,7 @@ export class ViewExpenseComponent implements OnInit {
    });
   }
   editExpense(expense: Expense ){
+    expense.Date = this.datepipe.transform(expense.Date,'shortDate');
     this.expenseservice.formdata = Object.assign({},expense);
     this.router.navigate(['expense/add-expense']);
   }

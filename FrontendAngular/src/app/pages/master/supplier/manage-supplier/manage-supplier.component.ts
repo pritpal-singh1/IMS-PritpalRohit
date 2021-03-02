@@ -67,6 +67,23 @@ export class ManageSupplierComponent implements OnInit {
   }
 
   addSupplier(){
+    this.supplierservice.formdata = {
+      SupplierId: 0,
+      // SupplierName: '',
+      CompanyName:'',
+      Address:'',
+      City:'',
+      State:'',
+      Pincode:null,
+      Email:'',
+      Contact:null,
+      PANNo:'',
+      GSTIN:'',
+      Status:'',
+      ContactPerson:'',
+      ContactPersonNo:'',
+      CreatedAt:''
+    }
     this.router.navigate(['/master/supplier/add-supplier']);
 
   }
