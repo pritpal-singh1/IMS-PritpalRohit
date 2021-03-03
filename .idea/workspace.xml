@@ -20,6 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8107d7b8-2b89-4408-a1fb-cbbf9f8518fc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/inventory.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/inventory.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/views.py" afterDir="false" />
