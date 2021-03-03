@@ -35,6 +35,11 @@ urlpatterns=[
     url(r'expense/([0-9]+)$',views.expenseApi),
     url(r'^expense/$',views.expenseApi),
 
+    url(r'stockdata/([0-9]+)$',views.stockAvailibilityApi),
+    url(r'stockdata/$',views.stockAvailibilityApi),
+    url(r'^expense/$',views.expenseApi),
+    url(r'^lowlevellimit/$',views.lowLevelLimitApi),
+
 
 
     url(r'^SaveFile$',views.SaveProductImage)

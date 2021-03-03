@@ -1,3 +1,4 @@
+from django.db.models import F
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
@@ -459,3 +460,30 @@ def CompanyDetailsApi(request, eid=0):
             companydetails_serializer.save()
             return JsonResponse("updated",safe=False)
         return JsonResponse("failed to update",safe=False)
+
+@csrf_exempt
+def stockAvailibilityApi(request):
+    if request.method=='POST':
+        queryData = JSONParser().parse(request)
+        print(queryData)
+        StockData = Product.objects.all()
+        if queryData['brandId']:
+            StockData = StockData.filter(Brand=queryData['brandId'])
+        if queryData['productId']:
+            StockData = StockData.filter(ProductId=queryData['productId'])
+        if queryData['categoryId']:
+            StockData = StockData.filter(Category=queryData['categoryId'])
+        if queryData['itemCode']:
+            StockData = StockData.filter(ItemCode=queryData['itemCode'])
+    StockDataSerializer = ProductSerializer(StockData, many=True)
+    return JsonResponse(StockDataSerializer.data,safe=False)
+
+@csrf_exempt
+def lowLevelLimitApi(request):
+    if request.method=='GET':
+        result=Product.objects.filter(StockQTY__lt=F('LowLevelLimit'))
+        print(result)
+    LowLevelLimitSerializer = ProductSerializer(result, many=True)
+    return JsonResponse(LowLevelLimitSerializer.data,safe=False)
+
+

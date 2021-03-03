@@ -1,12 +1,13 @@
 <div class="container-fluid">
-    <app-pagetitle title="Stock Availability" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
-    <div class="row">
-        
-        <div class="col-lg-12">
-            <div class="card">
-                
-              <div class="card-body">
-                <!-- <div class="card border-0">
+	<app-pagetitle
+		title="Stock Availability"
+		[breadcrumbItems]="breadCrumbItems"
+	></app-pagetitle>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-body">
+					<!-- <div class="card border-0">
                     <div class="card-body">
                         <div
                             class="row align-items-center"
@@ -26,75 +27,106 @@
                     </div>
                 
                 </div> -->
-                <div class="row">
-                    <div class="col-md-3">
-                        <select class="custom-select">
-                            <option selected>Select Category</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                          </select>
-                    </div>
-                    <div class="col-md-3">
-                        <select class="custom-select">
-                            <option selected>Select Brand</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                          </select>
-                    </div>
-                    <div class="col-md-3">
-                        <select class="custom-select">
-                            <option selected>Select Product Name</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                          </select>
-                    </div>
-                    <div class="col-md-3">
-                        <input class="form-control" type="text" value="Item Code" id="example-text-input">
-                    </div>
-                </div>
-                <div class="row mt-2">
-                    <div class="col-md-3">
-                       
-                    </div>
-                    <div class="col-md-3">
-                      
-                    </div>
-                    <div class="col-md-3">
-                      
-                    </div>
-                    <div class="col-md-3">
-                        <button type="button" class="btn btn-success btn-rounded">Search</button>
-                    </div>
-                </div>
-                <h4 class="card-title mt-3">Stock Availability as on Current Date </h4>
-                <!-- <p class="card-title-desc">For basic styling—light padding and
-                  only horizontal dividers—add the base class <code>.table</code> to any
-                  <code>&lt;table&gt;</code>.
-                </p> -->
-      
-                <div class="table-responsive">
-                  <table class="table mb-0">
-      
-                    <thead class="thead-light">
-                      <tr>
-                        <th>Item Name</th>
-                        <th>Item Code</th>
-                        <th>Current Stock</th>
-                        <th>Valuation</th>
-                      
-                      </tr>
-                    </thead>
-                    <tbody>
-                    
-                    </tbody>
-                  </table>
-                </div>
-      
-              </div>
-            </div>
-        </div>
-    </div>  
+					<div class="row">
+						<div class="col-md-3">
+							<ng-select name="brandId"
+                                [(ngModel)]="AllIds.brandId"
+                                #brandId="ngModel"
+
+                            >
+								<ng-option
+									[value]="item.BrandId"
+									*ngFor="let item of AllBrands"
+									>{{ item.BrandName }}</ng-option
+								>
+							</ng-select>
+						</div>
+						<div class="col-md-3">
+                            <ng-select 
+                            name="categoryId"
+                                [(ngModel)]="AllIds.categoryId"
+                                #categoryId="ngModel"
+
+                            >
+								<ng-option
+									[value]="item.CategoryId"
+									*ngFor="let item of AllCategories"
+									>{{ item.CategoryName }}</ng-option
+								>
+							</ng-select>
+						</div>
+						<div class="col-md-3">
+							<ng-select name="Product" 
+                            name="productId"
+                                [(ngModel)]="AllIds.productId"
+                                #productId="ngModel"
+                            >
+                            
+								<ng-option
+									[value]="item.ProductId"
+									*ngFor="let item of AllProductList"
+									>{{ item.ProductName }}</ng-option
+								>
+							</ng-select>
+						</div>
+						<div class="col-md-3">
+							<input
+								class="form-control"
+								type="text"
+                                name="itemCode"
+                                [(ngModel)]="AllIds.itemCode"
+                                #itemCode="ngModel"
+								id="example-text-input"
+							/>
+						</div>
+					</div>
+					<div class="row mt-2">
+						<div class="col-md-3"></div>
+						<div class="col-md-3"></div>
+						<div class="col-md-3"></div>
+						<div class="col-md-3">
+							<button type="button" (click)="searchData()" class="btn btn-success btn-rounded">
+								Search
+							</button>
+						</div>
+					</div>
+					<h4 class="card-title mt-3">Stock Availability as on {{jstoday}}</h4>
+					
+
+					<div class="table-responsive">
+						<table class="table mb-0">
+							<thead class="thead-light">
+								<tr>
+                                    <th>Sr.No.</th>
+									<th>Item Name</th>
+									<th>Item Code</th>
+									<th>Current Stock</th>
+									<th>Valuation</th>
+								</tr>
+							</thead>
+							<tbody>
+                              
+                                <tr *ngFor="let item of Result;let i=index"> 
+                                    <td>{{i+1}}</td>
+                                    <td class="font-weight-bold">
+                                        {{item.ProductName}}
+                                    </td>
+                                    <td>
+                                       {{ item.ItemCode}}
+                                    </td>
+                                    <td>
+                                        {{item.StockQTY}}
+                                    </td>
+                                    <td>
+                                        &#8377;  {{ item.StockQTY * item.MRP}}
+                                    </td>
+                                </tr>
+
+                            </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
