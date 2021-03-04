@@ -7,10 +7,10 @@ from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 
 from InventoryApp.models import Category, Brand, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, \
-    Supplier, Employee,SalesOrdersOffline,SalesOrderOfflineDetail, Expense,CompanyDetails
+    Supplier, Employee,SalesOrdersOffline,SalesOrderOfflineDetail, Expense,CompanyDetails, PurchaseBill, PurchaseBillDetail
 from InventoryApp.serializers import CategorySerializer, BrandSerializer, RoleSerializer, AdminSerializer, \
     ProductSerializer, CustomersOnlineSerializer, SalesOrderOnlineSerializer, SupplierSerializer, EmployeeSerializer,\
-    SalesOrdersOfflineSerializer,SalesOrderOfflineDetailSerializer,ExpenseSerializer,CompanyDetailsSerializer
+    SalesOrdersOfflineSerializer,SalesOrderOfflineDetailSerializer,ExpenseSerializer,CompanyDetailsSerializer, PurchaseBillSerializer,PurchaseBillDetailSerializer
 
 
 from django.core.files.storage import default_storage
@@ -122,9 +122,9 @@ def newSalesOrder(request,sid=0):
         sales_order_offline_recieved = dict(list(sales_order.items())[:len(sales_order) - 1])
         sales_order_offline = SalesOrdersOffline.objects.get(SalesOrderOfflineId=sales_order_offline_recieved[
             'SalesOrderOfflineId'])
-        sales_order_offline_serializer = SalesOrdersOfflineSerializer(sales_order_offline, data=sales_order_offline_recieved)
-        if sales_order_offline_serializer.is_valid():
-            sales_order_offline_serializer.save()
+        purchase_bill_serializer = SalesOrdersOfflineSerializer(sales_order_offline, data=sales_order_offline_recieved)
+        if purchase_bill_serializer.is_valid():
+            purchase_bill_serializer.save()
         salesorderdetail = SalesOrderOfflineDetail.objects.filter(SalesOrdersOfflineId=sales_order_offline_recieved[
             'SalesOrderOfflineId'])
 
@@ -460,6 +460,82 @@ def CompanyDetailsApi(request, eid=0):
             companydetails_serializer.save()
             return JsonResponse("updated",safe=False)
         return JsonResponse("failed to update",safe=False)
+
+
+@csrf_exempt
+def getPurchaseInvoiceNo(request):
+    if request.method == 'GET':
+        o = PurchaseBill.objects.order_by('PurchaseBillId')
+        if o.count()==0:
+            return JsonResponse(0, safe=False)
+        else:
+            obj = PurchaseBill.objects.order_by('PurchaseBillId')[len(o)-1:]
+
+            return JsonResponse(obj.values()[0]['PurchaseBillId'], safe=False)
+
+@csrf_exempt
+def newPurchaseBill(request,pid=0):
+    if request.method=="POST":
+        purchase_bill=JSONParser().parse(request)
+        purchaseItems=purchase_bill['purchaseItem']
+        purchase_bills=dict(list(purchase_bill.items())[:len(purchase_bill)-1])
+        purchase_bill_serializer = PurchaseBillSerializer(data=purchase_bills)
+        purchase_bill_serializer.is_valid(raise_exception=True)
+        if purchase_bill_serializer.is_valid():
+            purchase_bill_serializer.save()
+            purchase_bill_id=purchase_bill_serializer.data['PurchaseBillId']
+
+        for i in purchaseItems:
+            purchase_bill_detail=i
+            purchase_bill_detail['PurchaseBillDetailId']=purchase_bill_id
+            purchase_bill_detail_serializer = PurchaseBillDetailSerializer(data=purchase_bill_detail)
+            purchase_bill_detail_serializer.is_valid(raise_exception=True)
+            if purchase_bill_detail_serializer.is_valid():
+                purchase_bill_detail_serializer.save()
+                # res=updateProductQuantityForAdd(purchase_bill_detail_serializer.data['ProductId'],i['Quantity'])
+                # purchase_bill_Added = "Purchase Bill Successfully Added"
+        return JsonResponse("Purchase Bill Successfully Added", safe=False)
+    elif request.method == 'GET':
+        bills = PurchaseBill.objects.all()
+
+        bills_serializer = PurchaseBillSerializer(bills, many=True)
+        return JsonResponse(bills_serializer.data, safe=False)
+    elif request.method == 'DELETE':
+        billdetail=PurchaseBill.objects.filter(PurchaseBillDetailId=pid)
+        for i in billdetail:
+            i.delete()
+        bills = PurchaseBill.objects.get(PurchaseBillId = pid)
+        bills.delete()
+        return JsonResponse("Deleted",safe=False)
+
+    elif request.method == 'PUT':
+        purchase_bill=JSONParser().parse(request)
+        purchaseItems = purchase_bill['purchaseItem']
+
+        purchase_bill_recieved = dict(list(purchase_bill.items())[:len(purchase_bill) - 1])
+        purchase_bill = PurchaseBill.objects.get(purchasebillid=purchase_bill_recieved[
+            'PurchaseBillId'])
+        purchase_bill_serializer = PurchaseBillSerializer(purchase_bill, data=purchase_bill_recieved)
+        if purchase_bill_serializer.is_valid():
+            purchase_bill_serializer.save()
+        purchasebilldetail = PurchaseBillDetail.objects.filter(PurchaseBillDetailId=purchase_bill_recieved[
+            'PurchaseBillId'])
+
+        for i in purchasebilldetail:
+            # res = updateProductQuantityForUpdate(model_to_dict(i.ProductId)['ProductId'], i.Quantity)
+            i.delete()
+        for i in purchaseItems:
+            purchase_bill_detail=i
+            purchase_bill_detail['PurchaseBillDetailId']=purchase_bill_recieved[
+            'PurchaseBillId']
+            purchase_bill_detail_serializer = PurchaseBillDetailSerializer(data=purchase_bill_detail)
+            purchase_bill_detail_serializer.is_valid(raise_exception=True)
+            if purchase_bill_detail_serializer.is_valid():
+                purchase_bill_detail_serializer.save()
+                # res=updateProductQuantityForAdd(purchase_bill_detail_serializer.data['ProductId'],i['Quantity'])
+
+        return JsonResponse("updated", safe=False)
+
 
 @csrf_exempt
 def stockAvailibilityApi(request):

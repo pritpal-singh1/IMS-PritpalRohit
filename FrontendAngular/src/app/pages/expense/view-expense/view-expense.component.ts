@@ -71,7 +71,7 @@ export class ViewExpenseComponent implements OnInit {
    });
   }
   editExpense(expense: Expense ){
-    expense.Date = this.datepipe.transform(expense.Date,'shortDate');
+    // expense.Date = this.datepipe.transform(expense.Date,'shortDate');
     this.expenseservice.formdata = Object.assign({},expense);
     this.router.navigate(['expense/add-expense']);
   }
