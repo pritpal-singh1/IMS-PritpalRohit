@@ -40,6 +40,12 @@ urlpatterns=[
     url(r'^addPurchaseBill/$',views.newPurchaseBill),
     url(r'^addPurchaseBill/([0-9]+)$',views.newPurchaseBill),
 
+    
+    url(r'stockdata/([0-9]+)$',views.stockAvailibilityApi),
+    url(r'stockdata/$',views.stockAvailibilityApi),
+    url(r'^expense/$',views.expenseApi),
+    url(r'^lowlevellimit/$',views.lowLevelLimitApi),
+
 
 
     url(r'^SaveFile$',views.SaveProductImage)

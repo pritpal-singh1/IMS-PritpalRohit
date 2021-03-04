@@ -20,19 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8107d7b8-2b89-4408-a1fb-cbbf9f8518fc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/inventory.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/inventory.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/company-details/company-detail.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/company-details/company-detail.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/company-details/company-detail.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/company-details/company-detail.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/company-details/company-details.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/company-details/company-details.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/company-details/company-details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/company-details/company-details.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/sales/new-invoice/new-invoice.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/sales/new-invoice/new-invoice.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/sales/new-invoice/new-invoice.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/sales/new-invoice/new-invoice.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/sales/print-invoice/print-invoice.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/sales/print-invoice/print-invoice.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/sales/update-invoice/update-invoice.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/sales/update-invoice/update-invoice.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/stock-availability/stock-availability.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/stock-availability/stock-availability.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/stock-availability/stock-availability.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/stock-availability/stock-availability.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,10 +87,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="187" y="17" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1614245089833" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1613892170890">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1614670569576">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1613892170890" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1614670569576" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
