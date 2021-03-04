@@ -13,14 +13,14 @@
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label>Date</label>
-                                <div class="input-group clockpicker">
+                                <!-- <div class="input-group clockpicker"> -->
                                   <input type="date" class="form-control"  #Date="ngModel" [(ngModel)] = "expenseservice.formdata.Date" name="Date"
                                   [class.is-invalid]="Date.invalid && Date.touched" required>
                                   <div *ngIf="Date.invalid && (Date.dirty || Date.touched)">
                                     <small class="text-danger" *ngIf="Date.errors.required">Date is required.</small>
                                   </div>
                                   
-                                </div>
+                                <!-- </div> -->
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -70,7 +70,10 @@
                             <div class="form-group col-md-4">
                                 <label>Remarks</label>
                                 <input type="text" class="form-control" #Remarks="ngModel" [(ngModel)]="expenseservice.formdata.Remarks" name="Remarks"
-                                placeholder="Remarks" >
+                                required [class.is-invalid]="Remarks.invalid && Remarks.touched" placeholder="Remarks" >
+                                <div *ngIf="Remarks.invalid && (Remarks.dirty || Remarks.touched)">
+                                    <small class="text-danger" *ngIf="Remarks.errors.required">Remarks is required.</small>
+                                  </div>
                             </div>
                         </div>
                         <div class="row">

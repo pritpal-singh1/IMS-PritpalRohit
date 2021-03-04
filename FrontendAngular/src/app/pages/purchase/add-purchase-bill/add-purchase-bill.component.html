@@ -9,44 +9,44 @@
                 <h4 class="card-title">Purchase Bill Information</h4>
                 <form class="needs-validation">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Purchase Bill Number</label>
-                                <input type="text" class="form-control" 
-                                placeholder="Bill Number">
+                                <input type="text" class="form-control" #BillNo="ngModel" [(ngModel)] = "purchaseBill.BillNo" name="BillNo"
+                                readonly style="font-weight: bold;" [class.is-invalid]="BillNo.invalid && BillNo.touched" placeholder="Bill Number" required>
                             </div>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label>Purchase Date</label>
-                            <div class="input-group clockpicker">
-                              <input type="date" class="form-control" placeholder="yyyy-mm-dd">
-                              
-                            </div>
+                            <!-- <div class="input-group clockpicker"> -->
+                              <input type="date" class="form-control" placeholder="yyyy-mm-dd" #Date="ngModel" [(ngModel)]="purchaseBill.Date" name="Date"
+                              required [class.is-invalid]="Date.invalid && Date.touched">
+                                <div *ngIf="Date.invalid && (Date.dirty || Date.touched)">
+                                    <small class="text-danger" *ngIf="Date.errors.required">
+                                        Date is required.
+                                    </small>
+                                </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Bill Type</label>
-                                <!-- <ng-select [items]="selectValue"
-                                bindLabel='name'></ng-select> -->
-                                <ng-select>
-                                    <ng-option *ngFor="let item of selectValue">{{item.name}}</ng-option>
-                                </ng-select>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Purchase Order Number</label>
-                                <input type="text" class="form-control"
-                                placeholder="Order Number">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
+                        
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Supplier Name</label>
-                                <input type="text" class="form-control"
-                                placeholder="Name">
+                                <!-- <input type="text" class="form-control" #Supplier="ngModel" [(ngModel)]="purchaseBill.Supplier" name="Supplier"
+                                [class.is-invalid]="Supplier.invalid && Supplier.touched" required placeholder="Supplier Name"> -->
+                                <ng-select #Supplier="ngModel" [(ngModel)]="purchaseBill.Supplier" name="Supplier"
+                                [class.is-invalid]="Supplier.invalid && Supplier.touched" required placeholder="Supplier Name" (change)="getSupplierContact(purchaseBill.Supplier)">
+                                    <ng-option *ngFor="let supplier of suppliers" [value]="supplier.SupplierId">
+                                        {{supplier.CompanyName}}
+                                    </ng-option>
+                                </ng-select>
+                                <div *ngIf="Supplier.invalid && (Supplier.dirty || Supplier.touched)">
+                                    <small class="text-danger" *ngIf="Supplier.errors.required">
+                                        Supplier Name is required.
+                                    </small>
+                                </div>
                             </div>
                         </div>
                         <!-- <div class="form-group col-md-4">
@@ -63,65 +63,190 @@
                                 bindLabel='name'></ng-select>
                             </div>
                         </div> -->
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label>Place of supply</label>
-                                <input type="text" class="form-control" 
-                                placeholder="Address">
+                                <label>Contact Number</label>
+                                <input type="text" class="form-control" #Contact="ngModel" [(ngModel)]="purchaseBill.Contact" name="Contact"
+                                [class.is-invalid]="Contact.invalid && Contact.touched" required placeholder="Supplier Contact Number">
+                                <div *ngIf="Contact.invalid && (Contact.dirty || Contact.touched)">
+                                    <small class="text-danger" *ngIf="Contact.errors.required">
+                                        Contact Number is required.
+                                    </small>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </form>
-                <div class="card border border-primary text-dark mb-4 mt-3">
-                    <div class="card-body">
-                                            <table class="mb-0 table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Item Name</th>
-                                                        <th scope="col">Quantity</th>
-                                                        <th scope="col">Unit Price</th>
-                                                        <th scope="col">Price</th>
-                                                        <th scope="col">Discount</th>
-                                                        <th scope="col">GST</th>
-                                                        <th scope="col">Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td><input class="form-control form-control-sm" type="text"
-                                                                placeholder="Item Name"></td>
-                                                        <td><input class="form-control form-control-sm" type="text"
-                                                                placeholder="Quantity"></td>
-                                                        <td><input class="form-control form-control-sm" type="text"
-                                                                placeholder="Unit Price"></td>
-                                                        <td><input class="form-control form-control-sm" type="text"
-                                                                placeholder="Price"></td>
-                                                        <td><input class="form-control form-control-sm" type="text"
-                                                                placeholder="Discount"></td>
-                                                        <td><input class="form-control form-control-sm" type="text"
-                                                                placeholder="GST"></td>
-
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                    <div class="card border border-primary text-dark mb-4 mt-3">
+						<div class="card-body">
+                            <div   class="text-right mb-3">
+								<label *ngIf = "isShow" class="mr-5"> InStock : {{stockQuantity}} </label>
+								<label *ngIf = "isShow" class="mr-5">Purchase Price:  {{purchaseprice}} </label>
+								<label *ngIf = "isShow" class="mr-5">MRP : {{MRP}}</label>
+								<button (click)="addItem()" class="btn btn-primary d-inline">
+									Add More Item
+								</button>
+							</div>
+                            <table class="mb-0 table table-bordered">
+								<thead>
+									<tr>
+										<th style="width: 30%" scope="col">Item Name</th>
+										<th scope="col">Quantity</th>
+										<th scope="col">Unit Price</th>
+										<th scope="col">Price</th>
+										<!-- <th scope="col">Discount</th> -->
+										<th scope="col">GST</th>
+										<th scope="col">Action</th>
+									</tr>
+								</thead>
+                                <tbody>
+									<tr *ngFor="let obj of dataarray; let i = index">
+										<td>
+											<ng-select
+												required
+												[(ngModel)]="obj.ProductId"
+												name="ProductId"
+												(change)="getProductById(obj)"
+											>
+												<ng-option
+													[value]="item.ProductId"
+													*ngFor="let item of AllProductList"
+													>{{ item.ProductName }}</ng-option
+												>
+											</ng-select>
+										</td>
+										<td>
+											<input
+												[(ngModel)]="obj.Quantity"
+												(change)="calculate(obj)"
+												min="1"
+												#Quantity="ngModel"
+										[class.is-invalid]="Quantity.invalid && Quantity.touched"
+										required
+										pattern="^[0-9]+$"
+												name="Quantity"
+												class="form-control form-control-md"
+												type="text"
+												placeholder="Quantity"
+											/>
+										</td>
+										<td>
+											<div class="input-group mb-2">
+												<div class="input-group-prepend">
+													<div class="input-group-text">&#8377;</div>
+												</div>
+												<input
+													type="text"
+													class="form-control"
+													id="inlineFormInputGroup"
+													[(ngModel)]="obj.SalePrice"
+													min="0"
+													readonly
+													name="SalePrice"
+													placeholder="Unit Price"
+												/>
+											</div>
+											<!-- <input [(ngModel)]="obj.SalePrice" min=0  disabled name="SalePrice" class="form-control form-control-md" type="tnumberext"
+                                                placeholder="Unit Price"> -->
+										</td>
+										<td>
+											<div class="input-group mb-2">
+												<div class="input-group-prepend">
+													<div class="input-group-text">&#8377;</div>
+												</div>
+												<input
+												#Amount="ngModel"
+										[class.is-invalid]="Amount.invalid && Amount.touched"
+										required
+										pattern="^[0-9]+$"
+													type="text"
+													class="form-control"
+													id="inlineFormInputGroup"
+													[(ngModel)]="obj.Amount"
+													min="0"
+													name="Amount"
+													type="number"
+													placeholder="Price"
+												/>
+											</div>
+										</td>
+										<!-- <td><input class="form-control form-control-sm" type="text"
+                                                placeholder="Discount"></td> -->
+										<td>
+											<div class="input-group mb-2">
+												<input
+													type="text"
+													class=" form-control"
+													id="inlineFormInputGroup"
+													[(ngModel)]="obj.GST"
+													readonly
+													name="GST"
+													min="0"
+												/>
+												<div class="input-group-prepend">
+													<div class="input-group-text">%</div>
+												</div>
+											</div>
+										</td>
+										<td>
+											<a
+												*ngIf="i != 0"
+												class="text-danger"
+												(click)="removeItem(i)"
+												placement="top"
+												ngbTooltip="Delete"
+												><i class="mdi mdi-trash-can font-size-18"></i
+											></a>
+										</td>
+									</tr>
+								</tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Bill Type</label>
                             <!-- <ng-select [items]="selectValue"
                             bindLabel='name'></ng-select> -->
-                            <ng-select>
-                                <ng-option *ngFor="let item of selectValue">{{item.name}}</ng-option>
+                            <ng-select #PurchaseType="ngModel" [(ngModel)]="purchaseBill.PurchaseType" name="PurchaseType" 
+                            required >
+                                <ng-option [value]="item.name" *ngFor="let item of selectValue">{{item.name}}</ng-option>
                             </ng-select>
                         </div>
                     </div>
                     <div class="col-md-3">
-
                         <label class="">Amount Paid</label>
-                        <input class="form-control" type="text"
-                        placeholder="Amount Paid">
+                        <input
+                            [(ngModel)]="purchaseBill.AmountPaid"
+                            name="AmountPaid"
+                            (change)="getbal()"
+                            class="form-control"
+                            type="text"
+                            placeholder="Amount Paid"
+                            #AmountPaid="ngModel"
+                                    [class.is-invalid]="AmountPaid.invalid && AmountPaid.touched"
+                                    required
+                                    pattern="^[0-9]+$"
+                        />
+                        <div
+                                    *ngIf="AmountPaid.invalid && (AmountPaid.dirty || AmountPaid.touched)"
+                                    
+                                >
+                                    <small class="text-danger" *ngIf="AmountPaid.errors.required">Amount paid is required.</small>
+                                    <small class="text-danger"  *ngIf="AmountPaid.errors.pattern">
+                                        Paid amount must be in digits
+                                    </small>
+                                    
+                                </div>
+                        <label *ngIf="showbalance" class="text-danger mt-2">Balance</label>
+                        <input 
+                            [(ngModel)]="purchaseBill.Balance"
+                            name="Balance"
+                            *ngIf="showbalance"
+                            class="border border-danger form-control"
+                            type="text"
+                            placeholder="Balance"
+                        />
                     </div>
                     <div class="col-md-3">
 
@@ -135,18 +260,23 @@
                          
                         </div>
                      
-                         <div class="ml-5 d-inline-block text-right">
-                             <h5>500</h5>
-                             <h6 class="d-inline">0</h6>
-                             <h4>1,000</h4>
+                        <div class="ml-5 d-inline-block text-right">
+                            <h5 class="text-primary">&#8377; {{ purchaseBill.SubTotal }}</h5>
+                            <h6 class="d-inline text-danger">&#8377; {{ purchaseBill.GST }}</h6>
+                            <h4 class="text-success">
+                                &#8377; {{ purchaseBill.TotalAmount  }}
+                            </h4>
                         </div>
                         <div class="text-right">
-                        <button class="btn btn-primary d-inline">Save & Print</button>
-                        &nbsp;<button class="btn btn-primary d-inline">Save</button>
-                    </div>
+                            <button class="btn btn-primary d-inline">Save & Print</button>
+                            &nbsp;<button (click)="saveInvoiceWithoutPrint($event)" class="btn btn-primary d-inline">Save</button>
+                        </div>
                     </div>
                 </div>
-        
+                <input class="form-control" [(ngModel)]="purchaseBill.CreatedAt"  name ="CreatedAt"
+                    #CreatedAt="ngModel" type="hidden">
+            </form>
+
             </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from InventoryApp.models import Category, Brand,Employee,SalesOrderOfflineDetail, SalesOrdersOffline,Supplier, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, CompanyDetails, Expense
+from InventoryApp.models import Category, Brand,Employee,SalesOrderOfflineDetail, SalesOrdersOffline,Supplier, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, CompanyDetails, Expense, PurchaseBill, PurchaseBillDetail
 
 
 
@@ -189,3 +189,33 @@ class ExpenseSerializer(serializers.ModelSerializer):
         'PaidTo',
         'PaidBy',
         'Remarks')
+
+class PurchaseBillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PurchaseBill
+        fields = (
+        'PurchaseBillId',
+        'BillNo',
+        'Date',
+        'Supplier',
+        'PurchaseType',
+        'Contact',
+        'TotalAmount',
+        'AmountPaid',
+        # 'PaymentMode',
+        'Status',
+        'CreatedAt',
+        'Balance',
+        'GST',
+        'SubTotal')
+
+class PurchaseBillDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PurchaseBillDetail
+        fields = ('PurchaseBillDetailId',
+        'ProductId',
+        'Quantity',
+        'SalePrice',
+        'Amount',
+        # 'Discount'
+        )

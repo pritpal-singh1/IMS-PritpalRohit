@@ -119,6 +119,7 @@ export class NewInvoiceComponent {
           this.invoice.SubTotal =
             this.invoice.SubTotal + this.dataarray[i].Amount;
         }
+        // this.invoice.SubTotal += obj.Amount;
         
         //similarly here we iterate a loop which will calculate the GST as soon as user selects a product from 
         //the list
@@ -130,6 +131,7 @@ export class NewInvoiceComponent {
           this.invoice.GST =
             this.invoice.GST + parseInt(this.dataarray[i].GST);
         }
+        // this.invoice.GST += Number(obj.GST);
         this.invoice.TotalAmount = this.invoice.GST + this.invoice.SubTotal; 
         
         // console.log(this.ProductData);
@@ -160,44 +162,59 @@ export class NewInvoiceComponent {
   }
   //when used click a product item from the selected list this method is called 
 
-  removeItem(index) {
-    this.dataarray.splice(index);
-    var i;
-    this.invoice.TotalAmount = 0;
-    for (i = 0; i < this.dataarray.length; i++) {
-      // console.log("This Dataraay " + this.dataarray);
-      // console.log("This Amount " + this.dataarray[i].Amount);
-      this.invoice.TotalAmount =
-        this.invoice.TotalAmount + this.dataarray[i].Amount;
-    }
+  // removeItem(index) {
+  //   this.dataarray.splice(index,1);
+  //   var i;
+  //   this.invoice.TotalAmount = 0;
+  //   for (i = 0; i < this.dataarray.length; i++) {
+  //     // console.log("This Dataraay " + this.dataarray);
+  //     // console.log("This Amount " + this.dataarray[i].Amount);
+  //     this.invoice.TotalAmount =
+  //       this.invoice.TotalAmount + this.dataarray[i].Amount;
+  //   }
 
-    this.invoice.GST = 0;
-    for (i = 0; i < this.dataarray.length; i++) {
-      console.log("This Dataraay " + this.dataarray);
-      console.log("This Amount " + this.dataarray[i].Amount);
-      this.invoice.GST =
-        this.invoice.GST + parseInt(this.dataarray[i].GST)  ;
-    }
+  //   this.invoice.GST = 0;
+  //   for (i = 0; i < this.dataarray.length; i++) {
+  //     console.log("This Dataraay " + this.dataarray);
+  //     console.log("This Amount " + this.dataarray[i].Amount);
+  //     this.invoice.GST =
+  //       this.invoice.GST + parseInt(this.dataarray[i].GST)  ;
+  //   }
+  // }
+  removeItem(index){
+    this.invoice.SubTotal -= this.dataarray[index].Amount;
+    this.invoice.GST -= this.dataarray[index].GST;
+    this.invoice.TotalAmount = this.invoice.SubTotal + this.invoice.GST;
+    this.dataarray.splice(index,1);
   }
   //this calculate function is called when user changes the item quantity in the list 
-  calculate(obj) {
-    obj.Amount = obj.SalePrice * obj.Quantity;
-    var i;
-    this.invoice.SubTotal = 0;
-    for (i = 0; i < this.dataarray.length; i++) {
-      // console.log("This Dataraay " + this.dataarray);
-      // console.log("This Amount " + this.dataarray[i].Amount);
-      this.invoice.SubTotal =
-        this.invoice.SubTotal + this.dataarray[i].Amount;
-    }
+  // calculate(obj) {
+  //   obj.Amount = obj.SalePrice * obj.Quantity;
+  //   var i;
+  //   this.invoice.SubTotal = 0;
+  //   for (i = 0; i < this.dataarray.length; i++) {
+  //     // console.log("This Dataraay " + this.dataarray);
+  //     // console.log("This Amount " + this.dataarray[i].Amount);
+  //     this.invoice.SubTotal =
+  //       this.invoice.SubTotal + this.dataarray[i].Amount;
+  //   }
 
-    this.invoice.GST = 0;
-    for (i = 0; i < this.dataarray.length; i++) {
-      console.log("This Dataraay " + this.dataarray);
-      console.log("This Amount " + this.dataarray[i].Amount);
-      this.invoice.GST =
-        this.invoice.GST + parseInt(this.dataarray[i].GST)  ;
-    }
+  //   this.invoice.GST = 0;
+  //   for (i = 0; i < this.dataarray.length; i++) {
+  //     console.log("This Dataraay " + this.dataarray);
+  //     console.log("This Amount " + this.dataarray[i].Amount);
+  //     this.invoice.GST =
+  //       this.invoice.GST + parseInt(this.dataarray[i].GST)  ;
+  //   }
+  //   this.invoice.TotalAmount = this.invoice.GST + this.invoice.SubTotal; 
+  // }
+  calculate(obj){
+    this.invoice.SubTotal -= obj.Amount;
+    this.invoice.GST -= Number(obj.GST);
+    obj.Amount = obj.SalePrice * obj.Quantity;
+    obj.GST = obj.GST * obj.Quantity;
+    this.invoice.SubTotal += obj.Amount;
+    this.invoice.GST += obj.GST;
     this.invoice.TotalAmount = this.invoice.GST + this.invoice.SubTotal; 
   }
 

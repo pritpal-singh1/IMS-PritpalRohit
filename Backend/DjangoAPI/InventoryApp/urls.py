@@ -35,6 +35,11 @@ urlpatterns=[
     url(r'expense/([0-9]+)$',views.expenseApi),
     url(r'^expense/$',views.expenseApi),
 
+    # for purchase 
+    url(r'^getPurchaseInvoiceNo/$',views.getPurchaseInvoiceNo),
+    url(r'^addPurchaseBill/$',views.newPurchaseBill),
+    url(r'^addPurchaseBill/([0-9]+)$',views.newPurchaseBill),
+
 
 
     url(r'^SaveFile$',views.SaveProductImage)

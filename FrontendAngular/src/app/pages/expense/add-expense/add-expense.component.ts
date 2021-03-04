@@ -24,7 +24,11 @@ export class AddExpenseComponent implements OnInit {
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'Expenses' }, { label: 'Add Expense', active: true }];
     if(!this.expenseservice.formdata){
+      
       this.restForm();
+    }
+    else{
+      this.expenseservice.formdata.Date = this.datepipe.transform(this.expenseservice.formdata.Date,'shortDate');
     }
   }
   restForm(form? : NgForm){
