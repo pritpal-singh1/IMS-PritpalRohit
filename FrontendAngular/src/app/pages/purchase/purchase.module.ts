@@ -10,17 +10,21 @@ import { ManagePurchaseOrderComponent } from './manage-purchase-order/manage-pur
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UiModule } from '../../shared/ui/ui.module';
+import { DataTablesModule } from 'angular-datatables';
+import { UpdatePurchaseBillComponent } from './update-purchase-bill/update-purchase-bill.component';
+import { PrintPurchaseBillComponent } from './print-purchase-bill/print-purchase-bill.component';
 
 
 @NgModule({
-  declarations: [AddPurchaseBillComponent, ManagePurchaseBillComponent, PurchaseReturnComponent, ManagePurchaseReturnComponent, PurchaseOrderComponent, ManagePurchaseOrderComponent],
+  declarations: [AddPurchaseBillComponent, ManagePurchaseBillComponent, PurchaseReturnComponent, ManagePurchaseReturnComponent, PurchaseOrderComponent, ManagePurchaseOrderComponent, UpdatePurchaseBillComponent, PrintPurchaseBillComponent],
   imports: [
     CommonModule,
     PurchaseRoutingModule,
     NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    UiModule
+    UiModule,
+    DataTablesModule
   ]
 })
 export class PurchaseModule { }

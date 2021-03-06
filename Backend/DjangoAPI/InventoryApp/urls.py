@@ -39,7 +39,7 @@ urlpatterns=[
     url(r'^getPurchaseInvoiceNo/$',views.getPurchaseInvoiceNo),
     url(r'^addPurchaseBill/$',views.newPurchaseBill),
     url(r'^addPurchaseBill/([0-9]+)$',views.newPurchaseBill),
-
+    url(r'^getPurchaseBillById/([0-9]+)$',views.getPurchaseBillById),
     
     url(r'stockdata/([0-9]+)$',views.stockAvailibilityApi),
     url(r'stockdata/$',views.stockAvailibilityApi),

@@ -12,7 +12,7 @@ export class PurchaseBill{
     Status: string;
     CreatedAt: string;
     Balance:number;
-    purchaseItem: purchaseItem[];
+    purchaseItems: purchaseItem[];
 }
 
 export class purchaseItem{

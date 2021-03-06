@@ -32,78 +32,47 @@
             </p> -->
   
             <div class="table-responsive">
-              <table class="table mb-0">
+                <table datatable [dtOptions]="dtOptions"  [dtTrigger]="dtTrigger" class="row-border hover">
   
                 <thead class="thead-light">
-                  <tr>
-                    <th>Bill Number</th>
-                    <th>Supplier Name</th>
-                    <th>Place of Supply</th>
-                    <th>Purchase Date</th>
-                    <th>Action</th>
-                  </tr>
+                    <tr>
+                        <th>Bill No.</th>
+                        <th>Status</th>
+                        <th>Supplier Name</th>
+                        <th>Date</th>
+                        <th>Total Amount</th>
+                        <!-- <th>Invoice</th> -->
+                        <th>Options</th>
+                    </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>1/1/1</td>
-                    <td>
-                        <div class="row">
-                            <div class="icon-demo-content" id="solid">
-                                <i class="fas fa-eye"></i>
-                                
-                            </div>
-                            <div class="icon-demo-content" id="solid" >
-                                <i class="fas fa-edit editcolor"></i>
-                            </div>
-                            <div class="icon-demo-content" id="solid">
-                                <i class="fas fa-trash trashcolor"></i>
-                            </div>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>2/2/2</td>
-                    <td>
-                        <div class="row">
-                            <div class="icon-demo-content" id="solid">
-                                <i class="fas fa-eye"></i>
-                                
-                            </div>
-                            <div class="icon-demo-content" id="solid" >
-                                <i class="fas fa-edit editcolor"></i>
-                            </div>
-                            <div class="icon-demo-content" id="solid">
-                                <i class="fas fa-trash trashcolor"></i>
-                            </div>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>3/3/3</td>
-                    <td>
-                        <div class="row">
-                            <div class="icon-demo-content" id="solid">
-                                <i class="fas fa-eye"></i>
-                                
-                            </div>
-                            <div class="icon-demo-content" id="solid" >
-                                <i class="fas fa-edit editcolor"></i>
-                            </div>
-                            <div class="icon-demo-content" id="solid">
-                                <i class="fas fa-trash trashcolor"></i>
-                            </div>
-                        </div>
-                    </td>
-                  </tr>
+                    <tr *ngFor="let item of bills;">
+                        
+                        <td>{{ item.BillNo }}</td>
+                        
+                        <td><div
+                          class="badge font-size-12"
+                          [ngClass]="{
+                              'badge-soft-danger':
+                                  item.Status === 'Unpaid',
+                              'badge-soft-success': item.Status === 'Paid'
+                              
+                          }"
+                      >
+                          {{ item.Status }}
+                      </div></td>
+                        <td class="font-weight-bold">{{ item.Supplier }}</td>
+                        <td>{{ item.Date | date:'medium' }}</td>
+                        <td><h6>{{ item.TotalAmount }}</h6></td>
+                        <!-- <td><button class="btn btn-light btn-rounded" routerLink="../print-invoice/{{ item.SalesOrderOfflineId }}">Invoice <i class="mdi mdi-download ml-2"></i></button></td> -->
+                        <td>
+                          <a routerLink="../update-purchase-bill/{{item.PurchaseBillId}}"  class="mr-3 text-primary" placement="top" ngbTooltip="Edit"><i
+                            class="mdi mdi-pencil font-size-18"></i></a>
+                          <a (click)="deleteBill(item)" class="text-danger" placement="top" ngbTooltip="Delete"><i
+                            class="mdi mdi-trash-can font-size-18"></i></a>
+                          
+                        </td>
+                      </tr>
                 </tbody>
               </table>
             </div>

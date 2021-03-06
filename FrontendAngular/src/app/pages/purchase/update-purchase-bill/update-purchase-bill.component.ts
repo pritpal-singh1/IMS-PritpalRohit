@@ -4,15 +4,14 @@ import {PurchaseBill, purchaseItem} from '../purchase.model';
 import { HttpClient } from "@angular/common/http";
 import Swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
-import {NavigationEnd, Router} from '@angular/router';
-
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-add-purchase-bill',
-  templateUrl: './add-purchase-bill.component.html',
-  styleUrls: ['./add-purchase-bill.component.scss']
+  selector: 'app-update-purchase-bill',
+  templateUrl: './update-purchase-bill.component.html',
+  styleUrls: ['./update-purchase-bill.component.scss']
 })
-export class AddPurchaseBillComponent implements OnInit {
+export class UpdatePurchaseBillComponent implements OnInit {
 
   breadCrumbItems: Array<{}>;
   showbalance: boolean = false;
@@ -40,7 +39,8 @@ export class AddPurchaseBillComponent implements OnInit {
     purchaseItems:[]
    }
    dataarray = [];
-   purchaseitem = new purchaseItem();
+   purchaseitem= new purchaseItem();
+   items: purchaseItem[];
    AllProductList: any;
    stockQuantity;
    purchaseprice;
@@ -48,20 +48,19 @@ export class AddPurchaseBillComponent implements OnInit {
    ProductData: any[];
    isShow: boolean = false;
  
-  constructor( public purchaseservice: PurchaseService,public httpClient: HttpClient,public datepipe: DatePipe, private router: Router) { }
+  constructor(public purchaseservice: PurchaseService,public httpClient: HttpClient,public datepipe: DatePipe,private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.purchaseitem = new purchaseItem();
-    this.dataarray.push(this.purchaseitem);
-    this.getInvoice();
-    this.getSupplierList();
+    this.getBillDetails(this.route.snapshot.paramMap.get('id'));
     this.getProductList();
-    this.breadCrumbItems = [{ label: 'Purchase' }, { label: 'Add Purchase Bill', active: true }];
+    this.purchaseitem= new purchaseItem();
+    this.getSupplierList();
+
   }
-  getInvoice(){
-    this.purchaseservice.getPurchaseInvoiceNo().subscribe((data)=>{
-      console.log(data);
-      this.purchaseBill.BillNo = "INV-00"+ (Number(data)+1);
+  getSupplierList(){
+    this.httpClient.get("http://127.0.0.1:8000/supplier/").subscribe(data=>{
+      this.suppliers = data;
+      console.log(this.suppliers);
     })
   }
   getSupplierContact(supplierId){
@@ -77,16 +76,35 @@ export class AddPurchaseBillComponent implements OnInit {
     this.purchaseBill.Contact = contact;
     console.log(this.purchaseBill.Contact);
   }
-  getSupplierList(){
-    this.httpClient.get("http://127.0.0.1:8000/supplier/").subscribe(data=>{
-      this.suppliers = data;
-      console.log(this.suppliers);
-    })
-  }
   addItem(){
     this.isShow = false;
     this.purchaseitem = new purchaseItem();
     this.dataarray.push(this.purchaseitem);
+  }
+  // getInvoice(){
+  //   this.purchaseservice.getPurchaseInvoiceNo().subscribe((data)=>{
+  //     console.log(data);
+  //     this.purchaseBill.BillNo = "INV-00"+ (Number(data)+1);
+  //   })
+  // }
+
+  getBillDetails(id){
+    this.purchaseservice.getPurchaseBillById(id).subscribe(data=>{
+      this.purchaseBill = data as PurchaseBill;
+      this.purchaseBill.Date = this.datepipe.transform(this.purchaseBill.Date,'yyyy-MM-dd');
+      console.log(this.purchaseBill);
+      this.items = this.purchaseBill.purchaseItems;
+      for (let i = 0; i <Object.keys(this.items).length;i++) {
+        this.purchaseitem = new purchaseItem();
+        this.purchaseitem.Quantity = this.items[i].Quantity;
+        this.purchaseitem.ProductId = this.items[i].ProductId;
+        this.purchaseitem.SalePrice = this.items[i].SalePrice;
+        this.purchaseitem.GST = this.items[i].GST;
+        this.purchaseitem.Amount = this.items[i].Amount;
+        this.dataarray.push(this.purchaseitem);
+      }
+
+    });
   }
   getProductList() {
     this.httpClient.get("http://127.0.0.1:8000/product/").subscribe((data) => {
@@ -112,9 +130,11 @@ export class AddPurchaseBillComponent implements OnInit {
         obj.GST = this.ProductData["GST"];
         //here we iterate a loop which will calculate the sub total as soon as user selects a product from 
         //the list
-        this.purchaseBill.SubTotal += obj.Amount;
-        this.purchaseBill.GST += Number(obj.GST);
-        this.purchaseBill.TotalAmount = this.purchaseBill.SubTotal + this.purchaseBill.GST
+        // this.purchaseBill.SubTotal += obj.Amount;
+        // this.purchaseBill.GST += Number(obj.GST);
+        // this.purchaseBill.TotalAmount = this.purchaseBill.SubTotal + this.purchaseBill.GST
+        this.calculate(obj);
+
       });
       this.isShow = true;
   }
@@ -141,13 +161,13 @@ export class AddPurchaseBillComponent implements OnInit {
       this.purchaseBill.Status = "Unpaid";
     }
   }
-  saveBillWithoutPrint(event) {
+  saveBill(event){
     this.purchaseBill.purchaseItems = this.dataarray;
     // this.purchaseBill.CreatedAt = (new Date()).toString;
     // this.purchaseBill.Date = this.datepipe.transform(this.purchaseBill.Date,'longDate');
     this.purchaseBill.Date = new Date(this.purchaseBill.Date);
     console.log(this.purchaseBill);
-    this.purchaseservice.addPurchaseBill(this.purchaseBill).subscribe(data => {
+    this.purchaseservice.updatePurchaseBill(this.purchaseBill).subscribe(data => {
       
     });
     Swal.fire({
@@ -157,24 +177,7 @@ export class AddPurchaseBillComponent implements OnInit {
       showConfirmButton: false,
       timer: 1500
     });
-    
-  }
-  saveBillWithPrint(event){
-    this.purchaseBill.purchaseItems = this.dataarray;
-    this.purchaseBill.Date = new Date(this.purchaseBill.Date);
-    this.purchaseservice.addPurchaseBill(this.purchaseBill).subscribe(data => {
-      this.router.navigate(['/purchase/print-purchase-bill/'+data['PurchaseId']]);
-    });
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: "New Product "+ this.purchaseBill.BillNo +" Created",
-      showConfirmButton: false,
-      timer: 1500
-    });
-    event.preventDefault();
     this.router.navigateByUrl('/', {skipLocationChange: true})
-      .then(() => this.router.navigate(['/purchase/add-purchase-bill']));
+    .then(() => this.router.navigate(['/purchase/manage-purchase-bill']));
   }
-  
 }
