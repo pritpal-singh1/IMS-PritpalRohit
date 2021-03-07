@@ -1,7 +1,12 @@
-export interface Stocks {
-    name: string;
-    email: string;
-    phone: string;
-    balance: string;
-    date: string;
+export interface StockAdjustments {
+    StockAdjustmentsId: string;
+    Date: string;
+    Type: string;
+    Reason: string;
+    ProductId: string;
+    Quantity: number;
+    Amount: number;
+    Remarks: string;
+    ProductName: string;
+    
 }

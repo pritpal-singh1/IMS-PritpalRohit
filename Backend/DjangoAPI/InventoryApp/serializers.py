@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from InventoryApp.models import Category, Brand,Employee,SalesOrderOfflineDetail, SalesOrdersOffline,Supplier, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, CompanyDetails, Expense
-
+from InventoryApp.models import Category, Brand,Employee,SalesOrderOfflineDetail, SalesOrdersOffline,Supplier, Role, \
+    AdminUser, Product, CustomersOnline, SalesOrderOnline, CompanyDetails, Expense,StockAdjustments
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -189,4 +189,17 @@ class ExpenseSerializer(serializers.ModelSerializer):
         'Amount',
         'PaidTo',
         'PaidBy',
+        'Remarks')
+
+class StockAdjustmentsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = StockAdjustments
+        fields = ('StockAdjustmentsId',
+            'Date',
+        'Type',
+        'Reason',
+        'ProductId',
+        'Quantity',
+        'Amount',
         'Remarks')
