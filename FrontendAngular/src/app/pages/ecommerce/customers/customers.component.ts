@@ -55,9 +55,7 @@ export class CustomersComponent implements OnInit {
     this.modalService.open(content, { centered: true });
   }
 
-  /**
-   * save the contacts data
-   */
+
   saveData() {
     const name = this.validationform.get('name').value;
     const phone = this.validationform.get('phone').value;

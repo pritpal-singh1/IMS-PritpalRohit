@@ -51,8 +51,9 @@ urlpatterns=[
     url(r'stockdata/$',views.stockAvailibilityApi),
     url(r'^expense/$',views.expenseApi),
     url(r'^lowlevellimit/$',views.lowLevelLimitApi),
-
-
-
+    url(r'stockadjustment/([0-9]+)$',views.stockAdjustmentsApi),
+    url(r'stockadjustment/$',views.stockAdjustmentsApi),
+    url(r'getProductListName/$',views.getProductListName),
+    url(r'stockadjusmentsbyid/([0-9]+)$',views.getStockAdjustmentByIdApi),
     url(r'^SaveFile$',views.SaveProductImage)
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

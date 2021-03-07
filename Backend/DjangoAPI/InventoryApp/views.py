@@ -5,12 +5,14 @@ from rest_framework import status
 from django.forms.models import model_to_dict
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
+import json
 
 from InventoryApp.models import Category, Brand, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, \
     Supplier, Employee,SalesOrdersOffline,SalesOrderOfflineDetail, Expense,CompanyDetails, PurchaseBill, PurchaseBillDetail, PurchaseOrder,PurchaseOrderDetail
 from InventoryApp.serializers import CategorySerializer, BrandSerializer, RoleSerializer, AdminSerializer, \
     ProductSerializer, CustomersOnlineSerializer, SalesOrderOnlineSerializer, SupplierSerializer, EmployeeSerializer,\
-    SalesOrdersOfflineSerializer,SalesOrderOfflineDetailSerializer,ExpenseSerializer,CompanyDetailsSerializer, PurchaseBillSerializer,PurchaseBillDetailSerializer,PurchaseOrderSerializer, PurchaseOrderDetailSerializer
+    SalesOrdersOfflineSerializer,SalesOrderOfflineDetailSerializer,ExpenseSerializer,CompanyDetailsSerializer, PurchaseBillSerializer,PurchaseBillDetailSerializer,PurchaseOrderSerializer, PurchaseOrderDetailSerializer,StockAdjustmentsSerializer
+    SalesOrdersOfflineSerializer, SalesOrderOfflineDetailSerializer, ExpenseSerializer, CompanyDetailsSerializer, PurchaseBillSerializer, PurchaseBillDetailSerializer, PurchaseOrderSerializer, PurchaseOrderDetailSerializer, StockAdjustmentsSerializer
 
 
 from django.core.files.storage import default_storage
@@ -691,9 +693,79 @@ def stockAvailibilityApi(request):
 @csrf_exempt
 def lowLevelLimitApi(request):
     if request.method=='GET':
-        result=Product.objects.filter(StockQTY__lt=F('LowLevelLimit'))
+        result=Product.objects.filter(LowLevelLimit__gte=F('StockQTY'))
         print(result)
+
     LowLevelLimitSerializer = ProductSerializer(result, many=True)
+
+
     return JsonResponse(LowLevelLimitSerializer.data,safe=False)
 
 
+@csrf_exempt
+def stockAdjustmentsApi(request,sdid=0):
+    if request.method == 'GET':
+        res=[]
+        stockadj = StockAdjustments.objects.all()
+        e=StockAdjustments.objects.select_related()
+        for i in e:
+            result = {'ProductName': i.ProductId.ProductName, 'StockAdjustmentsId': i.StockAdjustmentsId,
+                      'Type': i.Type, 'Reason': i.Reason, 'Date': i.Date, 'Quantity': i.Quantity,'ProductId':
+                          i.ProductId.ProductId,
+                      'Amount': i.Amount, 'Remarks': i.Remarks}
+
+            res.append(result)
+        print(res)
+        print(e[0].ProductId.ProductName)
+        print(e.values_list('Date','ProductId'))
+        stockadj_serializer = StockAdjustmentsSerializer(stockadj, many=True)
+        print(stockadj_serializer.data)
+        return JsonResponse(res ,safe=False)
+    elif request.method == 'POST':
+        stockadj_data = JSONParser().parse(request)
+        print(stockadj_data)
+        stockadj_serializer = StockAdjustmentsSerializer(data=stockadj_data)
+        print(stockadj_serializer)
+        stockadj_serializer.is_valid(raise_exception=True)
+        if stockadj_serializer.is_valid():
+            stockadj_serializer.save()
+            return JsonResponse("Added", safe=False)
+        return JsonResponse("Failed to add", safe=False)
+    elif request.method == 'PUT':
+        stockadj_data = JSONParser().parse(request)
+        stockadj = StockAdjustments.objects.get(StockAdjustmentsId=stockadj_data['StockAdjustmentsId'])
+        stockadj_serializer = StockAdjustmentsSerializer(stockadj, data=stockadj_data)
+        if stockadj_serializer.is_valid():
+            stockadj_serializer.save()
+            return JsonResponse("updated", safe=False)
+        return JsonResponse("failed to update", safe=False)
+    elif request.method == 'DELETE':
+        stockadj = StockAdjustments.objects.get(StockAdjustmentsId=sdid)
+        stockadj.delete()
+        return JsonResponse("Deleted", safe=False)
+
+@csrf_exempt
+def getStockAdjustmentByIdApi(request,sid=0):
+    if request.method == 'GET':
+        try:
+            stockadjustment = StockAdjustments.objects.get(StockAdjustmentsId=sid)
+
+        except StockAdjustments.DoesNotExist:
+            return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+        if request.method == 'GET':
+            stockadjustment_serializer = StockAdjustmentsSerializer(stockadjustment)
+            return JsonResponse(stockadjustment_serializer.data, safe=False)
+
+@csrf_exempt
+def getProductListName(request):
+    if request.method == 'GET':
+        res = []
+        stockadj = Product.objects.all()
+
+        for i in stockadj:
+            result = {'ProductName': i.ProductName, 'ProductId': i.ProductId}
+
+            res.append(result)
+        print(res)
+        return JsonResponse(res, safe=False)
