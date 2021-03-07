@@ -20,7 +20,7 @@ export class AddPurchaseBillComponent implements OnInit {
     {id:1,name:'Cash'},
     {id:2,name:'Cheque'},
     {id:3,name:'Card Payment'},
-    {id:4,name:'Wallet'}
+    // {id:4,name:'Wallet'}
    ];
    suppliers:any;
    purchaseBill: PurchaseBill={

@@ -209,4 +209,27 @@ class Expense(models.Model):
     Remarks = models.CharField(max_length=100)
 
 
+class PurchaseOrder(models.Model):
+    PurchaseOrderId = models.AutoField(primary_key=True)
+    BillNo=models.CharField(max_length=100)
+    Date=models.DateTimeField()
+    Supplier=models.ForeignKey(Supplier,db_column="SupplierId",on_delete=models.CASCADE)
+    PurchaseType=models.CharField(max_length=100)
+    Contact=models.CharField(max_length=100)
+    TotalAmount=models.CharField(max_length=10)
+    AmountPaid=models.CharField(max_length=10)
+    Status=models.CharField(max_length=10)
+    CreatedAt=models.DateTimeField(auto_now_add=True)
+    Balance=models.CharField(max_length=100)
+    GST = models.CharField(max_length=100)
+    SubTotal=models.CharField(max_length=100)
+    def __str__(self):
+        return self.BillNo
 
+class PurchaseOrderDetail(models.Model):
+    PurchaseOrderDetailId = models.ForeignKey(PurchaseOrder,db_column="PurchaseOrderId",on_delete=models.CASCADE)
+    ProductId=models.ForeignKey(Product,db_column="ProductId",on_delete=models.CASCADE)
+    Quantity=models.CharField(max_length=10)
+    SalePrice=models.CharField(max_length=10)
+    Amount=models.CharField(max_length=10)
+    GST = models.CharField(max_length=100)

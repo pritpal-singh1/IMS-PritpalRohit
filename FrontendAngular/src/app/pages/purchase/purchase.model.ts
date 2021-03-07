@@ -24,3 +24,31 @@ export class purchaseItem{
     Amount: number;
     GST: number;
 }
+
+export class PurchaseOrder{
+    PurchaseOrderId:number;
+    BillNo:string;
+    Date:any;
+    Supplier:string;
+    PurchaseType: string;
+    Contact: number;
+    TotalAmount: number;
+    AmountPaid: number;
+    Status: string;
+    CreatedAt: string;
+    Balance:number;
+    GST:number;
+    SubTotal:number;
+    purchaseItems: purchaseOrderItem[];
+}
+
+export class purchaseOrderItem{
+    PurchaseOrderDetailId: number;
+    ProductId: number;
+    ProductName: string;
+    Quantity: number;
+    SalePrice: number;
+    Amount: number;
+    GST: number;
+}
+
