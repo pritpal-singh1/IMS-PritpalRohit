@@ -5,16 +5,16 @@ import {PurchaseOrder, purchaseOrderItem} from '../purchase.model';
 import { HttpClient } from "@angular/common/http";
 import Swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
-import {NavigationEnd, Router} from '@angular/router';
+import {NavigationEnd, Router,ActivatedRoute} from '@angular/router';
+
 
 @Component({
-  selector: 'app-purchase-order',
-  templateUrl: './purchase-order.component.html',
-  styleUrls: ['./purchase-order.component.scss']
+  selector: 'app-update-purchase-order',
+  templateUrl: './update-purchase-order.component.html',
+  styleUrls: ['./update-purchase-order.component.scss']
 })
-export class PurchaseOrderComponent implements OnInit {
+export class UpdatePurchaseOrderComponent implements OnInit {
 
-  breadCrumbItems: Array<{}>;
   showbalance: boolean = false;
   selectValue = [
     {id:1,name:'Cash'},
@@ -47,23 +47,15 @@ export class PurchaseOrderComponent implements OnInit {
    MRP;
    ProductData: any[];
    isShow: boolean = false;
- 
+   items: purchaseOrderItem[];
 
-  constructor(public purchaseservice: PurchaseService,public httpClient: HttpClient,public datepipe: DatePipe, private router: Router) { }
+  constructor(public purchaseservice: PurchaseService,public httpClient: HttpClient,public datepipe: DatePipe, private router: Router,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'Purchase' }, { label: 'Purchase Order', active: true }];
-    this.purchaseitem = new purchaseOrderItem();
-    this.dataarray.push(this.purchaseitem);
-    this.getInvoice();
-    this.getSupplierList();
+    this.getBillDetails(this.route.snapshot.paramMap.get('id'));
     this.getProductList();
-  }
-  getInvoice(){
-    this.purchaseservice.getPurchaseOrderNo().subscribe((data)=>{
-      console.log(data);
-      this.purchaseOrder.BillNo = "INV-00"+ (Number(data)+1);
-    })
+    this.purchaseitem= new purchaseOrderItem();
+    this.getSupplierList();
   }
   getSupplierContact(supplierId){
     var contact;
@@ -113,9 +105,11 @@ export class PurchaseOrderComponent implements OnInit {
         obj.GST = this.ProductData["GST"];
         //here we iterate a loop which will calculate the sub total as soon as user selects a product from 
         //the list
-        this.purchaseOrder.SubTotal += obj.Amount;
-        this.purchaseOrder.GST += Number(obj.GST);
-        this.purchaseOrder.TotalAmount = this.purchaseOrder.SubTotal + this.purchaseOrder.GST
+        // this.purchaseOrder.SubTotal += obj.Amount;
+        // this.purchaseOrder.GST += Number(obj.GST);
+        // this.purchaseOrder.TotalAmount = this.purchaseOrder.SubTotal + this.purchaseOrder.GST
+        this.calculate(obj);
+
       });
       this.isShow = true;
   }
@@ -142,13 +136,13 @@ export class PurchaseOrderComponent implements OnInit {
       this.purchaseOrder.Status = "Unpaid";
     }
   }
-  saveOrderWithoutPrint(event) {
+  saveOrder(event) {
     this.purchaseOrder.purchaseItems = this.dataarray;
     // this.purchaseBill.CreatedAt = (new Date()).toString;
     // this.purchaseBill.Date = this.datepipe.transform(this.purchaseBill.Date,'longDate');
     this.purchaseOrder.Date = new Date(this.purchaseOrder.Date);
     console.log(this.purchaseOrder);
-    this.purchaseservice.addPurchaseOrder(this.purchaseOrder).subscribe(data => {
+    this.purchaseservice.updatePurchaseOrder(this.purchaseOrder).subscribe(data => {
       
     });
     Swal.fire({
@@ -158,26 +152,29 @@ export class PurchaseOrderComponent implements OnInit {
       showConfirmButton: false,
       timer: 1500
     });
+    this.router.navigateByUrl('/', {skipLocationChange: true})
+    .then(() => this.router.navigate(['/purchase/manage-purchase-order']));
     
   }
-  saveOrderWithPrint(event){
-    this.purchaseOrder.purchaseItems = this.dataarray;
-    this.purchaseOrder.Date = new Date(this.purchaseOrder.Date);
-    this.purchaseservice.addPurchaseOrder(this.purchaseOrder).subscribe(data => {
-      this.router.navigate(['/purchase/print-purchase-order/'+data['PurchaseId']]);
+  getBillDetails(id){
+    this.purchaseservice.getPurchaseOrderById(id).subscribe(data=>{
+      this.purchaseOrder = data as PurchaseOrder;
+      this.purchaseOrder.Date = this.datepipe.transform(this.purchaseOrder.Date,'yyyy-MM-dd');
+      console.log(this.purchaseOrder);
+      this.items = this.purchaseOrder.purchaseItems;
+      for (let i = 0; i <Object.keys(this.items).length;i++) {
+        this.purchaseitem = new purchaseOrderItem();
+        this.purchaseitem.Quantity = this.items[i].Quantity;
+        this.purchaseitem.ProductId = this.items[i].ProductId;
+        this.purchaseitem.SalePrice = this.items[i].SalePrice;
+        this.purchaseitem.GST = this.items[i].GST;
+        this.purchaseitem.Amount = this.items[i].Amount;
+        this.dataarray.push(this.purchaseitem);
+      }
+
     });
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: "New Product "+ this.purchaseOrder.BillNo +" Created",
-      showConfirmButton: false,
-      timer: 1500
-    });
-    event.preventDefault();
-    this.router.navigateByUrl('/', {skipLocationChange: true})
-      .then(() => this.router.navigate(['/purchase/purchase-order']));
   }
   onSubmit(){
-    
+
   }
 }
