@@ -4,26 +4,7 @@
         <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
-                <!-- <div class="card border-0">
-                    <div class="card-body">
-                        <div
-                            class="row align-items-center"
-                            
-                        >
-                            <div class="col align-content-start">
-                                <h4 class="one">Manage Invoice</h4>
-                            </div>
-                            <div class="col-auto">
-                                <button (click)="addInvoice()"
-                                    class="btn btn-outline-success waves-effect pull-right waves-light"
-                                >
-                                    Add New Invoice
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                 
-                </div> -->
                 <h4 class="card-title">Stocks at low level and requires reordering</h4>
                 <!-- <p class="card-title-desc">For basic styling—light padding and
                   only horizontal dividers—add the base class <code>.table</code> to any
@@ -35,7 +16,7 @@
       
                     <thead class="thead-light">
                       <tr>
-                        <th>s.No</th>
+                        <th>S.No</th>
                         <th>Product Name</th>
                         <th>Product Code</th>
                         <th>Current Stock</th>
@@ -43,20 +24,14 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mica Handle</td>
-                        <td>MIC666</td>
-                        <td>6</td>
+                      <tr *ngFor="let item of LowLevelLimitData; let i=index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{item.ProductName}}</td>
+                        <td>{{item.ItemCode}}</td>
+                        <td>{{item.StockQTY}}</td>
            
                       </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Mica Handle</td>
-                        <td>MIC666</td>
-                        <td>6</td>
                       
-                      </tr>
                       
                     </tbody>
                   </table>

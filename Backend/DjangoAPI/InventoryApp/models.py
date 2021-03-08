@@ -62,10 +62,10 @@ class Product(models.Model):
     PurchasePrice=models.CharField(max_length=100)
     SalePrice=models.CharField(max_length=100)
     MRP=models.CharField(max_length=100)
-    LowLevelLimit=models.CharField(max_length=100)
+    LowLevelLimit=models.IntegerField()
     Discount=models.CharField(max_length=10)
     GST=models.CharField(max_length=10)
-    StockQTY=models.CharField(max_length=10)
+    StockQTY=models.IntegerField()
     CreatedAt = models.DateTimeField(auto_now_add=True)
     ProductImage=models.CharField(max_length=100)
 
@@ -225,6 +225,19 @@ class PurchaseOrder(models.Model):
     SubTotal=models.CharField(max_length=100)
     def __str__(self):
         return self.BillNo
+        
+class StockAdjustments(models.Model):
+    StockAdjustmentsId=models.AutoField(primary_key=True)
+    Date=models.DateField()
+    Type=models.CharField(max_length=10)
+    Reason=models.CharField(max_length=30)
+    ProductId=models.ForeignKey(Product,db_column="ProductId",on_delete=models.CASCADE)
+    Quantity=models.IntegerField()
+    Amount=models.IntegerField()
+    Remarks=models.CharField(max_length=200)
+
+
+
 
 class PurchaseOrderDetail(models.Model):
     PurchaseOrderDetailId = models.ForeignKey(PurchaseOrder,db_column="PurchaseOrderId",on_delete=models.CASCADE)
