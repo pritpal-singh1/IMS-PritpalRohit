@@ -28,7 +28,7 @@ export class AddExpenseComponent implements OnInit {
       this.restForm();
     }
     else{
-      this.expenseservice.formdata.Date = this.datepipe.transform(this.expenseservice.formdata.Date,'shortDate');
+      this.expenseservice.formdata.Date = this.datepipe.transform(this.expenseservice.formdata.Date,'yyyy-MM-dd');
     }
   }
   restForm(form? : NgForm){

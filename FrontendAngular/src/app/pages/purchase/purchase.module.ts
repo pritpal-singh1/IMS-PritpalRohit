@@ -15,10 +15,12 @@ import { UpdatePurchaseBillComponent } from './update-purchase-bill/update-purch
 import { PrintPurchaseBillComponent } from './print-purchase-bill/print-purchase-bill.component';
 import { UpdatePurchaseOrderComponent } from './update-purchase-order/update-purchase-order.component';
 import { PrintPurchaseOrderComponent } from './print-purchase-order/print-purchase-order.component';
+import { UpdatePurchaseReturnComponent } from './update-purchase-return/update-purchase-return.component';
+import { PrintPurchaseReturnComponent } from './print-purchase-return/print-purchase-return.component';
 
 
 @NgModule({
-  declarations: [AddPurchaseBillComponent, ManagePurchaseBillComponent, PurchaseReturnComponent, ManagePurchaseReturnComponent, PurchaseOrderComponent, ManagePurchaseOrderComponent, UpdatePurchaseBillComponent, PrintPurchaseBillComponent, UpdatePurchaseOrderComponent, PrintPurchaseOrderComponent],
+  declarations: [AddPurchaseBillComponent, ManagePurchaseBillComponent, PurchaseReturnComponent, ManagePurchaseReturnComponent, PurchaseOrderComponent, ManagePurchaseOrderComponent, UpdatePurchaseBillComponent, PrintPurchaseBillComponent, UpdatePurchaseOrderComponent, PrintPurchaseOrderComponent, UpdatePurchaseReturnComponent, PrintPurchaseReturnComponent],
   imports: [
     CommonModule,
     PurchaseRoutingModule,

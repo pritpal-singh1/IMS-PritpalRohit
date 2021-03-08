@@ -10,6 +10,8 @@ import {PurchaseOrderComponent} from './purchase-order/purchase-order.component'
 import {ManagePurchaseOrderComponent} from './manage-purchase-order/manage-purchase-order.component';
 import {UpdatePurchaseOrderComponent} from './update-purchase-order/update-purchase-order.component';
 import {PrintPurchaseOrderComponent} from './print-purchase-order/print-purchase-order.component';
+import {UpdatePurchaseReturnComponent} from './update-purchase-return/update-purchase-return.component';
+import{PrintPurchaseReturnComponent} from './print-purchase-return/print-purchase-return.component';
 import { from } from 'rxjs';
 
 const routes: Routes = [
@@ -21,7 +23,9 @@ const routes: Routes = [
 
     { path:'purchase-return', component: PurchaseReturnComponent},
     { path:'manage-purchase-return', component:ManagePurchaseReturnComponent },
-
+    { path:'print-purchase-return/:id', component: PrintPurchaseReturnComponent},
+    { path:'update-purchase-return/:id', component: UpdatePurchaseReturnComponent},
+  
 
     { path:'purchase-order', component:PurchaseOrderComponent },
     { path:'manage-purchase-order', component:ManagePurchaseOrderComponent },
