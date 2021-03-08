@@ -45,6 +45,11 @@ urlpatterns=[
     url(r'^addPurchaseOrder/$',views.newPurchaseOrder),
     url(r'^addPurchaseOrder/([0-9]+)$',views.newPurchaseOrder),
     url(r'^getPurchaseOrderById/([0-9]+)$',views.getPurchaseOrderById),
+
+    url(r'^getPurchaseReturnNo/$',views.getPurchaseReturnNo),
+    url(r'^getPurchaseBillByBillno/(INV-00[0-9]+)$',views.getPurchaseBillByBillno),
+
+
      
     
     url(r'stockdata/([0-9]+)$',views.stockAvailibilityApi),

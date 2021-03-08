@@ -176,5 +176,8 @@ export class AddPurchaseBillComponent implements OnInit {
     this.router.navigateByUrl('/', {skipLocationChange: true})
       .then(() => this.router.navigate(['/purchase/add-purchase-bill']));
   }
+  onSubmit(){
+    
+  }
   
 }

@@ -233,3 +233,26 @@ class PurchaseOrderDetail(models.Model):
     SalePrice=models.CharField(max_length=10)
     Amount=models.CharField(max_length=10)
     GST = models.CharField(max_length=100)
+
+class PurchaseReturn(models.Model):
+    PurchaseReturnId = models.AutoField(primary_key=True)
+    ReturnBillNo = models.CharField(max_length=100)
+    PurchaseBillNo = models.CharField(max_length=100)
+    Date = models.DateTimeField()
+    Supplier = models.ForeignKey(Supplier,db_column="SupplierId",on_delete=models.CASCADE)
+    ReturnType = models.CharField(max_length=100)
+    TotalAmount=models.CharField(max_length=10)
+    AmountPaid=models.CharField(max_length=10)
+    Status=models.CharField(max_length=10)
+    CreatedAt=models.DateTimeField(auto_now_add=True)
+    Balance=models.CharField(max_length=100)
+    GST = models.CharField(max_length=100)
+    SubTotal=models.CharField(max_length=100)
+
+class PurchaseReturnDetail(models.Model):
+    PurchaseReturnDetailId = models.AutoField(primary_key=True)
+    ProductId=models.ForeignKey(Product,db_column="ProductId",on_delete=models.CASCADE)
+    Quantity=models.CharField(max_length=10)
+    SalePrice=models.CharField(max_length=10)
+    Amount=models.CharField(max_length=10)
+    GST = models.CharField(max_length=100)

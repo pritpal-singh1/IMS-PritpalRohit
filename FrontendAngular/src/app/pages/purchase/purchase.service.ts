@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {PurchaseBill, PurchaseOrder} from './purchase.model';
+import {PurchaseBill, PurchaseOrder, PurchaseReturn} from './purchase.model';
 @Injectable({
     providedIn: 'root'
   })
@@ -46,4 +46,24 @@ import {PurchaseBill, PurchaseOrder} from './purchase.model';
     getPurchaseOrderById(id){
       return this.http.get(this.APIUrl+'/getPurchaseOrderById/'+id);
     }
+    //Purchase Return
+    getPurchaseReturnNumber(){
+      return this.http.get(this.APIUrl + '/getPurchaseReturnNo/');
+    }
+    getAllReturns(){
+      return this.http.get(this.APIUrl+'/addPurchaseReturn/');
+    }
+    addPurchaseReturn(rtn: PurchaseReturn) {
+      return this.http.post(this.APIUrl + '/addPurchaseReturn/', rtn);
+    }
+    deleteReturn(rid){
+      return this.http.delete(this.APIUrl + '/addPurchaseReturn/' + rid);
+    }
+    updatePurchaseReturn(rtn: PurchaseReturn){
+      return this.http.put(this.APIUrl+'/addPurchaseReturn/',rtn);
+    }
+    getPurchaseReturnById(id){
+      return this.http.get(this.APIUrl+'/getPurchaseReturnById/'+id);
+    }
+
   }
