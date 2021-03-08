@@ -7,12 +7,8 @@ from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 import json
 
-from InventoryApp.models import Category, Brand, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, \
-    Supplier, Employee,SalesOrdersOffline,SalesOrderOfflineDetail, Expense,CompanyDetails, PurchaseBill, PurchaseBillDetail, PurchaseOrder,PurchaseOrderDetail
-from InventoryApp.serializers import CategorySerializer, BrandSerializer, RoleSerializer, AdminSerializer, \
-    ProductSerializer, CustomersOnlineSerializer, SalesOrderOnlineSerializer, SupplierSerializer, EmployeeSerializer,\
-    SalesOrdersOfflineSerializer,SalesOrderOfflineDetailSerializer,ExpenseSerializer,CompanyDetailsSerializer, PurchaseBillSerializer,PurchaseBillDetailSerializer,PurchaseOrderSerializer, PurchaseOrderDetailSerializer,StockAdjustmentsSerializer
-    SalesOrdersOfflineSerializer, SalesOrderOfflineDetailSerializer, ExpenseSerializer, CompanyDetailsSerializer, PurchaseBillSerializer, PurchaseBillDetailSerializer, PurchaseOrderSerializer, PurchaseOrderDetailSerializer, StockAdjustmentsSerializer
+from InventoryApp.models import Category, Brand, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, Supplier, Employee,SalesOrdersOffline,SalesOrderOfflineDetail, Expense,CompanyDetails, PurchaseBill, PurchaseBillDetail, PurchaseOrder,PurchaseOrderDetail, PurchaseReturn, PurchaseReturnDetail,StockAdjustments
+from InventoryApp.serializers import CategorySerializer, BrandSerializer, RoleSerializer, AdminSerializer, ProductSerializer, CustomersOnlineSerializer, SalesOrderOnlineSerializer, SupplierSerializer, EmployeeSerializer,SalesOrdersOfflineSerializer,SalesOrderOfflineDetailSerializer,ExpenseSerializer,CompanyDetailsSerializer, PurchaseBillSerializer,PurchaseBillDetailSerializer,PurchaseOrderSerializer, PurchaseOrderDetailSerializer,StockAdjustmentsSerializer
 
 
 from django.core.files.storage import default_storage
@@ -668,10 +664,153 @@ def getPurchaseOrderById(request,pid=0):
         return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
 
+@csrf_exempt
+def getPurchaseReturnNo(request):
+    if request.method == 'GET':
+        o = PurchaseReturn.objects.order_by('PurchaseReturnId')
+        if o.count()==0:
+            return JsonResponse(0, safe=False)
+        else:
+            obj = PurchaseReturn.objects.order_by('PurchaseReturnId')[len(o)-1:]
+
+            return JsonResponse(obj.values()[0]['PurchaseReturnId'], safe=False)
 
 
+@csrf_exempt
+def newPurchaseOrder(request,pid=0):
+    if request.method=="POST":
+        purchase_return=JSONParser().parse(request)
+        purchaseItems=purchase_return['purchaseItems']
+        purchase_returns=dict(list(purchase_return.items())[:len(purchase_return)-1])
+        purchase_return_serializer = PurchaseReturnSerializer(data=purchase_returns)
+        purchase_return_serializer.is_valid(raise_exception=True)
+        if purchase_return_serializer.is_valid():
+            purchase_return_serializer.save()
+            purchase_return_id=purchase_return_serializer.data['PurchaseReturnId']
+
+        for i in purchaseItems:
+            purchase_return_detail=i
+            purchase_return_detail['PurchaseReturnDetailId']=purchase_return_id
+            purchase_return_detail_serializer = PurchaseReturnDetailSerializer(data=purchase_return_detail)
+            purchase_return_detail_serializer.is_valid(raise_exception=True)
+            if purchase_return_detail_serializer.is_valid():
+                purchase_return_detail_serializer.save()
+                res=updatePurchaseReturnQuantityAdd(purchase_return_detail_serializer.data['ProductId'],i['Quantity'])
+                # purchase_bill_Added = "Purchase Bill Successfully Added"
+        return JsonResponse({"response":"Purchase Order Successfully Added","PurchaseId":purchase_order_id}, safe=False)
+    elif request.method == 'GET':
+        returns = PurchaseReturn.objects.all()
+
+        return_serializer = PurchaseReturnSerializer(returns, many=True)
+        return JsonResponse(return_serializer.data, safe=False)
+    elif request.method == 'DELETE':
+        # import pdb;pdb.set_trace()
+        returndetail=PurchaseReturnDetail.objects.filter(PurchaseReturnDetailId=pid)
+        for i in returndetail:
+            i.delete()
+        returns = PurchaseReturn.objects.get(PurchaseReturnId = pid)
+        returns.delete()
+        return JsonResponse("Deleted",safe=False)
+
+    elif request.method == 'PUT':
+        purchase_order=JSONParser().parse(request)
+        purchaseItems = purchase_order['purchaseItems']
+
+        purchase_order_recieved = dict(list(purchase_order.items())[:len(purchase_order) - 1])
+        purchase_order = PurchaseOrder.objects.get(PurchaseOrderId=purchase_order_recieved[
+            'PurchaseOrderId'])
+        purchase_order_serializer = PurchaseOrderSerializer(purchase_order, data=purchase_order_recieved)
+        if purchase_order_serializer.is_valid():
+            purchase_order_serializer.save()
+        purchaseorderdetail = PurchaseOrderDetail.objects.filter(PurchaseOrderDetailId=purchase_order_recieved[
+            'PurchaseOrderId'])
+
+        for i in purchaseorderdetail:
+            # res = updateProductQuantityForUpdate(model_to_dict(i.ProductId)['ProductId'], i.Quantity)
+            i.delete()
+        for i in purchaseItems:
+            purchase_order_detail=i
+            purchase_order_detail['PurchaseOrderDetailId']=purchase_order_recieved[
+            'PurchaseOrderId']
+            purchase_order_detail_serializer = PurchaseOrderDetailSerializer(data=purchase_order_detail)
+            purchase_order_detail_serializer.is_valid(raise_exception=True)
+            if purchase_order_detail_serializer.is_valid():
+                purchase_order_detail_serializer.save()
+                # res=updateProductQuantityForAdd(purchase_bill_detail_serializer.data['ProductId'],i['Quantity'])
+
+        return JsonResponse("updated", safe=False)
 
 
+def getPurchaseReturnById(request,pid=0):
+    try:
+        ResData={}
+        returns = PurchaseReturn.objects.get(PurchaseReturnId=pid)
+
+        purchase_details=PurchaseReturnDetail.objects.filter(PurchaseReturnDetailId=pid).select_related("ProductId")
+        index = 0
+        for i in purchase_details:
+
+            purchase_return_serializer = PurchaseReturnDetailSerializer(i)
+
+            ResData[index] =purchase_return_serializer.data
+
+            index+=1
+            # print(orderdetails_serializer.data['ProductId']['ProductId'])
+        returns_serializer=PurchaseReturnSerializer(returns)
+
+        FinalData=returns_serializer.data
+        FinalData['purchaseItems']=ResData
+
+        return JsonResponse(FinalData,safe=False)
+    except SalesOrdersOffline.DoesNotExist:
+        return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+def getPurchaseBillByBillno(request,bno=0):
+    # try:
+    #     ResData={}
+    #     bills = PurchaseBill.objects.get(BillNo=bno)
+    #     print(bills);
+    #     return(bills)
+    # except PurchaseBill.DoesNotExist:
+    print(bno)
+    ResData={}
+    bills = PurchaseBill.objects.get(BillNo=bno)
+    print(bills)
+    return bills
+
+    #     purchase_details=PurchaseBillDetail.objects.filter(PurchaseBillDetailId=pid).select_related("ProductId")
+    #     index = 0
+    #     for i in purchase_details:
+
+    #         purchase_bill_serializer = PurchaseBillDetailSerializer(i)
+
+    #         ResData[index] =purchase_bill_serializer.data
+
+    #         index+=1
+    #         # print(orderdetails_serializer.data['ProductId']['ProductId'])
+    #     bills_serializer=PurchaseBillSerializer(bills)
+
+    #     FinalData=bills_serializer.data
+    #     FinalData['purchaseItems']=ResData
+
+    #     return JsonResponse(FinalData,safe=False)
+    # except SalesOrdersOffline.DoesNotExist:
+    #     return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+def updatePurchaseReturnQuantityAdd(pid, quantity):
+        try:
+            product = Product.objects.get(ProductId=pid)
+
+        except Product.DoesNotExist:
+            return 'The Product does not exist'
+        product_serializer = ProductSerializer(product,  data=model_to_dict(product))
+
+        product_serializer.is_valid(raise_exception=True)
+        if product_serializer.is_valid():
+            print(product_serializer.validated_data['StockQTY'])
+            product_serializer.validated_data['StockQTY']=int(product_serializer.validated_data['StockQTY'])+int(quantity)
+            product_serializer.save()
+            return "Success"
 
 @csrf_exempt
 def stockAvailibilityApi(request):

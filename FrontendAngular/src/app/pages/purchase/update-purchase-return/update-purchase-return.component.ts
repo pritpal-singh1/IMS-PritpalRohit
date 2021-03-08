@@ -5,15 +5,14 @@ import {PurchaseReturn, PurchaseReturnItem} from '../purchase.model';
 import { HttpClient } from "@angular/common/http";
 import Swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
-import {NavigationEnd, Router} from '@angular/router';
-
+import {NavigationEnd, Router, ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-purchase-return',
-  templateUrl: './purchase-return.component.html',
-  styleUrls: ['./purchase-return.component.scss']
+  selector: 'app-update-purchase-return',
+  templateUrl: './update-purchase-return.component.html',
+  styleUrls: ['./update-purchase-return.component.scss']
 })
-export class PurchaseReturnComponent implements OnInit {
+export class UpdatePurchaseReturnComponent implements OnInit {
 
   breadCrumbItems: Array<{}>;
   selectValue = [
@@ -48,23 +47,16 @@ export class PurchaseReturnComponent implements OnInit {
    MRP;
    ProductData: any[];
    isShow: boolean = false;
+   items: PurchaseReturnItem[];
 
 
-  constructor(public purchaseservice: PurchaseService,public httpClient: HttpClient,public datepipe: DatePipe, private router: Router) { }
+  constructor(public purchaseservice: PurchaseService,public httpClient: HttpClient,public datepipe: DatePipe, private router: Router,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'Purchase' }, { label: 'Purchase Return', active: true }];
-    this.purchaseitem = new PurchaseReturnItem();
-    this.dataarray.push(this.purchaseitem);
-    this.getInvoice();
-    this.getSupplierList();
+    this.getBillDetails(this.route.snapshot.paramMap.get('id'));
     this.getProductList();
-  }
-  getInvoice(){
-    this.purchaseservice.getPurchaseReturnNumber().subscribe((data)=>{
-      console.log(data);
-      this.purchaseReturn.ReturnBillNo = "INV-00"+ (Number(data)+1);
-    })
+    this.purchaseitem= new PurchaseReturnItem();
+    this.getSupplierList();
   }
   getSupplierList(){
     this.httpClient.get("http://127.0.0.1:8000/supplier/").subscribe(data=>{
@@ -101,9 +93,11 @@ export class PurchaseReturnComponent implements OnInit {
         obj.GST = this.ProductData["GST"];
         //here we iterate a loop which will calculate the sub total as soon as user selects a product from 
         //the list
-        this.purchaseReturn.SubTotal += obj.Amount;
-        this.purchaseReturn.GST += Number(obj.GST);
-        this.purchaseReturn.TotalAmount = this.purchaseReturn.SubTotal + this.purchaseReturn.GST
+        // this.purchaseReturn.SubTotal += obj.Amount;
+        // this.purchaseReturn.GST += Number(obj.GST);
+        // this.purchaseReturn.TotalAmount = this.purchaseReturn.SubTotal + this.purchaseReturn.GST
+        this.calculate(obj);
+
       });
       this.isShow = true;
   }
@@ -130,10 +124,34 @@ export class PurchaseReturnComponent implements OnInit {
       this.purchaseReturn.Status = "Unpaid";
     }
   }
-  saveReturnWithoutPrint(event){
+  getBillDetails(id){
+    this.purchaseservice.getPurchaseReturnById(id).subscribe(data=>{
+      this.purchaseReturn = data as PurchaseReturn;
+      this.purchaseReturn.Date = this.datepipe.transform(this.purchaseReturn.Date,'yyyy-MM-dd');
+      console.log(this.purchaseReturn);
+      this.items = this.purchaseReturn.purchaseItems;
+      for (let i = 0; i <Object.keys(this.items).length;i++) {
+        this.purchaseitem = new PurchaseReturnItem();
+        this.purchaseitem.Quantity = this.items[i].Quantity;
+        this.purchaseitem.ProductId = this.items[i].ProductId;
+        this.purchaseitem.SalePrice = this.items[i].SalePrice;
+        this.purchaseitem.GST = this.items[i].GST;
+        this.purchaseitem.Amount = this.items[i].Amount;
+        this.dataarray.push(this.purchaseitem);
+      }
+
+    });
+  }
+  onSubmit(){
+
+  }
+  saveOrder(event) {
     this.purchaseReturn.purchaseItems = this.dataarray;
+    // this.purchaseBill.CreatedAt = (new Date()).toString;
+    // this.purchaseBill.Date = this.datepipe.transform(this.purchaseBill.Date,'longDate');
     this.purchaseReturn.Date = new Date(this.purchaseReturn.Date);
-    this.purchaseservice.addPurchaseReturn(this.purchaseReturn).subscribe(data => {
+    console.log(this.purchaseReturn);
+    this.purchaseservice.updatePurchaseReturn(this.purchaseReturn).subscribe(data => {
       
     });
     Swal.fire({
@@ -143,8 +161,9 @@ export class PurchaseReturnComponent implements OnInit {
       showConfirmButton: false,
       timer: 1500
     });
-  }
-  onSubmit(){
+    this.router.navigateByUrl('/', {skipLocationChange: true})
+    .then(() => this.router.navigate(['/purchase/manage-purchase-return']));
     
   }
+
 }
