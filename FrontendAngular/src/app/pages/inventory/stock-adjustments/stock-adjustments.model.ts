@@ -1,5 +1,5 @@
 export interface StockAdjustments {
-    StockAdjustmentsId: string;
+    StockAdjustmentsId: number;
     Date: string;
     Type: string;
     Reason: string;

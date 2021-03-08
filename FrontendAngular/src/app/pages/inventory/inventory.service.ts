@@ -25,11 +25,11 @@ export class InventoryService {
   saveStockAdjustmentsData(formdata:StockAdjustments) {
     return this.http.post(this.APIUrl + '/stockadjustment/',formdata);
   }
-  updateStockAdjustmentsData(): Observable<any[]>{
-    return this.http.get<any[]>(this.APIUrl + '/stockadjustment/');
+  updateStockAdjustmentsData(formdata:StockAdjustments){
+    return this.http.put(this.APIUrl + '/stockadjustment/'+formdata.StockAdjustmentsId,formdata);
   }
-  deleteStockAdjustmentsData(): Observable<any[]>{
-    return this.http.get<any[]>(this.APIUrl + '/stockadjustment/');
+  deleteStockAdjustmentsData(id){
+    return this.http.delete(this.APIUrl + '/stockadjustment/'+id);
   }
   getStockAdjustmentById(id:any){
     return this.http.get(this.APIUrl+'/stockadjusmentsbyid/'+id);

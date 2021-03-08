@@ -21,15 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8107d7b8-2b89-4408-a1fb-cbbf9f8518fc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/ecommerce/customers/customers.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/ecommerce/customers/customers.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/inventory.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/inventory.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/inventory.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/inventory.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/low-level-stock/low-level-stock.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/low-level-stock/low-level-stock.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/low-level-stock/low-level-stock.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/low-level-stock/low-level-stock.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/stock-adjustments/stock-adjustments.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/stock-adjustments/stock-adjustments.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/stock-adjustments/stock-adjustments.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/stock-adjustments/stock-adjustments.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/stock-adjustments/stock-adjustments.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/inventory/stock-adjustments/stock-adjustments.model.ts" afterDir="false" />
