@@ -55,6 +55,7 @@
 										<a
 											href="javascript:void(0);"
 											class="text-danger"
+											(click)="deleteData( item.StockAdjustmentsId)"
 											v-b-tooltip.hover
 											title="Delete"
 										>
@@ -87,10 +88,19 @@
 	<div class="modal-body p-3">
 		<div class="text-left">
 			<form (ngSubmit)="saveData()" [formGroup]="stockAdjustmentForm">
+			
+					<input
+					hidden
+						type="text"
+						class="form-control"
+						id="name"
+						placeholder="Enter name"
+						formControlName="StockAdjustmentsId"
+					/>
 				<div class="form-group">
 					<label for="name">Date</label>
 					<input
-						type="text"
+						type="Date"
 						class="form-control"
 						id="name"
 						placeholder="Enter name"
@@ -100,8 +110,8 @@
 
 				<div class="form-group">
 					<label for="email">Adjustment Type</label>
-					<div class="mt-4 mt-lg-0 row ml-3">
-						<div *ngFor="let item of types" class="form-check mb-3">
+					<div class=" mt-lg-0 row ml-3">
+						<div *ngFor="let item of types" class="form-check">
 							<input 
 								class="form-check-input"
 								type="radio"
@@ -111,24 +121,11 @@
 								id="exampleRadios1"
 								checked
 							/>
-							<label class="form-check-label" for="exampleRadios1">
+							<label class=" form-check-label" for="exampleRadios1">
 								{{item}}
 							</label>
 						</div>
-						<!-- <div class="form-check">
-							<input
-								class="form-check-input"
-								type="radio"
-								name="Type"
-								[value]=0
-								formControlName="Type"
-								id="exampleRadios2"
-								value="Credit"
-							/>
-							<label class="form-check-label" for="exampleRadios2">
-								Credit (+)
-							</label>
-						</div> -->
+						
 					</div>
 				</div>
 
@@ -153,7 +150,7 @@
 					<label>Quantity </label>
 					<input
 						class="form-control"
-						placeholder="Enter date"
+						placeholder="Enter Quantity"
 						formControlName="Quantity"
 					/>
 				</div>
@@ -161,7 +158,7 @@
 					<label>Amount </label>
 					<input
 						class="form-control"
-						placeholder="Enter date"
+						placeholder="Enter Amount"
 						formControlName="Amount"
 					/>
 				</div>
@@ -169,7 +166,7 @@
 					<label>Remarks </label>
 					<input
 						class="form-control"
-						placeholder="Enter date"
+						placeholder="Enter Remarks"
 						formControlName="Remarks"
 					/>
 				</div>
