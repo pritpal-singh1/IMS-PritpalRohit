@@ -157,6 +157,18 @@ export const MENU: MenuItem[] = [
                 link: '/sales/manage-invoice',
                 parentId: 3
             },
+            {
+                id: '',
+                label: 'New Sales Return',
+                link: '/sales/sales-return',
+                parentId: 3
+            },
+            {
+                id: '',
+                label: 'Manage Sales Returns',
+                link: '/sales/manage-sales-return',
+                parentId: 3
+            },
         ]
     },
     {
