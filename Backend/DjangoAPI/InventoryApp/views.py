@@ -7,8 +7,14 @@ from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 import json
 
-from InventoryApp.models import Category, Brand, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, Supplier, Employee,SalesOrdersOffline,SalesOrderOfflineDetail, Expense,CompanyDetails, PurchaseBill, PurchaseBillDetail, PurchaseOrder,PurchaseOrderDetail, PurchaseReturn, PurchaseReturnDetail,StockAdjustments
-from InventoryApp.serializers import CategorySerializer, BrandSerializer, RoleSerializer, AdminSerializer, ProductSerializer, CustomersOnlineSerializer, SalesOrderOnlineSerializer, SupplierSerializer, EmployeeSerializer,SalesOrdersOfflineSerializer,SalesOrderOfflineDetailSerializer,ExpenseSerializer,CompanyDetailsSerializer, PurchaseBillSerializer,PurchaseBillDetailSerializer,PurchaseOrderSerializer, PurchaseOrderDetailSerializer,StockAdjustmentsSerializer,PurchaseReturnSerializer, PurchaseReturnDetailSerializer
+from InventoryApp.models import Category, Brand, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, \
+    Supplier, Employee,SalesOrdersOffline,SalesOrderOfflineDetail, Expense,CompanyDetails, PurchaseBill, \
+    PurchaseBillDetail, PurchaseOrder,PurchaseOrderDetail,StockAdjustments
+from InventoryApp.serializers import CategorySerializer, BrandSerializer, RoleSerializer, AdminSerializer, \
+    ProductSerializer, CustomersOnlineSerializer, SalesOrderOnlineSerializer, SupplierSerializer, EmployeeSerializer,\
+    SalesOrdersOfflineSerializer,SalesOrderOfflineDetailSerializer,ExpenseSerializer,CompanyDetailsSerializer, \
+    PurchaseBillSerializer,PurchaseBillDetailSerializer,PurchaseOrderSerializer, PurchaseOrderDetailSerializer,StockAdjustmentsSerializer,\
+    SalesOrdersOfflineSerializer, SalesOrderOfflineDetailSerializer, ExpenseSerializer, CompanyDetailsSerializer, PurchaseBillSerializer, PurchaseBillDetailSerializer, PurchaseOrderSerializer, PurchaseOrderDetailSerializer, StockAdjustmentsSerializer
 
 
 from django.core.files.storage import default_storage
@@ -848,8 +854,7 @@ def stockAdjustmentsApi(request,sdid=0):
 
             res.append(result)
         print(res)
-        print(e[0].ProductId.ProductName)
-        print(e.values_list('Date','ProductId'))
+
         stockadj_serializer = StockAdjustmentsSerializer(stockadj, many=True)
         print(stockadj_serializer.data)
         return JsonResponse(res ,safe=False)
@@ -859,6 +864,11 @@ def stockAdjustmentsApi(request,sdid=0):
         stockadj_serializer = StockAdjustmentsSerializer(data=stockadj_data)
         print(stockadj_serializer)
         stockadj_serializer.is_valid(raise_exception=True)
+
+        if stockadj_data['Type']=="Credit":
+            updateProductQuantityForCredit(stockadj_data['ProductId'], stockadj_data['Quantity'])
+        else:
+            updateProductQuantityForAdd(stockadj_data['ProductId'], stockadj_data['Quantity'])
         if stockadj_serializer.is_valid():
             stockadj_serializer.save()
             return JsonResponse("Added", safe=False)
@@ -867,6 +877,7 @@ def stockAdjustmentsApi(request,sdid=0):
         stockadj_data = JSONParser().parse(request)
         stockadj = StockAdjustments.objects.get(StockAdjustmentsId=stockadj_data['StockAdjustmentsId'])
         stockadj_serializer = StockAdjustmentsSerializer(stockadj, data=stockadj_data)
+        updateProductQuantityForUpdate(stockadj_data['ProductId'], stockadj_data['Quantity'])
         if stockadj_serializer.is_valid():
             stockadj_serializer.save()
             return JsonResponse("updated", safe=False)
@@ -901,3 +912,19 @@ def getProductListName(request):
             res.append(result)
         print(res)
         return JsonResponse(res, safe=False)
+
+def updateProductQuantityForCredit(pid, quantity):
+    try:
+        product = Product.objects.get(ProductId=pid)
+
+    except Product.DoesNotExist:
+        return 'The Product does not exist'
+    product_serializer = ProductSerializer(product, data=model_to_dict(product))
+
+    product_serializer.is_valid(raise_exception=True)
+    if product_serializer.is_valid():
+        print(product_serializer.validated_data['StockQTY'])
+        product_serializer.validated_data['StockQTY'] = int(product_serializer.validated_data['StockQTY']) + int(
+            quantity)
+        product_serializer.save()
+        return "Success"

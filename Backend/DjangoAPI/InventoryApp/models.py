@@ -270,6 +270,35 @@ class PurchaseReturnDetail(models.Model):
     PurchaseReturnDetailId = models.AutoField(primary_key=True)
     PurchaseReturnId = models.ForeignKey(PurchaseReturn,db_column="PurchaseReturnId",on_delete=models.CASCADE)
     ProductId=models.ForeignKey(Product,db_column="ProductId",on_delete=models.CASCADE)
+    PurchaseReturnId = models.ForeignKey(PurchaseReturn, db_column="PurchaseReturnId", on_delete=models.CASCADE)
+    Quantity=models.CharField(max_length=10)
+    SalePrice=models.CharField(max_length=10)
+    Amount=models.CharField(max_length=10)
+    GST = models.CharField(max_length=100)
+
+
+class SalesReturn(models.Model):
+    SalesReturnId = models.AutoField(primary_key=True)
+    SalesReturnNo = models.CharField(max_length=100)
+    InvoiceNo=models.ForeignKey(SalesOrdersOffline,db_column="InvoiceNo",on_delete=models.CASCADE)
+    Reason = models.CharField(max_length=100)
+    Contact = models.CharField(max_length=100)
+    Date = models.DateTimeField()
+    ClientName = models.CharField(max_length=100)
+    PaymentMode = models.CharField(max_length=100)
+    TotalAmount=models.CharField(max_length=10)
+    AmountPaid=models.CharField(max_length=10)
+    Status=models.CharField(max_length=10)
+    CreatedAt=models.DateTimeField(auto_now_add=True)
+    Balance=models.CharField(max_length=100)
+    GST = models.CharField(max_length=100)
+    SubTotal=models.CharField(max_length=100)
+
+
+class SalesReturnDetail(models.Model):
+    SalesReturnDetailId = models.AutoField(primary_key=True)
+    ProductId=models.ForeignKey(Product,db_column="ProductId",on_delete=models.CASCADE)
+    SalesReturnId = models.ForeignKey(SalesReturn, db_column="SalesReturnId", on_delete=models.CASCADE)
     Quantity=models.CharField(max_length=10)
     SalePrice=models.CharField(max_length=10)
     Amount=models.CharField(max_length=10)

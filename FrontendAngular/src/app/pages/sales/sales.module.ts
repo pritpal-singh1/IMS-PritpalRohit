@@ -9,12 +9,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UiModule } from '../../shared/ui/ui.module';
 import { UpdateInvoiceComponent } from './update-invoice/update-invoice.component';
 import { PrintInvoiceComponent } from './print-invoice/print-invoice.component';
+import { SalesReturnComponent } from './sales-return/sales-return.component';
+import { ManageSalesReturnComponent } from './manage-sales-return/manage-sales-return.component';
+import { UpdateSalesReturnComponent } from './update-sales-return/update-sales-return.component';
 
 
 
 
 @NgModule({
-  declarations: [NewInvoiceComponent, ManageInvoiceComponent, UpdateInvoiceComponent, PrintInvoiceComponent],
+  declarations: [NewInvoiceComponent, ManageInvoiceComponent, UpdateInvoiceComponent, PrintInvoiceComponent, SalesReturnComponent, ManageSalesReturnComponent, UpdateSalesReturnComponent],
   imports: [
     CommonModule,
     SalesRoutingModule,
