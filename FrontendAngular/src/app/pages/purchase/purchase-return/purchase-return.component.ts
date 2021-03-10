@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { from } from 'rxjs';
 import {PurchaseService} from '../purchase.service';
-import {PurchaseReturn, PurchaseReturnItem} from '../purchase.model';
+import {PurchaseReturn, PurchaseReturnItem, PurchaseBill, purchaseItem} from '../purchase.model';
 import { HttpClient } from "@angular/common/http";
 import Swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
@@ -48,7 +48,9 @@ export class PurchaseReturnComponent implements OnInit {
    MRP;
    ProductData: any[];
    isShow: boolean = false;
-
+   bills:PurchaseBill[];
+   billNumbers = [];
+   purchaseItems = [];
 
   constructor(public purchaseservice: PurchaseService,public httpClient: HttpClient,public datepipe: DatePipe, private router: Router) { }
 
@@ -56,7 +58,8 @@ export class PurchaseReturnComponent implements OnInit {
     this.breadCrumbItems = [{ label: 'Purchase' }, { label: 'Purchase Return', active: true }];
     this.purchaseitem = new PurchaseReturnItem();
     this.dataarray.push(this.purchaseitem);
-    this.getInvoice();
+    // this.getInvoice();
+    this.getPurchaseBillNumbers();
     this.getSupplierList();
     this.getProductList();
   }
@@ -65,6 +68,17 @@ export class PurchaseReturnComponent implements OnInit {
       console.log(data);
       this.purchaseReturn.ReturnBillNo = "INV-00"+ (Number(data)+1);
     })
+  }
+  getPurchaseBillNumbers(){
+    this.purchaseservice.getAllBills().subscribe((data)=>{
+      this.bills = data as PurchaseBill[];
+      // console.log(this.bills);
+      this.bills.forEach(element => {
+        this.billNumbers.push(element.BillNo);
+        // console.log(element.BillNo);
+      });
+      console.log(this.billNumbers);
+    });
   }
   getSupplierList(){
     this.httpClient.get("http://127.0.0.1:8000/supplier/").subscribe(data=>{
@@ -83,6 +97,31 @@ export class PurchaseReturnComponent implements OnInit {
       console.log(this.AllProductList);
     });
   }
+  getPurchaseBillByBillno(bilNo){
+    this.httpClient.get("http://127.0.0.1:8000/getPurchaseBillByBillno/" + bilNo).subscribe((data) => {
+      // console.log(data['purchaseItems']);
+      this.purchaseItems = data['purchaseItems'];
+      this.purchaseItems.forEach(element => {
+        console.log(element.ProductId);
+        this.getProduct(element.ProductId);
+      });
+      // console.log(this.purchaseItems);
+    });
+    // console.log(this.purchaseItems);
+    
+  }
+  getProduct(id) {
+
+    this.httpClient
+      .get("http://127.0.0.1:8000/product/" + id)
+      .subscribe((data) => {
+
+        // this.purchaseBill['purchaseItems'][index]['ProductName'] = data['ProductName'];
+       this.AllProductList.push(data);
+        
+      });
+  }
+  
   getProductById(obj) {
     
     this.httpClient 

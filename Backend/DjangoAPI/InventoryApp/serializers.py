@@ -214,6 +214,7 @@ class PurchaseBillDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = PurchaseBillDetail
         fields = ('PurchaseBillDetailId',
+        'PurchaseBillId',
         'ProductId',
         'Quantity',
         'SalePrice',
@@ -242,6 +243,7 @@ class PurchaseOrderDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = PurchaseOrderDetail
         fields = ('PurchaseOrderDetailId',
+        'PurchaseOrderId',
         'ProductId',
         'Quantity',
         'SalePrice',
@@ -273,6 +275,7 @@ class PurchaseReturnDetailSerializer(serializers.ModelSerializer):
         model = PurchaseReturnDetail
         fields = (
             'PurchaseReturnDetailId',
+            'PurchaseReturnId',
             'ProductId',
             'Quantity',
             'SalePrice',

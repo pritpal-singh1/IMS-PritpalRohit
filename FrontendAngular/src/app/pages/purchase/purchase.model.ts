@@ -17,6 +17,7 @@ export class PurchaseBill{
 
 export class purchaseItem{
     PurchaseBillDetailId:number;
+    PurchaseBillId:number;
     ProductId: number;
     ProductName: string;
     Quantity: number;
@@ -44,6 +45,7 @@ export class PurchaseOrder{
 
 export class purchaseOrderItem{
     PurchaseOrderDetailId: number;
+    PurchaseOrderId: number;
     ProductId: number;
     ProductName: string;
     Quantity: number;
@@ -70,6 +72,7 @@ export class PurchaseReturn{
 }
 export class PurchaseReturnItem{
     PurchaseReturnDetailId: number;
+    PurchaseReturnId:number;
     ProductId: number;
     ProductName: string;
     Quantity: number;

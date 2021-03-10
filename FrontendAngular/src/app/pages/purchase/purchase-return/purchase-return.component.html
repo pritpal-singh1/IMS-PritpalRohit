@@ -18,7 +18,7 @@
 									<input
 									required
 									[class.is-invalid]="ReturnBillNo.invalid && ReturnBillNo.touched"
-										readonly
+										
 										style="font-weight: bold;"
 										type="text"
 										class=" form-control"
@@ -31,7 +31,7 @@
 									
 								</div>
 							</div>
-							<div class="form-group col-md-6">
+							<!-- <div class="form-group col-md-6">
 								<label>Purchase Bill No.</label>
 								<div class="input-group clockpicker">
 									<input
@@ -43,6 +43,8 @@
 										class=" form-control"
 										placeholder="Purchase Bill Number"
 										required
+										minlength="7"
+										(change)="getPurchaseBillByBillno(purchaseReturn.PurchaseBillNo)"
 									/>
 								
 								</div>
@@ -53,7 +55,26 @@
 								<small class="text-danger" *ngIf="PurchaseBillNo.errors.required">Purchase Bill No is required.</small>
 								
 							</div>
-							</div>
+							</div> -->
+							<div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Purchase Bill Number</label>
+                                    <!-- <input type="text" class="form-control" #Supplier="ngModel" [(ngModel)]="purchaseBill.Supplier" name="Supplier"
+                                    [class.is-invalid]="Supplier.invalid && Supplier.touched" required placeholder="Supplier Name"> -->
+                                    <ng-select #PurchaseBillNo="ngModel" [(ngModel)]="purchaseReturn.PurchaseBillNo" name="PurchaseBillNo"
+                                    [class.is-invalid]="PurchaseBillNo.invalid && PurchaseBillNo.touched" required placeholder="Purchase Bill Number "
+									(change)="getPurchaseBillByBillno(purchaseReturn.PurchaseBillNo)">
+                                        <ng-option *ngFor="let billNumber of billNumbers" [value]="billNumber">
+                                            {{billNumber}}
+                                        </ng-option>
+                                    </ng-select>
+                                    <div *ngIf="PurchaseBillNo.invalid && (PurchaseBillNo.dirty || PurchaseBillNo.touched)">
+                                        <small class="text-danger" *ngIf="PurchaseBillNo.errors.required">
+                                            Purchase Bill Number  is required.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
 						</div>
 						<div class="row">
                             <div class="form-group col-md-6">
