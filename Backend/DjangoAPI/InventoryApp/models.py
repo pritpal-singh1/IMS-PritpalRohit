@@ -177,11 +177,14 @@ class PurchaseBill(models.Model):
         return self.BillNo
 
 class PurchaseBillDetail(models.Model):
-    PurchaseBillDetailId=models.ForeignKey(PurchaseBill,db_column="PurchaseBillId",on_delete=models.CASCADE)
+    PurchaseBillDetailId =  models.AutoField(primary_key=True) 
+    PurchaseBillId = models.ForeignKey(PurchaseBill,db_column="PurchaseBillId",on_delete=models.CASCADE)
     ProductId=models.ForeignKey(Product,db_column="ProductId",on_delete=models.CASCADE)
     Quantity=models.CharField(max_length=10)
     SalePrice=models.CharField(max_length=10)
     Amount=models.CharField(max_length=10)
+    GST = models.CharField(max_length=100)
+
     # Discount=models.CharField(max_length=10)
 
     def __str__(self):
@@ -240,7 +243,8 @@ class StockAdjustments(models.Model):
 
 
 class PurchaseOrderDetail(models.Model):
-    PurchaseOrderDetailId = models.ForeignKey(PurchaseOrder,db_column="PurchaseOrderId",on_delete=models.CASCADE)
+    PurchaseOrderDetailId = models.AutoField(primary_key=True)
+    PurchaseOrderId = models.ForeignKey(PurchaseOrder,db_column="PurchaseOrderId",on_delete=models.CASCADE)
     ProductId=models.ForeignKey(Product,db_column="ProductId",on_delete=models.CASCADE)
     Quantity=models.CharField(max_length=10)
     SalePrice=models.CharField(max_length=10)
@@ -264,6 +268,7 @@ class PurchaseReturn(models.Model):
 
 class PurchaseReturnDetail(models.Model):
     PurchaseReturnDetailId = models.AutoField(primary_key=True)
+    PurchaseReturnId = models.ForeignKey(PurchaseReturn,db_column="PurchaseReturnId",on_delete=models.CASCADE)
     ProductId=models.ForeignKey(Product,db_column="ProductId",on_delete=models.CASCADE)
     Quantity=models.CharField(max_length=10)
     SalePrice=models.CharField(max_length=10)

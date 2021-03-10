@@ -28,15 +28,17 @@ export class PrintPurchaseOrderComponent implements OnInit {
     purchaseItems:[]
    }
    arr = [];
-
+   suppliers;
   constructor(public purchaseservice: PurchaseService,private router: Router,private route: ActivatedRoute,public httpClient: HttpClient) { }
 
   ngOnInit(): void {
-    this.getBillDetails(this.route.snapshot.paramMap.get('id'))
+    this.getBillDetails(this.route.snapshot.paramMap.get('id'));
+    this.getSupplierList();
   }
   getBillDetails(id){
     this.purchaseservice.getPurchaseOrderById(id).subscribe(data=>{
       this.purchaseOrder = data as PurchaseOrder;
+      this.getSupplierName(this.purchaseOrder.Supplier);
       for (let i = 0; i < Object.keys(this.purchaseOrder['purchaseItems']).length; i++) {
         
         this.getProductById(this.purchaseOrder['purchaseItems'][i]['ProductId'], i);
@@ -63,9 +65,25 @@ export class PrintPurchaseOrderComponent implements OnInit {
        
         
       });
-      
-      
-
-
   }
+  getSupplierName(supplierId){
+    var name;
+    this.suppliers.forEach(function(supplier){
+      // console.log(supplier)
+      if(supplier.SupplierId == supplierId){
+        console.log(supplier.CompanyName);
+        name = supplier.CompanyName;
+        // return supplier.Contact;
+      }
+    });
+    this.purchaseOrder.Supplier = name;
+    // console.log(this.purchaseBill.Contact);
+  }
+  getSupplierList(){
+    this.httpClient.get("http://127.0.0.1:8000/supplier/").subscribe(data=>{
+      this.suppliers = data;
+      console.log(this.suppliers);
+    })
+  }
+
 }

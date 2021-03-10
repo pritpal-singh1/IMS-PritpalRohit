@@ -55,7 +55,7 @@ export class PurchaseOrderComponent implements OnInit {
     this.breadCrumbItems = [{ label: 'Purchase' }, { label: 'Purchase Order', active: true }];
     this.purchaseitem = new purchaseOrderItem();
     this.dataarray.push(this.purchaseitem);
-    this.getInvoice();
+    // this.getInvoice();
     this.getSupplierList();
     this.getProductList();
   }

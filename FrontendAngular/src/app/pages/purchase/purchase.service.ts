@@ -66,4 +66,9 @@ import {PurchaseBill, PurchaseOrder, PurchaseReturn} from './purchase.model';
       return this.http.get(this.APIUrl+'/getPurchaseReturnById/'+id);
     }
 
+    // get Supplier
+    getSupplierById(id){
+      return this.http.get(this.APIUrl+'/supplier/'+id)
+    }
+
   }
