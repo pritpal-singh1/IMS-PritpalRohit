@@ -9,12 +9,12 @@ import json
 
 from InventoryApp.models import Category, Brand, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, \
     Supplier, Employee,SalesOrdersOffline,SalesOrderOfflineDetail, Expense,CompanyDetails, PurchaseBill, \
-    PurchaseBillDetail, PurchaseOrder,PurchaseOrderDetail,StockAdjustments
+    PurchaseBillDetail, PurchaseOrder,PurchaseOrderDetail,StockAdjustments,PurchaseReturn, PurchaseReturnDetail
 from InventoryApp.serializers import CategorySerializer, BrandSerializer, RoleSerializer, AdminSerializer, \
     ProductSerializer, CustomersOnlineSerializer, SalesOrderOnlineSerializer, SupplierSerializer, EmployeeSerializer,\
     SalesOrdersOfflineSerializer,SalesOrderOfflineDetailSerializer,ExpenseSerializer,CompanyDetailsSerializer, \
     PurchaseBillSerializer,PurchaseBillDetailSerializer,PurchaseOrderSerializer, PurchaseOrderDetailSerializer,StockAdjustmentsSerializer,\
-    SalesOrdersOfflineSerializer, SalesOrderOfflineDetailSerializer, ExpenseSerializer, CompanyDetailsSerializer, PurchaseBillSerializer, PurchaseBillDetailSerializer, PurchaseOrderSerializer, PurchaseOrderDetailSerializer, StockAdjustmentsSerializer
+    SalesOrdersOfflineSerializer, SalesOrderOfflineDetailSerializer, ExpenseSerializer, CompanyDetailsSerializer, PurchaseBillSerializer, PurchaseBillDetailSerializer, PurchaseOrderSerializer, PurchaseOrderDetailSerializer, StockAdjustmentsSerializer, PurchaseReturnSerializer, PurchaseReturnDetailSerializer
 
 
 from django.core.files.storage import default_storage
@@ -546,7 +546,7 @@ def getPurchaseBillById(request,pid=0):
         ResData={}
         bills = PurchaseBill.objects.get(PurchaseBillId=pid)
 
-        purchase_details=PurchaseBillDetail.objects.filter(PurchaseBillDetailId=pid).select_related("ProductId")
+        purchase_details=PurchaseBillDetail.objects.filter(PurchaseBillId=pid).select_related("ProductId")
         index = 0
         for i in purchase_details:
 
@@ -751,7 +751,7 @@ def getPurchaseReturnById(request,pid=0):
         ResData={}
         returns = PurchaseReturn.objects.get(PurchaseReturnId=pid)
 
-        purchase_details=PurchaseReturnDetail.objects.filter(PurchaseReturnDetailId=pid).select_related("ProductId")
+        purchase_details=PurchaseReturnDetail.objects.filter(PurchaseReturnId=pid).select_related("ProductId")
         index = 0
         for i in purchase_details:
 

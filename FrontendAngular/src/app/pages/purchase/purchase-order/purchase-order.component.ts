@@ -141,6 +141,10 @@ export class PurchaseOrderComponent implements OnInit {
       this.showbalance = true;
       this.purchaseOrder.Status = "Unpaid";
     }
+    else{
+      this.showbalance = false;
+      this.purchaseOrder.Status = "Paid";
+    }
   }
   saveOrderWithoutPrint(event) {
     this.purchaseOrder.purchaseItems = this.dataarray;

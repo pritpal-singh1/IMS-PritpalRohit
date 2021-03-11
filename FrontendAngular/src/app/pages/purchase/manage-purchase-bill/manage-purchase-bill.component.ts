@@ -27,12 +27,16 @@ export class ManagePurchaseBillComponent implements OnInit {
   isDtInitialized: boolean = false;
   dtOptions: DataTables.Settings = {};
 	dtTrigger: Subject<any> = new Subject<any>();
+	suppliers:any;
 
-  constructor(private router:Router,private http: HttpClient,public purchaseservice:PurchaseService) { }
+
+  constructor(private router:Router,private http: HttpClient,public purchaseservice:PurchaseService,public httpClient: HttpClient) { }
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'Purchase' }, { label: 'Manage Purchase Bill', active: true }];
-    this.getAllBills();
+    this.getSupplierList();
+	this.getAllBills();
+	this.changeSupplierName();
   }
   addPurchaseBill(){
     this.router.navigate(['/purchase/add-purchase-bill']);
@@ -50,6 +54,13 @@ export class ManagePurchaseBillComponent implements OnInit {
 				this.dtTrigger.next();
 			}
     }); 
+	
+  }
+  getSupplierList(){
+    this.httpClient.get("http://127.0.0.1:8000/supplier/").subscribe(data=>{
+      this.suppliers = data;
+      console.log(this.suppliers);
+    })
   }
   deleteBill(bill: PurchaseBill) {
 		Swal.fire({
@@ -73,6 +84,11 @@ export class ManagePurchaseBillComponent implements OnInit {
 				);
 			}
 		});
+	}
+	changeSupplierName(){
+		for(var i=0;i<this.bills.length;i++){
+			console.log(this.bills[i]);
+		}
 	}
 
 }

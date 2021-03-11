@@ -230,18 +230,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-3">
-							<label class="">Payment Mode</label>
-							<ng-select 
-							required
-							 	[(ngModel)]="purchaseOrder.PurchaseType"
-							name="PurchaseType">
-								<ng-option [value]="item.name" *ngFor="let item of selectValue">{{
-									item.name
-								}}</ng-option>
-							</ng-select>
-							
-						</div>
+						
 						<div class="col-md-3">
 							<label class="">Amount Paid</label>
 							<input
@@ -275,6 +264,18 @@
 								type="text"
 								placeholder="Balance"
 							/>
+						</div>
+						<div class="col-md-3">
+							<label class="">Payment Mode</label>
+							<ng-select 
+							required
+							 	[(ngModel)]="purchaseOrder.PurchaseType"
+							name="PurchaseType">
+								<ng-option [value]="item.name" *ngFor="let item of selectValue">{{
+									item.name
+								}}</ng-option>
+							</ng-select>
+							
 						</div>
 						<div class="col-md-2"></div>
 						<div class="col-md-4 ">

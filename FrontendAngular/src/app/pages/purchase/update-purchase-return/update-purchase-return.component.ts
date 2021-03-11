@@ -123,6 +123,10 @@ export class UpdatePurchaseReturnComponent implements OnInit {
       this.showbalance = true;
       this.purchaseReturn.Status = "Unpaid";
     }
+    else{
+      this.showbalance = false;
+      this.purchaseReturn.Status = "Paid";
+    }
   }
   getBillDetails(id){
     this.purchaseservice.getPurchaseReturnById(id).subscribe(data=>{
