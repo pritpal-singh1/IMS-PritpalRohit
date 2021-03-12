@@ -49,6 +49,9 @@ urlpatterns=[
     url(r'^getPurchaseOrderById/([0-9]+)$',views.getPurchaseOrderById),
 
     url(r'^getPurchaseReturnNo/$',views.getPurchaseReturnNo),
+    url(r'^addPurchaseReturn/$',views.newPurchaseReturn),
+    url(r'^addPurchaseReturn/([0-9]+)$',views.newPurchaseReturn),
+
     url(r'^getPurchaseBillByBillno/(INV-00[0-9]+)$',views.getPurchaseBillByBillno),
 
 

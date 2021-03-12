@@ -497,7 +497,7 @@ def newPurchaseBill(request,pid=0):
 
         for i in purchaseItems:
             purchase_bill_detail=i
-            purchase_bill_detail['PurchaseBillDetailId']=purchase_bill_id
+            purchase_bill_detail['PurchaseBillId']=purchase_bill_id
             purchase_bill_detail_serializer = PurchaseBillDetailSerializer(data=purchase_bill_detail)
             purchase_bill_detail_serializer.is_valid(raise_exception=True)
             if purchase_bill_detail_serializer.is_valid():
@@ -512,13 +512,12 @@ def newPurchaseBill(request,pid=0):
         return JsonResponse(bills_serializer.data, safe=False)
     elif request.method == 'DELETE':
         # import pdb;pdb.set_trace()
-        billdetail=PurchaseBillDetail.objects.filter(PurchaseBillDetailId=pid)
+        billdetail=PurchaseBillDetail.objects.filter(PurchaseBillId=pid)
         for i in billdetail:
             i.delete()
         bills = PurchaseBill.objects.get(PurchaseBillId = pid)
         bills.delete()
         return JsonResponse("Deleted",safe=False)
-
     elif request.method == 'PUT':
         purchase_bill=JSONParser().parse(request)
         purchaseItems = purchase_bill['purchaseItems']
@@ -529,7 +528,7 @@ def newPurchaseBill(request,pid=0):
         purchase_bill_serializer = PurchaseBillSerializer(purchase_bill, data=purchase_bill_recieved)
         if purchase_bill_serializer.is_valid():
             purchase_bill_serializer.save()
-        purchasebilldetail = PurchaseBillDetail.objects.filter(PurchaseBillDetailId=purchase_bill_recieved[
+        purchasebilldetail = PurchaseBillDetail.objects.filter(PurchaseBillId=purchase_bill_recieved[
             'PurchaseBillId'])
 
         for i in purchasebilldetail:
@@ -537,7 +536,7 @@ def newPurchaseBill(request,pid=0):
             i.delete()
         for i in purchaseItems:
             purchase_bill_detail=i
-            purchase_bill_detail['PurchaseBillDetailId']=purchase_bill_recieved[
+            purchase_bill_detail['PurchaseBillId']=purchase_bill_recieved[
             'PurchaseBillId']
             purchase_bill_detail_serializer = PurchaseBillDetailSerializer(data=purchase_bill_detail)
             purchase_bill_detail_serializer.is_valid(raise_exception=True)
@@ -600,7 +599,7 @@ def newPurchaseOrder(request,pid=0):
 
         for i in purchaseItems:
             purchase_order_detail=i
-            purchase_order_detail['PurchaseOrderDetailId']=purchase_order_id
+            purchase_order_detail['PurchaseOrderId']=purchase_order_id
             purchase_order_detail_serializer = PurchaseOrderDetailSerializer(data=purchase_order_detail)
             purchase_order_detail_serializer.is_valid(raise_exception=True)
             if purchase_order_detail_serializer.is_valid():
@@ -615,7 +614,7 @@ def newPurchaseOrder(request,pid=0):
         return JsonResponse(orders_serializer.data, safe=False)
     elif request.method == 'DELETE':
         # import pdb;pdb.set_trace()
-        orderdetail=PurchaseOrderDetail.objects.filter(PurchaseOrderDetailId=pid)
+        orderdetail=PurchaseOrderDetail.objects.filter(PurchaseOrderId=pid)
         for i in orderdetail:
             i.delete()
         orders = PurchaseOrder.objects.get(PurchaseOrderId = pid)
@@ -632,7 +631,7 @@ def newPurchaseOrder(request,pid=0):
         purchase_order_serializer = PurchaseOrderSerializer(purchase_order, data=purchase_order_recieved)
         if purchase_order_serializer.is_valid():
             purchase_order_serializer.save()
-        purchaseorderdetail = PurchaseOrderDetail.objects.filter(PurchaseOrderDetailId=purchase_order_recieved[
+        purchaseorderdetail = PurchaseOrderDetail.objects.filter(PurchaseOrderId=purchase_order_recieved[
             'PurchaseOrderId'])
 
         for i in purchaseorderdetail:
@@ -640,7 +639,7 @@ def newPurchaseOrder(request,pid=0):
             i.delete()
         for i in purchaseItems:
             purchase_order_detail=i
-            purchase_order_detail['PurchaseOrderDetailId']=purchase_order_recieved[
+            purchase_order_detail['PurchaseOrderId']=purchase_order_recieved[
             'PurchaseOrderId']
             purchase_order_detail_serializer = PurchaseOrderDetailSerializer(data=purchase_order_detail)
             purchase_order_detail_serializer.is_valid(raise_exception=True)
@@ -689,7 +688,7 @@ def getPurchaseReturnNo(request):
 
 
 @csrf_exempt
-def newPurchaseOrder(request,pid=0):
+def newPurchaseReturn(request,pid=0):
     if request.method=="POST":
         purchase_return=JSONParser().parse(request)
         purchaseItems=purchase_return['purchaseItems']
@@ -702,14 +701,14 @@ def newPurchaseOrder(request,pid=0):
 
         for i in purchaseItems:
             purchase_return_detail=i
-            purchase_return_detail['PurchaseReturnDetailId']=purchase_return_id
+            purchase_return_detail['PurchaseReturnId']=purchase_return_id
             purchase_return_detail_serializer = PurchaseReturnDetailSerializer(data=purchase_return_detail)
             purchase_return_detail_serializer.is_valid(raise_exception=True)
             if purchase_return_detail_serializer.is_valid():
                 purchase_return_detail_serializer.save()
                 res=updatePurchaseReturnQuantityAdd(purchase_return_detail_serializer.data['ProductId'],i['Quantity'])
                 # purchase_bill_Added = "Purchase Bill Successfully Added"
-        return JsonResponse({"response":"Purchase Order Successfully Added","PurchaseId":purchase_order_id}, safe=False)
+        return JsonResponse({"response":"Purchase Order Successfully Added","PurchaseId":purchase_return_id}, safe=False)
     elif request.method == 'GET':
         returns = PurchaseReturn.objects.all()
 
@@ -717,7 +716,7 @@ def newPurchaseOrder(request,pid=0):
         return JsonResponse(return_serializer.data, safe=False)
     elif request.method == 'DELETE':
         # import pdb;pdb.set_trace()
-        returndetail=PurchaseReturnDetail.objects.filter(PurchaseReturnDetailId=pid)
+        returndetail=PurchaseReturnDetail.objects.filter(PurchaseReturnId=pid)
         for i in returndetail:
             i.delete()
         returns = PurchaseReturn.objects.get(PurchaseReturnId = pid)
@@ -729,21 +728,21 @@ def newPurchaseOrder(request,pid=0):
         purchaseItems = purchase_order['purchaseItems']
 
         purchase_order_recieved = dict(list(purchase_order.items())[:len(purchase_order) - 1])
-        purchase_order = PurchaseOrder.objects.get(PurchaseOrderId=purchase_order_recieved[
-            'PurchaseOrderId'])
+        purchase_order = PurchaseOrder.objects.get(PurchaseReturnId=purchase_order_recieved[
+            'PurchaseReturnId'])
         purchase_order_serializer = PurchaseOrderSerializer(purchase_order, data=purchase_order_recieved)
         if purchase_order_serializer.is_valid():
             purchase_order_serializer.save()
-        purchaseorderdetail = PurchaseOrderDetail.objects.filter(PurchaseOrderDetailId=purchase_order_recieved[
-            'PurchaseOrderId'])
+        purchaseorderdetail = PurchaseOrderDetail.objects.filter(PurchaseReturnId=purchase_order_recieved[
+            'PurchaseReturnId'])
 
         for i in purchaseorderdetail:
             # res = updateProductQuantityForUpdate(model_to_dict(i.ProductId)['ProductId'], i.Quantity)
             i.delete()
         for i in purchaseItems:
             purchase_order_detail=i
-            purchase_order_detail['PurchaseOrderDetailId']=purchase_order_recieved[
-            'PurchaseOrderId']
+            purchase_order_detail['PurchaseReturnId']=purchase_order_recieved[
+            'PurchaseReturnId']
             purchase_order_detail_serializer = PurchaseOrderDetailSerializer(data=purchase_order_detail)
             purchase_order_detail_serializer.is_valid(raise_exception=True)
             if purchase_order_detail_serializer.is_valid():
@@ -778,36 +777,30 @@ def getPurchaseReturnById(request,pid=0):
         return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
 def getPurchaseBillByBillno(request,bno=0):
-    # try:
-    #     ResData={}
-    #     bills = PurchaseBill.objects.get(BillNo=bno)
-    #     print(bills);
-    #     return(bills)
-    # except PurchaseBill.DoesNotExist:
-    print(bno)
-    ResData={}
-    bills = PurchaseBill.objects.get(BillNo=bno)
-    print(bills)
-    return bills
+    try:
+        ResData={}
+        bills = PurchaseBill.objects.get(BillNo=bno)
+        bills_serializer=PurchaseBillSerializer(bills)
+        FinalData=bills_serializer.data
+        purchasebillid = FinalData['PurchaseBillId']
+        # import pdb;pdb.set_trace()
+        print(purchasebillid)
+        purchase_details=PurchaseBillDetail.objects.filter(PurchaseBillId=purchasebillid).select_related("ProductId")
+        index = 0
+        for i in purchase_details:
 
-    #     purchase_details=PurchaseBillDetail.objects.filter(PurchaseBillDetailId=pid).select_related("ProductId")
-    #     index = 0
-    #     for i in purchase_details:
+            purchase_bill_serializer = PurchaseBillDetailSerializer(i)
 
-    #         purchase_bill_serializer = PurchaseBillDetailSerializer(i)
+            ResData[index] =purchase_bill_serializer.data
 
-    #         ResData[index] =purchase_bill_serializer.data
+            index+=1
+            # print(orderdetails_serializer.data['ProductId']['ProductId'])
+        
+        FinalData['purchaseItems']=ResData
 
-    #         index+=1
-    #         # print(orderdetails_serializer.data['ProductId']['ProductId'])
-    #     bills_serializer=PurchaseBillSerializer(bills)
-
-    #     FinalData=bills_serializer.data
-    #     FinalData['purchaseItems']=ResData
-
-    #     return JsonResponse(FinalData,safe=False)
-    # except SalesOrdersOffline.DoesNotExist:
-    #     return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
+        return JsonResponse(FinalData,safe=False)
+    except SalesOrdersOffline.DoesNotExist:
+        return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
 def updatePurchaseReturnQuantityAdd(pid, quantity):
         try:

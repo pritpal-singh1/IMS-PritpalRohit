@@ -53,7 +53,7 @@ export class AddPurchaseBillComponent implements OnInit {
   ngOnInit(): void {
     this.purchaseitem = new purchaseItem();
     this.dataarray.push(this.purchaseitem);
-    this.getInvoice();
+    // this.getInvoice();
     this.getSupplierList();
     this.getProductList();
     this.breadCrumbItems = [{ label: 'Purchase' }, { label: 'Add Purchase Bill', active: true }];
@@ -107,7 +107,7 @@ export class AddPurchaseBillComponent implements OnInit {
         obj.SalePrice = this.ProductData["SalePrice"];
         obj.Quantity = 1;
          //calcultae the amount when used select one product on the basis of the unit price
-         obj.Amount = obj.SalePrice * obj.Quantity;
+        obj.Amount = obj.SalePrice * obj.Quantity;
          //calcultae the GST when used select one product on the basis of the unit price
         obj.GST = this.ProductData["GST"];
         //here we iterate a loop which will calculate the sub total as soon as user selects a product from 
