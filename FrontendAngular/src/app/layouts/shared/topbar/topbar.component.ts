@@ -7,6 +7,7 @@ import { AuthenticationService } from '../../../core/services/auth.service';
 import { AuthfakeauthenticationService } from '../../../core/services/authfake.service';
 import { LanguageService } from '../../../core/services/language.service';
 import { environment } from '../../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-topbar',
@@ -21,7 +22,7 @@ export class TopbarComponent implements OnInit {
   flagvalue;
   countryName;
   valueset: string;
-
+  UserFullName: string;
   listLang = [
     { text: 'English', flag: 'assets/images/flags/us.jpg', lang: 'en' },
     { text: 'Spanish', flag: 'assets/images/flags/spain.jpg', lang: 'es' },
@@ -31,7 +32,7 @@ export class TopbarComponent implements OnInit {
   ];
 
   // tslint:disable-next-line: max-line-length
-  constructor(@Inject(DOCUMENT) private document: any, private router: Router, private authService: AuthenticationService, private authFackservice: AuthfakeauthenticationService, public languageService: LanguageService, public cookiesService: CookieService) { }
+  constructor(@Inject(DOCUMENT) private document: any, private http: HttpClient, private authservice: AuthenticationService, private router: Router, private authService: AuthenticationService, private authFackservice: AuthfakeauthenticationService, public languageService: LanguageService, public cookiesService: CookieService) { }
 
   @Output() mobileMenuButtonClicked = new EventEmitter();
   @Output() settingsButtonClicked = new EventEmitter();
@@ -51,6 +52,12 @@ export class TopbarComponent implements OnInit {
     } else {
       this.flagvalue = val.map(element => element.flag);
     }
+    console.log()
+    this.http.get('http://127.0.0.1:8000/getUser/'+this.authservice.currentUserValue()['EmployeeId']).subscribe(data => {
+      this.UserFullName = (data as any).EmployeeName;
+      console.log(this.UserFullName);
+    })
+
   }
 
   /**
@@ -126,5 +133,6 @@ export class TopbarComponent implements OnInit {
     }
     this.router.navigate(['/account/login']);
   }
+ 
   
 }

@@ -16,7 +16,9 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
       
-            const currentUser = this.authenticationService.currentUserValue();
+        const currentUser = this.authenticationService.currentUserValue();
+        console.log("hello");
+        console.log(route.data);
             if (currentUser) {
                 // logged in so return true
                 console.log(currentUser);
@@ -28,4 +30,17 @@ export class AuthGuard implements CanActivate {
         this.router.navigate(['/account/login'], { queryParams: { returnUrl: state.url } });
         return false;
     }
+    // checkUserLogin(route: ActivatedRouteSnapshot, url: any): boolean {
+    //     if (this.authenticationService.isLoggedIn()) {
+    //       const userRole = this.authenticationService.getRole();
+    //       if (route.data.role && route.data.role.indexOf(userRole) === -1) {
+    //         this.router.navigate(['/home']);
+    //         return false;
+    //       }
+    //       return true;
+    //     }
+    
+    //     this.router.navigate(['/home']);
+    //     return false;
+    //   }
 }

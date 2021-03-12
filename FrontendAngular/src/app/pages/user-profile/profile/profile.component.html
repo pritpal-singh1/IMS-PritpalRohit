@@ -1,0 +1,199 @@
+<div class="container-fluid">
+    <!-- start page title -->
+    <app-pagetitle title="My Profile"></app-pagetitle>
+    <!-- end page title -->
+    <form #form="ngForm">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">My Profile</h4>
+                        <!-- <p class="card-title-desc">Here are examples of <code>.form-control</code> applied to each
+                textual HTML5 <code>&lt;input&gt;</code> <code>type</code>.</p> -->
+                        <div hidden class="form-group row">
+                            <label for="example-text-input" class="col-md-2 col-form-label">Name:</label>
+                            <div class="col-md-10">
+                                <input class="form-control" name='EmployeeId' type="text" [(ngModel)]="profileData.EmployeeId"
+                                    id="example-text-input" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-md-2 col-form-label">Name:</label>
+                            <div class="col-md-10">
+                                <input class="form-control border" [class.border-danger]="!isDisabled"
+                                    [class.is-invalid]="EmployeeName.invalid" [disabled]="isDisabled" type="text"
+                                    name="EmployeeName" #EmployeeName="ngModel" [(ngModel)]="profileData.EmployeeName"
+                                    id="example-text-input" required
+                                    pattern="^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$" />
+                                <div *ngIf="EmployeeName.invalid && (EmployeeName.dirty || EmployeeName.touched)">
+                                    <small class="text-danger" *ngIf="EmployeeName.errors.required">Name is
+                                        required.</small>
+                                    <small class="text-danger" *ngIf="EmployeeName.errors.pattern">
+                                        Name should not contain any special characters.
+                                    </small>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-md-2 col-form-label">Email Id:</label>
+                            <div class="col-md-10">
+                                <input class="form-control border" [class.border-danger]="!isDisabled"
+                                    [class.is-invalid]="EmailId.invalid" [disabled]="isDisabled" type="text"
+                                    name="EmailId" #EmailId="ngModel" [(ngModel)]="profileData.EmailId"
+                                    id="example-text-input" required
+                                    pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" />
+                                <div *ngIf="EmailId.invalid && (EmailId.dirty || EmailId.touched)">
+                                    <small class="text-danger" *ngIf="EmailId.errors.required">Email Id is
+                                        required.</small>
+                                    <small class="text-danger" *ngIf="EmailId.errors.pattern">
+                                        Enter Valid Email Id.
+                                    </small>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-md-2 col-form-label">Gender:</label>
+                            <div class="col-md-4">
+                                <div  >
+                                    <ng-select class="form-group border" [class.border-danger]="!isDisabled" 
+                                     [disabled]="isDisabled" [class.is-invalid]="Gender.invalid" 
+                                    name="Gender" #Gender="ngModel" [(ngModel)]="profileData.Gender"
+                                    id="example-text-input">
+                                        <ng-option [value]="item" *ngFor="let item of genders">{{ item }}
+                                        </ng-option>
+                                      </ng-select>
+                                </div>
+
+
+
+                                <!-- <div *ngIf="Gender.invalid && (Gender.dirty || Gender.touched)">
+                                    <small class="text-danger" *ngIf="Gender.errors.required">GSTIN is required.</small>
+                                    <small class="text-danger" *ngIf="Gender.errors.pattern">
+                                        Please enter a valid GSTIN.
+                                    </small>
+
+                                </div> -->
+                            </div>
+                            <!-- </div>
+              <div class="form-group row"> -->
+                            <label for="example-text-input" class="col-md-2 col-form-label">Mobile No.:</label>
+                            <div class="col-md-4">
+                                <input class="form-control border" [class.border-danger]="!isDisabled"
+                                    [disabled]="isDisabled" [class.is-invalid]="MobileNo.invalid" type="text"
+                                    name="MobileNo" #MobileNo="ngModel" [(ngModel)]="profileData.MobileNo"
+                                    id="example-text-input" required pattern="^[2-9]{1}[0-9]{9}$" />
+                                <div *ngIf="MobileNo.invalid && (MobileNo.dirty || MobileNo.touched)">
+                                    <small class="text-danger" *ngIf="MobileNo.errors.required">Mobile number is
+                                        required.</small>
+                                    <small class="text-danger" *ngIf="MobileNo.errors.pattern">
+                                        Enter a valid mobile number.
+                                    </small>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-md-2 col-form-label">Address:</label>
+                            <div class="col-md-10">
+                                <input class="form-control border" [class.border-danger]="!isDisabled"
+                                    [disabled]="isDisabled" [class.is-invalid]="Address.invalid" type="text"
+                                    name="Address" #Address="ngModel" [(ngModel)]="profileData.Address"
+                                    id="example-text-input" required />
+                                <div *ngIf="Address.invalid && (Address.dirty || Address.touched)">
+                                    <small class="text-danger" *ngIf="Address.errors.required">Address is
+                                        required.</small>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-md-2 col-form-label">Date of Birth:</label>
+                            <div class="col-md-4">
+                                <input class="form-control border" [class.border-danger]="!isDisabled"
+                                    [disabled]="isDisabled" [class.is-invalid]="DOB.invalid" type="date"
+                                    [(ngModel)]="profileData.DOB" name="DOB" #DOB="ngModel" id="example-text-input"
+                                    required  />
+                                <div *ngIf="DOB.invalid && (DOB.dirty || DOB.touched)">
+                                    <small class="text-danger" *ngIf="DOB.errors.required">Date of Birth is required.</small>
+                                  
+
+                                </div>
+                            </div>
+                            <!-- </div>
+              <div class="form-group row"> -->
+                            <label for="example-text-input" class="col-md-2 col-form-label">Adhar No.:</label>
+                            <div class="col-md-4">
+                                <input class="form-control border" [class.border-danger]="!isDisabled"
+                                    [disabled]="isDisabled" [class.is-invalid]="AdhaarNo.invalid" type="text"
+                                    name="AdhaarNo" #AdhaarNo="ngModel" [(ngModel)]="profileData.AdhaarNo"
+                                    id="example-text-input" required pattern="^[0-9]{12}$" />
+                                <div *ngIf="AdhaarNo.invalid && (AdhaarNo.dirty || AdhaarNo.touched)">
+                                    <small class="text-danger" *ngIf="AdhaarNo.errors.required">Adhar Number is
+                                        required.</small>
+                                    <small class="text-danger" *ngIf="AdhaarNo.errors.pattern">
+                                        Enter valid adhar number.
+                                    </small>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-md-2 col-form-label">Contact Person
+                                Number:</label>
+                            <div class="col-md-4">
+                                <input class="form-control border" [class.border-danger]="!isDisabled"
+                                    [disabled]="isDisabled" [class.is-invalid]="ContactPersonNo.invalid" type="text"
+                                    name="ContactPersonNo" #ContactPersonNo="ngModel"
+                                    [(ngModel)]="profileData.ContactPersonNo" id="example-text-input" required
+                                    pattern="^[2-9]{1}[0-9]{9}$" />
+                                <div
+                                    *ngIf="ContactPersonNo.invalid && (ContactPersonNo.dirty || ContactPersonNo.touched)">
+                                    <small class="text-danger" *ngIf="ContactPersonNo.errors.required">Contact person number is
+                                        required.</small>
+                                    <small class="text-danger" *ngIf="ContactPersonNo.errors.pattern">
+                                        Please enter valid contact number.
+                                    </small>
+
+                                </div>
+                            </div>
+                            <!-- </div>
+              <div class="form-group row"> -->
+                            <label for="example-text-input" class="col-md-2 col-form-label">Contact Person:</label>
+                            <div class="col-md-4">
+                                <input class="form-control border" [class.border-danger]="!isDisabled"
+                                    [disabled]="isDisabled" [class.is-invalid]="ContactPerson.invalid" type="type"
+                                    name="ContactPerson" #ContactPerson="ngModel"
+                                    [(ngModel)]="profileData.ContactPerson" id="example-text-input" required
+                                    pattern="^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$"  />
+                                <div *ngIf="ContactPerson.invalid && (ContactPerson.dirty || ContactPerson.touched)">
+                                    <small class="text-danger" *ngIf="ContactPerson.errors.required">Contact Person Name is
+                                        required.</small>
+                                    <small class="text-danger" *ngIf="ContactPerson .errors.pattern">
+                                        Enter a valid name for the field.
+                                    </small>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="text-right">
+                                <button 	(click)="updateProfileData()" type="button" [disabled]="form.form.invalid" *ngIf="!isDisabled"
+                                    class="btn btn-primary mr-3">
+                                    <i class="fas fa-save editcolor"></i>&nbsp;Submit
+                                </button>
+                                <button 	(click)="changeButtons()" type="button" *ngIf="isDisabled" class="btn btn-danger">
+                                    <i class="fas fa-edit editcolor"></i>&nbsp;Edit My Profile
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end col -->
+        </div>
+    </form>
+    <!-- end row -->
+</div>

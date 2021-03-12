@@ -33,6 +33,8 @@ import { MasterModule } from './master/master.module';
 
 import { RoleConfigurationComponent } from './role-configuration/role-configuration.component';
 import { CompanyDetailsComponent } from './company-details/company-details.component';
+import { ProfileComponent } from './user-profile/profile/profile.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 
@@ -44,7 +46,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 };
 
 @NgModule({
-  declarations: [DashboardComponent, CalendarComponent, ChatComponent, KanbanComponent, RoleConfigurationComponent, CompanyDetailsComponent],
+  declarations: [DashboardComponent, CalendarComponent, ChatComponent, KanbanComponent, RoleConfigurationComponent, CompanyDetailsComponent, ProfileComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -62,6 +64,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FullCalendarModule,
     EcommerceModule, EmailModule,
     IconsModule,
+    NgSelectModule,
     ChartModule,
     FormModule,
     TablesModule,
