@@ -1,5 +1,7 @@
 from django.conf.urls import url
 from InventoryApp import views
+from django.urls import path
+
 
 from django.conf.urls.static import static
 from django.conf import settings
@@ -60,5 +62,11 @@ urlpatterns=[
     url(r'stockadjustment/$',views.stockAdjustmentsApi),
     url(r'getProductListName/$',views.getProductListName),
     url(r'stockadjusmentsbyid/([0-9]+)$',views.getStockAdjustmentByIdApi),
-    url(r'^SaveFile$',views.SaveProductImage)
+    url(r'^SaveFile$',views.SaveProductImage),
+    url(r'register/$',views.register),
+    url(r'login/$',views.login),
+    url(r'getEmployeeListName/$',views.getAllEmployees),
+    url(r'getAllUsers/$',views.getUsers),
+    url(r'getAllUsers/([0-9]+)$',views.getUsers),
+    url(r'getUserById/([0-9]+)$',views.getUserDetailsById),
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

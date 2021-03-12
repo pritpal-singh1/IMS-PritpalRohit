@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class Role(models.Model):
@@ -35,6 +35,19 @@ class AdminUser(models.Model):
     Role=models.ForeignKey(Role,db_column="RoleId",on_delete=models.CASCADE)
     def __str__(self):
         return self.UserId
+
+class User(AbstractUser):
+    UserId = models.AutoField(primary_key=True)
+    password = models.CharField(max_length=255)
+    email=models.CharField(max_length=255,unique=True)
+    username = None
+    Status = models.CharField(max_length=100)
+    EmployeeId = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    Role = models.ForeignKey(Role, db_column="RoleId", on_delete=models.CASCADE)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
 
 
 class Category(models.Model):

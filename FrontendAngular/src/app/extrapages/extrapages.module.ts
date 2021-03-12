@@ -11,13 +11,15 @@ import { Register1Component } from './register1/register1.component';
 import { RecoverpasswordComponent } from './recoverpassword/recoverpassword.component';
 import { LockscreenComponent } from './lockscreen/lockscreen.component';
 import { ComingsoonComponent } from './comingsoon/comingsoon.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   // tslint:disable-next-line: max-line-length
   declarations: [MaintenanceComponent, Page404Component, Page500Component, Login1Component, Register1Component, RecoverpasswordComponent, LockscreenComponent, ComingsoonComponent],
   imports: [
     CommonModule,
-    ExtrapagesRoutingModule
+    ExtrapagesRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class ExtrapagesModule { }

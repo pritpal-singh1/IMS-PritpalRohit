@@ -1,70 +1,68 @@
 <div class="container-fluid">
-    <!-- start page title -->
+  <!-- start page title -->
   <app-pagetitle title="Add User" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
   <!-- end page title -->
+  <form (ngSubmit)="saveData()" [formGroup]="userData" class="needs-validation">
   <div class="row">
+ 
     <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Add New User</h4>
-                <div class="form-group row">
-                    <label class="col-md-2 col-form-label">Select Employee:</label>
-                    <div class="col-md-4">
-                      <select class="form-control">
-                        <option>Select</option>
-                        <option>Large select</option>
-                        <option>Small select</option>
-                      </select>
-                    </div>
-                    <label class="col-md-2 col-form-label">Assign Role:</label>
-                    <div class="col-md-4">
-                      <select class="form-control">
-                        <option>Select</option>
-                        <option>Large select</option>
-                        <option>Small select</option>
-                      </select>
-                    </div>
-                  </div>
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Add New User</h4>
+
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label">Select Employee:</label>
+            <div class="col-md-4">
+              <ng-select formControlName="EmployeeId">
+                <ng-option [value]="item.EmployeeId" *ngFor="let item of allEmployeeList">{{ item.EmployeeName }}
+                </ng-option>
+              </ng-select>
             </div>
+            <label class="col-md-2 col-form-label">Assign Role:</label>
+            <div class="col-md-4">
+              <ng-select formControlName="Role">
+                <ng-option [value]="item.id" *ngFor="let item of RoleList">{{ item.RoleName }}</ng-option>
+              </ng-select>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
     <div class="col-lg-12">
       <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">Login Credentials</h4>
-            <form class="needs-validation">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>User Name</label>
-                            <input type="text" class="form-control"
-                            placeholder="User name">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" class="form-control"
-                            placeholder="">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Confirm Password</label>
-                            <input type="password" class="form-control"
-                            placeholder="">
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="text-right">
-                      
-                        <button class="btn btn-primary d-inline">Submit</button>
-                      </div>
-                  </div>
-                </div>
-                
-            </form>
+        <div class="card-body">
+          <h4 class="card-title">Login Credentials</h4>
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>User Name</label>
+                <input formControlName="email" type="text" class="form-control" placeholder="User name" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Password</label>
+                <input formControlName="password" type="password" class="form-control" placeholder="" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" class="form-control" placeholder="" />
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="text-right">
+                <button class="btn btn-primary d-inline">Submit</button>
+              </div>
+            </div>
           </div>
-       </div>
+
+        </div>
+      </div>
     </div>
+  
+  </div>
+</form>
 </div>
