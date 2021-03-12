@@ -191,6 +191,7 @@ def getInvoiceNo(request):
         else:
             obj = SalesOrdersOffline.objects.order_by('SalesOrderOfflineId')[len(o) - 1:]
 
+
             return JsonResponse(obj.values()[0]['SalesOrderOfflineId'], safe=False)
 
 
@@ -507,13 +508,13 @@ def newPurchaseBill(request, pid=0):
             purchase_bill_id = purchase_bill_serializer.data['PurchaseBillId']
 
         for i in purchaseItems:
-<<<<<<< HEAD
+
             purchase_bill_detail=i
             purchase_bill_detail['PurchaseBillId']=purchase_bill_id
-=======
+
             purchase_bill_detail = i
             purchase_bill_detail['PurchaseBillDetailId'] = purchase_bill_id
->>>>>>> pritpal_change
+
             purchase_bill_detail_serializer = PurchaseBillDetailSerializer(data=purchase_bill_detail)
             purchase_bill_detail_serializer.is_valid(raise_exception=True)
             if purchase_bill_detail_serializer.is_valid():
@@ -529,21 +530,21 @@ def newPurchaseBill(request, pid=0):
         return JsonResponse(bills_serializer.data, safe=False)
     elif request.method == 'DELETE':
         # import pdb;pdb.set_trace()
-<<<<<<< HEAD
+
         billdetail=PurchaseBillDetail.objects.filter(PurchaseBillId=pid)
-=======
+
         billdetail = PurchaseBillDetail.objects.filter(PurchaseBillDetailId=pid)
->>>>>>> pritpal_change
+
         for i in billdetail:
             i.delete()
         bills = PurchaseBill.objects.get(PurchaseBillId=pid)
         bills.delete()
-<<<<<<< HEAD
+
         return JsonResponse("Deleted",safe=False)
-=======
+
         return JsonResponse("Deleted", safe=False)
 
->>>>>>> pritpal_change
+
     elif request.method == 'PUT':
         purchase_bill = JSONParser().parse(request)
         purchaseItems = purchase_bill['purchaseItems']
@@ -561,15 +562,14 @@ def newPurchaseBill(request, pid=0):
             # res = updateProductQuantityForUpdate(model_to_dict(i.ProductId)['ProductId'], i.Quantity)
             i.delete()
         for i in purchaseItems:
-<<<<<<< HEAD
             purchase_bill_detail=i
             purchase_bill_detail['PurchaseBillId']=purchase_bill_recieved[
             'PurchaseBillId']
-=======
+
             purchase_bill_detail = i
             purchase_bill_detail['PurchaseBillDetailId'] = purchase_bill_recieved[
                 'PurchaseBillId']
->>>>>>> pritpal_change
+
             purchase_bill_detail_serializer = PurchaseBillDetailSerializer(data=purchase_bill_detail)
             purchase_bill_detail_serializer.is_valid(raise_exception=True)
             if purchase_bill_detail_serializer.is_valid():
@@ -628,13 +628,13 @@ def newPurchaseOrder(request, pid=0):
             purchase_order_id = purchase_order_serializer.data['PurchaseOrderId']
 
         for i in purchaseItems:
-<<<<<<< HEAD
+
             purchase_order_detail=i
             purchase_order_detail['PurchaseOrderId']=purchase_order_id
-=======
+
             purchase_order_detail = i
             purchase_order_detail['PurchaseOrderDetailId'] = purchase_order_id
->>>>>>> pritpal_change
+
             purchase_order_detail_serializer = PurchaseOrderDetailSerializer(data=purchase_order_detail)
             purchase_order_detail_serializer.is_valid(raise_exception=True)
             if purchase_order_detail_serializer.is_valid():
@@ -650,11 +650,11 @@ def newPurchaseOrder(request, pid=0):
         return JsonResponse(orders_serializer.data, safe=False)
     elif request.method == 'DELETE':
         # import pdb;pdb.set_trace()
-<<<<<<< HEAD
+
         orderdetail=PurchaseOrderDetail.objects.filter(PurchaseOrderId=pid)
-=======
+
         orderdetail = PurchaseOrderDetail.objects.filter(PurchaseOrderDetailId=pid)
->>>>>>> pritpal_change
+
         for i in orderdetail:
             i.delete()
         orders = PurchaseOrder.objects.get(PurchaseOrderId=pid)
@@ -678,15 +678,15 @@ def newPurchaseOrder(request, pid=0):
             # res = updateProductQuantityForUpdate(model_to_dict(i.ProductId)['ProductId'], i.Quantity)
             i.delete()
         for i in purchaseItems:
-<<<<<<< HEAD
+
             purchase_order_detail=i
             purchase_order_detail['PurchaseOrderId']=purchase_order_recieved[
             'PurchaseOrderId']
-=======
+
             purchase_order_detail = i
             purchase_order_detail['PurchaseOrderDetailId'] = purchase_order_recieved[
                 'PurchaseOrderId']
->>>>>>> pritpal_change
+
             purchase_order_detail_serializer = PurchaseOrderDetailSerializer(data=purchase_order_detail)
             purchase_order_detail_serializer.is_valid(raise_exception=True)
             if purchase_order_detail_serializer.is_valid():
@@ -733,19 +733,18 @@ def getPurchaseReturnNo(request):
 
 
 @csrf_exempt
-<<<<<<< HEAD
 def newPurchaseReturn(request,pid=0):
     if request.method=="POST":
         purchase_return=JSONParser().parse(request)
         purchaseItems=purchase_return['purchaseItems']
         purchase_returns=dict(list(purchase_return.items())[:len(purchase_return)-1])
-=======
+
 def newPurchaseOrder(request, pid=0):
     if request.method == "POST":
         purchase_return = JSONParser().parse(request)
         purchaseItems = purchase_return['purchaseItems']
         purchase_returns = dict(list(purchase_return.items())[:len(purchase_return) - 1])
->>>>>>> pritpal_change
+
         purchase_return_serializer = PurchaseReturnSerializer(data=purchase_returns)
         purchase_return_serializer.is_valid(raise_exception=True)
         if purchase_return_serializer.is_valid():
@@ -753,13 +752,13 @@ def newPurchaseOrder(request, pid=0):
             purchase_return_id = purchase_return_serializer.data['PurchaseReturnId']
 
         for i in purchaseItems:
-<<<<<<< HEAD
+
             purchase_return_detail=i
             purchase_return_detail['PurchaseReturnId']=purchase_return_id
-=======
+
             purchase_return_detail = i
             purchase_return_detail['PurchaseReturnDetailId'] = purchase_return_id
->>>>>>> pritpal_change
+
             purchase_return_detail_serializer = PurchaseReturnDetailSerializer(data=purchase_return_detail)
             purchase_return_detail_serializer.is_valid(raise_exception=True)
             if purchase_return_detail_serializer.is_valid():
@@ -767,12 +766,12 @@ def newPurchaseOrder(request, pid=0):
                 res = updatePurchaseReturnQuantityAdd(purchase_return_detail_serializer.data['ProductId'],
                                                       i['Quantity'])
                 # purchase_bill_Added = "Purchase Bill Successfully Added"
-<<<<<<< HEAD
+
         return JsonResponse({"response":"Purchase Order Successfully Added","PurchaseId":purchase_return_id}, safe=False)
-=======
+
         return JsonResponse({"response": "Purchase Order Successfully Added", "PurchaseId": purchase_order_id},
                             safe=False)
->>>>>>> pritpal_change
+
     elif request.method == 'GET':
         returns = PurchaseReturn.objects.all()
 
@@ -780,11 +779,10 @@ def newPurchaseOrder(request, pid=0):
         return JsonResponse(return_serializer.data, safe=False)
     elif request.method == 'DELETE':
         # import pdb;pdb.set_trace()
-<<<<<<< HEAD
+
         returndetail=PurchaseReturnDetail.objects.filter(PurchaseReturnId=pid)
-=======
+
         returndetail = PurchaseReturnDetail.objects.filter(PurchaseReturnDetailId=pid)
->>>>>>> pritpal_change
         for i in returndetail:
             i.delete()
         returns = PurchaseReturn.objects.get(PurchaseReturnId=pid)
@@ -843,7 +841,7 @@ def getPurchaseReturnById(request, pid=0):
     except SalesOrdersOffline.DoesNotExist:
         return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
-<<<<<<< HEAD
+
 def getPurchaseBillByBillno(request,bno=0):
     try:
         ResData={}
@@ -869,7 +867,7 @@ def getPurchaseBillByBillno(request,bno=0):
         return JsonResponse(FinalData,safe=False)
     except SalesOrdersOffline.DoesNotExist:
         return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
-=======
+
 
 def getPurchaseBillByBillno(request, bno=0):
     # try:
@@ -902,7 +900,7 @@ def getPurchaseBillByBillno(request, bno=0):
     #     return JsonResponse(FinalData,safe=False)
     # except SalesOrdersOffline.DoesNotExist:
     #     return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
->>>>>>> pritpal_change
+
 
 
 def updatePurchaseReturnQuantityAdd(pid, quantity):
@@ -1162,3 +1160,13 @@ def getUserDetailById(request, id=0):
             employeedetails_serializer.save()
             return JsonResponse("updated", safe=False)
         return JsonResponse("failed to update", safe=False)
+
+def getEmployeeNo():
+        o = Employee.objects.order_by('EmployeeId')
+        if o.count() == 0:
+            return 0
+        else:
+            obj = Employee.objects.order_by('EmployeeId')[len(o) - 1:]
+
+
+            return obj.values()[0]['EmployeeId']

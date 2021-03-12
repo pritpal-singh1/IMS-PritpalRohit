@@ -26,6 +26,14 @@ export class AddEmployeeComponent implements OnInit {
     }
 
   }
+  getInvoice() {
+    this.salesservice.getInvoiceNo().subscribe((data) => {
+      this.invNo = data;
+      console.log(this.invNo + "");
+      this.invoice.InvoiceNo =  "INV-00"+(this.invNo+1);
+    });
+    
+  }
   restForm(form? : NgForm){
     if(form != null)
       form.resetForm();

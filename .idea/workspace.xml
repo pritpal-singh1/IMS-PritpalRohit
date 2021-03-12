@@ -20,19 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8107d7b8-2b89-4408-a1fb-cbbf9f8518fc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/migrations/0001_initial.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/purchase/add-purchase-bill/add-purchase-bill.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/purchase/add-purchase-bill/add-purchase-bill.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/purchase/add-purchase-bill/add-purchase-bill.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/purchase/add-purchase-bill/add-purchase-bill.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/purchase/print-purchase-order/print-purchase-order.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/purchase/print-purchase-order/print-purchase-order.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/purchase/purchase-order/purchase-order.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/purchase/purchase-order/purchase-order.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/purchase/purchase-order/purchase-order.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/purchase/purchase-order/purchase-order.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/purchase/purchase-return/purchase-return.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/purchase/purchase-return/purchase-return.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/purchase/purchase-return/purchase-return.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/purchase/purchase-return/purchase-return.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/purchase/purchase.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/purchase/purchase.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/purchase/purchase.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/purchase/purchase.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/employees/add-employee/add-employee.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/employees/add-employee/add-employee.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/user-profile/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/user-profile/profile/profile.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +96,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/models.py</url>
-          <line>86</line>
+          <line>87</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
