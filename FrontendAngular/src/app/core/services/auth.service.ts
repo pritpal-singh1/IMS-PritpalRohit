@@ -9,6 +9,9 @@ import { User } from '../models/auth.models';
 @Injectable({ providedIn: 'root' })
 
 export class AuthenticationService {
+    isLogin = false;
+    
+      roleAs: string;
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
     user: User;
@@ -34,10 +37,16 @@ export class AuthenticationService {
         return this.http.post<any>(`http://127.0.0.1:8000/login/`, { username, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('currentUser', JSON.stringify(user));
+                localStorage.setItem('currentUser', user);
+                localStorage.setItem('ROLE', user.Role);
+                localStorage.setItem('STATE', 'true');
                 this.currentUserSubject.next(user);
                 return user;
             }));
+    }
+    getUserRole() {
+        const user = this.currentUserValue();
+        return user.Role;
     }
     /**
      * Performs the register
@@ -67,9 +76,23 @@ export class AuthenticationService {
      */
     logout() {
         // logout the user
-    
+        localStorage.setItem('STATE', 'false');
+        localStorage.setItem('ROLE', '');
         getFirebaseBackend().logout();
         
     }
+    // isLoggedIn() {
+    //     const loggedIn = localStorage.getItem('STATE');
+    //     if (loggedIn == 'true')
+    //       this.isLogin = true;
+    //     else
+    //       this.isLogin = false;
+    //     return this.isLogin;
+    //   }
+    
+    //   getRole() {
+    //     this.roleAs = localStorage.getItem('ROLE');
+    //     return this.roleAs;
+    //   }
 }
 
