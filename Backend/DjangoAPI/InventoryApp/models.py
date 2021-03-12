@@ -11,6 +11,7 @@ class Role(models.Model):
 class Employee(models.Model):
     EmployeeId = models.AutoField(primary_key=True)
     EmployeeName=models.CharField(max_length=100)
+    EmployeeNo=models.CharField(max_length=100)
     Gender=models.CharField(max_length=10)
     Address= models.CharField(max_length=100)
     EmailId=models.CharField(max_length=100)
@@ -172,7 +173,7 @@ class SalesOrderOfflineDetail(models.Model):
         return self.SalesOrderOfflineDetailId
 
 class PurchaseBill(models.Model):
-    PurchaseBillId = models.AutoField(max_length=100,primary_key=True)
+    PurchaseBillId = models.AutoField(primary_key=True)
     BillNo=models.CharField(max_length=100)
     Date=models.DateTimeField()
     Supplier=models.ForeignKey(Supplier,db_column="SupplierId",on_delete=models.CASCADE)
@@ -196,7 +197,7 @@ class PurchaseBillDetail(models.Model):
     Quantity=models.CharField(max_length=10)
     SalePrice=models.CharField(max_length=10)
     Amount=models.CharField(max_length=10)
-    GST = models.CharField(max_length=100)
+    GST = models.CharField(max_length=100,default=0)
 
     # Discount=models.CharField(max_length=10)
 
