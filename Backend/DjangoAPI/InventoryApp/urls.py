@@ -69,4 +69,6 @@ urlpatterns=[
     url(r'getAllUsers/$',views.getUsers),
     url(r'getAllUsers/([0-9]+)$',views.getUsers),
     url(r'getUserById/([0-9]+)$',views.getUserDetailsById),
+    url(r'getUser/([0-9]+)$', views.getUserName),
+    url(r'getEmployeeById/([0-9]+)$', views.getUserDetailById),
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
