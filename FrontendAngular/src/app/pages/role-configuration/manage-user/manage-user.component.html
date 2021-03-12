@@ -1,12 +1,9 @@
 <div class="container-fluid">
-    <!-- start page title -->
-  <app-pagetitle title="Manage User" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
-  <!-- end page title -->
-  <div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <!-- <h4 class="card-title">Add New User</h4> -->
+    <app-pagetitle title="Manage Expense" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
                 <div class="card border-0">
                     <div class="card-body">
                         <div
@@ -14,102 +11,69 @@
                             
                         >
                             <div class="col align-content-start">
-                                <h4 class="one">Manage Users</h4>
+                                <h4 class="one">Recent Expense(s)</h4>
                             </div>
                             <div class="col-auto">
-                                <button (click)="addUser()"
-                                    class="btn btn-outline-success waves-effect pull-right waves-light"
-                                >
-                                    Add User
-                                </button>
+                                <button (click)="addUser()" class="btn btn-outline-success waves-effect pull-right waves-light">Add User</button>
                             </div>
                         </div>
                     </div>
                 
                 </div>
-                <h4 class="card-title">Basic Example</h4>
-            <!-- <p class="card-title-desc">For basic styling—light padding and
-              only horizontal dividers—add the base class <code>.table</code> to any
-              <code>&lt;table&gt;</code>.
-            </p> -->
-  
-            <div class="table-responsive">
-              <table class="table mb-0">
-  
-                <thead class="thead-light">
-                  <tr>
-                    <th>#</th>
-                    <th>User Name</th>
-                    <th>Contact Number</th>
-                    <th>Date of Joining</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>1/1/1</td>
-                    <td>
-                        <div class="row">
-                            <div class="icon-demo-content" id="solid">
-                                <i class="fas fa-eye"></i>
-                                
+                <!-- <h4 class="card-title">Basic Example</h4> -->
+                <!-- <p class="card-title-desc">For basic styling—light padding and
+                  only horizontal dividers—add the base class <code>.table</code> to any
+                  <code>&lt;table&gt;</code>.
+                </p> -->
+      
+                <div class="table-responsive">
+                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Employe Name</th>
+                          <!-- <th>Company Name</th> -->
+                          <th>Employee Id</th>
+                          <th>User Role</th>
+                          <!-- <th>Email</th> -->
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody  >
+                        <tr *ngFor="let item of usersArray">
+                          <td>{{ item.UserId }}</td>
+                          <td>{{ item.EmployeeName }}</td>
+                          <!-- <td>{{ expense.CompanyName }}</td> -->
+                          <td>{{ item.EmployeeId }}</td>
+                          <td>{{ item.RoleId }}</td>
+                          <!-- <td>{{ expense.EmailId }}</td> -->
+                          <!-- <td> 
+                            <div class="row">
+                              <div class="icon-demo-content" id="solid">
+                                  <i class="fas fa-eye"></i>
+                                  
+                              </div>
+                              <div class="icon-demo-content" id="solid" >
+                                  <i class="fas fa-edit editcolor"></i>
+                              </div>
+                              <div class="icon-demo-content" id="solid">
+                                  <i class="fas fa-trash trashcolor"></i>
+                              </div>
                             </div>
-                            <div class="icon-demo-content" id="solid" >
-                                <i class="fas fa-edit editcolor"></i>
-                            </div>
-                            <div class="icon-demo-content" id="solid">
-                                <i class="fas fa-trash trashcolor"></i>
-                            </div>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>2/2/2</td>
-                    <td>
-                        <div class="row">
-                            <div class="icon-demo-content" id="solid">
-                                <i class="fas fa-eye"></i>
-                                
-                            </div>
-                            <div class="icon-demo-content" id="solid" >
-                                <i class="fas fa-edit editcolor"></i>
-                            </div>
-                            <div class="icon-demo-content" id="solid">
-                                <i class="fas fa-trash trashcolor"></i>
-                            </div>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>3/3/3</td>
-                    <td>
-                        <div class="row">
-                            <div class="icon-demo-content" id="solid">
-                                <i class="fas fa-eye"></i>
-                                
-                            </div>
-                            <div class="icon-demo-content" id="solid" >
-                                <i class="fas fa-edit editcolor"></i>
-                            </div>
-                            <div class="icon-demo-content" id="solid">
-                                <i class="fas fa-trash trashcolor"></i>
-                            </div>
-                        </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-  
+                          </td> -->
+                          <td>
+                            <a  routerLink="../users/{{item.UserId}}"  class="mr-3 text-primary" placement="top" ngbTooltip="Edit"><i
+                                                      class="mdi mdi-pencil font-size-18"></i></a>
+                                                  <a  (click)="deleteData(item.UserId)" class="text-danger" placement="top" ngbTooltip="Delete"><i
+                                                      class="mdi mdi-trash-can font-size-18"></i></a>
+                          </td>
+                        </tr>
+                      </tbody  >
+                     
+                    </table>
+                  </div>
+
+              </div>
             </div>
         </div>
     </div>

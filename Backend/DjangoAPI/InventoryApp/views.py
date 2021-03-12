@@ -3,18 +3,24 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from django.forms.models import model_to_dict
+from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 import json
+from rest_framework.views import APIView
+from rest_framework.response import Response
+import jwt ,datetime
 
 from InventoryApp.models import Category, Brand, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, \
     Supplier, Employee,SalesOrdersOffline,SalesOrderOfflineDetail, Expense,CompanyDetails, PurchaseBill, \
-    PurchaseBillDetail, PurchaseOrder,PurchaseOrderDetail,StockAdjustments
+    PurchaseBillDetail, PurchaseOrder,PurchaseOrderDetail,StockAdjustments,User
 from InventoryApp.serializers import CategorySerializer, BrandSerializer, RoleSerializer, AdminSerializer, \
     ProductSerializer, CustomersOnlineSerializer, SalesOrderOnlineSerializer, SupplierSerializer, EmployeeSerializer,\
     SalesOrdersOfflineSerializer,SalesOrderOfflineDetailSerializer,ExpenseSerializer,CompanyDetailsSerializer, \
     PurchaseBillSerializer,PurchaseBillDetailSerializer,PurchaseOrderSerializer, PurchaseOrderDetailSerializer,StockAdjustmentsSerializer,\
-    SalesOrdersOfflineSerializer, SalesOrderOfflineDetailSerializer, ExpenseSerializer, CompanyDetailsSerializer, PurchaseBillSerializer, PurchaseBillDetailSerializer, PurchaseOrderSerializer, PurchaseOrderDetailSerializer, StockAdjustmentsSerializer
+    SalesOrdersOfflineSerializer, SalesOrderOfflineDetailSerializer, ExpenseSerializer, CompanyDetailsSerializer, \
+    PurchaseBillSerializer, PurchaseBillDetailSerializer, PurchaseOrderSerializer, PurchaseOrderDetailSerializer, \
+    StockAdjustmentsSerializer,UserSerializer
 
 
 from django.core.files.storage import default_storage
@@ -935,3 +941,104 @@ def updateProductQuantityForCredit(pid, quantity):
             quantity)
         product_serializer.save()
         return "Success"
+
+@csrf_exempt
+def register(request):
+    if request.method=='POST':
+        registerdata = JSONParser().parse(request)
+        user = User.objects.filter(email=registerdata['email']).first()
+        if user is None:
+            user_serializer=UserSerializer( data=registerdata)
+
+            user_serializer.is_valid(raise_exception=True)
+            user_serializer.save()
+            return JsonResponse({"message":1}, safe=False)
+        else:
+            return JsonResponse({"message":0}, safe=False)
+
+@csrf_exempt
+def login(request):
+    if request.method=='POST':
+        logindata = JSONParser().parse(request)
+
+        user=User.objects.filter(email=logindata['username']).first()
+        if user is None:
+            raise  AuthenticationFailed("user not found")
+
+        if not user.check_password(logindata['password']):
+            raise AuthenticationFailed('incorrect password')
+        user_serialized=UserSerializer(user)
+        return JsonResponse(user_serialized.data, safe=False)
+
+@csrf_exempt
+def getAllEmployees(request):
+        res = []
+        allemployees = Employee.objects.all()
+
+        for i in allemployees:
+            result = {'EmployeeName': i.EmployeeName, 'EmployeeId': i.EmployeeId}
+
+            res.append(result)
+        print(res)
+        return JsonResponse(res, safe=False)
+
+@csrf_exempt
+def getUsers(request,uid=0):
+    if request.method == 'GET':
+        res=[]
+        users = User.objects.all()
+        e=User.objects.select_related()
+        for i in e:
+            result = {'EmployeeName': i.EmployeeId.EmployeeName, 'EmployeeId': i.EmployeeId.EmployeeId,
+                      'RoleId': i.Role.RoleName, 'Email': i.email, 'UserId': i.UserId, }
+
+            res.append(result)
+        print(res)
+        return JsonResponse(res ,safe=False)
+
+    elif request.method == 'PUT':
+        user_data = JSONParser().parse(request)
+        existing_email = User.objects.filter(email=user_data['email']).first()
+        if existing_email is not None:
+            if existing_email.UserId== user_data['UserId']:
+                user = User.objects.get(UserId=user_data['UserId'])
+                user_serializer = UserSerializer(user, data=user_data)
+
+                if user_serializer.is_valid():
+                    user_serializer.save()
+                    return JsonResponse({"message": 1}, safe=False)
+                return JsonResponse("failed to update", safe=False)
+            else:
+                return JsonResponse({"message": 0}, safe=False)
+        else:
+            user = User.objects.get(UserId=user_data['UserId'])
+            user_serializer = UserSerializer(user, data=user_data)
+            print("hi")
+            if user_serializer.is_valid():
+                user_serializer.save()
+                return JsonResponse({"message": 1}, safe=False)
+            return JsonResponse("failed to update", safe=False)
+
+
+
+
+
+
+
+    elif request.method == 'DELETE':
+        user = User.objects.get(UserId=uid)
+        user.delete()
+        return JsonResponse("Deleted", safe=False)
+
+
+def getUserDetailsById(request,uid=0):
+    if request.method == 'GET':
+        try:
+            user = User.objects.get(UserId=uid)
+            print(user)
+        except User.DoesNotExist:
+            return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+        if request.method == 'GET':
+            user_serializer = UserSerializer(user)
+            return JsonResponse(user_serializer.data, safe=False)

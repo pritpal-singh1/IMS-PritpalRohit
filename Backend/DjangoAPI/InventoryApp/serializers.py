@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from InventoryApp.models import Category, Brand,Employee,SalesOrderOfflineDetail, SalesOrdersOffline,Supplier, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, CompanyDetails, Expense, PurchaseBill, PurchaseBillDetail, PurchaseOrder, PurchaseOrderDetail, PurchaseReturn, PurchaseReturnDetail,StockAdjustments
+from InventoryApp.models import Category, Brand,Employee,SalesOrderOfflineDetail,User, SalesOrdersOffline,Supplier, \
+                                                                                      Role,\
+                                                                                   AdminUser, Product, CustomersOnline, SalesOrderOnline, CompanyDetails, Expense, PurchaseBill, PurchaseBillDetail, PurchaseOrder, PurchaseOrderDetail, PurchaseReturn, PurchaseReturnDetail,StockAdjustments
 
 
 
@@ -291,3 +293,26 @@ class StockAdjustmentsSerializer(serializers.ModelSerializer):
         'Quantity',
         'Amount',
         'Remarks')
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=User
+        fields=['UserId','password','email','Status','Role','EmployeeId']
+
+    def create(self,validated_data):
+        password=validated_data.pop('password',None)
+        instance=self.Meta.model(**validated_data)
+        if password is not None:
+            instance.set_password(password)
+        instance.save()
+        return instance
+
+    # def update(self, instance, validated_data):
+    #     for attr, value in validated_data.items():
+    #         if attr == 'password':
+    #             instance.set_password(value)
+    #         else:
+    #             setattr(instance, attr, value)
+    #     instance.save()
+    #     return instance

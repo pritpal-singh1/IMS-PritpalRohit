@@ -21,11 +21,43 @@
   <component name="ChangeListManager">
     <list default="true" id="8107d7b8-2b89-4408-a1fb-cbbf9f8518fc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/DjangoAPI/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/DjangoAPI/DjangoAPI/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/migrations/0003_purchasereturn_purchasereturndetail.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/sales/sales-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/sales/sales-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/sales/sales.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/sales/sales.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/media/1-500x500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/media/GreenDecowoodSantos1488885646.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/media/IMG_20191231_065641.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/media/IMG_20191231_065655.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/media/IMG_20191231_065655_CXr4DO9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/media/IMG_20191231_065805.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/media/IMG_20191231_065805_iwB7Shm.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/media/IMG_20191231_065805_rd9Vws5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/media/IMG_20191231_090915.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/media/IMG_20191231_090915_6zYjMMQ.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/media/images.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/media/images_B8ot9qk.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/media/images_LBM31Z0.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/media/images_YLLEWba.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/media/images_k1YuHl8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/DjangoAPI/media/images_qnDzdao.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/account/auth/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/account/auth/login/login.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/core/guards/auth.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/core/guards/auth.guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/core/helpers/jwt.interceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/core/helpers/jwt.interceptor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/core/models/auth.models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/core/models/auth.models.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/core/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/core/services/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/extrapages/extrapages.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/extrapages/extrapages.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/extrapages/login1/login1.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/extrapages/login1/login1.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/layouts/shared/topbar/topbar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/layouts/shared/topbar/topbar.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/expense/expense-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/expense/expense-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/role-configuration/add-user/add-user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/role-configuration/add-user/add-user.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/role-configuration/add-user/add-user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/role-configuration/add-user/add-user.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/role-configuration/manage-user/manage-user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/role-configuration/manage-user/manage-user.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/role-configuration/manage-user/manage-user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/role-configuration/manage-user/manage-user.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/role-configuration/role-configuration-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/role-configuration/role-configuration-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontendAngular/src/app/pages/role-configuration/role-configuration.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/FrontendAngular/src/app/pages/role-configuration/role-configuration.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,8 +77,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Backend/venv/Scripts/python.exe" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -78,25 +110,25 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="309" y="42" key="#Inspections/0.0.1366.728@0.0.1366.728" timestamp="1613049511405" />
-    <state x="462" y="118" key="FileChooserDialogImpl" timestamp="1613049872228">
+    <state x="462" y="118" key="FileChooserDialogImpl" timestamp="1615392593928">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="462" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1613049872228" />
-    <state x="187" y="17" key="SettingsEditor" timestamp="1614245089833">
+    <state x="462" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1615392593928" />
+    <state x="187" y="17" key="SettingsEditor" timestamp="1615392608496">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="187" y="17" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1614245089833" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1614870334231">
+    <state x="187" y="17" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1615392608496" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1615389610937">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1614870334231" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1615389610937" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Backend/DjangoAPI/InventoryApp/models.py</url>
-          <line>73</line>
+          <line>86</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

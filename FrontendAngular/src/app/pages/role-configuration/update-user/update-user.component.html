@@ -1,0 +1,81 @@
+<div class="container-fluid">
+    <!-- start page title -->
+    <app-pagetitle title="Add User" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+    <!-- end page title -->
+    <form (ngSubmit)="updateData()" [formGroup]="userData" class="needs-validation">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Update User</h4>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Employee</label>
+                                    <ng-select formControlName="EmployeeId">
+                                        <ng-option [value]="item.EmployeeId" *ngFor="let item of allEmployeeList">
+                                            {{ item.EmployeeName }}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Role</label>
+                                    <ng-select formControlName="Role">
+                                        <ng-option [value]="item.id" *ngFor="let item of RoleList">{{ item.RoleName }}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <ng-select formControlName="Status">
+                                        <ng-option [value]="item.Status" *ngFor="let item of Status">{{ item.Status }}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Login Credentials</h4>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>User Name</label>
+                                    <input formControlName="email" type="text" class="form-control"
+                                        placeholder="User name" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input formControlName="password" type="password" class="form-control"
+                                        placeholder="" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Confirm Password</label>
+                                    <input type="password" class="form-control" placeholder="" />
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="text-right">
+                                    <button class="btn btn-primary d-inline">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

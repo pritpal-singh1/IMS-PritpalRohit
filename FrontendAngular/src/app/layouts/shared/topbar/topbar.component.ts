@@ -126,4 +126,5 @@ export class TopbarComponent implements OnInit {
     }
     this.router.navigate(['/account/login']);
   }
+  
 }

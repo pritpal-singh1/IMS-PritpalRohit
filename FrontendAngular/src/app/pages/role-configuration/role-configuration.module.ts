@@ -6,17 +6,20 @@ import {RoleConfigurationRoutingModule} from './role-configuration-routing.modul
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UiModule } from '../../shared/ui/ui.module';
-
+import { DataTablesModule } from 'angular-datatables';
+import { UpdateUserComponent } from './update-user/update-user.component';
 
 @NgModule({
-  declarations: [AddUserComponent, ManageUserComponent],
+  declarations: [AddUserComponent, ManageUserComponent, UpdateUserComponent],
   imports: [
     CommonModule,
     RoleConfigurationRoutingModule,
     NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    UiModule
+    UiModule,
+    DataTablesModule
+    
   ]
 })
 export class RoleConfigurationModule { }

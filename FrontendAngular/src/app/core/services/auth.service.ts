@@ -1,37 +1,44 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { getFirebaseBackend } from '../../authUtils';
-
+import { map } from 'rxjs/operators';
 import { User } from '../models/auth.models';
 
 @Injectable({ providedIn: 'root' })
 
 export class AuthenticationService {
-
+    private currentUserSubject: BehaviorSubject<User>;
+    public currentUser: Observable<User>;
     user: User;
 
-    constructor() {
+    constructor(private http: HttpClient) {
+        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+        this.currentUser = this.currentUserSubject.asObservable();  
     }
 
     /**
      * Returns the current user
      */
-    public currentUser(): User {
-        return getFirebaseBackend().getAuthenticatedUser();
+    public currentUserValue(): User {
+        return this.currentUserSubject.value;
     }
-
+       
     /**
      * Performs the auth
      * @param email email of user
      * @param password password of user
      */
-    login(email: string, password: string) {
-        return getFirebaseBackend().loginUser(email, password).then((response: any) => {
-            const user = response;
-            return user;
-        });
+     login(username: string, password: string) {
+        return this.http.post<any>(`http://127.0.0.1:8000/login/`, { username, password })
+            .pipe(map(user => {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                this.currentUserSubject.next(user);
+                return user;
+            }));
     }
-
     /**
      * Performs the register
      * @param email email
@@ -60,7 +67,9 @@ export class AuthenticationService {
      */
     logout() {
         // logout the user
+    
         getFirebaseBackend().logout();
+        
     }
 }
 
