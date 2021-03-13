@@ -9,12 +9,12 @@ import json
 
 from InventoryApp.models import Category, Brand, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, \
     Supplier, Employee,SalesOrdersOffline,SalesOrderOfflineDetail, Expense,CompanyDetails, PurchaseBill, \
-    PurchaseBillDetail, PurchaseOrder,PurchaseOrderDetail,StockAdjustments,PurchaseReturn, PurchaseReturnDetail
+    PurchaseBillDetail, PurchaseOrder,PurchaseOrderDetail,StockAdjustments,PurchaseReturn, PurchaseReturnDetail, SalesReturn, SalesReturnDetail
 from InventoryApp.serializers import CategorySerializer, BrandSerializer, RoleSerializer, AdminSerializer, \
     ProductSerializer, CustomersOnlineSerializer, SalesOrderOnlineSerializer, SupplierSerializer, EmployeeSerializer,\
     SalesOrdersOfflineSerializer,SalesOrderOfflineDetailSerializer,ExpenseSerializer,CompanyDetailsSerializer, \
     PurchaseBillSerializer,PurchaseBillDetailSerializer,PurchaseOrderSerializer, PurchaseOrderDetailSerializer,StockAdjustmentsSerializer,\
-    SalesOrdersOfflineSerializer, SalesOrderOfflineDetailSerializer, ExpenseSerializer, CompanyDetailsSerializer, PurchaseBillSerializer, PurchaseBillDetailSerializer, PurchaseOrderSerializer, PurchaseOrderDetailSerializer, StockAdjustmentsSerializer, PurchaseReturnSerializer, PurchaseReturnDetailSerializer
+    SalesOrdersOfflineSerializer, SalesOrderOfflineDetailSerializer, ExpenseSerializer, CompanyDetailsSerializer, PurchaseBillSerializer, PurchaseBillDetailSerializer, PurchaseOrderSerializer, PurchaseOrderDetailSerializer, StockAdjustmentsSerializer, PurchaseReturnSerializer, PurchaseReturnDetailSerializer, SalesReturnSerializer,SalesReturnDetailSerializer
 
 
 from django.core.files.storage import default_storage
@@ -185,7 +185,7 @@ def getInvoiceNo(request):
 
             return JsonResponse(obj.values()[0]['SalesOrderOfflineId'], safe=False)
 
-
+# substracts in product quantity
 def updateProductQuantityForAdd(pid,quantity):
         try:
             product = Product.objects.get(ProductId=pid)
@@ -201,7 +201,7 @@ def updateProductQuantityForAdd(pid,quantity):
             product_serializer.save()
             return "Success"
 
-
+# adds in Product Quantity
 def updateProductQuantityForUpdate(pid, quantity):
     try:
         product = Product.objects.get(ProductId=pid)
@@ -217,6 +217,108 @@ def updateProductQuantityForUpdate(pid, quantity):
             quantity)
         product_serializer.save()
         return "Success"
+
+# Sales Return 
+@csrf_exempt
+def newSalesReturn(request,rid=0):
+    if request.method=="POST":
+        sales_return=JSONParser().parse(request)
+        ReturnItems=sales_return['ReturnItem']
+        sales_return_offline=dict(list(sales_return.items())[:len(sales_return)-1])
+        sales_return_serializer = SalesReturnSerializer(data=sales_return_offline)
+        sales_return_serializer.is_valid(raise_exception=True)
+        if sales_return_serializer.is_valid():
+            sales_return_serializer.save()
+            sales_return_offline_id=sales_return_serializer.data['SalesReturnId']
+
+        for i in ReturnItems:
+            sales_return_offline_detail=i
+            sales_return_offline_detail['SalesReturnId']=sales_return_offline_id
+            sales_return_detail_serializer = SalesReturnDetailSerializer(data=sales_return_offline_detail)
+            sales_return_detail_serializer.is_valid(raise_exception=True)
+            if sales_return_detail_serializer.is_valid():
+                sales_return_detail_serializer.save()
+                res=updateProductQuantityForUpdate(sales_return_detail_serializer.data['ProductId'],i['Quantity'])
+                # salesOrderSuccess = "Invoice Successfully Added"
+        return JsonResponse({"SalesId" : sales_return_offline_id}, safe=False)
+    elif request.method == 'GET':
+        returns = SalesReturn.objects.all()
+
+        return_serializer = SalesReturnSerializer(returns, many=True)
+        return JsonResponse(return_serializer.data, safe=False)
+    elif request.method == 'DELETE':
+        returndetail=SalesReturnDetail.objects.filter(SalesReturnId=rid)
+        for i in returndetail:
+            i.delete()
+        returns = SalesReturn.objects.get(SalesReturnId = rid)
+        returns.delete()
+        return JsonResponse("Deleted",safe=False)
+
+    elif request.method == 'PUT':
+        return_order=JSONParser().parse(request)
+        ReturnItems = return_order['ReturnItem']
+
+        sales_return_offline_recieved = dict(list(return_order.items())[:len(return_order) - 1])
+        sales_return_offline = SalesReturn.objects.get(SalesReturnId=sales_return_offline_recieved[
+            'SalesReturnId'])
+        sales_return_serializer = SalesReturnSerializer(sales_return_offline, data=sales_return_offline_recieved)
+        if sales_return_serializer.is_valid():
+            sales_return_serializer.save()
+        salesreturndetail = SalesReturnDetail.objects.filter(SalesReturnId=sales_return_offline_recieved[
+            'SalesReturnId'])
+
+        for i in salesreturndetail:
+            res = updateProductQuantityForAdd(model_to_dict(i.ProductId)['ProductId'], i.Quantity)
+            i.delete()
+        for i in ReturnItems:
+            sales_return_offline_detail=i
+            sales_return_offline_detail['SalesReturnId']=sales_return_offline_recieved[
+            'SalesReturnId']
+            sales_return_detail_serializer = SalesReturnDetailSerializer(data=sales_return_offline_detail)
+            sales_return_detail_serializer.is_valid(raise_exception=True)
+            if sales_return_detail_serializer.is_valid():
+                sales_return_detail_serializer.save()
+                res=updateProductQuantityForUpdate(sales_return_detail_serializer.data['ProductId'],i['Quantity'])
+
+        return JsonResponse("updated", safe=False)
+
+
+@csrf_exempt
+def getSalesInvoices(request):
+    if request.method == 'GET':
+        res = []
+        invoices = SalesOrdersOffline.objects.all()
+
+        for i in invoices:
+            result = {'invoiceNumber': i.InvoiceNo, 'invoiceId': i.SalesOrderOfflineId}
+
+            res.append(result)
+        print(res)
+        return JsonResponse(res, safe=False)
+
+def getSalesReturnById(request,rid=0):
+    try:
+        ResData={}
+        returns = SalesReturn.objects.get(SalesReturnId=rid)
+
+        returndetails=SalesReturnDetail.objects.filter(SalesReturnId=rid).select_related("ProductId")
+        index = 0
+        for i in returndetails:
+
+            returndetails_serializer = SalesReturnDetailSerializer(i)
+
+            ResData[index] =returndetails_serializer.data
+
+            index+=1
+            # print(orderdetails_serializer.data['ProductId']['ProductId'])
+        return_serializer=SalesReturnSerializer(returns)
+
+        FinalData=return_serializer.data
+        FinalData['ReturnItem']=ResData
+
+        return JsonResponse(FinalData,safe=False)
+    except SalesOrdersOffline.DoesNotExist:
+        return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
 @csrf_exempt
 def supplierApi(request, sid=0):
@@ -731,7 +833,7 @@ def newPurchaseReturn(request,pid=0):
             'PurchaseReturnId'])
 
         for i in purchaseorderdetail:
-            # res = updateProductQuantityForUpdate(model_to_dict(i.ProductId)['ProductId'], i.Quantity)
+            res = updateProductQuantityForUpdate(model_to_dict(i.ProductId)['ProductId'], i.Quantity)
             i.delete()
         for i in purchaseItems:
             purchase_order_detail=i
@@ -741,7 +843,7 @@ def newPurchaseReturn(request,pid=0):
             purchase_order_detail_serializer.is_valid(raise_exception=True)
             if purchase_order_detail_serializer.is_valid():
                 purchase_order_detail_serializer.save()
-                # res=updateProductQuantityForAdd(purchase_bill_detail_serializer.data['ProductId'],i['Quantity'])
+                res=updateProductQuantityForAdd(purchase_bill_detail_serializer.data['ProductId'],i['Quantity'])
 
         return JsonResponse("updated", safe=False)
 

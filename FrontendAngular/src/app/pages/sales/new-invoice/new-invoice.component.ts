@@ -42,7 +42,7 @@ export class NewInvoiceComponent {
     { id: 1, name: "Cash" },
     { id: 2, name: "Cheque" },
     { id: 2, name: "Card Payment" },
-    { id: 2, name: "Wallet" },
+    // { id: 2, name: "Wallet" },
  
   ];
 

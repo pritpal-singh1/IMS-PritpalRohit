@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from InventoryApp.models import Category, Brand,Employee,SalesOrderOfflineDetail, SalesOrdersOffline,Supplier, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, CompanyDetails, Expense, PurchaseBill, PurchaseBillDetail, PurchaseOrder, PurchaseOrderDetail, PurchaseReturn, PurchaseReturnDetail,StockAdjustments
+from InventoryApp.models import Category, Brand,Employee,SalesOrderOfflineDetail, SalesOrdersOffline,Supplier, Role, AdminUser, Product, CustomersOnline, SalesOrderOnline, CompanyDetails, Expense, PurchaseBill, PurchaseBillDetail, PurchaseOrder, PurchaseOrderDetail, PurchaseReturn, PurchaseReturnDetail,StockAdjustments, SalesReturn, SalesReturnDetail
 
 
 
@@ -122,24 +122,24 @@ class AdminSerializer(serializers.ModelSerializer):
         'Status',
         'Role')
 
-class ProductSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
-        fields = ('ProductId',
-        'Brand',
-        'Category',
-        'ProductName',
-        'ItemCode',
-        'PrintName',
-        'PurchasePrice',
-        'SalePrice',
-        'MRP',
-        'LowLevelLimit',
-        'Discount',
-        'GST',
-        'StockQTY',
-        'CreatedAt',
-        'ProductImage')
+# class ProductSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Product
+#         fields = ('ProductId',
+#         'Brand',
+#         'Category',
+#         'ProductName',
+#         'ItemCode',
+#         'PrintName',
+#         'PurchasePrice',
+#         'SalePrice',
+#         'MRP',
+#         'LowLevelLimit',
+#         'Discount',
+#         'GST',
+#         'StockQTY',
+#         'CreatedAt',
+#         'ProductImage')
 
 class CustomersOnlineSerializer(serializers.ModelSerializer):
     class Meta:
@@ -294,3 +294,37 @@ class StockAdjustmentsSerializer(serializers.ModelSerializer):
         'Quantity',
         'Amount',
         'Remarks')
+
+class SalesReturnSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SalesReturn
+        fields = (
+            'SalesReturnId',
+            'SalesReturnNo',
+            'InvoiceNo',
+            'Reason',
+            'Contact',
+            'Date',
+            'ClientName',
+            'PaymentMode',
+            'TotalAmount',
+            'AmountPaid',
+            'Status',
+            'CreatedAt',
+            'Balance',
+            'GST',
+            'SubTotal'
+        )
+
+class SalesReturnDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SalesReturnDetail
+        fields = (
+            'SalesReturnDetailId',
+            'ProductId',
+            'SalesReturnId',
+            'Quantity',
+            'SalePrice',
+            'Amount',
+            'GST'
+        )
