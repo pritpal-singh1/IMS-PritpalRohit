@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class Role(models.Model):
@@ -11,6 +11,7 @@ class Role(models.Model):
 class Employee(models.Model):
     EmployeeId = models.AutoField(primary_key=True)
     EmployeeName=models.CharField(max_length=100)
+    EmployeeNo=models.CharField(max_length=100)
     Gender=models.CharField(max_length=10)
     Address= models.CharField(max_length=100)
     EmailId=models.CharField(max_length=100)
@@ -35,6 +36,19 @@ class AdminUser(models.Model):
     Role=models.ForeignKey(Role,db_column="RoleId",on_delete=models.CASCADE)
     def __str__(self):
         return self.UserId
+
+class User(AbstractUser):
+    UserId = models.AutoField(primary_key=True)
+    password = models.CharField(max_length=255)
+    email=models.CharField(max_length=255,unique=True)
+    username = None
+    Status = models.CharField(max_length=100)
+    EmployeeId = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    Role = models.ForeignKey(Role, db_column="RoleId", on_delete=models.CASCADE)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
 
 
 class Category(models.Model):
@@ -159,7 +173,7 @@ class SalesOrderOfflineDetail(models.Model):
         return self.SalesOrderOfflineDetailId
 
 class PurchaseBill(models.Model):
-    PurchaseBillId = models.AutoField(max_length=100,primary_key=True)
+    PurchaseBillId = models.AutoField(primary_key=True)
     BillNo=models.CharField(max_length=100)
     Date=models.DateTimeField()
     Supplier=models.ForeignKey(Supplier,db_column="SupplierId",on_delete=models.CASCADE)
@@ -183,7 +197,7 @@ class PurchaseBillDetail(models.Model):
     Quantity=models.CharField(max_length=10)
     SalePrice=models.CharField(max_length=10)
     Amount=models.CharField(max_length=10)
-    GST = models.CharField(max_length=100)
+    GST = models.CharField(max_length=100,default=0)
 
     # Discount=models.CharField(max_length=10)
 

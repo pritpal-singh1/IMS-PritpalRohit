@@ -26,6 +26,7 @@ export class AddEmployeeComponent implements OnInit {
     }
 
   }
+  
   restForm(form? : NgForm){
     if(form != null)
       form.resetForm();

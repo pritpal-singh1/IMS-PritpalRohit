@@ -5,8 +5,9 @@ import { Router, NavigationEnd } from '@angular/router';
 import { EventService } from '../../../core/services/event.service';
 
 
-import { MENU } from './menu';
+import { MENU,NEWMENU } from './menu';
 import { MenuItem } from './menu.model';
+import { AuthenticationService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -21,7 +22,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
   @ViewChild('sideMenu') sideMenu: ElementRef;
 
-  constructor(private eventService: EventService, private router: Router) {
+  constructor(private eventService: EventService, private router: Router, private authservice: AuthenticationService) {
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         this._activateMenuDropdown();
@@ -112,8 +113,16 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   /**
    * Initialize
    */
-  initialize(): void {
-    this.menuItems = MENU;
+
+
+  initialize():void{
+    const role=this.authservice.getUserRole();
+    if (role == 1) {
+      this.menuItems = NEWMENU;
+    }
+    else {
+      this.menuItems = MENU;
+    }
   }
 
   /**
