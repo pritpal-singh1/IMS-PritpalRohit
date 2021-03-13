@@ -168,6 +168,10 @@ export class PurchaseReturnComponent implements OnInit {
       this.showbalance = true;
       this.purchaseReturn.Status = "Unpaid";
     }
+    else{
+      this.showbalance = false;
+      this.purchaseReturn.Status = "Paid";
+    }
   }
   saveReturnWithoutPrint(event){
     this.purchaseReturn.purchaseItems = this.dataarray;

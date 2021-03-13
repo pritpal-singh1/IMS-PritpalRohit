@@ -24,8 +24,15 @@ urlpatterns=[
     url(r'getSalesById/([0-9]+)$',views.getSalesOrderById),
     url(r'getInvoiceNo/$',views.getInvoiceNo),
 
+    #for Sales
     url(r'^newsale/$',views.newSalesOrder),
+    
     url(r'^newsale/([0-9]+)$',views.newSalesOrder),
+    url(r'^getSalesInvoices/$',views.getSalesInvoices),
+    url(r'^newSalesReturn/$',views.newSalesReturn),
+    url(r'^newSalesReturn/([0-9]+)$',views.newSalesReturn),
+    url(r'^getSalesReturnById/([0-9]+)$',views.getSalesReturnById),
+
 
     url(r'supplier/([0-9]+)$',views.supplierApi),
     url(r'^supplier/$',views.supplierApi),
@@ -51,6 +58,7 @@ urlpatterns=[
     url(r'^getPurchaseReturnNo/$',views.getPurchaseReturnNo),
     url(r'^addPurchaseReturn/$',views.newPurchaseReturn),
     url(r'^addPurchaseReturn/([0-9]+)$',views.newPurchaseReturn),
+    url(r'^getPurchaseReturnById/([0-9]+)$',views.getPurchaseReturnById),
 
     url(r'^getPurchaseBillByBillno/(INV-00[0-9]+)$',views.getPurchaseBillByBillno),
 

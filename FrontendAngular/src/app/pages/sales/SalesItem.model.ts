@@ -27,3 +27,32 @@ export class SalesItem
     GST: number;
   
 }
+
+export class SalesReturn{
+    SalesReturnId:number;
+    SalesReturnNo:string;
+    InvoiceNo:number;
+    Reason:string;
+    Contact:string;
+    Date:any;
+    ClientName:string;
+    PaymentMode:string;
+    TotalAmount:number;
+    AmountPaid:number;
+    Status:string;
+    CreatedAt:string;
+    Balance:number;
+    GST:number;
+    SubTotal:number;    
+    ReturnItem: ReturnItem[];
+}
+
+export class ReturnItem{
+    SalesReturnDetailId:number;
+    SalesReturnId:number;
+    ProductId:number;
+    Quantity:number;
+    SalePrice:number;
+    Amount:number;
+    GST:number;
+}

@@ -55,6 +55,7 @@ export class UpdatePurchaseBillComponent implements OnInit {
     this.getProductList();
     this.purchaseitem= new purchaseItem();
     this.getSupplierList();
+    this.getbal();
 
   }
   getSupplierList(){
@@ -92,6 +93,9 @@ export class UpdatePurchaseBillComponent implements OnInit {
     this.purchaseservice.getPurchaseBillById(id).subscribe(data=>{
       this.purchaseBill = data as PurchaseBill;
       this.purchaseBill.Date = this.datepipe.transform(this.purchaseBill.Date,'yyyy-MM-dd');
+      if(this.purchaseBill.Balance > 0){
+        this.showbalance = true;
+      }
       console.log(this.purchaseBill);
       this.items = this.purchaseBill.purchaseItems;
       for (let i = 0; i <Object.keys(this.items).length;i++) {
@@ -160,6 +164,10 @@ export class UpdatePurchaseBillComponent implements OnInit {
       this.showbalance = true;
       this.purchaseBill.Status = "Unpaid";
     }
+    else{
+      this.showbalance = false;
+      this.purchaseBill.Status = "Paid";
+    }
   }
   saveBill(event){
     this.purchaseBill.purchaseItems = this.dataarray;
@@ -179,5 +187,8 @@ export class UpdatePurchaseBillComponent implements OnInit {
     });
     this.router.navigateByUrl('/', {skipLocationChange: true})
     .then(() => this.router.navigate(['/purchase/manage-purchase-bill']));
+  }
+  onSubmit(){
+    
   }
 }

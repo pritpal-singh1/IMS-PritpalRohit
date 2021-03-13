@@ -85,8 +85,7 @@ export class AddSupplierComponent implements OnInit {
         ContactPersonNo:'',
         CreatedAt:''
       }
-      // this.router.navigateByUrl('/', {skipLocationChange: true})
-      // .then(() => this.router.navigate(['/supplier/manage-supplier']));
+      
     
     }
     else{
@@ -105,9 +104,9 @@ export class AddSupplierComponent implements OnInit {
         Address:'',
         City:'',
         State:'',
-        Pincode:0,
+        Pincode:null,
         Email:'',
-        Contact:0,
+        Contact:null,
         PANNo:'',
         GSTIN:'',
         Status:'',
@@ -116,8 +115,7 @@ export class AddSupplierComponent implements OnInit {
         CreatedAt:''
 
       }
-      // this.router.navigateByUrl('/', {skipLocationChange: true})
-      // .then(() => this.router.navigate(['/supplier/manage-supplier']));
+      
     
     }
     
@@ -126,9 +124,13 @@ export class AddSupplierComponent implements OnInit {
     this.supplierService.addSupplier(form.value).subscribe(res => {
       this.supplierService.getSupplierList();
     });
+    this.router.navigateByUrl('/', {skipLocationChange: true})
+      .then(() => this.router.navigate(['/supplier/manage-supplier']));
   }
   updateRecord(form: NgForm){
     this.supplierService.updateSupplier(form.value).subscribe(res =>{ });
+    this.router.navigateByUrl('/', {skipLocationChange: true})
+      .then(() => this.router.navigate(['/supplier/manage-supplier']));
   }
 
 }

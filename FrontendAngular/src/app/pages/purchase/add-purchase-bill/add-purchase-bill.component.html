@@ -27,7 +27,11 @@
 										#BillNo="ngModel"
 										placeholder="Purchase Bill No"
 									/>
-									
+									<div *ngIf="BillNo.invalid && (BillNo.dirty || BillNo.touched)">
+                                        <small class="text-danger" *ngIf="BillNo.errors.required">
+                                            Bill No is required.
+                                        </small>
+                                    </div>
 								</div>
 							</div>
 							<div class="form-group col-md-6">
@@ -74,20 +78,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="form-group col-md-4">
-                                <label>Date</label>
-                                <div class="input-group clockpicker">
-                                  <input type="date" class="form-control" placeholder="yyyy-mm-dd">
-                                  
-                                </div>
-                            </div> -->
-                            <!-- <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Single Select</label>
-                                    <ng-select [items]="selectValue"
-                                    bindLabel='name'></ng-select>
-                                </div>
-                            </div> -->
+                            
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Contact Number</label>
@@ -109,7 +100,7 @@
 								<label *ngIf = "isShow" class="mr-5">Purchase Price:  {{purchaseprice}} </label>
 								<label *ngIf = "isShow" class="mr-5">MRP : {{MRP}}</label>
 								<button (click)="addItem()" class="btn btn-primary d-inline">
-									Add More Item
+									Add Item
 								</button>
 							</div>
 							<table class="mb-0 table table-bordered">
@@ -215,7 +206,7 @@
 										</td>
 										<td>
 											<a
-												*ngIf="i != 0"
+												
 												class="text-danger"
 												(click)="removeItem(i)"
 												placement="top"
@@ -229,18 +220,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-3">
-							<label class="">Payment Mode</label>
-							<ng-select 
-							required
-							 	[(ngModel)]="purchaseBill.PurchaseType"
-							name="PurchaseType">
-								<ng-option [value]="item.name" *ngFor="let item of selectValue">{{
-									item.name
-								}}</ng-option>
-							</ng-select>
-							
-						</div>
+						
 						<div class="col-md-3">
 							<label class="">Amount Paid</label>
 							<input
@@ -267,6 +247,7 @@
 									</div>
 							<label *ngIf="showbalance" class="text-danger mt-2">Balance</label>
 							<input 
+									readonly
 								[(ngModel)]="purchaseBill.Balance"
 								name="Balance"
 								*ngIf="showbalance"
@@ -274,6 +255,18 @@
 								type="text"
 								placeholder="Balance"
 							/>
+						</div>
+						<div class="col-md-3">
+							<label class="">Payment Mode</label>
+							<ng-select 
+							required
+							 	[(ngModel)]="purchaseBill.PurchaseType"
+							name="PurchaseType">
+								<ng-option [value]="item.name" *ngFor="let item of selectValue">{{
+									item.name
+								}}</ng-option>
+							</ng-select>
+							
 						</div>
 						<div class="col-md-2"></div>
 						<div class="col-md-4 ">

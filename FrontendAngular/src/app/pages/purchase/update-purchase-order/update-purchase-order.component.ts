@@ -135,6 +135,10 @@ export class UpdatePurchaseOrderComponent implements OnInit {
       this.showbalance = true;
       this.purchaseOrder.Status = "Unpaid";
     }
+    else{
+      this.showbalance = false;
+      this.purchaseOrder.Status = "Paid";
+    }
   }
   saveOrder(event) {
     this.purchaseOrder.purchaseItems = this.dataarray;
@@ -171,7 +175,9 @@ export class UpdatePurchaseOrderComponent implements OnInit {
         this.purchaseitem.Amount = this.items[i].Amount;
         this.dataarray.push(this.purchaseitem);
       }
-
+      if(this.purchaseOrder.Balance > 0){
+        this.showbalance = true;
+      }
     });
   }
   onSubmit(){

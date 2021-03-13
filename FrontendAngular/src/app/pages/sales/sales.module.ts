@@ -12,12 +12,13 @@ import { PrintInvoiceComponent } from './print-invoice/print-invoice.component';
 import { SalesReturnComponent } from './sales-return/sales-return.component';
 import { ManageSalesReturnComponent } from './manage-sales-return/manage-sales-return.component';
 import { UpdateSalesReturnComponent } from './update-sales-return/update-sales-return.component';
+import { PrintSalesReturnComponent } from './print-sales-return/print-sales-return.component';
 
 
 
 
 @NgModule({
-  declarations: [NewInvoiceComponent, ManageInvoiceComponent, UpdateInvoiceComponent, PrintInvoiceComponent, SalesReturnComponent, ManageSalesReturnComponent, UpdateSalesReturnComponent],
+  declarations: [NewInvoiceComponent, ManageInvoiceComponent, UpdateInvoiceComponent, PrintInvoiceComponent, SalesReturnComponent, ManageSalesReturnComponent, UpdateSalesReturnComponent, PrintSalesReturnComponent],
   imports: [
     CommonModule,
     SalesRoutingModule,

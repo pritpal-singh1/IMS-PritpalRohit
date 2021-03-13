@@ -53,6 +53,8 @@ export class AddPurchaseBillComponent implements OnInit {
   ngOnInit(): void {
     this.purchaseitem = new purchaseItem();
     this.dataarray.push(this.purchaseitem);
+    this.purchaseBill.Date = new Date();
+    this.purchaseBill.Date = this.datepipe.transform(this.purchaseBill.Date,'yyyy-MM-dd');
     // this.getInvoice();
     this.getSupplierList();
     this.getProductList();
@@ -139,6 +141,10 @@ export class AddPurchaseBillComponent implements OnInit {
     {
       this.showbalance = true;
       this.purchaseBill.Status = "Unpaid";
+    }
+    else{
+      this.showbalance = false;
+      this.purchaseBill.Status = "Paid";
     }
   }
   saveBillWithoutPrint(event) {
