@@ -14,10 +14,16 @@
                                 	<h4 class="one">Manage Employee</h4>
                             	</div>
 								<div class="col-auto">
+									<button (click)="getEmployees()"
+										class="btn btn-outline-info waves-effect pull-right  mr-2 waves-light"
+									>
+									<i class="fas fa-undo-alt"></i>&nbsp;Refresh
+									</button>
 									<button (click)="addEmployee()"
 										class="btn btn-outline-success waves-effect pull-right waves-light"
 									>
-										Add Employee
+									
+									<i class="fas fa-plus"></i>&nbsp;Add User
 									</button>
 								</div>
                         	</div>
@@ -29,7 +35,7 @@
 						<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
 						  <thead>
 							<tr>
-							  <th>ID</th>
+							  <th>Employee No</th>
 							  <th>Employee Name</th>
 							  <!-- <th>Company Name</th> -->
 							  <th>Address</th>
@@ -40,7 +46,7 @@
 						  </thead>
 						  <tbody  >
 							<tr *ngFor="let employee of employees">
-							  <td>{{ employee.EmployeeId }}</td>
+							  <td>{{ employee.EmployeeNo }}</td>
 							  <td>{{ employee.EmployeeName }}</td>
 							  <!-- <td>{{ employee.CompanyName }}</td> -->
 							  <td>{{ employee.Address }}</td>

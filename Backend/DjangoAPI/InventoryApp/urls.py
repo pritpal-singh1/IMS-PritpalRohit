@@ -74,4 +74,5 @@ urlpatterns=[
     url(r'getUserById/([0-9]+)$',views.getUserDetailsById),
     url(r'getUser/([0-9]+)$', views.getUserName),
     url(r'getEmployeeById/([0-9]+)$', views.getUserDetailById),
+    url(r'changepassword/([0-9]+)$', views.changepassword),
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

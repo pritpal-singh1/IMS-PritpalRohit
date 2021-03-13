@@ -134,4 +134,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'InventoryApp.User'
 CORS_ALLOW_CREDENTIALS=True
-
+REST_FRAMEWORK = {
+   'DEFAULT_AUTHENTICATION_CLASSES': (
+       'rest_framework.authentication.TokenAuthentication',
+   ),
+   'DEFAULT_PERMISSION_CLASSES': (
+           'rest_framework.permissions.AllowAny'
+   ),
+}

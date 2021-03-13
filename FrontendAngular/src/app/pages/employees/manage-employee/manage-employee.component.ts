@@ -64,7 +64,8 @@ export class ManageEmployeeComponent implements OnInit {
       EmployeeId:0,
       EmployeeName:'',
       Gender:'',
-      Address:'',
+      Address: '',
+     
       EmailId:'',
       MobileNo:null,
       DOB:'',
