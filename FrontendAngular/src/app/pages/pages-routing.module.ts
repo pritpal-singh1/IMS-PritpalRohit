@@ -9,6 +9,7 @@ import { KanbanComponent } from './kanban/kanban.component';
 import {RoleConfigurationComponent} from './role-configuration/role-configuration.component';
 import {CompanyDetailsComponent} from './company-details/company-details.component';
 import { ProfileComponent } from './user-profile/profile/profile.component';
+import { ResetPasswordComponent } from './user-profile/reset-password/reset-password.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
     { path: 'chat', component: ChatComponent },
     { path: 'kanban-board', component: KanbanComponent },
     { path: 'profile', component: ProfileComponent },
+    { path: 'change-password', component: ResetPasswordComponent },
     { path: 'company-details', component: CompanyDetailsComponent },
     
     { path: 'ecommerce', loadChildren: () => import('./ecommerce/ecommerce.module').then(m => m.EcommerceModule) },

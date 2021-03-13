@@ -1,12 +1,17 @@
+from django.contrib.auth.decorators import login_required
 from django.db.models import F
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework import status
+from rest_framework import status, serializers, generics
 from django.forms.models import model_to_dict
+from rest_framework.decorators import action
 from rest_framework.exceptions import AuthenticationFailed
+from rest_framework.generics import UpdateAPIView
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 import json
+
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import jwt, datetime
@@ -21,7 +26,7 @@ from InventoryApp.serializers import CategorySerializer, BrandSerializer, RoleSe
     StockAdjustmentsSerializer, \
     SalesOrdersOfflineSerializer, SalesOrderOfflineDetailSerializer, ExpenseSerializer, CompanyDetailsSerializer, \
     PurchaseBillSerializer, PurchaseBillDetailSerializer, PurchaseOrderSerializer, PurchaseOrderDetailSerializer, \
-    StockAdjustmentsSerializer, UserSerializer
+    StockAdjustmentsSerializer, UserSerializer,ChangePasswordSerializer
 
 from django.core.files.storage import default_storage
 
@@ -268,9 +273,8 @@ def employeeApi(request, eid=0):
         return JsonResponse(employee_serializer.data, safe=False)
     elif request.method == 'POST':
         employee_data = JSONParser().parse(request)
-        print(employee_data)
+        employee_data['EmployeeNo']="EMP0" + str(getEmployeeNo()+1)
         employee_serializer = EmployeeSerializer(data=employee_data)
-        print(employee_serializer)
         employee_serializer.is_valid(raise_exception=True)
         if employee_serializer.is_valid():
             employee_serializer.save()
@@ -1141,7 +1145,8 @@ def getUserDetailsById(request, uid=0):
 
 
 def getUserName(request, id):
-    user = User.objects.select_related().get(EmployeeId=id)
+    user = User.objects.select_related().filter(EmployeeId=id).first()
+    print(user)
     res = {'EmployeeId': user.EmployeeId.EmployeeId, 'EmployeeName': user.EmployeeId.EmployeeName}
     print(user.EmployeeId.EmployeeName)
     return JsonResponse(res, safe=False)
@@ -1170,3 +1175,19 @@ def getEmployeeNo():
 
 
             return obj.values()[0]['EmployeeId']
+
+@csrf_exempt
+def changepassword(request,id=0):
+    if request.method == 'PUT':
+        registerdata = JSONParser().parse(request)
+        user = User.objects.get(UserId=id)
+        if user.check_password(registerdata['oldpassword']):
+            user_serializer = ChangePasswordSerializer(user,data=registerdata)
+            user_serializer.is_valid(raise_exception=True)
+            user_serializer.save()
+            return JsonResponse({"message": 1}, safe=False)
+        else:
+            return JsonResponse({"message":0},safe=False)
+
+
+

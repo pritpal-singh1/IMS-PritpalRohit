@@ -7,7 +7,7 @@ import { WidgetModule } from '../shared/widget/widget.module';
 
 import { PagesRoutingModule } from './pages-routing.module';
 
-import { NgbNavModule, NgbDropdownModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbNavModule, NgbDropdownModule, NgbTooltipModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -35,6 +35,7 @@ import { RoleConfigurationComponent } from './role-configuration/role-configurat
 import { CompanyDetailsComponent } from './company-details/company-details.component';
 import { ProfileComponent } from './user-profile/profile/profile.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ResetPasswordComponent } from './user-profile/reset-password/reset-password.component';
 
 
 
@@ -46,7 +47,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 };
 
 @NgModule({
-  declarations: [DashboardComponent, CalendarComponent, ChatComponent, KanbanComponent, RoleConfigurationComponent, CompanyDetailsComponent, ProfileComponent],
+  declarations: [DashboardComponent, CalendarComponent, ChatComponent, KanbanComponent, RoleConfigurationComponent, CompanyDetailsComponent, ProfileComponent, ResetPasswordComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -69,6 +70,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FormModule,
     TablesModule,
     MapsModule,
+    NgbAlertModule,
     LeafletModule,
     WidgetModule,
     MasterModule
